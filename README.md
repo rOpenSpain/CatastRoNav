@@ -10,6 +10,7 @@
 badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev)
 [![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
 [![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 <!-- badges: end -->
@@ -68,7 +69,9 @@ ggplot(wfs_get_buildings) +
 To cite ‘CatastRoNav’ in publications use:
 
 Hernangómez D (2022). *CatastRoNav: Interface to the API Catastro de
-Navarra*. \<URL: <https://ropenspain.github.io/CatastRoNav/>\>.
+Navarra*. doi: 10.5281/zenodo.6366407 (URL:
+<https://doi.org/10.5281/zenodo.6366407>), \<URL:
+<https://ropenspain.github.io/CatastRoNav/>\>.
 
 A BibTeX entry for LaTeX users is:
 
@@ -76,8 +79,9 @@ A BibTeX entry for LaTeX users is:
       title = {{CatastRoNav}: Interface to the {API} Catastro de Navarra},
       author = {Diego Hernangómez},
       year = {2022},
-      version = {0.0.0.9000},
+      version = {0.0.1},
       url = {https://ropenspain.github.io/CatastRoNav/},
+      doi = {10.5281/zenodo.6366407},
       abstract = {Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},
     }
 
