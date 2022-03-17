@@ -9,7 +9,7 @@ bibentry(
   year = year,
   version = meta$Version,
   url = unlist(strsplit(meta$URL, ","))[1],
-  #doi = "10.5281/zenodo.6044091",
+  doi = "10.5281/zenodo.6366407",
   abstract = abs,
   key = "R-catastronav"
 )
