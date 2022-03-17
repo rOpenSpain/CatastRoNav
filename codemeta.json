@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.2 (2021-11-01)",
+  "runtimePlatform": "R version 4.1.3 (2022-03-10)",
   "author": [
     {
       "@type": "Person",
@@ -178,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "916.178KB",
+  "fileSize": "914.885KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -195,5 +195,6 @@
     }
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/master/NEWS.md",
-  "contIntegration": ["https://github.com/dieghernan/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://codecov.io/gh/dieghernan/CatastroNav"]
+  "contIntegration": ["https://github.com/dieghernan/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/dieghernan/CatastroNav"],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }
