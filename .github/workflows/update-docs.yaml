@@ -1,5 +1,4 @@
 on:
-  push:
   workflow_dispatch:
 
 name: update-docs
@@ -25,6 +24,7 @@ jobs:
             any::pkgdown
             any::rcmdcheck
             dieghernan/pkgdev
+            ropenspain/rostemplate
           needs: website
 
       - name: Update docs
