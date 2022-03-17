@@ -178,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "914.881KB",
+  "fileSize": "915KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -196,7 +196,7 @@
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/master/NEWS.md",
   "readme": "https://github.com/rOpenSpain/CatastRoNav/blob/main/README.md",
-  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/dieghernan/CatastroNav"],
+  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["r", "maps", "spain", "navarra", "catastro", "r-package", "r-stats", "ropenspain"]
 }
