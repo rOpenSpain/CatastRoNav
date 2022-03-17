@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
   "issueTracker": "https://github.com/rOpenSpain/CatastRoNav/issues",
   "license": "https://spdx.org/licenses/CC-BY-4.0",
-  "version": "0.0.0.9000",
+  "version": "0.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -178,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "915KB",
+  "fileSize": "915.335KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -191,7 +191,10 @@
         }
       ],
       "name": "{CatastRoNav}: Interface to the {API} Catastro de Navarra",
-      "url": "https://ropenspain.github.io/CatastRoNav/"
+      "identifier": "10.5281/zenodo.6366407",
+      "url": "https://ropenspain.github.io/CatastRoNav/",
+      "@id": "https://doi.org/10.5281/zenodo.6366407",
+      "sameAs": "https://doi.org/10.5281/zenodo.6366407"
     }
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/master/NEWS.md",

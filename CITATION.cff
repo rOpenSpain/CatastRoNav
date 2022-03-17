@@ -8,7 +8,8 @@ message: 'To cite package "CatastRoNav" in publications use:'
 type: software
 license: CC-BY-4.0
 title: 'CatastRoNav: Interface to the ''INSPIRE'' services of ''Catastro de Navarra'''
-version: 0.0.0.9000
+version: 0.0.1
+doi: 10.5281/zenodo.6366407
 abstract: Access public spatial data available under the 'INSPIRE' directive. Tools
   for downloading references, buildings and addresses of properties on Navarre (Spain).
 authors:
@@ -25,8 +26,9 @@ preferred-citation:
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
   year: '2022'
-  version: 0.0.0.9000
+  version: 0.0.1
   url: https://ropenspain.github.io/CatastRoNav/
+  doi: 10.5281/zenodo.6366407
   abstract: Access public spatial data available under the 'INSPIRE' directive. Tools
     for downloading references, buildings and addresses of properties on Navarre (Spain).
 repository-code: https://github.com/rOpenSpain/CatastRoNav
