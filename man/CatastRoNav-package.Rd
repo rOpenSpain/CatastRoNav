@@ -10,6 +10,15 @@
 
 Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://ropenspain.github.io/CatastRoNav/}
+  \item \url{https://github.com/rOpenSpain/CatastRoNav}
+  \item Report bugs at \url{https://github.com/rOpenSpain/CatastRoNav/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Diego Hernangómez \email{diego.hernangomezherrero@gmail.com} (\href{https://orcid.org/0000-0001-8457-4658}{ORCID})
 

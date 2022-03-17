@@ -8,6 +8,9 @@ Description: Access public spatial data available under the 'INSPIRE'
     directive. Tools for downloading references, buildings and addresses
     of properties on Navarre (Spain).
 License: CC BY 4.0
+URL: https://ropenspain.github.io/CatastRoNav/,
+    https://github.com/rOpenSpain/CatastRoNav
+BugReports: https://github.com/rOpenSpain/CatastRoNav/issues
 Depends: 
     R (>= 3.6)
 Imports: 

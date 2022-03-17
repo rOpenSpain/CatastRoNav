@@ -4,6 +4,12 @@
 # CatastRoNav <img src="man/figures/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
+
+[![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
+[![R-CMD-check](https://github.com/dieghernan/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/dieghernan/CatastRoNav/actions?query=workflow%3AR-CMD-check)
+[![codecov](https://codecov.io/gh/dieghernan/CatastroNav/branch/main/graph/badge.svg)](https://codecov.io/gh/dieghernan/CatastroNav)
+[![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 <!-- badges: end -->
 
 **CatastRoNav** is a package that provide access to different API
@@ -60,7 +66,7 @@ ggplot(wfs_get_buildings) +
 To cite ‘CatastRoNav’ in publications use:
 
 Hernangómez D (2022). *CatastRoNav: Interface to the API Catastro de
-Navarra*.
+Navarra*. \<URL: <https://ropenspain.github.io/CatastRoNav/>\>.
 
 A BibTeX entry for LaTeX users is:
 
@@ -69,6 +75,7 @@ A BibTeX entry for LaTeX users is:
       author = {Diego Hernangómez},
       year = {2022},
       version = {0.0.0.9000},
+      url = {https://ropenspain.github.io/CatastRoNav/},
       abstract = {Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},
     }
 

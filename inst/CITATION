@@ -8,7 +8,7 @@ bibentry(
   author = person("Diego", "Hernangómez"),
   year = year,
   version = meta$Version,
-  #url = unlist(strsplit(meta$URL, ","))[1],
+  url = unlist(strsplit(meta$URL, ","))[1],
   #doi = "10.5281/zenodo.6044091",
   abstract = abs,
   key = "R-catastronav"
