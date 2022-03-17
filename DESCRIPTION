@@ -1,0 +1,33 @@
+Package: CatastRoNav
+Title: Interface to the 'INSPIRE' services of 'Catastro de Navarra'
+Version: 0.0.0.9000
+Authors@R: 
+    person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8457-4658"))
+Description: Access public spatial data available under the 'INSPIRE'
+    directive. Tools for downloading references, buildings and addresses
+    of properties on Navarre (Spain).
+License: CC BY 4.0
+Depends: 
+    R (>= 3.6)
+Imports: 
+    sf (>= 1.0.0),
+    stringi,
+    tibble,
+    xml2
+Suggests:
+    CatastRo,
+    dplyr,
+    ggplot2,
+    knitr,
+    mapSpain,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Copyright: Data Source: SITNA – Catastro de Navarra
+    <https://sitna.navarra.es/geoportal/>
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
