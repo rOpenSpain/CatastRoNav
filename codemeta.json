@@ -195,6 +195,8 @@
     }
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/master/NEWS.md",
-  "contIntegration": ["https://github.com/dieghernan/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/dieghernan/CatastroNav"],
-  "developmentStatus": "https://www.repostatus.org/#active"
+  "readme": "https://github.com/rOpenSpain/CatastRoNav/blob/main/README.md",
+  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/dieghernan/CatastroNav"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": ["r", "maps", "spain", "navarra", "catastro", "r-package", "r-stats", "ropenspain"]
 }

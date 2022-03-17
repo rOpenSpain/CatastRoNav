@@ -23,7 +23,7 @@ library(CatastRoNav)
 <!-- badges: start -->
 
 [![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
-[![R-CMD-check](https://github.com/dieghernan/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/dieghernan/CatastRoNav/actions?query=workflow%3AR-CMD-check)
+[![R-CMD-check](https://github.com/dieghernan/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/dieghernan/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dieghernan/CatastroNav)
 [![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 

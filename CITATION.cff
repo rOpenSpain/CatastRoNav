@@ -36,6 +36,15 @@ contact:
   given-names: Diego
   email: diego.hernangomezherrero@gmail.com
   orcid: https://orcid.org/0000-0001-8457-4658
+keywords:
+- catastro
+- maps
+- navarra
+- r
+- r-package
+- r-stats
+- ropenspain
+- spain
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
