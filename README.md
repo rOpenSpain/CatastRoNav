@@ -69,9 +69,9 @@ ggplot(wfs_get_buildings) +
 To cite ‘CatastRoNav’ in publications use:
 
 Hernangómez D (2022). *CatastRoNav: Interface to the API Catastro de
-Navarra*. doi: 10.5281/zenodo.6366407 (URL:
-<https://doi.org/10.5281/zenodo.6366407>), \<URL:
-<https://ropenspain.github.io/CatastRoNav/>\>.
+Navarra*. <doi:10.5281/zenodo.6366407>
+<https://doi.org/10.5281/zenodo.6366407>,
+<https://ropenspain.github.io/CatastRoNav/>.
 
 A BibTeX entry for LaTeX users is:
 

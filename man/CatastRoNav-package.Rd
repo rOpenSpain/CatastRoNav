@@ -6,7 +6,7 @@
 \alias{CatastRoNav-package}
 \title{CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).
 }
