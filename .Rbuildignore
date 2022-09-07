@@ -16,3 +16,4 @@
 ^_pkgdown\.yml$
 ^_pkgdown\.yaml$
 ^pkgdown$
+^cran-comments\.md$

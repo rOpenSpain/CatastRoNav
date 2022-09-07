@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.2
+# CITATION file created with {cffr} R package, v0.2.3
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -74,7 +74,7 @@ references:
   version: '>= 1.0.0'
 - type: software
   title: stringi
-  abstract: 'stringi: Character String Processing Facilities'
+  abstract: 'stringi: Fast and Portable Character String Processing Facilities'
   notes: Imports
   authors:
   - family-names: Gagolewski

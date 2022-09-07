@@ -33,4 +33,4 @@ Copyright: Data Source: SITNA – Catastro de Navarra
     <https://sitna.navarra.es/geoportal/>
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
