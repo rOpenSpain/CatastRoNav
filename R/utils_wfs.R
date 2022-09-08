@@ -87,6 +87,7 @@ wfs_results <- function(res, verbose) {
   # Check result
   if (res$is_sf) {
     out <- st_read_layers_encoding(res$path, verbose)
+    out <- sf::st_make_valid(out)
 
     unlink(res$path, force = TRUE)
     return(out)

@@ -1,5 +1,7 @@
 year <- format(Sys.time(), "%Y")
 abs <- trimws(gsub("\\s+", " ", meta$Description))
+abs <- gsub("'", "", abs)
+doi <- "10.5281/zenodo.6366407"
 
 bibentry(
   "Manual",
@@ -7,9 +9,14 @@ bibentry(
   title = "{CatastRoNav}: Interface to the {API} Catastro de Navarra",
   author = person("Diego", "Hernangómez"),
   year = year,
+  key = "R-catastronav",
   version = meta$Version,
+  doi = doi,
   url = unlist(strsplit(meta$URL, ","))[1],
-  doi = "10.5281/zenodo.6366407",
   abstract = abs,
-  key = "R-catastronav"
+  textVersion = paste0(
+    "Hernangomez D (", year, "). CatastRoNav: ",
+    gsub("'", "", meta$Title), ". <https://doi.org/", doi, ">, <",
+    unlist(strsplit(meta$URL, ","))[1], ">"
+  )
 )

@@ -91,11 +91,11 @@ In first place, we extract the coordinates of the city center of Pamplona using
 # Use mapSpain for getting the coords
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
-# Transform to ETRS89 / UTM 30 N and add a buffer of 1000m
+# Transform to ETRS89 / UTM 30 N and add a buffer of 750m
 
 pamp_buff <- pamp %>%
   st_transform(25830) %>%
-  st_buffer(1000)
+  st_buffer(750)
 
 ```
 
