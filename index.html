@@ -46,7 +46,7 @@
     <div>
       <img src="logo.png" alt="CatastRoNav-logo" id="ROS-navbar-logo"><a class="navbar-brand me-2" href="index.html">CatastRoNav</a>
 
-      <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+      <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
     </div>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,14 +104,15 @@
 <p>Alternatively, you can install the developing version of <strong>CatastRoNav</strong> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
-<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rOpenSpain/CatastRoNav"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rOpenSpain/CatastRoNav"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>The WFS service allows to download vector objects of specific cadastral elements. The result is provided as <code>sf</code> objects (See <strong>sf</strong> package).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/CatastRoNav/">CatastRoNav</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/CatastRoNav/">CatastRoNav</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">wfs_get_buildings</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/catrnav_wfs_get_buildings_bbox.html">catrnav_wfs_get_buildings_bbox</a></span><span class="op">(</span></span>
@@ -128,16 +129,16 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>To cite ‘CatastRoNav’ in publications use:</p>
-<p>Hernangómez D (2022). <em>CatastRoNav: Interface to the API Catastro de Navarra</em>. <a href="doi:10.5281/zenodo.6366407" class="uri">doi:10.5281/zenodo.6366407</a> <a href="https://doi.org/10.5281/zenodo.6366407" class="external-link uri">https://doi.org/10.5281/zenodo.6366407</a>, <a href="https://ropenspain.github.io/CatastRoNav/" class="uri">https://ropenspain.github.io/CatastRoNav/</a>.</p>
+<p>Hernangomez D (2022). CatastRoNav: Interface to the INSPIRE services of Catastro de Navarra. <a href="https://doi.org/10.5281/zenodo.6366407" class="external-link uri">https://doi.org/10.5281/zenodo.6366407</a>, <a href="https://ropenspain.github.io/CatastRoNav/" class="uri">https://ropenspain.github.io/CatastRoNav/</a></p>
 <p>A BibTeX entry for LaTeX users is:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>Manual{R<span class="sc">-</span>catastronav,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">=</span> {{CatastRoNav}<span class="sc">:</span> Interface to the {API} Catastro de Navarra},</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  author <span class="ot">=</span> {Diego Hernangómez},</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">=</span> {<span class="dv">2022</span>},</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  version <span class="ot">=</span> {<span class="dv">0</span>.<span class="fl">0.1</span>},</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ropenspain.github.io<span class="sc">/</span>CatastRoNav<span class="sc">/</span>},</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  doi <span class="ot">=</span> {<span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.6366407</span>},</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  abstract <span class="ot">=</span> {Access public spatial data available under the <span class="st">'INSPIRE'</span> directive. Tools <span class="cf">for</span> downloading references, buildings and addresses of properties on <span class="fu">Navarre</span> (Spain).},</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  version <span class="ot">=</span> {<span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">1.9000</span>},</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  doi <span class="ot">=</span> {<span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.6366407</span>},</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ropenspain.github.io<span class="sc">/</span>CatastRoNav<span class="sc">/</span>},</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  abstract <span class="ot">=</span> {Access public spatial data available under the INSPIRE directive. Tools <span class="cf">for</span> downloading references, buildings and addresses of properties on <span class="fu">Navarre</span> (Spain).},</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div class="section level2">
