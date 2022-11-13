@@ -93,18 +93,32 @@
 
     
     
-<p><strong>CatastRoNav</strong> is a package that provide access to different INSPIRE API services of the <a href="https://idena.navarra.es/portal/servicios?lang=en" class="external-link">Cadastre of Navarre</a>. With <strong>CatastRoNav</strong> it is possible to download spatial objects as buildings or cadastral parcels.</p>
+<p><strong>CatastRoNav</strong> is a package that provide access to
+different INSPIRE API services of the <a href="https://idena.navarra.es/portal/servicios?lang=en" class="external-link">Cadastre of
+Navarre</a>. With <strong>CatastRoNav</strong> it is possible to
+download spatial objects as buildings or cadastral parcels.</p>
 <div class="section level2">
 <h2 id="inspire-services">INSPIRE Services<a class="anchor" aria-label="anchor" href="#inspire-services"></a>
 </h2>
 <blockquote>
-<p>The INSPIRE Directive aims to create a European Union spatial data infrastructure for the purposes of EU environmental policies and policies or activities which may have an impact on the environment. This European Spatial Data Infrastructure will enable the sharing of environmental spatial information among public sector organisations, facilitate public access to spatial information across Europe and assist in policy-making across boundaries.</p>
+<p>The INSPIRE Directive aims to create a European Union spatial data
+infrastructure for the purposes of EU environmental policies and
+policies or activities which may have an impact on the environment. This
+European Spatial Data Infrastructure will enable the sharing of
+environmental spatial information among public sector organisations,
+facilitate public access to spatial information across Europe and assist
+in policy-making across boundaries.</p>
 <p><em>From <a href="https://inspire.ec.europa.eu/about-inspire/563" class="external-link uri">https://inspire.ec.europa.eu/about-inspire/563</a></em></p>
 </blockquote>
-<p>The implementation of the INSPIRE directive on the Cadastre of Navarre allows to retrieve spatial objects from the database of the cadastre:</p>
+<p>The implementation of the INSPIRE directive on the Cadastre of
+Navarre allows to retrieve spatial objects from the database of the
+cadastre:</p>
 <ul>
 <li>
-<strong>Vector objects:</strong> Parcels, addresses, buildings, cadastral zones and more. These objects are provided by <strong>CatastRoNav</strong> as <em>sf</em> objects (see <code>?sf)</code>.</li>
+<strong>Vector objects:</strong> Parcels, addresses, buildings,
+cadastral zones and more. These objects are provided by
+<strong>CatastRoNav</strong> as <em>sf</em> objects (see
+<code>?sf)</code>.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -136,8 +150,13 @@
 <div class="section level3">
 <h3 id="thematic-maps">Thematic maps<a class="anchor" aria-label="anchor" href="#thematic-maps"></a>
 </h3>
-<p>We can create also thematic maps using the information available on the spatial objects. We would produce a visualization of the urban growth of Pamplona using <strong>CatastRoNav</strong>, replicating the map produced by Dominic Royé on his post <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link">Visualize urban growth</a>.</p>
-<p>In first place, we extract the coordinates of the city center of Pamplona using <strong>mapSpain</strong>:</p>
+<p>We can create also thematic maps using the information available on
+the spatial objects. We would produce a visualization of the urban
+growth of Pamplona using <strong>CatastRoNav</strong>, replicating the
+map produced by Dominic Royé on his post <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link">Visualize
+urban growth</a>.</p>
+<p>In first place, we extract the coordinates of the city center of
+Pamplona using <strong>mapSpain</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Use mapSpain for getting the coords</span></span>
@@ -148,11 +167,13 @@
 <span><span class="va">pamp_buff</span> <span class="op">&lt;-</span> <span class="va">pamp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="fl">750</span><span class="op">)</span></span></code></pre></div>
-<p>Next step consists on extracting the buildings using the WFS service:</p>
+<p>Next step consists on extracting the buildings using the WFS
+service:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">pamp_bu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catrnav_wfs_get_buildings_bbox.html">catrnav_wfs_get_buildings_bbox</a></span><span class="op">(</span><span class="va">pamp_buff</span><span class="op">)</span></span></code></pre></div>
-<p>Next step for creating the visualization is to crop the buildings to the buffer we created before:</p>
+<p>Next step for creating the visualization is to crop the buildings to
+the buffer we created before:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Cut buildings</span></span>
@@ -162,7 +183,8 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="minimal-1.png" alt="plot of chunk minimal" width="100%"></p>
-<p>Let’s extract now the construction year, available in the column <code>beginning</code>:</p>
+<p>Let’s extract now the construction year, available in the column
+<code>beginning</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Extract 4 initial positions</span></span>
@@ -177,7 +199,9 @@
 <span><span class="co"># New column</span></span>
 <span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
-<p>Last step is to create groups based on the year and create the data visualization. We use here the function <code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create different classes:</p>
+<p>Last step is to create groups based on the year and create the data
+visualization. We use here the function
+<code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create different classes:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -225,7 +249,8 @@
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-roye_2019" class="csl-entry">
-Royé, Dominic. 2019. <span>“Visualize Urban Growth.”</span> <em>Dr. Dominic Royé</em>. <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link">https://dominicroye.github.io/en/2019/visualize-urban-growth/</a>.
+Royé, Dominic. 2019. <span>“Visualize Urban Growth.”</span> <em>Dr.
+Dominic Royé</em>. <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link">https://dominicroye.github.io/en/2019/visualize-urban-growth/</a>.
 </div>
 </div>
 </div>
