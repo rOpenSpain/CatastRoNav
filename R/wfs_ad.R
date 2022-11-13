@@ -38,7 +38,6 @@
 #'
 #' @seealso [CatastRo::catr_wfs_get_address_bbox()]
 catrnav_wfs_get_address_bbox <- function(x, srs, verbose = FALSE) {
-
   # Switch to stored queries
   stored_query <- "AD:Address"
 

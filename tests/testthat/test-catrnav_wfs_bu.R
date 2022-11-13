@@ -9,19 +9,21 @@ test_that("BBOX Check errors", {
 test_that("BBOX Check projections", {
   skip_on_cran()
 
-  expect_null(catrnav_wfs_get_buildings_bbox(c(
-    760926, 4019259,
-    761155, 4019366
-  ),
-  srs = 25829
+  expect_null(catrnav_wfs_get_buildings_bbox(
+    c(
+      760926, 4019259,
+      761155, 4019366
+    ),
+    srs = 25829
   ))
 
-  expect_message(catrnav_wfs_get_buildings_bbox(c(
-    1071071, 4747924,
-    1071171, 4748024
-  ),
-  srs = 25829,
-  verbose = TRUE
+  expect_message(catrnav_wfs_get_buildings_bbox(
+    c(
+      1071071, 4747924,
+      1071171, 4748024
+    ),
+    srs = 25829,
+    verbose = TRUE
   ))
 
   obj <- catrnav_wfs_get_buildings_bbox(c(1071071, 4747924, 1071171, 4748024),

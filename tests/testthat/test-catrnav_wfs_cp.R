@@ -13,12 +13,13 @@ test_that("BBOX Check projections", {
     srs = 25829
   ))
 
-  expect_message(catrnav_wfs_get_parcels_bbox(c(
-    1071071, 4747924,
-    1071171, 4748024
-  ),
-  srs = 25829,
-  verbose = TRUE
+  expect_message(catrnav_wfs_get_parcels_bbox(
+    c(
+      1071071, 4747924,
+      1071171, 4748024
+    ),
+    srs = 25829,
+    verbose = TRUE
   ))
 
   obj <- catrnav_wfs_get_parcels_bbox(c(1071071, 4747924, 1071171, 4748024),

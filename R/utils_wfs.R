@@ -1,7 +1,6 @@
 catrnav_wfs_get_url <- function(host = "https://inspire.navarra.es/services/",
                                 entry,
                                 params) {
-
   # Clean empty params
   params <- params[lengths(params) != 0]
 
@@ -103,8 +102,6 @@ wfs_bbox <- function(bbox, srs) {
 
   # Use bbox of a spatial object. The API fails on geografic coord ¿?
   if (inherits(bbox, "sf") | inherits(bbox, "sfc")) {
-
-
     # Convert to 25830 (opinionated)
     bbox_new <- sf::st_transform(bbox, 25830)
 
