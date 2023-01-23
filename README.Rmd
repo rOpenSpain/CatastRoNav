@@ -63,7 +63,6 @@ The WFS service allows to download vector objects of specific cadastral
 elements. The result is provided as `sf` objects (See **sf** package).
 
 ```{r wfs}
-
 library(CatastRoNav)
 library(ggplot2)
 

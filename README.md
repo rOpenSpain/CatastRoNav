@@ -49,7 +49,6 @@ The WFS service allows to download vector objects of specific cadastral
 elements. The result is provided as `sf` objects (See **sf** package).
 
 ``` r
-
 library(CatastRoNav)
 library(ggplot2)
 
@@ -69,7 +68,7 @@ ggplot(wfs_get_buildings) +
 
 To cite ‘CatastRoNav’ in publications use:
 
-Hernangomez D (2022). CatastRoNav: Interface to the INSPIRE services of
+Hernangomez D (2023). CatastRoNav: Interface to the INSPIRE services of
 Catastro de Navarra. <https://doi.org/10.5281/zenodo.6366407>,
 <https://ropenspain.github.io/CatastRoNav/>
 
@@ -78,7 +77,7 @@ A BibTeX entry for LaTeX users is:
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the {API} Catastro de Navarra},
       author = {Diego Hernangómez},
-      year = {2022},
+      year = {2023},
       version = {0.0.1.9000},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},

@@ -42,7 +42,6 @@ On this example we would retrieve the cadastral parcels of
 
 
 ```r
-
 library(CatastRoNav)
 # For getting coords
 library(sf)
@@ -79,7 +78,6 @@ In first place, we extract the coordinates of the city center of Pamplona using
 
 
 ```r
-
 # Use mapSpain for getting the coords
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
@@ -94,7 +92,6 @@ Next step consists on extracting the buildings using the WFS service:
 
 
 ```r
-
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff)
 ```
 
@@ -103,7 +100,6 @@ we created before:
 
 
 ```r
-
 # Cut buildings
 
 dataviz <- st_intersection(pamp_bu, pamp_buff)
@@ -118,7 +114,6 @@ Let's extract now the construction year, available in the column `beginning`:
 
 
 ```r
-
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
 
@@ -139,7 +134,6 @@ different classes:
 
 
 ```r
-
 dataviz <- dataviz %>%
   mutate(year_cat = ggplot2::cut_width(year,
     width = 10
