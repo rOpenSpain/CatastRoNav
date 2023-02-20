@@ -24,7 +24,7 @@ or cadastral parcels.
 ## Installation
 
 You can install the developing version of **CatastRoNav** using the
-[r-universe](https://ropenspain.r-universe.dev/ui#builds):
+[r-universe](http://ropenspain.r-universe.dev/ui/):
 
 ``` r
 # Enable this universe

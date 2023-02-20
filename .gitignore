@@ -15,7 +15,6 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 .Renviron
-revdep
 CatastRoNav.Rcheck/
 CatastRoNav*.tar.gz
 CatastRoNav*.tgz
@@ -24,3 +23,4 @@ CRAN-SUBMISSION
 inst/doc
 docs/
 cran-comments.md
+.Rdata
