@@ -17,3 +17,6 @@
 ^_pkgdown\.yaml$
 ^pkgdown$
 ^cran-comments\.md$
+^pkgdown\.yaml$
+^pkgdown\.yml$
+^\.imgbotconfig$
