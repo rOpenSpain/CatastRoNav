@@ -17,7 +17,7 @@ badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain
 
 **CatastRoNav** is a package that provide access to different API
 services of the [Cadastre of
-Navarre](https://idena.navarra.es/portal/servicios?lang=en). With
+Navarre](https://geoportal.navarra.es/es/idena). With
 **CatastRoNav** it is possible to download spatial objects as buildings
 or cadastral parcels.
 
