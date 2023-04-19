@@ -5,7 +5,7 @@ name: update-docs
 
 jobs:
   update-docs:
-    runs-on: macOS-latest
+    runs-on: windows-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -20,12 +20,15 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          cache-version: 2
           extra-packages: |
             local::.
-            any::pkgdown
+            any::cli
             any::rcmdcheck
+            any::pkgdown
             dieghernan/pkgdev
             ropenspain/rostemplate
+
           needs: website
 
       - name: Update docs
@@ -37,8 +40,8 @@ jobs:
 
       - name: Commit results
         run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "dieghernan"
+          git config --local user.email "dieghernan@users.noreply.github.com"
           git add -A
           git commit -m 'Update docs with pkgdev' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
@@ -49,4 +52,5 @@ jobs:
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE, run_dont_run = TRUE)'
+
