@@ -17,14 +17,14 @@ badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain
 
 **CatastRoNav** is a package that provide access to different API
 services of the [Cadastre of
-Navarre](https://geoportal.navarra.es/es/idena). With
-**CatastRoNav** it is possible to download spatial objects as buildings
-or cadastral parcels.
+Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
+is possible to download spatial objects as buildings or cadastral
+parcels.
 
 ## Installation
 
 You can install the developing version of **CatastRoNav** using the
-[r-universe](http://ropenspain.r-universe.dev/ui/):
+[r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
 # Enable this universe
@@ -78,7 +78,7 @@ A BibTeX entry for LaTeX users is:
       title = {{CatastRoNav}: Interface to the {API} Catastro de Navarra},
       author = {Diego Hernangómez},
       year = {2023},
-      version = {0.0.1.9000},
+      version = {0.0.2},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
       abstract = {Access public spatial data available under the INSPIRE directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},
