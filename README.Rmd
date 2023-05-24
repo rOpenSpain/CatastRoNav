@@ -23,7 +23,8 @@ library(CatastRoNav)
 <!-- badges: start -->
 
 [![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
-[![CatastRoNav status badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev)
+[![CatastRoNav status
+badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev)
 [![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
@@ -32,8 +33,8 @@ library(CatastRoNav)
 <!-- badges: end -->
 
 **CatastRoNav** is a package that provide access to different API services of
-the [Cadastre of Navarre](https://geoportal.navarra.es/es/idena).
-With **CatastRoNav** it is possible to download spatial objects as buildings or
+the [Cadastre of Navarre](https://geoportal.navarra.es/es/idena). With
+**CatastRoNav** it is possible to download spatial objects as buildings or
 cadastral parcels.
 
 ## Installation
@@ -96,8 +97,9 @@ similar functionalities for Spain excluding the Basque Country and Navarre.
 ## Terms and conditions of use
 
 Data provided by the Government of Navarre under [Creative Commons Attribution
-(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_EN). The service
-is provided "as is", and without guarantee of any kind, implicit or explicit.
+(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_EN). The
+service is provided "as is", and without guarantee of any kind, implicit or
+explicit.
 
-Data source: [SITNA – Government of
+Data source: [SITNA -- Government of
 Navarre](https://sitna.navarra.es/geoportal/)

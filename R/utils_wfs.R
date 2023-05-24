@@ -101,7 +101,7 @@ wfs_bbox <- function(bbox, srs) {
   result <- list()
 
   # Use bbox of a spatial object. The API fails on geografic coord ¿?
-  if (inherits(bbox, "sf") | inherits(bbox, "sfc")) {
+  if (inherits(bbox, "sf") || inherits(bbox, "sfc")) {
     # Convert to 25830 (opinionated)
     bbox_new <- sf::st_transform(bbox, 25830)
 
@@ -128,12 +128,12 @@ wfs_bbox <- function(bbox, srs) {
 }
 
 get_sf_from_bbox <- function(bbox, srs) {
-  if (inherits(bbox, "sf") | inherits(bbox, "sfc")) {
+  if (inherits(bbox, "sf") || inherits(bbox, "sfc")) {
     return(bbox)
   }
 
   # Sanity check
-  if (!(is.numeric(bbox) & length(bbox) == 4)) {
+  if (!(is.numeric(bbox) && length(bbox) == 4)) {
     stop("bbox should be a vector of 4 numbers.", call. = FALSE)
   }
 

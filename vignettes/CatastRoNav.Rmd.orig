@@ -5,8 +5,6 @@ vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: references.bib
-nocite: '@*'
 ---
 
 ```{r, include = FALSE}
@@ -185,3 +183,4 @@ ggplot(dataviz) +
 
 ## References
 
+- Royé D (2019). "Visualize urban growth." <https://dominicroye.github.io/en/2019/visualize-urban-growth/>.

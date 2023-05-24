@@ -1,3 +1,7 @@
+# CatastRoNav (development version)
+
+-   Improve condition handling.
+
 # CatastRoNav 0.0.2
 
 -   Make `sf` objects valid with `sf::st_make_valid()`.
