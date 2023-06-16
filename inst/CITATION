@@ -13,10 +13,5 @@ bibentry(
   version = meta$Version,
   doi = doi,
   url = unlist(strsplit(meta$URL, ","))[1],
-  abstract = abs,
-  textVersion = paste0(
-    "Hernangomez D (", year, "). CatastRoNav: ",
-    gsub("'", "", meta$Title), ". <https://doi.org/", doi, ">, <",
-    unlist(strsplit(meta$URL, ","))[1], ">"
-  )
+  abstract = abs
 )

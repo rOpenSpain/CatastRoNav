@@ -80,7 +80,7 @@ ggplot(wfs_get_buildings) +
 ## Citation
 
 ```{r echo=FALSE, results='asis'}
-print(citation("CatastRoNav"), bibtex = FALSE)
+print(citation("CatastRoNav"), style = "html")
 ```
 
 A BibTeX entry for LaTeX users is:
