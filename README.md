@@ -66,11 +66,12 @@ ggplot(wfs_get_buildings) +
 
 ## Citation
 
-To cite ‘CatastRoNav’ in publications use:
-
-Hernangomez D (2023). CatastRoNav: Interface to the INSPIRE services of
-Catastro de Navarra. <https://doi.org/10.5281/zenodo.6366407>,
-<https://ropenspain.github.io/CatastRoNav/>
+<p>
+Hernangómez D (2023). <em>CatastRoNav: Interface to the API Catastro de
+Navarra</em>.
+<a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
+<a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
+</p>
 
 A BibTeX entry for LaTeX users is:
 
