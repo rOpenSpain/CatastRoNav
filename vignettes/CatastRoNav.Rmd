@@ -9,6 +9,8 @@ vignette: >
 
 
 
+<!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
+
 **CatastRoNav** is a package that provide access to different INSPIRE API
 services of the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With
@@ -62,8 +64,8 @@ ggplot(cp) +
 ```
 
 <div class="figure">
-<img src="./olite-1.png" alt="plot of chunk olite" width="100%" />
-<p class="caption">plot of chunk olite</p>
+<img src="./olite-1.png" alt="Example: Olite" width="100%" />
+<p class="caption">Example: Olite</p>
 </div>
 
 ### Thematic maps
@@ -110,8 +112,8 @@ ggplot(dataviz) +
 ```
 
 <div class="figure">
-<img src="./minimal-1.png" alt="plot of chunk minimal" width="100%" />
-<p class="caption">plot of chunk minimal</p>
+<img src="./minimal-1.png" alt="Minimal map" width="100%" />
+<p class="caption">Minimal map</p>
 </div>
 
 Let's extract now the construction year, available in the column `beginning`:
@@ -178,8 +180,8 @@ ggplot(dataviz) +
 ```
 
 <div class="figure">
-<img src="./dataviz-1.png" alt="plot of chunk dataviz" width="100%" />
-<p class="caption">plot of chunk dataviz</p>
+<img src="./dataviz-1.png" alt="Pamplona: Urban Growth" width="100%" />
+<p class="caption">Pamplona: Urban Growth</p>
 </div>
 
 ## References

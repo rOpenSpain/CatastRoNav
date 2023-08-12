@@ -178,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "852.42KB",
+  "fileSize": "853.786KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -190,7 +190,7 @@
           "familyName": "Hernangómez"
         }
       ],
-      "name": "{CatastRoNav}: Interface to the {API} Catastro de Navarra",
+      "name": "{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}",
       "identifier": "10.5281/zenodo.6366407",
       "url": "https://ropenspain.github.io/CatastRoNav/",
       "@id": "https://doi.org/10.5281/zenodo.6366407",

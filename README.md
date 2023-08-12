@@ -7,7 +7,7 @@
 
 [![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
 [![CatastRoNav status
-badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev)
+badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev/CatastRoNav)
 [![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
@@ -27,12 +27,13 @@ You can install the developing version of **CatastRoNav** using the
 [r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
-# Enable this universe
-options(repos = c(
-  ropenspain = "https://ropenspain.r-universe.dev",
-  CRAN = "https://cloud.r-project.org"
-))
-install.packages("CatastRoNav")
+# Install CatastRoNav in R:
+install.packages("CatastRoNav",
+  repos = c(
+    "https://ropenspain.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
+)
 ```
 
 Alternatively, you can install the developing version of **CatastRoNav**
@@ -76,7 +77,7 @@ Navarra</em>.
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-catastronav,
-      title = {{CatastRoNav}: Interface to the {API} Catastro de Navarra},
+      title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
       author = {Diego Hernangómez},
       year = {2023},
       version = {0.0.2.9000},
