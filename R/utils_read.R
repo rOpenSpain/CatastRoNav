@@ -45,10 +45,12 @@ st_read_layers_encoding <- function(path, verbose) {
 
 
   out <- try(
-  sf::st_read(path,
-    layer = df_layers$layer[1],
-    quiet = !verbose
-  ), silent = TRUE)
+    sf::st_read(path,
+      layer = df_layers$layer[1],
+      quiet = !verbose
+    ),
+    silent = TRUE
+  )
 
   # It may be an error, check
   if (inherits(out, "try-error")) {

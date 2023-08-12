@@ -43,20 +43,24 @@ catr_hlp_dwnload <- function(api_entry, filename, cache_dir,
   # Downloading
   if (dwnload) {
     err_dwnload <- try(
-    download.file(url, filepath,
-      quiet = isFALSE(verbose),
-      mode = "wb"
-    ), silent = TRUE)
+      download.file(url, filepath,
+        quiet = isFALSE(verbose),
+        mode = "wb"
+      ),
+      silent = TRUE
+    )
 
     # nocov start
     # On error retry
     if (inherits(err_dwnload, "try-error")) {
       if (verbose) message("Retrying query")
       err_dwnload <- try(
-      download.file(url, filepath,
-        quiet = isFALSE(verbose),
-        mode = "wb"
-      ), silent = TRUE)
+        download.file(url, filepath,
+          quiet = isFALSE(verbose),
+          mode = "wb"
+        ),
+        silent = TRUE
+      )
     }
     # nocov end
 
