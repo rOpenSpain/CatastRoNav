@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+<!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
+
 **CatastRoNav** is a package that provide access to different INSPIRE API
 services of the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With
@@ -50,7 +52,7 @@ retrieve spatial objects from the database of the cadastre:
 On this example we would retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
-```{r olite}
+```{r olite, fig.cap="Example: Olite"}
 
 library(CatastRoNav)
 # For getting coords
@@ -108,7 +110,7 @@ pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff)
 Next step for creating the visualization is to crop the buildings to the buffer
 we created before:
 
-```{r minimal}
+```{r minimal, fig.cap="Minimal map"}
 
 # Cut buildings
 
@@ -140,7 +142,7 @@ Last step is to create groups based on the year and create the data
 visualization. We use here the function `ggplot2::cut_width()` to create
 different classes:
 
-```{r dataviz}
+```{r dataviz, fig.cap="Pamplona: Urban Growth"}
 
 dataviz <- dataviz %>%
   mutate(year_cat = ggplot2::cut_width(year,

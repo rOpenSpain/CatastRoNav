@@ -6,7 +6,7 @@ doi <- "10.5281/zenodo.6366407"
 bibentry(
   "Manual",
   header = paste0("To cite '", meta$Package, "' in publications use:"),
-  title = "{CatastRoNav}: Interface to the {API} Catastro de Navarra",
+  title = "{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}",
   author = person("Diego", "Hernangómez"),
   year = year,
   key = "R-catastronav",
