@@ -105,10 +105,6 @@ and the spatial object is projected back to the SRS of the initial object.</p>
 <span class="r-in"><span><span class="va">downtown</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.646812</span>, <span class="fl">42.814528</span>, <span class="op">-</span><span class="fl">1.638036</span>, <span class="fl">42.820320</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">bu</span> <span class="op">&lt;-</span> <span class="fu">catrnav_wfs_get_buildings_bbox</span><span class="op">(</span><span class="va">downtown</span>, srs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Malformed query: java.lang.RuntimeException: java.io.IOException</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> java.io.IOExceptionorg.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> An I/O error occurred while sending to the backend.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Connection reset</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
