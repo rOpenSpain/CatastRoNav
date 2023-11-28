@@ -8,13 +8,16 @@
 #'     the bounding box: `c(xmin, ymin, xmax, ymax)`
 #'   - A `sf/sfc` object, as provided by the **sf** package.
 #' @param srs SRS/CRS to use on the query. See **Details**.
-#'
 #' @param verbose Logical, displays information. Useful for debugging, default
 #'   is `FALSE`.
+#' @param count integer, indicating the maximum number of features to return.
+#'   The default value `NULL` does not pass this parameter to the query,
+#'   and the maximum number of features would be determined by the default value
+#'   of the API service (5,000 in this case).
 #'
 #' @seealso [sf::st_bbox()]
 #'
-#' @return A `sf` object.
+#' @return A \CRANpkg{sf} object.
 #' @source [SITNA – Catastro de Navarra](https://sitna.navarra.es/geoportal/)
 #'
 #' @details
@@ -25,7 +28,7 @@
 #' [EPSG:25830](https://epsg.io/25830) - ETRS89 / UTM zone 30N. The result is
 #' provided always in the SRS provided in `srs`.
 #'
-#' When `x` is a `sf` object, the value `srs` is ignored. The query is
+#' When `x` is a \CRANpkg{sf} object, the value `srs` is ignored. The query is
 #' performed using [EPSG:25830](https://epsg.io/25830) (ETRS89 / UTM zone 30N)
 #' and the spatial object is projected back to the SRS of the initial object.
 #'
@@ -44,7 +47,8 @@
 #' }
 #'
 #' @seealso [CatastRo::catr_wfs_get_buildings_bbox()]
-catrnav_wfs_get_buildings_bbox <- function(x, srs, verbose = FALSE) {
+catrnav_wfs_get_buildings_bbox <- function(x, srs, verbose = FALSE,
+                                           count = NULL) {
   # Switch to stored queries
   stored_query <- "BU:Building"
 
@@ -58,6 +62,7 @@ catrnav_wfs_get_buildings_bbox <- function(x, srs, verbose = FALSE) {
     service = "WFS",
     request = "getfeature",
     typenames = stored_query,
+    count = count,
     # Stored query
     bbox = bbox_res$bbox,
     SRSNAME = bbox_res$incrs

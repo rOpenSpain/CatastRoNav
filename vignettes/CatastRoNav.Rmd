@@ -1,6 +1,7 @@
 ---
 title: "Get started"
 output: rmarkdown::html_vignette
+date: "2023-11-28"
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,7 +28,7 @@ cadastral parcels.
 > spatial information across Europe and assist in policy-making across
 > boundaries.
 >
-> *From <https://inspire.ec.europa.eu/about-inspire/563>*
+> *From <https://knowledge-base.inspire.ec.europa.eu/index_en>*
 
 The implementation of the INSPIRE directive on the Cadastre of Navarre allows to
 retrieve spatial objects from the database of the cadastre:
@@ -88,14 +89,14 @@ pamp <- esp_get_capimun(munic = "^Pamplona")
 
 pamp_buff <- pamp %>%
   st_transform(25830) %>%
-  st_buffer(750)
+  st_buffer(1250)
 ```
 
 Next step consists on extracting the buildings using the WFS service:
 
 
 ```r
-pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff)
+pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 ```
 
 Next step for creating the visualization is to crop the buildings to the buffer

@@ -23,10 +23,12 @@ test_that("BBOX Check projections", {
   ))
 
   obj <- catrnav_wfs_get_parcels_bbox(c(1071071, 4747924, 1071171, 4748024),
-    srs = 25829
+    srs = 25829,
+    count = 10
   )
 
   expect_true(sf::st_crs(obj) == sf::st_crs(25829))
+  expect_true(nrow(obj) == 10)
 
 
   # test conversion
