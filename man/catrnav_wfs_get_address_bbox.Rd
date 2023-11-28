@@ -7,7 +7,7 @@
 \href{https://sitna.navarra.es/geoportal/}{SITNA – Catastro de Navarra}
 }
 \usage{
-catrnav_wfs_get_address_bbox(x, srs, verbose = FALSE)
+catrnav_wfs_get_address_bbox(x, srs, verbose = FALSE, count = NULL)
 }
 \arguments{
 \item{x}{See \strong{Details}. It could be:
@@ -21,9 +21,14 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}
 
 \item{verbose}{Logical, displays information. Useful for debugging, default
 is \code{FALSE}.}
+
+\item{count}{integer, indicating the maximum number of features to return.
+The default value \code{NULL} does not pass this parameter to the query,
+and the maximum number of features would be determined by the default value
+of the API service (5,000 in this case).}
 }
 \value{
-A \code{sf} object.
+A \CRANpkg{sf} object.
 }
 \description{
 Get the spatial data of addresses by bounding box.
@@ -35,7 +40,7 @@ reference system (4326, 4258), the function queries the bounding box on
 \href{https://epsg.io/25830}{EPSG:25830} - ETRS89 / UTM zone 30N. The result is
 provided always in the SRS provided in \code{srs}.
 
-When \code{x} is a \code{sf} object, the value \code{srs} is ignored. The query is
+When \code{x} is a \CRANpkg{sf} object, the value \code{srs} is ignored. The query is
 performed using \href{https://epsg.io/25830}{EPSG:25830} (ETRS89 / UTM zone 30N)
 and the spatial object is projected back to the SRS of the initial object.
 }

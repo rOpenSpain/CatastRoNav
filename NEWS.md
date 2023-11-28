@@ -1,10 +1,12 @@
 # CatastRoNav (development version)
 
 -   Improve condition handling.
+-   Add a `count` parameter that allows to set the maximum number of features to
+    be returned.
 
 # CatastRoNav 0.0.2
 
--   Make `sf` objects valid with `sf::st_make_valid()`.
+-   Make \CRANpkg{sf} objects valid with `sf::st_make_valid()`.
 
 # CatastRoNav 0.0.1
 

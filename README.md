@@ -8,7 +8,7 @@
 [![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
 [![CatastRoNav status
 badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev/CatastRoNav)
-[![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check)
+[![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml)
 [![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
 [![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -47,7 +47,7 @@ install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 ## Usage
 
 The WFS service allows to download vector objects of specific cadastral
-elements. The result is provided as `sf` objects (See **sf** package).
+elements. The result is provided as objects (See **sf** package).
 
 ``` r
 library(CatastRoNav)
@@ -96,7 +96,7 @@ and Navarre.
 
 Data provided by the Government of Navarre under [Creative Commons
 Attribution (CC BY
-4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_EN). The
+4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_en). The
 service is provided “as is”, and without guarantee of any kind, implicit
 or explicit.
 

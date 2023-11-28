@@ -7,7 +7,7 @@
 #'
 #' @seealso [sf::st_bbox()]
 #'
-#' @return A `sf` object.
+#' @return A \CRANpkg{sf} object.
 #' @source [SITNA – Catastro de Navarra](https://sitna.navarra.es/geoportal/)
 #'
 #' @details
@@ -18,7 +18,7 @@
 #' [EPSG:25830](https://epsg.io/25830) - ETRS89 / UTM zone 30N. The result is
 #' provided always in the SRS provided in `srs`.
 #'
-#' When `x` is a `sf` object, the value `srs` is ignored. The query is
+#' When `x` is a \CRANpkg{sf} object, the value `srs` is ignored. The query is
 #' performed using [EPSG:25830](https://epsg.io/25830) (ETRS89 / UTM zone 30N)
 #' and the spatial object is projected back to the SRS of the initial object.
 #'
@@ -37,7 +37,8 @@
 #' }
 #'
 #' @seealso [CatastRo::catr_wfs_get_address_bbox()]
-catrnav_wfs_get_address_bbox <- function(x, srs, verbose = FALSE) {
+catrnav_wfs_get_address_bbox <- function(x, srs, verbose = FALSE,
+                                         count = NULL) {
   # Switch to stored queries
   stored_query <- "AD:Address"
 
@@ -51,6 +52,7 @@ catrnav_wfs_get_address_bbox <- function(x, srs, verbose = FALSE) {
     service = "WFS",
     request = "getfeature",
     typenames = stored_query,
+    count = count,
     # Stored query
     bbox = bbox_res$bbox,
     SRSNAME = bbox_res$incrs

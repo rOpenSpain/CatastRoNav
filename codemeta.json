@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.1 (2023-06-16 ucrt)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31 ucrt)",
   "author": [
     {
       "@type": "Person",
@@ -178,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "853.79KB",
+  "fileSize": "890.901KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -199,7 +199,7 @@
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/master/NEWS.md",
   "readme": "https://github.com/rOpenSpain/CatastRoNav/blob/main/README.md",
-  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions?query=workflow%3AR-CMD-check", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
+  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["r", "maps", "spain", "navarra", "catastro", "r-package", "r-stats", "ropenspain"]
 }
