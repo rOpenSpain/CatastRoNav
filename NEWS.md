@@ -3,6 +3,12 @@
 -   Improve condition handling.
 -   Add a `count` parameter that allows to set the maximum number of features to
     be returned.
+-   **New features**;
+    -   Support for ATOM on cadastral parcels added, see
+        `catrnav_atom_get_parcels()`. Other ATOM capabilities to be added when
+        the Cadastre of Navarra make them available.
+    -   New caching system, see `catrnav_set_cache_dir()`.
+    -   New dependency: **rappdirs** .
 
 # CatastRoNav 0.0.2
 

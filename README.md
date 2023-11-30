@@ -95,10 +95,9 @@ and Navarre.
 ## Terms and conditions of use
 
 Data provided by the Government of Navarre under [Creative Commons
-Attribution (CC BY
-4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_en). The
-service is provided “as is”, and without guarantee of any kind, implicit
-or explicit.
+Attribution (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+The service is provided “as is”, and without guarantee of any kind,
+implicit or explicit.
 
 Data source: [SITNA – Government of
-Navarre](https://sitna.navarra.es/geoportal/)
+Navarre](https://geoportal.navarra.es/es/inspire)

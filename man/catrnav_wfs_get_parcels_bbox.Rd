@@ -4,7 +4,7 @@
 \alias{catrnav_wfs_get_parcels_bbox}
 \title{Download Cadastral Parcels of Navarre}
 \source{
-\href{https://sitna.navarra.es/geoportal/}{SITNA – Catastro de Navarra}
+\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
 }
 \usage{
 catrnav_wfs_get_parcels_bbox(x, srs, verbose = FALSE, count = NULL)
@@ -61,4 +61,9 @@ ggplot(cp) +
 \code{\link[sf:st_bbox]{sf::st_bbox()}}
 
 \code{\link[CatastRo:catr_wfs_get_parcels]{CatastRo::catr_wfs_get_parcels_bbox()}}
+
+Other parcels: 
+\code{\link{catrnav_atom_get_parcels_db_all}()},
+\code{\link{catrnav_atom_get_parcels}()}
 }
+\concept{parcels}

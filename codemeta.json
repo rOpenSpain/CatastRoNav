@@ -129,6 +129,18 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "rappdirs",
+      "name": "rappdirs",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rappdirs"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
       "version": ">= 1.0.0",
@@ -140,7 +152,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -152,7 +164,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -164,7 +176,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
@@ -178,7 +190,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "890.901KB",
+  "fileSize": "913.016KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

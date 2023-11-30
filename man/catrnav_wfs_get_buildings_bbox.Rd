@@ -4,7 +4,7 @@
 \alias{catrnav_wfs_get_buildings_bbox}
 \title{Download Buildings of Navarre}
 \source{
-\href{https://sitna.navarra.es/geoportal/}{SITNA – Catastro de Navarra}
+\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
 }
 \usage{
 catrnav_wfs_get_buildings_bbox(x, srs, verbose = FALSE, count = NULL)

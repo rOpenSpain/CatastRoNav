@@ -7,8 +7,11 @@
 #'
 #' @seealso [sf::st_bbox()]
 #'
+#' @family parcels
+#'
 #' @return A \CRANpkg{sf} object.
-#' @source [SITNA – Catastro de Navarra](https://sitna.navarra.es/geoportal/)
+#' @source
+#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @details
 #'

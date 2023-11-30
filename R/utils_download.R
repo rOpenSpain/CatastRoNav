@@ -7,6 +7,9 @@ catr_hlp_dwnload <- function(api_entry, filename, cache_dir,
   api_entry <- utils::URLencode(api_entry)
   url <- api_entry
 
+  cache_dir <- catrnav_hlp_cachedir(cache_dir)
+
+
   if (verbose) message("Cache dir is ", cache_dir)
 
   # Create filepath
