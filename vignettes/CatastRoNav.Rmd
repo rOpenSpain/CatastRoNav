@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 output: rmarkdown::html_vignette
-date: "2023-11-30"
+date: "2023-12-04"
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
