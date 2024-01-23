@@ -25,9 +25,8 @@ knitr::opts_chunk$set(
 <!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
 
 **CatastRoNav** is a package that provide access to different INSPIRE API
-services of the [Cadastre of
-Navarre](https://geoportal.navarra.es/es/idena). With
-**CatastRoNav** it is possible to download spatial objects as buildings or
+services of the [Cadastre of Navarre](https://geoportal.navarra.es/es/idena).
+With **CatastRoNav** it is possible to download spatial objects as buildings or
 cadastral parcels.
 
 ## INSPIRE Services
@@ -186,4 +185,5 @@ ggplot(dataviz) +
 
 ## References
 
-- Royé D (2019). "Visualize urban growth." <https://dominicroye.github.io/en/2019/visualize-urban-growth/>.
+-   Royé D (2019). "Visualize urban growth."
+    <https://dominicroye.github.io/en/2019/visualize-urban-growth/>.
