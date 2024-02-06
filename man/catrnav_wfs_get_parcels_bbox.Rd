@@ -63,7 +63,7 @@ ggplot(cp) +
 \code{\link[CatastRo:catr_wfs_get_parcels]{CatastRo::catr_wfs_get_parcels_bbox()}}
 
 Other parcels: 
-\code{\link{catrnav_atom_get_parcels_db_all}()},
-\code{\link{catrnav_atom_get_parcels}()}
+\code{\link{catrnav_atom_get_parcels}()},
+\code{\link{catrnav_atom_get_parcels_db_all}()}
 }
 \concept{parcels}
