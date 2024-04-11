@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
   dev = "ragg_png",
+  dpi = 300,
   tidy = "styler",
   comment = "#>",
   fig.path = "man/figures/README-",
@@ -55,14 +56,14 @@ install.packages("CatastRoNav",
 Alternatively, you can install the developing version of **CatastRoNav** with:
 
 ```{r, eval = FALSE}
-library(remotes)
-install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
+remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 ```
 
 ## Usage
 
 The WFS service allows to download vector objects of specific cadastral
-elements. The result is provided as \CRANpkg{sf} objects (See **sf** package).
+elements. The result is provided as `sf` objects (See [**sf**
+package](https://r-spatial.github.io/sf/)).
 
 ```{r wfs}
 library(CatastRoNav)

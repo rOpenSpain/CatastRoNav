@@ -1,4 +1,4 @@
-#' Set your **CatastRoNav** cache dir
+#' Set your \pkg{CatastRoNav} cache dir
 #'
 #' @family cache utilities
 #' @seealso [rappdirs::user_config_dir()]
@@ -13,7 +13,7 @@
 #' options:
 #'   * Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You would need to
 #'     run this command on each session (Similar to `install = FALSE`).
-#'   * Write this line on your .Renviron file:
+#'   * Write this line on your `.Renviron` file:
 #'     `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior than
 #'     `install = TRUE`). This would store your `cache_dir` permanently.
 #'

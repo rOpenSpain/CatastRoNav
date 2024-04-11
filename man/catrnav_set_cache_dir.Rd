@@ -2,7 +2,7 @@
 % Please edit documentation in R/cache_set.R
 \name{catrnav_set_cache_dir}
 \alias{catrnav_set_cache_dir}
-\title{Set your \strong{CatastRoNav} cache dir}
+\title{Set your \pkg{CatastRoNav} cache dir}
 \usage{
 catrnav_set_cache_dir(
   cache_dir,
@@ -38,7 +38,7 @@ options:
 \itemize{
 \item Run \code{Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")}. You would need to
 run this command on each session (Similar to \code{install = FALSE}).
-\item Write this line on your .Renviron file:
+\item Write this line on your \code{.Renviron} file:
 \code{CATASTRONAV_CACHE_DIR = "value_for_cache_dir"} (same behavior than
 \code{install = TRUE}). This would store your \code{cache_dir} permanently.
 }

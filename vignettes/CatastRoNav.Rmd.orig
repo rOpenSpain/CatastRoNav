@@ -17,9 +17,12 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   dev = "ragg_png",
-  dpi = 90,
+  dpi = 300,
   out.width = "100%"
 )
+
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+
 ```
 
 <!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
@@ -45,7 +48,8 @@ The implementation of the INSPIRE directive on the Cadastre of Navarre allows to
 retrieve spatial objects from the database of the cadastre:
 
 -   **Vector objects:** Parcels, addresses, buildings, cadastral zones and more.
-    These objects are provided by **CatastRoNav** as *sf* objects (see `?sf)`.
+    These objects are provided by **CatastRoNav** as `sf` objects (see
+    `?sf::st_sf`).
 
 ## Examples
 
@@ -110,7 +114,7 @@ pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 Next step for creating the visualization is to crop the buildings to the buffer
 we created before:
 
-```{r minimal, fig.cap="Minimal map"}
+```{r minimal, fig.cap="Minimal map", dpi=150}
 
 # Cut buildings
 
@@ -142,7 +146,7 @@ Last step is to create groups based on the year and create the data
 visualization. We use here the function `ggplot2::cut_width()` to create
 different classes:
 
-```{r dataviz, fig.cap="Pamplona: Urban Growth"}
+```{r dataviz, fig.cap="Pamplona: Urban Growth", crop=TRUE}
 
 dataviz <- dataviz %>%
   mutate(year_cat = ggplot2::cut_width(year,

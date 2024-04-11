@@ -2,7 +2,7 @@
 % Please edit documentation in R/atom_cp.R
 \name{catrnav_atom_get_parcels}
 \alias{catrnav_atom_get_parcels}
-\title{ATOM INSPIRE: Download all the Cadastral Parcels of a Municipality}
+\title{ATOM INSPIRE: Download all the cadastral parcels of a municipality}
 \usage{
 catrnav_atom_get_parcels(
   munic,
@@ -29,7 +29,7 @@ would store the cached files on a temporary dir (See \code{\link[base:tempfile]{
 default is \code{FALSE}.}
 }
 \value{
-A \CRANpkg{sf} object.
+A \code{\link[sf:sf]{sf}} object.
 }
 \description{
 Get the spatial data of all the cadastral parcels belonging to a single
@@ -49,7 +49,6 @@ ggplot(s) +
     subtitle = "Pamplona / Iruña"
   )
 }
-
 }
 \references{
 \href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}

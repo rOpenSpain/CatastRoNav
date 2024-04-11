@@ -2,7 +2,7 @@
 % Please edit documentation in R/atom_cp_db.R
 \name{catrnav_atom_get_parcels_db_all}
 \alias{catrnav_atom_get_parcels_db_all}
-\title{ATOM INSPIRE: Reference Database for ATOM Cadastral Parcels}
+\title{ATOM INSPIRE: Reference database for ATOM cadastral parcels}
 \source{
 \href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
 }
@@ -28,7 +28,7 @@ would store the cached files on a temporary dir (See \code{\link[base:tempfile]{
 default is \code{FALSE}.}
 }
 \value{
-A tibble with the information requested.
+A \link[tibble:tibble]{tibble} with the information requested:
 \itemize{
 \item \code{munic}: Name of the municipality.
 \item \code{url}: url for downloading information of the corresponding municipality.

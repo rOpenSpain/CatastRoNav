@@ -1,4 +1,4 @@
-#' Download Addresses of Navarre
+#' Download addresses of Navarre in spatial format
 #'
 #' @description
 #' Get the spatial data of addresses by bounding box.
@@ -7,21 +7,14 @@
 #'
 #' @seealso [sf::st_bbox()]
 #'
-#' @return A \CRANpkg{sf} object.
+#' @return A [`sf`][sf::st_sf] object.
 #' @source
 #' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @details
 #'
-#' When `x` is a numeric vector, make sure that the `srs` matches the
-#' coordinate values. Additionally, when the `srs` correspond to a geographic
-#' reference system (4326, 4258), the function queries the bounding box on
-#' [EPSG:25830](https://epsg.io/25830) - ETRS89 / UTM zone 30N. The result is
-#' provided always in the SRS provided in `srs`.
-#'
-#' When `x` is a \CRANpkg{sf} object, the value `srs` is ignored. The query is
-#' performed using [EPSG:25830](https://epsg.io/25830) (ETRS89 / UTM zone 30N)
-#' and the spatial object is projected back to the SRS of the initial object.
+#' ```{r child = "man/chunks/spatdet.Rmd"}
+#' ```
 #'
 #' @export
 #'

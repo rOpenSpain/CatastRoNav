@@ -1,12 +1,12 @@
-#' Download Buildings of Navarre
+#' Download buildings of Navarre in spatial format
 #'
 #' @description
 #' Get the spatial data of buildings by bounding box.
 #'
 #' @param x See **Details**. It could be:
 #'   - A numeric vector of length 4 with the coordinates that defines
-#'     the bounding box: `c(xmin, ymin, xmax, ymax)`
-#'   - A `sf/sfc` object, as provided by the **sf** package.
+#'     the bounding box: `c(xmin, ymin, xmax, ymax)`.
+#'   - A `sf/sfc` object, as provided by the \CRANpkg{sf} package.
 #' @param srs SRS/CRS to use on the query. See **Details**.
 #' @param verbose Logical, displays information. Useful for debugging, default
 #'   is `FALSE`.
@@ -17,21 +17,14 @@
 #'
 #' @seealso [sf::st_bbox()]
 #'
-#' @return A \CRANpkg{sf} object.
+#' @return A [`sf`][sf::st_sf] object.
 #' @source
 #' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @details
 #'
-#' When `x` is a numeric vector, make sure that the `srs` matches the
-#' coordinate values. Additionally, when the `srs` correspond to a geographic
-#' reference system (4326, 4258), the function queries the bounding box on
-#' [EPSG:25830](https://epsg.io/25830) - ETRS89 / UTM zone 30N. The result is
-#' provided always in the SRS provided in `srs`.
-#'
-#' When `x` is a \CRANpkg{sf} object, the value `srs` is ignored. The query is
-#' performed using [EPSG:25830](https://epsg.io/25830) (ETRS89 / UTM zone 30N)
-#' and the spatial object is projected back to the SRS of the initial object.
+#' ```{r child = "man/chunks/spatdet.Rmd"}
+#' ```
 #'
 #' @export
 #'

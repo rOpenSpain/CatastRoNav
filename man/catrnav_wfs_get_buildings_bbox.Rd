@@ -2,7 +2,7 @@
 % Please edit documentation in R/wfs_bu.R
 \name{catrnav_wfs_get_buildings_bbox}
 \alias{catrnav_wfs_get_buildings_bbox}
-\title{Download Buildings of Navarre}
+\title{Download buildings of Navarre in spatial format}
 \source{
 \href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
 }
@@ -13,8 +13,8 @@ catrnav_wfs_get_buildings_bbox(x, srs, verbose = FALSE, count = NULL)
 \item{x}{See \strong{Details}. It could be:
 \itemize{
 \item A numeric vector of length 4 with the coordinates that defines
-the bounding box: \code{c(xmin, ymin, xmax, ymax)}
-\item A \code{sf/sfc} object, as provided by the \strong{sf} package.
+the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
+\item A \code{sf/sfc} object, as provided by the \CRANpkg{sf} package.
 }}
 
 \item{srs}{SRS/CRS to use on the query. See \strong{Details}.}
@@ -28,21 +28,21 @@ and the maximum number of features would be determined by the default value
 of the API service (5,000 in this case).}
 }
 \value{
-A \CRANpkg{sf} object.
+A \code{\link[sf:sf]{sf}} object.
 }
 \description{
 Get the spatial data of buildings by bounding box.
 }
 \details{
-When \code{x} is a numeric vector, make sure that the \code{srs} matches the
-coordinate values. Additionally, when the \code{srs} correspond to a geographic
-reference system (4326, 4258), the function queries the bounding box on
+When \code{x} is a numeric vector, make sure that the \code{srs} matches the coordinate
+values. Additionally, when the \code{srs} correspond to a geographic reference system
+(4326, 4258), the function queries the bounding box on
 \href{https://epsg.io/25830}{EPSG:25830} - ETRS89 / UTM zone 30N. The result is
 provided always in the SRS provided in \code{srs}.
 
-When \code{x} is a \CRANpkg{sf} object, the value \code{srs} is ignored. The query is
-performed using \href{https://epsg.io/25830}{EPSG:25830} (ETRS89 / UTM zone 30N)
-and the spatial object is projected back to the SRS of the initial object.
+When \code{x} is a \code{\link[sf:sf]{sf}} object, the value \code{srs} is ignored. The query is
+performed using \href{https://epsg.io/25830}{EPSG:25830} (ETRS89 / UTM zone 30N) and
+the spatial object is projected back to the SRS of the initial object.
 }
 \examples{
 \donttest{

@@ -1,6 +1,6 @@
-#' ATOM INSPIRE: Download all the Cadastral Parcels of a Municipality
+#' ATOM INSPIRE: Download all the cadastral parcels of a municipality
 #'
-#'
+#' @description
 #' Get the spatial data of all the cadastral parcels belonging to a single
 #' municipality using the INSPIRE ATOM service.
 #'
@@ -11,7 +11,7 @@
 #' @family parcels
 #'
 #' @export
-#' @return A \CRANpkg{sf} object.
+#' @return A [`sf`][sf::st_sf] object.
 #'
 #' @inheritParams catrnav_atom_get_parcels_db_all
 #' @param munic Municipality to extract, It can be a part of a string or the
@@ -30,7 +30,6 @@
 #'     subtitle = "Pamplona / Iruña"
 #'   )
 #' }
-#'
 catrnav_atom_get_parcels <- function(munic,
                                      cache = TRUE,
                                      update_cache = FALSE,

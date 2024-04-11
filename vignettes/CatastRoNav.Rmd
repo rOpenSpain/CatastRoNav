@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 output: rmarkdown::html_vignette
-date: "2024-01-23"
+date: "2024-04-11"
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
@@ -33,7 +33,8 @@ The implementation of the INSPIRE directive on the Cadastre of Navarre allows to
 retrieve spatial objects from the database of the cadastre:
 
 -   **Vector objects:** Parcels, addresses, buildings, cadastral zones and more.
-    These objects are provided by **CatastRoNav** as *sf* objects (see `?sf)`.
+    These objects are provided by **CatastRoNav** as `sf` objects (see
+    `?sf::st_sf`).
 
 ## Examples
 

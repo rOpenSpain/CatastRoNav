@@ -40,14 +40,14 @@ Alternatively, you can install the developing version of **CatastRoNav**
 with:
 
 ``` r
-library(remotes)
-install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
+remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 ```
 
 ## Usage
 
 The WFS service allows to download vector objects of specific cadastral
-elements. The result is provided as objects (See **sf** package).
+elements. The result is provided as `sf` objects (See [**sf**
+package](https://r-spatial.github.io/sf/)).
 
 ``` r
 library(CatastRoNav)

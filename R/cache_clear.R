@@ -1,4 +1,4 @@
-#' Clear your **CatastRoNav** cache dir
+#' Clear your \pkg{CatastRoNav} cache dir
 #'
 #' @family cache utilities
 #'
@@ -8,20 +8,20 @@
 #' **Use this function with caution**. This function would clear your cached
 #' data and configuration, specifically:
 #'
-#' * Deletes the **CatastRoNav** config directory
+#' * Deletes the \pkg{CatastRoNav} config directory
 #'   (`rappdirs::user_config_dir("CatastRoNav", "R")`).
 #' * Deletes the `cache_dir` directory.
 #' * Deletes the values on stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
 #'
 #' @param config if `TRUE`, will delete the configuration folder of
-#'   **CatastRoNav**.
+#'   \pkg{CatastRoNav}.
 #' @param cached_data If this is set to `TRUE`, it will delete your
 #'   `cache_dir` and all its content.
 #' @inheritParams catrnav_set_cache_dir
 #'
 #' @details
 #' This is an overkill function that is intended to reset your status
-#' as it you would never have installed and/or used **CatastRoNav**.
+#' as it you would never have installed and/or used \pkg{CatastRoNav}.
 #'
 #' @examples
 #'

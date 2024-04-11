@@ -1,8 +1,6 @@
-#' ATOM INSPIRE: Reference Database for ATOM Cadastral Parcels
+#' ATOM INSPIRE: Reference database for ATOM cadastral parcels
 #'
 #' @description
-#'
-#'
 #' Create a database containing the urls provided in the INSPIRE ATOM service
 #' for extracting Cadastral Parcels.
 #'
@@ -24,7 +22,7 @@
 #' @export
 #'
 #' @return
-#' A tibble with the information requested.
+#' A [tibble][tibble::tibble] with the information requested:
 #'   - `munic`: Name of the municipality.
 #'   - `url`: url for downloading information of the corresponding municipality.
 #'   - `date`: Reference date of the data.
