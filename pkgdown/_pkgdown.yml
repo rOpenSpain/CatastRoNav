@@ -1,6 +1,7 @@
 url: 'https://ropenspain.github.io/CatastRoNav'
 
 template:
+  bootstrap: 5
   package: rostemplate
 
 authors:
