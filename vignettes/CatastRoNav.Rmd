@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 output: rmarkdown::html_vignette
-date: "2024-04-11"
+date: "2024-05-28"
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
@@ -42,7 +42,7 @@ On this example we would retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
 
-```r
+``` r
 library(CatastRoNav)
 # For getting coords
 library(sf)
@@ -81,7 +81,7 @@ In first place, we extract the coordinates of the city center of Pamplona using
 **mapSpain**:
 
 
-```r
+``` r
 # Use mapSpain for getting the coords
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
@@ -95,7 +95,7 @@ pamp_buff <- pamp %>%
 Next step consists on extracting the buildings using the WFS service:
 
 
-```r
+``` r
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 ```
 
@@ -103,36 +103,49 @@ Next step for creating the visualization is to crop the buildings to the buffer
 we created before:
 
 
-```r
+``` r
 # Cut buildings
 
 dataviz <- st_intersection(pamp_bu, pamp_buff)
+#> Error in UseMethod("st_intersection"): no applicable method for 'st_intersection' applied to an object of class "NULL"
+```
+
+``` r
 
 ggplot(dataviz) +
   geom_sf()
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
 ```
-
-<div class="figure">
-<img src="./minimal-1.png" alt="Minimal map" width="100%" />
-<p class="caption">Minimal map</p>
-</div>
 
 Let's extract now the construction year, available in the column `beginning`:
 
 
-```r
+``` r
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
+```
+
+``` r
 
 # Replace all that doesn't look as a number with 0000
 year[!(year %in% 0:2500)] <- "0000"
+#> Error: object 'year' not found
+```
+
+``` r
 
 # To numeric
 year <- as.integer(year)
+#> Error in eval(expr, envir, enclos): object 'year' not found
+```
+
+``` r
 
 # New column
 dataviz <- dataviz %>%
   mutate(year = year)
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
 ```
 
 Last step is to create groups based on the year and create the data
@@ -140,11 +153,15 @@ visualization. We use here the function `ggplot2::cut_width()` to create
 different classes:
 
 
-```r
+``` r
 dataviz <- dataviz %>%
   mutate(year_cat = ggplot2::cut_width(year,
     width = 10
   ))
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
+```
+
+``` r
 
 
 # Adjust the color palette
@@ -153,6 +170,10 @@ dataviz_pal <- hcl.colors(
   length(levels(dataviz$year_cat)),
   "Spectral"
 )
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
+```
+
+``` r
 
 ggplot(dataviz) +
   geom_sf(aes(fill = year_cat), color = NA) +
@@ -178,12 +199,8 @@ ggplot(dataviz) +
     ),
     plot.margin = margin(r = 40, l = 40)
   )
+#> Error in eval(expr, envir, enclos): object 'dataviz' not found
 ```
-
-<div class="figure">
-<img src="./dataviz-1.png" alt="Pamplona: Urban Growth" width="100%" />
-<p class="caption">Pamplona: Urban Growth</p>
-</div>
 
 ## References
 
