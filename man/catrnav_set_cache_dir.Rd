@@ -2,6 +2,7 @@
 % Please edit documentation in R/cache_set.R
 \name{catrnav_set_cache_dir}
 \alias{catrnav_set_cache_dir}
+\alias{catrnav_detect_cache_dir}
 \title{Set your \pkg{CatastRoNav} cache dir}
 \usage{
 catrnav_set_cache_dir(
@@ -10,6 +11,8 @@ catrnav_set_cache_dir(
   install = FALSE,
   verbose = TRUE
 )
+
+catrnav_detect_cache_dir(...)
 }
 \arguments{
 \item{cache_dir}{A path to a cache directory. On missing value the function
@@ -24,24 +27,32 @@ this parameter is set to \code{FALSE} automatically.}
 
 \item{verbose}{Logical, displays information. Useful for debugging,
 default is \code{FALSE}.}
+
+\item{...}{Ignored}
 }
 \value{
-An (invisible) character with the path to your \code{cache_dir}.
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} is called for its side effects, and returns an
+(invisible) character with the path to your \code{cache_dir}.
+
+\code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} returns the path to the \code{cache_dir} used in this
+session
 }
 \description{
-This function will store your \code{cache_dir} path on your local machine and
-would load it for future sessions. Type \code{Sys.getenv("CATASTRONAV_CACHE_DIR")}
-to find your cached path.
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} will store your \code{cache_dir} path on your local
+machine and would load it for future sessions.
 
 Alternatively, you can store the \code{cache_dir} manually with the following
 options:
 \itemize{
 \item Run \code{Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")}. You would need to
 run this command on each session (Similar to \code{install = FALSE}).
-\item Write this line on your \code{.Renviron} file:
+\item Write this line on your .Renviron file:
 \code{CATASTRONAV_CACHE_DIR = "value_for_cache_dir"} (same behavior than
 \code{install = TRUE}). This would store your \code{cache_dir} permanently.
 }
+
+\code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} detects and returns the path to your current
+\code{cache_dir}.
 }
 \section{About caching}{
 Sometimes cached files may be corrupt. On that case, try re-downloading
@@ -59,7 +70,9 @@ corresponding file by any other method and save it on your
 catrnav_set_cache_dir(verbose = TRUE)
 }
 
-Sys.getenv("CATASTRONAV_CACHE_DIR")
+
+catrnav_detect_cache_dir()
+
 }
 \seealso{
 \code{\link[rappdirs:user_data_dir]{rappdirs::user_config_dir()}}

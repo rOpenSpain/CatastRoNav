@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
 )
 
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
-
 ```
 
 <!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
@@ -57,7 +56,6 @@ On this example we would retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
 ```{r olite, fig.cap="Example: Olite"}
-
 library(CatastRoNav)
 # For getting coords
 library(sf)
@@ -91,7 +89,6 @@ In first place, we extract the coordinates of the city center of Pamplona using
 **mapSpain**:
 
 ```{r}
-
 # Use mapSpain for getting the coords
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
@@ -100,22 +97,18 @@ pamp <- esp_get_capimun(munic = "^Pamplona")
 pamp_buff <- pamp %>%
   st_transform(25830) %>%
   st_buffer(1250)
-
 ```
 
 Next step consists on extracting the buildings using the WFS service:
 
 ```{r }
-
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
-
 ```
 
 Next step for creating the visualization is to crop the buildings to the buffer
 we created before:
 
 ```{r minimal, fig.cap="Minimal map", dpi=150}
-
 # Cut buildings
 
 dataviz <- st_intersection(pamp_bu, pamp_buff)
@@ -127,7 +120,6 @@ ggplot(dataviz) +
 Let's extract now the construction year, available in the column `beginning`:
 
 ```{r}
-
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
 
@@ -147,19 +139,12 @@ visualization. We use here the function `ggplot2::cut_width()` to create
 different classes:
 
 ```{r dataviz, fig.cap="Pamplona: Urban Growth", crop=TRUE}
-
 dataviz <- dataviz %>%
-  mutate(year_cat = ggplot2::cut_width(year,
-    width = 10
-  ))
-
+  mutate(year_cat = ggplot2::cut_width(year, width = 10, dig.lab = 12))
 
 # Adjust the color palette
 
-dataviz_pal <- hcl.colors(
-  length(levels(dataviz$year_cat)),
-  "Spectral"
-)
+dataviz_pal <- hcl.colors(length(levels(dataviz$year_cat)), "Spectral")
 
 ggplot(dataviz) +
   geom_sf(aes(fill = year_cat), color = NA) +

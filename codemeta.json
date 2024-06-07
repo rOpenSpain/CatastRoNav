@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
   "issueTracker": "https://github.com/rOpenSpain/CatastRoNav/issues",
   "license": "https://spdx.org/licenses/CC-BY-4.0",
-  "version": "0.0.2.9000",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -190,7 +190,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "962.98KB",
+  "fileSize": "961.034KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

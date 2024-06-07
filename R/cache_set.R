@@ -3,17 +3,21 @@
 #' @family cache utilities
 #' @seealso [rappdirs::user_config_dir()]
 #'
-#' @return An (invisible) character with the path to your `cache_dir`.
+#' @rdname catrnav_set_cache_dir
+#'
+#' @return
+#' [catrnav_set_cache_dir()] is called for its side effects, and returns an
+#' (invisible) character with the path to your `cache_dir`.
+#'
 #' @description
-#' This function will store your `cache_dir` path on your local machine and
-#' would load it for future sessions. Type `Sys.getenv("CATASTRONAV_CACHE_DIR")`
-#' to find your cached path.
+#' [catrnav_set_cache_dir()] will store your `cache_dir` path on your local
+#' machine and would load it for future sessions.
 #'
 #' Alternatively, you can store the `cache_dir` manually with the following
 #' options:
 #'   * Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You would need to
 #'     run this command on each session (Similar to `install = FALSE`).
-#'   * Write this line on your `.Renviron` file:
+#'   * Write this line on your .Renviron file:
 #'     `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior than
 #'     `install = TRUE`). This would store your `cache_dir` permanently.
 #'
@@ -44,7 +48,6 @@
 #' catrnav_set_cache_dir(verbose = TRUE)
 #' }
 #'
-#' Sys.getenv("CATASTRONAV_CACHE_DIR")
 #' @export
 catrnav_set_cache_dir <- function(cache_dir,
                                   overwrite = FALSE,
@@ -127,6 +130,35 @@ catrnav_set_cache_dir <- function(cache_dir,
   return(invisible(cache_dir))
 }
 
+
+#' @rdname catrnav_set_cache_dir
+#' @name catrnav_detect_cache_dir
+#'
+#' @export
+#'
+#' @description
+#' [catrnav_detect_cache_dir()] detects and returns the path to your current
+#' `cache_dir`.
+#'
+#' @param ... Ignored
+#' @return
+#' [catrnav_detect_cache_dir()] returns the path to the `cache_dir` used in this
+#' session
+#'
+#' @examples
+#'
+#' catrnav_detect_cache_dir()
+#'
+catrnav_detect_cache_dir <- function(...) {
+  # nocov start
+  # This is just a wrapper
+
+  list(...)
+  cache <- catrnav_hlp_detect_cache_dir()
+
+  cache
+  # nocov end
+}
 
 #' Detect cache dir for CatastRoNav
 #'

@@ -3,6 +3,7 @@
 export(catrnav_atom_get_parcels)
 export(catrnav_atom_get_parcels_db_all)
 export(catrnav_clear_cache)
+export(catrnav_detect_cache_dir)
 export(catrnav_set_cache_dir)
 export(catrnav_wfs_get_address_bbox)
 export(catrnav_wfs_get_buildings_bbox)

@@ -1,4 +1,4 @@
-# CatastRoNav (development version)
+# CatastRoNav 0.1.0
 
 -   Improve condition handling.
 -   Add a `count` parameter that allows to set the maximum number of features to
@@ -7,7 +7,8 @@
     -   Support for ATOM on cadastral parcels added, see
         `catrnav_atom_get_parcels()`. Other ATOM capabilities to be added when
         the Cadastre of Navarra make them available.
-    -   New caching system, see `catrnav_set_cache_dir()`.
+    -   New caching system, see `catrnav_set_cache_dir()` and
+        `catrnav_detect_cache_dir()`.
     -   New dependency: **rappdirs** .
 
 # CatastRoNav 0.0.2
