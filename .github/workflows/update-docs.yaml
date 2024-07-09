@@ -33,9 +33,7 @@ jobs:
       - name: Update docs
         run: |
 
-          pkgdev::precompute_vignette_all()
-          pkgdev::update_docs(precompute = FALSE)
-
+          pkgdev::update_docs(url_update = FALSE)
 
         shell: Rscript {0}
 

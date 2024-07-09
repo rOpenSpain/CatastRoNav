@@ -5,7 +5,7 @@ library(nominatimlite)
 
 # Use Pamplona
 
-# Coord Plaza del Azoguejo: To Point
+# Coord Plaza del Castillo: To Point
 top <- geo_lite_sf("Plaza del Castillo, Pamplona") %>%
   st_transform(st_crs(25830))
 
