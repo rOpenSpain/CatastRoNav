@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get started">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -153,39 +153,42 @@ the buffer we created before:</p>
 <code class="sourceCode R"><span><span class="co"># Cut buildings</span></span>
 <span></span>
 <span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html" class="external-link">st_intersection</a></span><span class="op">(</span><span class="va">pamp_bu</span>, <span class="va">pamp_buff</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in UseMethod("st_intersection"): no applicable method for 'st_intersection' applied to an object of class "NULL"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="minimal-1.png" alt="Minimal map" width="100%"><p class="caption">
-Minimal map
-</p>
-</div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span></code></pre></div>
 <p>Let’s extract now the construction year, available in the column
 <code>beginning</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract 4 initial positions</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">$</span><span class="va">beginning</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span>
 <span></span>
 <span><span class="co"># Replace all that doesn't look as a number with 0000</span></span>
 <span><span class="va">year</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">2500</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"0000"</span></span>
+<span><span class="co">#&gt; Error: object 'year' not found</span></span>
 <span></span>
 <span><span class="co"># To numeric</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'year' not found</span></span>
 <span></span>
 <span><span class="co"># New column</span></span>
 <span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span></code></pre></div>
 <p>Last step is to create groups based on the year and create the data
 visualization. We use here the function
 <code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create different classes:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year_cat <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">cut_width</a></span><span class="op">(</span><span class="va">year</span>, width <span class="op">=</span> <span class="fl">10</span>, dig.lab <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span>
 <span></span>
 <span><span class="co"># Adjust the color palette</span></span>
 <span></span>
 <span><span class="va">dataviz_pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">$</span><span class="va">year_cat</span><span class="op">)</span><span class="op">)</span>, <span class="st">"Spectral"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">year_cat</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
@@ -210,12 +213,8 @@ visualization. We use here the function
 <span>      margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">.5</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>    plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">40</span>, l <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="dataviz-1.png" alt="Pamplona: Urban Growth" width="100%"><p class="caption">
-Pamplona: Urban Growth
-</p>
-</div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Error: object 'dataviz' not found</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -254,7 +253,7 @@ Pamplona: Urban Growth
   <div class="container">
     <div class="row">
       <div class="col-md text-center text-lg-start">
-        <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+        <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
       </div>
       <div class="col-md offset-md-4 text-center text-lg-start">
       <p>Template <a href="https://github.com/ropenspain/rostemplate/" class="external-link">rostemplate</a> by <a href="https://github.com/dieghernan/" class="external-link">dieghernan</a>, based on <a href="https://bootstrapious.com/" class="external-link">Bootstrapious</a>.
