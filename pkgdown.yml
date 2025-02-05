@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   CatastRoNav: CatastRoNav.html
-last_built: 2025-02-05T07:53Z
+last_built: 2025-02-05T10:51Z
 urls:
   reference: https://ropenspain.github.io/CatastRoNav/reference
   article: https://ropenspain.github.io/CatastRoNav/articles
