@@ -68,7 +68,7 @@ ggplot(wfs_get_buildings) +
 ## Citation
 
 <p>
-Hernangómez D (2024). <em>CatastRoNav: Interface to the API Catastro de
+Hernangómez D (2025). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
@@ -79,7 +79,7 @@ A BibTeX entry for LaTeX users is:
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
       author = {Diego Hernangómez},
-      year = {2024},
+      year = {2025},
       version = {0.1.0},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
