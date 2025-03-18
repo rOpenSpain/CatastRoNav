@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31 ucrt)",
+  "runtimePlatform": "R version 4.4.3 (2025-02-28 ucrt)",
   "author": [
     {
       "@type": "Person",
@@ -192,7 +192,7 @@
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "966.416KB",
+  "fileSize": "968.217KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
