@@ -52,5 +52,9 @@ catrnav_atom_get_buildings_db_all <- function(cache = TRUE,
 
   tbl <- catr_read_atom(path)
   names(tbl) <- c("munic", "url", "date")
-  return(tbl)
+  tbl$munic <- gsub(
+    "Download INSPIRE buildings of the municipality ", "",
+    tbl$munic
+  )
+return(tbl)
 }
