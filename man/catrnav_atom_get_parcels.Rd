@@ -55,6 +55,10 @@ ggplot(s) +
 }
 \seealso{
 Other ATOM: 
+\code{\link{catrnav_atom_get_address}()},
+\code{\link{catrnav_atom_get_address_db_all}()},
+\code{\link{catrnav_atom_get_buildings}()},
+\code{\link{catrnav_atom_get_buildings_db_all}()},
 \code{\link{catrnav_atom_get_parcels_db_all}()}
 
 Other parcels: 

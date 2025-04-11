@@ -1,14 +1,14 @@
-#' ATOM INSPIRE: Reference database for ATOM cadastral parcels
+#' ATOM INSPIRE: Reference database for ATOM buildings
 #'
 #' @description
 #' Create a database containing the urls provided in the INSPIRE ATOM service
-#' for extracting Cadastral Parcels.
+#' for extracting Buildings.
 #'
 #' @source
 #' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @family ATOM
-#' @family parcels
+#' @family buildings
 #'
 #' @inheritParams catrnav_set_cache_dir
 #'
@@ -18,7 +18,7 @@
 #' @param update_cache A logical whether to update cache. Default is `FALSE`.
 #'  When set to `TRUE` it would force a fresh download of the source file.
 #'
-#' @rdname catrnav_atom_get_parcels_db
+#' @rdname catrnav_atom_get_buildings_db
 #' @export
 #'
 #' @return
@@ -29,16 +29,16 @@
 #'
 #' @examples
 #' \donttest{
-#' catrnav_atom_get_parcels_db_all()
+#' catrnav_atom_get_buildings_db_all()
 #' }
-catrnav_atom_get_parcels_db_all <- function(cache = TRUE,
-                                            update_cache = FALSE,
-                                            cache_dir = NULL,
-                                            verbose = FALSE) {
+catrnav_atom_get_buildings_db_all <- function(cache = TRUE,
+                                              update_cache = FALSE,
+                                              cache_dir = NULL,
+                                              verbose = FALSE) {
   api_entry <- paste0(
     "https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/",
-    "2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_1_CP/",
-    "CadastralParcels_ServiceATOM_Navarra.xml"
+    "2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_2_BU/",
+    "Buildings_ServiceATOM_Navarra.xml"
   )
 
 
@@ -52,8 +52,8 @@ catrnav_atom_get_parcels_db_all <- function(cache = TRUE,
 
   tbl <- catr_read_atom(path)
   names(tbl) <- c("munic", "url", "date")
-    tbl$munic <- gsub(
-    "Download INSPIRE cadastral parcels of the municipality ", "",
+  tbl$munic <- gsub(
+    "Download INSPIRE buildings of the municipality ", "",
     tbl$munic
   )
 return(tbl)

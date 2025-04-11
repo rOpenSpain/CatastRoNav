@@ -33,10 +33,6 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
   })
 
   tbl_all <- dplyr::bind_rows(tbl_all)
-  tbl_all$title <- gsub(
-    "Download INSPIRE cadastral parcels of the municipality ", "",
-    tbl_all$title
-  )
   tbl_all <- dplyr::as_tibble(tbl_all)
   return(tbl_all)
 }
