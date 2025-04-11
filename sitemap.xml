@@ -8,6 +8,10 @@
 <url><loc>https://ropenspain.github.io/CatastRoNav/LICENSE.html</loc></url>
 <url><loc>https://ropenspain.github.io/CatastRoNav/news/index.html</loc></url>
 <url><loc>https://ropenspain.github.io/CatastRoNav/reference/CatastRoNav-package.html</loc></url>
+<url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.html</loc></url>
+<url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.html</loc></url>
+<url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.html</loc></url>
+<url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.html</loc></url>
 <url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.html</loc></url>
 <url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.html</loc></url>
 <url><loc>https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.html</loc></url>
