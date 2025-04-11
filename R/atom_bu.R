@@ -26,7 +26,7 @@
 #' ggplot(s) +
 #'   geom_sf() +
 #'   labs(
-#'     title = "Cadastral Zoning",
+#'     title = "Buildings",
 #'     subtitle = "Pamplona / Iruña"
 #'   )
 #' }
@@ -47,7 +47,8 @@ catrnav_atom_get_buildings <- function(munic,
   if (is.na(findmunic)) {
     message(
       "No Municipality found for ", munic,
-      ". Check available municipalities with catrnav_atom_get_buildings_db_all()"
+      ". Check available municipalities with ",
+      "catrnav_atom_get_buildings_db_all()"
     )
     return(invisible(NA))
   }

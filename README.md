@@ -80,7 +80,7 @@ A BibTeX entry for LaTeX users is:
       title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
       author = {Diego Hernangómez},
       year = {2025},
-      version = {0.1.0},
+      version = {0.1.0.9000},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
       abstract = {Access public spatial data available under the INSPIRE directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},

@@ -45,7 +45,7 @@ library(ggplot2)
 ggplot(s) +
   geom_sf() +
   labs(
-    title = "Cadastral Zoning",
+    title = "Addresses",
     subtitle = "Pamplona / Iruña"
   )
 }

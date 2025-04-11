@@ -1,3 +1,12 @@
+# CatastRoNav (development version)
+
+-   Adding ATOM capabilities for buildings and addresses (#11, #12) by
+    \@fgoerlich. New functions:
+    -   `catrnav_atom_get_address()`
+    -   `catrnav_atom_get_address_db_all()`
+    -   `catrnav_atom_get_buildings()`
+    -   `catrnav_atom_get_buildings_db_all()`
+
 # CatastRoNav 0.1.0
 
 -   Improve condition handling.
