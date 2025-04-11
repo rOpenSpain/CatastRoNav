@@ -56,5 +56,5 @@ catrnav_atom_get_address_db_all <- function(cache = TRUE,
     "Download INSPIRE addresses of the municipality ", "",
     tbl$munic
   )
-return(tbl)
+  return(tbl)
 }

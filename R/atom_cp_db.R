@@ -52,9 +52,9 @@ catrnav_atom_get_parcels_db_all <- function(cache = TRUE,
 
   tbl <- catr_read_atom(path)
   names(tbl) <- c("munic", "url", "date")
-    tbl$munic <- gsub(
+  tbl$munic <- gsub(
     "Download INSPIRE cadastral parcels of the municipality ", "",
     tbl$munic
   )
-return(tbl)
+  return(tbl)
 }

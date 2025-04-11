@@ -121,6 +121,12 @@ specification. Contributions of any kind are welcome!
 </a><br>
 <a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=dieghernan">dieghernan</a>
 </td>
+<td align="center">
+<a href="https://github.com/fgoerlich">
+<img src="https://avatars.githubusercontent.com/u/6486324?v=4" width="100px;" class="allctb-avatar" alt=""/>
+</a><br>
+<a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=fgoerlich">fgoerlich</a>
+</td>
 </tr>
 </table>
 <!-- markdownlint-enable -->

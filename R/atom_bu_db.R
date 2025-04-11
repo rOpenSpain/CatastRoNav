@@ -56,5 +56,5 @@ catrnav_atom_get_buildings_db_all <- function(cache = TRUE,
     "Download INSPIRE buildings of the municipality ", "",
     tbl$munic
   )
-return(tbl)
+  return(tbl)
 }

@@ -31,10 +31,10 @@
 #'   )
 #' }
 catrnav_atom_get_address <- function(munic,
-                                       cache = TRUE,
-                                       update_cache = FALSE,
-                                       cache_dir = NULL,
-                                       verbose = FALSE) {
+                                     cache = TRUE,
+                                     update_cache = FALSE,
+                                     cache_dir = NULL,
+                                     verbose = FALSE) {
   all <- catrnav_atom_get_address_db_all(
     cache = cache,
     update_cache = update_cache,
