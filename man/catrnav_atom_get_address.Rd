@@ -38,7 +38,7 @@ municipality using the INSPIRE ATOM service.
 \examples{
 \donttest{
 
-s <- catrnav_atom_get_address("Iruña")
+s <- catrnav_atom_get_address("Tudela")
 
 library(ggplot2)
 
@@ -46,7 +46,7 @@ ggplot(s) +
   geom_sf() +
   labs(
     title = "Addresses",
-    subtitle = "Pamplona / Iruña"
+    subtitle = "Tudela"
   )
 }
 }

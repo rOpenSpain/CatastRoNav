@@ -1,3 +1,4 @@
+Type: Package
 Package: CatastRoNav
 Title: Interface to the 'INSPIRE' services of 'Catastro de Navarra'
 Version: 0.1.0.9000

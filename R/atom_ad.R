@@ -19,7 +19,7 @@
 #' @examples
 #' \donttest{
 #'
-#' s <- catrnav_atom_get_address("Iruña")
+#' s <- catrnav_atom_get_address("Tudela")
 #'
 #' library(ggplot2)
 #'
@@ -27,7 +27,7 @@
 #'   geom_sf() +
 #'   labs(
 #'     title = "Addresses",
-#'     subtitle = "Pamplona / Iruña"
+#'     subtitle = "Tudela"
 #'   )
 #' }
 catrnav_atom_get_address <- function(munic,
