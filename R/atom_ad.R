@@ -30,11 +30,13 @@
 #'     subtitle = "Tudela"
 #'   )
 #' }
-catrnav_atom_get_address <- function(munic,
-                                     cache = TRUE,
-                                     update_cache = FALSE,
-                                     cache_dir = NULL,
-                                     verbose = FALSE) {
+catrnav_atom_get_address <- function(
+  munic,
+  cache = TRUE,
+  update_cache = FALSE,
+  cache_dir = NULL,
+  verbose = FALSE
+) {
   all <- catrnav_atom_get_address_db_all(
     cache = cache,
     update_cache = update_cache,
@@ -46,7 +48,8 @@ catrnav_atom_get_address <- function(munic,
 
   if (is.na(findmunic)) {
     message(
-      "No Municipality found for ", munic,
+      "No Municipality found for ",
+      munic,
       ". Check available municipalities with ",
       "catrnav_atom_get_buildings_db_all()"
     )
@@ -63,10 +66,13 @@ catrnav_atom_get_address <- function(munic,
 
   filename <- basename(api_entry)
 
-
   path <- catr_hlp_dwnload(
-    api_entry, filename, cache_dir,
-    verbose, update_cache, cache
+    api_entry,
+    filename,
+    cache_dir,
+    verbose,
+    update_cache,
+    cache
   )
 
   # To a new directory
@@ -80,9 +86,10 @@ catrnav_atom_get_address <- function(munic,
     unlist(strsplit(filename, ".", fixed = TRUE))[1]
   )
 
-  if (!dir.exists(exdir)) dir.create(exdir, recursive = TRUE)
+  if (!dir.exists(exdir)) {
+    dir.create(exdir, recursive = TRUE)
+  }
   unzip(path, exdir = exdir, junkpaths = TRUE, overwrite = TRUE)
-
 
   # Guess what to read
   files <- list.files(exdir, full.names = TRUE, pattern = ".gml$")

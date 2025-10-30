@@ -32,9 +32,11 @@
 #'
 #' Sys.getenv("CATASTRONAV_CACHE_DIR")
 #' @export
-catrnav_clear_cache <- function(config = FALSE,
-                                cached_data = TRUE,
-                                verbose = FALSE) {
+catrnav_clear_cache <- function(
+  config = FALSE,
+  cached_data = TRUE,
+  verbose = FALSE
+) {
   config_dir <- rappdirs::user_config_dir("CatastRoNav", "R")
   data_dir <- catrnav_hlp_detect_cache_dir()
 
@@ -49,7 +51,6 @@ catrnav_clear_cache <- function(config = FALSE,
     unlink(data_dir, recursive = TRUE, force = TRUE)
     if (verbose) message("CatastRoNav cached data deleted: ", data_dir)
   }
-
 
   Sys.setenv(CATASTRONAV_CACHE_DIR = "")
 

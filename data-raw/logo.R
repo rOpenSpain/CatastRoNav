@@ -18,7 +18,8 @@ hex <- function(x, center, size) {
 
   return(c(x, y))
 }
-hex_pol <- lapply(1:7,
+hex_pol <- lapply(
+  1:7,
   hex,
   center = st_coordinates(top), # Center coords
   size = 500 # Side lenght (meters)
@@ -47,7 +48,8 @@ pal <- colorRampPalette(c("#da291c", "#da291c", "white"))
 
 
 p <- ggplot(finalpols) +
-  geom_sf(aes(fill = value),
+  geom_sf(
+    aes(fill = value),
     col = "white",
     size = 0.01,
     show.legend = FALSE,
@@ -69,14 +71,16 @@ cols <- pal(7)
 text <- colorspace::darken(cols[1], 0.9)
 
 
-sysfonts::font_add("noto",
+sysfonts::font_add(
+  "noto",
   regular = "data-raw/NotoSerif-Regular.ttf",
   bold = "data-raw/NotoSerif-Bold.ttf"
 )
 
 showtext::showtext_auto()
 
-sticker(p,
+sticker(
+  p,
   package = "CatastRoNav",
   p_family = "noto",
   p_fontface = "bold",

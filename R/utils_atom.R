@@ -1,7 +1,8 @@
 catr_read_atom <- function(file, encoding = "UTF-8") {
   # Encoding error sometimes, thanks @dr_xeo
   feed <- try(
-    xml2::as_list(xml2::read_xml(file,
+    xml2::as_list(xml2::read_xml(
+      file,
       options = "NOCDATA",
       encoding = encoding
     )),
@@ -10,9 +11,7 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
 
   # On error try without encoding
   if (inherits(feed, "try-error")) {
-    feed <- xml2::as_list(xml2::read_xml(file,
-      options = "NOCDATA"
-    ))
+    feed <- xml2::as_list(xml2::read_xml(file, options = "NOCDATA"))
   }
 
   # Prepare data

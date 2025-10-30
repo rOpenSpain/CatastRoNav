@@ -9,27 +9,30 @@ test_that("BBOX Check errors", {
 test_that("BBOX Check projections", {
   skip_on_cran()
 
-  expect_null(catrnav_wfs_get_parcels_bbox(c(760926, 4019259, 761155, 4019366),
+  expect_null(catrnav_wfs_get_parcels_bbox(
+    c(760926, 4019259, 761155, 4019366),
     srs = 25829
   ))
 
   expect_message(catrnav_wfs_get_parcels_bbox(
     c(
-      1071071, 4747924,
-      1071171, 4748024
+      1071071,
+      4747924,
+      1071171,
+      4748024
     ),
     srs = 25829,
     verbose = TRUE
   ))
 
-  obj <- catrnav_wfs_get_parcels_bbox(c(1071071, 4747924, 1071171, 4748024),
+  obj <- catrnav_wfs_get_parcels_bbox(
+    c(1071071, 4747924, 1071171, 4748024),
     srs = 25829,
     count = 10
   )
 
   expect_true(sf::st_crs(obj) == sf::st_crs(25829))
   expect_true(nrow(obj) == 10)
-
 
   # test conversion
   testconv <- get_sf_from_bbox(obj[1, ])

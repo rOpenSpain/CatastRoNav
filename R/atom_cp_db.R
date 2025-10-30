@@ -31,29 +31,34 @@
 #' \donttest{
 #' catrnav_atom_get_parcels_db_all()
 #' }
-catrnav_atom_get_parcels_db_all <- function(cache = TRUE,
-                                            update_cache = FALSE,
-                                            cache_dir = NULL,
-                                            verbose = FALSE) {
+catrnav_atom_get_parcels_db_all <- function(
+  cache = TRUE,
+  update_cache = FALSE,
+  cache_dir = NULL,
+  verbose = FALSE
+) {
   api_entry <- paste0(
     "https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/",
     "2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_1_CP/",
     "CadastralParcels_ServiceATOM_Navarra.xml"
   )
 
-
   filename <- basename(api_entry)
 
   path <- catr_hlp_dwnload(
-    api_entry, filename, cache_dir,
-    verbose, update_cache, cache
+    api_entry,
+    filename,
+    cache_dir,
+    verbose,
+    update_cache,
+    cache
   )
-
 
   tbl <- catr_read_atom(path)
   names(tbl) <- c("munic", "url", "date")
   tbl$munic <- gsub(
-    "Download INSPIRE cadastral parcels of the municipality ", "",
+    "Download INSPIRE cadastral parcels of the municipality ",
+    "",
     tbl$munic
   )
   return(tbl)

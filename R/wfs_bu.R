@@ -41,8 +41,12 @@
 #' }
 #'
 #' @seealso [CatastRo::catr_wfs_get_buildings_bbox()]
-catrnav_wfs_get_buildings_bbox <- function(x, srs, verbose = FALSE,
-                                           count = NULL) {
+catrnav_wfs_get_buildings_bbox <- function(
+  x,
+  srs,
+  verbose = FALSE,
+  count = NULL
+) {
   # Switch to stored queries
   stored_query <- "BU:Building"
 

@@ -1,12 +1,13 @@
-catrnav_wfs_get_url <- function(host = "https://inspire.navarra.es/services/",
-                                entry,
-                                params) {
+catrnav_wfs_get_url <- function(
+  host = "https://inspire.navarra.es/services/",
+  entry,
+  params
+) {
   # Clean empty params
   params <- params[lengths(params) != 0]
 
   # Adjust params
   q <- paste0(names(params), "=", params, collapse = "&")
-
 
   # Full url
   full_url <- paste0(host, entry, q)
@@ -54,14 +55,15 @@ wfs_api_query <- function(entry, ..., verbose = TRUE) {
     params = arguments
   )
 
-
   # Filename
   filename <- paste0(basename(tempfile()), ".gml")
 
   path <- catr_hlp_dwnload(
-    api_entry, filename,
+    api_entry,
+    filename,
     cache_dir = tempdir(),
-    verbose = verbose, update_cache = FALSE,
+    verbose = verbose,
+    update_cache = FALSE,
     cache = TRUE
   )
 
@@ -137,7 +139,9 @@ get_sf_from_bbox <- function(bbox, srs) {
     stop("bbox should be a vector of 4 numbers.", call. = FALSE)
   }
 
-  if (missing(srs)) stop("Please provide a srs value", call. = FALSE)
+  if (missing(srs)) {
+    stop("Please provide a srs value", call. = FALSE)
+  }
 
   # Create template for a spatial bbox
   template_sf <- sf::st_sfc(sf::st_point(c(0, 0)))

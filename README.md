@@ -68,6 +68,7 @@ ggplot(wfs_get_buildings) +
 ## Citation
 
 <p>
+
 Hernangómez D (2025). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
@@ -105,7 +106,9 @@ Navarre](https://geoportal.navarra.es/es/inspire)
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
 
 All contributions to this project are gratefully acknowledged using the
@@ -114,21 +117,31 @@ following the [allcontributors](https://allcontributors.org)
 specification. Contributions of any kind are welcome!
 
 <table class="table allctb-table">
+
 <tr>
+
 <td align="center">
+
 <a href="https://github.com/dieghernan">
 <img src="https://avatars.githubusercontent.com/u/25656809?v=4" width="100px;" class="allctb-avatar" alt=""/>
 </a><br>
 <a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=dieghernan">dieghernan</a>
 </td>
+
 <td align="center">
+
 <a href="https://github.com/fgoerlich">
 <img src="https://avatars.githubusercontent.com/u/6486324?v=4" width="100px;" class="allctb-avatar" alt=""/>
 </a><br>
 <a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=fgoerlich">fgoerlich</a>
 </td>
+
 </tr>
+
 </table>
+
 <!-- markdownlint-enable -->
+
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
