@@ -1,0 +1,168 @@
+# Get started
+
+**CatastRoNav** is a package that provide access to different INSPIRE
+API services of the [Cadastre of
+Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
+is possible to download spatial objects as buildings or cadastral
+parcels.
+
+## INSPIRE Services
+
+> The INSPIRE Directive aims to create a European Union spatial data
+> infrastructure for the purposes of EU environmental policies and
+> policies or activities which may have an impact on the environment.
+> This European Spatial Data Infrastructure will enable the sharing of
+> environmental spatial information among public sector organisations,
+> facilitate public access to spatial information across Europe and
+> assist in policy-making across boundaries.
+>
+> *From <https://knowledge-base.inspire.ec.europa.eu/index_en>*
+
+The implementation of the INSPIRE directive on the Cadastre of Navarre
+allows to retrieve spatial objects from the database of the cadastre:
+
+- **Vector objects:** Parcels, addresses, buildings, cadastral zones and
+  more. These objects are provided by **CatastRoNav** as `sf` objects
+  (see
+  [`?sf::st_sf`](https://r-spatial.github.io/sf/reference/sf.html)).
+
+## Examples
+
+On this example we would retrieve the cadastral parcels of
+[Olite](https://en.wikipedia.org/wiki/Olite):
+
+``` r
+library(CatastRoNav)
+# For getting coords
+library(sf)
+library(mapSpain)
+# Data wrangling and visualization
+library(dplyr)
+library(ggplot2)
+
+olite <- esp_get_capimun(munic = "Olite") %>%
+  st_transform(25830) %>%
+  # Small buffer of 100 m
+  st_buffer(100)
+
+
+cp <- catrnav_wfs_get_parcels_bbox(olite)
+
+
+ggplot(cp) +
+  geom_sf()
+```
+
+![Example: Olite](olite-1.png)
+
+Example: Olite
+
+### Thematic maps
+
+We can create also thematic maps using the information available on the
+spatial objects. We would produce a visualization of the urban growth of
+Pamplona using **CatastRoNav**, replicating the map produced by Dominic
+Royé on his post [Visualize urban
+growth](https://dominicroye.github.io/en/2019/visualize-urban-growth/).
+
+In first place, we extract the coordinates of the city center of
+Pamplona using **mapSpain**:
+
+``` r
+# Use mapSpain for getting the coords
+pamp <- esp_get_capimun(munic = "^Pamplona")
+
+# Transform to ETRS89 / UTM 30 N and add a buffer of 750m
+
+pamp_buff <- pamp %>%
+  st_transform(25830) %>%
+  st_buffer(1250)
+```
+
+Next step consists on extracting the buildings using the WFS service:
+
+``` r
+pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
+```
+
+Next step for creating the visualization is to crop the buildings to the
+buffer we created before:
+
+``` r
+# Cut buildings
+
+dataviz <- st_intersection(pamp_bu, pamp_buff)
+
+ggplot(dataviz) +
+  geom_sf()
+```
+
+![Minimal map](minimal-1.png)
+
+Minimal map
+
+Let’s extract now the construction year, available in the column
+`beginning`:
+
+``` r
+# Extract 4 initial positions
+year <- substr(dataviz$beginning, 1, 4)
+
+# Replace all that doesn't look as a number with 0000
+year[!(year %in% 0:2500)] <- "0000"
+
+# To numeric
+year <- as.integer(year)
+
+# New column
+dataviz <- dataviz %>%
+  mutate(year = year)
+```
+
+Last step is to create groups based on the year and create the data
+visualization. We use here the function
+[`ggplot2::cut_width()`](https://ggplot2.tidyverse.org/reference/cut_interval.html)
+to create different classes:
+
+``` r
+dataviz <- dataviz %>%
+  mutate(year_cat = ggplot2::cut_width(year, width = 10, dig.lab = 12))
+
+# Adjust the color palette
+
+dataviz_pal <- hcl.colors(length(levels(dataviz$year_cat)), "Spectral")
+
+ggplot(dataviz) +
+  geom_sf(aes(fill = year_cat), color = NA) +
+  scale_fill_manual(values = dataviz_pal) +
+  theme_void() +
+  labs(title = "PAMPLONA", fill = "") +
+  theme(
+    panel.background = element_rect(fill = "black"),
+    plot.background = element_rect(fill = "black"),
+    legend.justification = .5,
+    legend.text = element_text(
+      colour = "white",
+      size = 12
+    ),
+    plot.title = element_text(
+      colour = "white", hjust = .5,
+      margin = margin(t = 30),
+      size = 30
+    ),
+    plot.caption = element_text(
+      colour = "white",
+      margin = margin(b = 20), hjust = .5
+    ),
+    plot.margin = margin(r = 40, l = 40)
+  )
+```
+
+![Pamplona: Urban Growth](dataviz-1.png)
+
+Pamplona: Urban Growth
+
+## References
+
+- Royé D (2019). “Visualize urban growth.”
+  <https://dominicroye.github.io/en/2019/visualize-urban-growth/>.
