@@ -63,13 +63,12 @@ ggplot(wfs_get_buildings) +
   ggtitle("Olite, Navarra")
 ```
 
-<img src="man/figures/README-wfs-1.png" width="100%" />
+<img src="man/figures/README-wfs-1.png" alt="" width="100%" />
 
 ## Citation
 
 <p>
-
-Hernangómez D (2025). <em>CatastRoNav: Interface to the API Catastro de
+Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
@@ -80,7 +79,7 @@ A BibTeX entry for LaTeX users is:
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
       author = {Diego Hernangómez},
-      year = {2025},
+      year = {2026},
       version = {0.1.0.9000},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
@@ -102,46 +101,3 @@ implicit or explicit.
 
 Data source: [SITNA – Government of
 Navarre](https://geoportal.navarra.es/es/inspire)
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
-<!-- prettier-ignore-start -->
-
-<!-- markdownlint-disable -->
-
-All contributions to this project are gratefully acknowledged using the
-[`allcontributors` package](https://github.com/ropensci/allcontributors)
-following the [allcontributors](https://allcontributors.org)
-specification. Contributions of any kind are welcome!
-
-<table class="table allctb-table">
-
-<tr>
-
-<td align="center">
-
-<a href="https://github.com/dieghernan">
-<img src="https://avatars.githubusercontent.com/u/25656809?v=4" width="100px;" class="allctb-avatar" alt=""/>
-</a><br>
-<a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=dieghernan">dieghernan</a>
-</td>
-
-<td align="center">
-
-<a href="https://github.com/fgoerlich">
-<img src="https://avatars.githubusercontent.com/u/6486324?v=4" width="100px;" class="allctb-avatar" alt=""/>
-</a><br>
-<a href="https://github.com/rOpenSpain/CatastRoNav/commits?author=fgoerlich">fgoerlich</a>
-</td>
-
-</tr>
-
-</table>
-
-<!-- markdownlint-enable -->
-
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
