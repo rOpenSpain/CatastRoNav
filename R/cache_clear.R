@@ -11,7 +11,7 @@
 #' * Deletes the \pkg{CatastRoNav} config directory
 #'   (`rappdirs::user_config_dir("CatastRoNav", "R")`).
 #' * Deletes the `cache_dir` directory.
-#' * Deletes the values on stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
+#' * Deletes the values stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
 #'
 #' @param config if `TRUE`, will delete the configuration folder of
 #'   \pkg{CatastRoNav}.
@@ -55,5 +55,5 @@ catrnav_clear_cache <- function(
   Sys.setenv(CATASTRONAV_CACHE_DIR = "")
 
   # Reset cache dir
-  return(invisible())
+  invisible()
 }

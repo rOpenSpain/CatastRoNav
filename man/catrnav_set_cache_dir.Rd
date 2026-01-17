@@ -22,8 +22,8 @@ would store the cached files on a temporary dir (See \code{\link[base:tempfile]{
 \code{CATASTRONAV_CACHE_DIR} that you already have in local machine.}
 
 \item{install}{if \code{TRUE}, will install the key in your local machine for
-use in future sessions.  Defaults to \code{FALSE.} If \code{cache_dir} is \code{FALSE}
-this parameter is set to \code{FALSE} automatically.}
+use in future sessions. Defaults to \code{FALSE}. If \code{cache_dir} is missing or
+empty this argument is set to \code{FALSE} automatically.}
 
 \item{verbose}{Logical, displays information. Useful for debugging,
 default is \code{FALSE}.}
@@ -55,7 +55,7 @@ run this command on each session (Similar to \code{install = FALSE}).
 \code{cache_dir}.
 }
 \section{About caching}{
-Sometimes cached files may be corrupt. On that case, try re-downloading
+Sometimes cached files may be corrupt. In that case, try re-downloading
 the data setting \code{update_cache = TRUE}.
 
 If you experience any problem on download, try to download the

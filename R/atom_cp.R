@@ -14,7 +14,7 @@
 #' @return A [`sf`][sf::st_sf] object.
 #'
 #' @inheritParams catrnav_atom_get_parcels_db_all
-#' @param munic Municipality to extract, It can be a part of a string or the
+#' @param munic Municipality to extract. It can be a part of a string or the
 #'   cadastral code. See [catrnav_atom_get_parcels_db_all].
 #' @examples
 #' \donttest{
@@ -50,7 +50,8 @@ catrnav_atom_get_parcels <- function(
     message(
       "No Municipality found for ",
       munic,
-      ". Check available municipalities with catrnav_atom_get_parcels_db_all()"
+      ". Check available municipalities with ",
+      "catrnav_atom_get_parcels_db_all()"
     )
     return(invisible(NA))
   }
@@ -94,5 +95,5 @@ catrnav_atom_get_parcels <- function(
   files <- list.files(exdir, full.names = TRUE, pattern = ".gml$")
   sfobj <- st_read_layers_encoding(files, verbose)
 
-  return(sfobj)
+  sfobj
 }

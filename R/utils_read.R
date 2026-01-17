@@ -3,10 +3,10 @@ st_read_layers_encoding <- function(path, verbose) {
   layers <- tryCatch(
     sf::st_layers(path),
     warning = function(e) {
-      return(NULL)
+      NULL
     },
     error = function(e) {
-      return(NULL)
+      NULL
     }
   )
 
@@ -53,5 +53,5 @@ st_read_layers_encoding <- function(path, verbose) {
     return(invisible(NULL))
   }
 
-  return(out)
+  out
 }

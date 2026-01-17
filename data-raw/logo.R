@@ -6,7 +6,7 @@ library(nominatimlite)
 # Use Pamplona
 
 # Coord Plaza del Castillo: To Point
-top <- geo_lite_sf("Plaza del Castillo, Pamplona") %>%
+top <- geo_lite_sf("Plaza del Castillo, Pamplona") |>
   st_transform(st_crs(25830))
 
 # Create spatial hexagon
@@ -23,18 +23,18 @@ hex_pol <- lapply(
   hex,
   center = st_coordinates(top), # Center coords
   size = 500 # Side lenght (meters)
-) %>%
+) |>
   # Convert to spatial polygon
-  unlist() %>%
-  matrix(ncol = 2, byrow = TRUE) %>%
-  list() %>%
-  st_polygon() %>%
-  st_sfc() %>%
+  unlist() |>
+  matrix(ncol = 2, byrow = TRUE) |>
+  list() |>
+  st_polygon() |>
+  st_sfc() |>
   st_set_crs(st_crs(top))
 
 # Get Buildings
-pamplona <- top %>%
-  st_buffer(1000) %>%
+pamplona <- top |>
+  st_buffer(1000) |>
   catrnav_wfs_get_buildings_bbox()
 
 

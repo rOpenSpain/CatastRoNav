@@ -26,7 +26,7 @@ data and configuration, specifically:
 \item Deletes the \pkg{CatastRoNav} config directory
 (\code{rappdirs::user_config_dir("CatastRoNav", "R")}).
 \item Deletes the \code{cache_dir} directory.
-\item Deletes the values on stored on \code{Sys.getenv("CATASTRONAV_CACHE_DIR")}.
+\item Deletes the values stored on \code{Sys.getenv("CATASTRONAV_CACHE_DIR")}.
 }
 }
 \details{

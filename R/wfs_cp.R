@@ -64,5 +64,5 @@ catrnav_wfs_get_parcels_bbox <- function(
     # Transform back to the desired srs
     out <- sf::st_transform(out, bbox_res$outcrs)
   }
-  return(out)
+  out
 }

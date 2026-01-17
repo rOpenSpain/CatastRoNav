@@ -95,5 +95,5 @@ catr_hlp_dwnload <- function(
     message(format(size, units = "auto"))
   }
 
-  return(filepath)
+  filepath
 }

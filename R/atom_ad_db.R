@@ -1,7 +1,7 @@
 #' ATOM INSPIRE: Reference database for ATOM addresses
 #'
 #' @description
-#' Create a database containing the urls provided in the INSPIRE ATOM service
+#' Create a database containing the URLs provided in the INSPIRE ATOM service
 #' for extracting Addresses.
 #'
 #' @source
@@ -24,7 +24,7 @@
 #' @return
 #' A [tibble][tibble::tibble] with the information requested:
 #'   - `munic`: Name of the municipality.
-#'   - `url`: url for downloading information of the corresponding municipality.
+#'   - `url`: URL for downloading information of the corresponding municipality.
 #'   - `date`: Reference date of the data.
 #'
 #' @examples
@@ -59,7 +59,8 @@ catrnav_atom_get_address_db_all <- function(
   tbl$munic <- gsub(
     "Download INSPIRE addresses of the municipality ",
     "",
-    tbl$munic
+    tbl$munic,
+    fixed = TRUE
   )
-  return(tbl)
+  tbl
 }

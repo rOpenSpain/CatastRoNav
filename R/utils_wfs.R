@@ -12,17 +12,17 @@ catrnav_wfs_get_url <- function(
   # Full url
   full_url <- paste0(host, entry, q)
 
-  return(full_url)
+  full_url
 }
 
 catrnav_wfs_check <- function(path) {
   # Check if it is valid
   lines <- suppressWarnings(readLines(path, n = 20))
 
-  if (any(grepl("<gml", lines))) {
-    return(TRUE)
+  if (any(grepl("<gml", lines, fixed = TRUE))) {
+    TRUE
   } else {
-    return(FALSE)
+    FALSE
   }
 }
 
@@ -31,10 +31,10 @@ catrnav_wfs_check <- function(path) {
 #' Prepare a WFS query and returns a list with information of the result
 #'
 #' @param entry Entry point of the API
-#' @param ... Query parameters
-#' @param ... Wheter to display additional info on call
+#' @param ... Query arguments
+#' @param ... Whether to display additional info on call
 #'
-#' @returns A list indicating the path to the tempfile, if it is a sf
+#' @return A list indicating the path to the tempfile, if it is an sf
 #' object and in case of error a message to display
 #'
 #' @noRd
@@ -82,7 +82,7 @@ wfs_api_query <- function(entry, ..., verbose = TRUE) {
 
     outlist$m <- m
   }
-  return(outlist)
+  outlist
 }
 wfs_results <- function(res, verbose) {
   # Check result
@@ -91,11 +91,11 @@ wfs_results <- function(res, verbose) {
     out <- sf::st_make_valid(out)
 
     unlink(res$path, force = TRUE)
-    return(out)
+    out
   } else {
     message("Malformed query: ", res$m)
     unlink(res$path, force = TRUE)
-    return(invisible(NULL))
+    invisible(NULL)
   }
 }
 
@@ -126,7 +126,7 @@ wfs_bbox <- function(bbox, srs) {
     result$bbox <- paste0(values, collapse = ",")
   }
 
-  return(result)
+  result
 }
 
 get_sf_from_bbox <- function(bbox, srs) {
@@ -154,5 +154,5 @@ get_sf_from_bbox <- function(bbox, srs) {
   bbox_new <- sf::st_as_sfc(bbox_new)
   bbox_new <- sf::st_set_crs(bbox_new, srs)
 
-  return(bbox_new)
+  bbox_new
 }

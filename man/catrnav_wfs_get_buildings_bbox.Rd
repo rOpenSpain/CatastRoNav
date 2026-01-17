@@ -23,7 +23,7 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 is \code{FALSE}.}
 
 \item{count}{integer, indicating the maximum number of features to return.
-The default value \code{NULL} does not pass this parameter to the query,
+The default value \code{NULL} does not pass this argument to the query,
 and the maximum number of features would be determined by the default value
 of the API service (5,000 in this case).}
 }

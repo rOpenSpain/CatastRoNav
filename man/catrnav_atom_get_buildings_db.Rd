@@ -31,12 +31,12 @@ default is \code{FALSE}.}
 A \link[tibble:tibble]{tibble} with the information requested:
 \itemize{
 \item \code{munic}: Name of the municipality.
-\item \code{url}: url for downloading information of the corresponding municipality.
+\item \code{url}: URL for downloading information of the corresponding municipality.
 \item \code{date}: Reference date of the data.
 }
 }
 \description{
-Create a database containing the urls provided in the INSPIRE ATOM service
+Create a database containing the URLs provided in the INSPIRE ATOM service
 for extracting Buildings.
 }
 \examples{

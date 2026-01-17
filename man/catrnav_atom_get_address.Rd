@@ -13,7 +13,7 @@ catrnav_atom_get_address(
 )
 }
 \arguments{
-\item{munic}{Municipality to extract, It can be a part of a string or the
+\item{munic}{Municipality to extract. It can be a part of a string or the
 cadastral code. See \link{catrnav_atom_get_address_db_all}.}
 
 \item{cache}{A logical whether to do caching. Default is \code{TRUE}. See

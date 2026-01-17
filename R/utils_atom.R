@@ -33,5 +33,6 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
 
   tbl_all <- dplyr::bind_rows(tbl_all)
   tbl_all <- dplyr::as_tibble(tbl_all)
-  return(tbl_all)
+
+  tbl_all
 }

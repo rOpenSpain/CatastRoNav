@@ -1,11 +1,9 @@
 CMD
 CRANpkg
-CRS
 Cadastral
 Cadastre
 CatastRo
 Catastro
-DOI
 EPSG
 ETRS
 Navarra
@@ -20,9 +18,7 @@ WFS
 cadastral
 cadastre
 codecov
-config
 de
-dir
 mapSpain
 organisations
 pre

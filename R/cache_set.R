@@ -26,15 +26,15 @@
 #' @param overwrite If this is set to `TRUE`, it will overwrite an existing
 #'   `CATASTRONAV_CACHE_DIR` that you already have in local machine.
 #' @param install if `TRUE`, will install the key in your local machine for
-#'   use in future sessions.  Defaults to `FALSE.` If `cache_dir` is `FALSE`
-#'   this parameter is set to `FALSE` automatically.
+#'   use in future sessions. Defaults to `FALSE`. If `cache_dir` is missing or
+#'   empty this argument is set to `FALSE` automatically.
 #' @param verbose Logical, displays information. Useful for debugging,
 #'   default is `FALSE`.
 #'
 #' @details
 #' # About caching
 #'
-#' Sometimes cached files may be corrupt. On that case, try re-downloading
+#' Sometimes cached files may be corrupt. In that case, try re-downloading
 #' the data setting `update_cache = TRUE`.
 #'
 #' If you experience any problem on download, try to download the
@@ -106,7 +106,7 @@ catrnav_set_cache_dir <- function(
 
     catastronav_file <- file.path(config_dir, "CATASTRONAV_CACHE_DIR")
 
-    if (!file.exists(catastronav_file) || overwrite == TRUE) {
+    if (!file.exists(catastronav_file) || overwrite) {
       # Create file if it doesn't exist
       writeLines(cache_dir, con = catastronav_file)
     } else {
@@ -127,7 +127,7 @@ catrnav_set_cache_dir <- function(
   }
 
   Sys.setenv(CATASTRONAV_CACHE_DIR = cache_dir)
-  return(invisible(cache_dir))
+  invisible(cache_dir)
 }
 
 
@@ -195,7 +195,7 @@ catrnav_hlp_detect_cache_dir <- function() {
 
       # 3. Return from cached path
       Sys.setenv(CATASTRONAV_CACHE_DIR = cached_path)
-      return(cached_path)
+      cached_path
       # nocov end
     } else {
       # 4. Default cache location
@@ -204,10 +204,10 @@ catrnav_hlp_detect_cache_dir <- function() {
         overwrite = TRUE,
         verbose = FALSE
       )
-      return(cache_dir)
+      cache_dir
     }
   } else {
-    return(getvar)
+    getvar
   }
 }
 
@@ -226,5 +226,5 @@ catrnav_hlp_cachedir <- function(cache_dir = NULL) {
   if (isFALSE(dir.exists(cache_dir))) {
     dir.create(cache_dir, recursive = TRUE)
   }
-  return(cache_dir)
+  cache_dir
 }

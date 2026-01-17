@@ -11,7 +11,7 @@
 #' @param verbose Logical, displays information. Useful for debugging, default
 #'   is `FALSE`.
 #' @param count integer, indicating the maximum number of features to return.
-#'   The default value `NULL` does not pass this parameter to the query,
+#'   The default value `NULL` does not pass this argument to the query,
 #'   and the maximum number of features would be determined by the default value
 #'   of the API service (5,000 in this case).
 #'
@@ -72,5 +72,5 @@ catrnav_wfs_get_buildings_bbox <- function(
     # Transform back to the desired srs
     out <- sf::st_transform(out, bbox_res$outcrs)
   }
-  return(out)
+  out
 }
