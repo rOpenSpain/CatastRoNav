@@ -5,6 +5,9 @@
 - **[Diego Hernangómez](https://dieghernan.github.io/)**. Author,
   maintainer. [](https://orcid.org/0000-0001-8457-4658)
 
+- **[Francisco J. Goerlich](https://www.uv.es/goerlich/)**. Contributor.
+  [](https://orcid.org/0000-0003-1626-525X)
+
 ## Citation
 
 Source:

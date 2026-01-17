@@ -66,7 +66,7 @@
     
     
 <!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
-<p><strong>CatastRoNav</strong> is a package that provide access to
+<p><strong>CatastRoNav</strong> is a package that provides access to
 different INSPIRE API services of the <a href="https://geoportal.navarra.es/es/idena" class="external-link">Cadastre of Navarre</a>.
 With <strong>CatastRoNav</strong> it is possible to download spatial
 objects as buildings or cadastral parcels.</p>
@@ -84,7 +84,7 @@ in policy-making across boundaries.</p>
 <p><em>From <a href="https://knowledge-base.inspire.ec.europa.eu/index_en" class="external-link uri">https://knowledge-base.inspire.ec.europa.eu/index_en</a></em></p>
 </blockquote>
 <p>The implementation of the INSPIRE directive on the Cadastre of
-Navarre allows to retrieve spatial objects from the database of the
+Navarre allows retrieving spatial objects from the database of the
 cadastre:</p>
 <ul>
 <li>
@@ -97,7 +97,7 @@ cadastral zones and more. These objects are provided by
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>On this example we would retrieve the cadastral parcels of <a href="https://en.wikipedia.org/wiki/Olite" class="external-link">Olite</a>:</p>
+<p>In this example we would retrieve the cadastral parcels of <a href="https://en.wikipedia.org/wiki/Olite" class="external-link">Olite</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/CatastRoNav/">CatastRoNav</a></span><span class="op">)</span></span>
 <span><span class="co"># For getting coords</span></span>
@@ -107,8 +107,8 @@ cadastral zones and more. These objects are provided by
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">olite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_capimun.html" class="external-link">esp_get_capimun</a></span><span class="op">(</span>munic <span class="op">=</span> <span class="st">"Olite"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">olite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_capimun.html" class="external-link">esp_get_capimun</a></span><span class="op">(</span>munic <span class="op">=</span> <span class="st">"Olite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># Small buffer of 100 m</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span></span>
@@ -128,22 +128,21 @@ Example: Olite
 </h3>
 <p>We can create also thematic maps using the information available on
 the spatial objects. We would produce a visualization of the urban
-growth of Pamplona using <strong>CatastRoNav</strong>, replicating the
-map produced by Dominic Royé on his post <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link">Visualize
-urban growth</a>.</p>
-<p>In first place, we extract the coordinates of the city center of
-Pamplona using <strong>mapSpain</strong>:</p>
+growth of Pamplona using <strong>CatastRoNav</strong>,, replicating the
+map produced by <a href="https://dominicroye.github.io" class="external-link">Dominic Royé</a>
+<span class="citation">(<a href="#ref-roye19">Royé 2019</a>)</span>.</p>
+<p>First, we extract the coordinates of the city center of Pamplona
+using <strong>mapSpain</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use mapSpain for getting the coords</span></span>
 <span><span class="va">pamp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_capimun.html" class="external-link">esp_get_capimun</a></span><span class="op">(</span>munic <span class="op">=</span> <span class="st">"^Pamplona"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Transform to ETRS89 / UTM 30 N and add a buffer of 750m</span></span>
 <span></span>
-<span><span class="va">pamp_buff</span> <span class="op">&lt;-</span> <span class="va">pamp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">pamp_buff</span> <span class="op">&lt;-</span> <span class="va">pamp</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="fl">1250</span><span class="op">)</span></span></code></pre></div>
-<p>Next step consists on extracting the buildings using the WFS
-service:</p>
+<p>The next step is to extract the buildings using the WFS service:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pamp_bu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catrnav_wfs_get_buildings_bbox.html">catrnav_wfs_get_buildings_bbox</a></span><span class="op">(</span><span class="va">pamp_buff</span>, count <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
 <p>Next step for creating the visualization is to crop the buildings to
@@ -160,7 +159,7 @@ the buffer we created before:</p>
 Minimal map
 </p>
 </div>
-<p>Let’s extract now the construction year, available in the column
+<p>Next, let’s extract the construction year, available in the column
 <code>beginning</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract 4 initial positions</span></span>
@@ -173,13 +172,13 @@ Minimal map
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># New column</span></span>
-<span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
 <p>Last step is to create groups based on the year and create the data
 visualization. We use here the function
 <code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create different classes:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year_cat <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">cut_width</a></span><span class="op">(</span><span class="va">year</span>, width <span class="op">=</span> <span class="fl">10</span>, dig.lab <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Adjust the color palette</span></span>
@@ -217,12 +216,14 @@ Pamplona: Urban Growth
 </div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<ul>
-<li>Royé D (2019). “Visualize urban growth.” <a href="https://dominicroye.github.io/en/2019/visualize-urban-growth/" class="external-link uri">https://dominicroye.github.io/en/2019/visualize-urban-growth/</a>.</li>
-</ul>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-roye19" class="csl-entry">
+Royé, Dominique. 2019. <em>Visualize Urban Growth</em>. <a href="https://dominicroye.github.io/blog/visualize-urban-growth/" class="external-link">https://dominicroye.github.io/blog/visualize-urban-growth/</a>.
+</div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

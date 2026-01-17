@@ -36,9 +36,9 @@ catrnav_wfs_get_address_bbox(x, srs, verbose = FALSE, count = NULL)
 - count:
 
   integer, indicating the maximum number of features to return. The
-  default value `NULL` does not pass this parameter to the query, and
-  the maximum number of features would be determined by the default
-  value of the API service (5,000 in this case).
+  default value `NULL` does not pass this argument to the query, and the
+  maximum number of features would be determined by the default value of
+  the API service (5,000 in this case).
 
 ## Value
 

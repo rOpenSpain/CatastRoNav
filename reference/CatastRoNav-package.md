@@ -18,3 +18,8 @@ Useful links:
 
 **Maintainer**: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
 ([ORCID](https://orcid.org/0000-0001-8457-4658))
+
+Other contributors:
+
+- Francisco J. Goerlich ([ORCID](https://orcid.org/0000-0003-1626-525X))
+  \[contributor\]

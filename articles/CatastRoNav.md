@@ -1,6 +1,6 @@
 # Get started
 
-**CatastRoNav** is a package that provide access to different INSPIRE
+**CatastRoNav** is a package that provides access to different INSPIRE
 API services of the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
 is possible to download spatial objects as buildings or cadastral
@@ -19,7 +19,7 @@ parcels.
 > *From <https://knowledge-base.inspire.ec.europa.eu/index_en>*
 
 The implementation of the INSPIRE directive on the Cadastre of Navarre
-allows to retrieve spatial objects from the database of the cadastre:
+allows retrieving spatial objects from the database of the cadastre:
 
 - **Vector objects:** Parcels, addresses, buildings, cadastral zones and
   more. These objects are provided by **CatastRoNav** as `sf` objects
@@ -28,7 +28,7 @@ allows to retrieve spatial objects from the database of the cadastre:
 
 ## Examples
 
-On this example we would retrieve the cadastral parcels of
+In this example we would retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
 ``` r
@@ -40,8 +40,8 @@ library(mapSpain)
 library(dplyr)
 library(ggplot2)
 
-olite <- esp_get_capimun(munic = "Olite") %>%
-  st_transform(25830) %>%
+olite <- esp_get_capimun(munic = "Olite") |>
+  st_transform(25830) |>
   # Small buffer of 100 m
   st_buffer(100)
 
@@ -61,12 +61,12 @@ Example: Olite
 
 We can create also thematic maps using the information available on the
 spatial objects. We would produce a visualization of the urban growth of
-Pamplona using **CatastRoNav**, replicating the map produced by Dominic
-Royé on his post [Visualize urban
-growth](https://dominicroye.github.io/en/2019/visualize-urban-growth/).
+Pamplona using **CatastRoNav**,, replicating the map produced by
+[Dominic Royé](https://dominicroye.github.io) ([Royé
+2019](#ref-roye19)).
 
-In first place, we extract the coordinates of the city center of
-Pamplona using **mapSpain**:
+First, we extract the coordinates of the city center of Pamplona using
+**mapSpain**:
 
 ``` r
 # Use mapSpain for getting the coords
@@ -74,12 +74,12 @@ pamp <- esp_get_capimun(munic = "^Pamplona")
 
 # Transform to ETRS89 / UTM 30 N and add a buffer of 750m
 
-pamp_buff <- pamp %>%
-  st_transform(25830) %>%
+pamp_buff <- pamp |>
+  st_transform(25830) |>
   st_buffer(1250)
 ```
 
-Next step consists on extracting the buildings using the WFS service:
+The next step is to extract the buildings using the WFS service:
 
 ``` r
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
@@ -101,7 +101,7 @@ ggplot(dataviz) +
 
 Minimal map
 
-Let’s extract now the construction year, available in the column
+Next, let’s extract the construction year, available in the column
 `beginning`:
 
 ``` r
@@ -115,7 +115,7 @@ year[!(year %in% 0:2500)] <- "0000"
 year <- as.integer(year)
 
 # New column
-dataviz <- dataviz %>%
+dataviz <- dataviz |>
   mutate(year = year)
 ```
 
@@ -125,7 +125,7 @@ visualization. We use here the function
 to create different classes:
 
 ``` r
-dataviz <- dataviz %>%
+dataviz <- dataviz |>
   mutate(year_cat = ggplot2::cut_width(year, width = 10, dig.lab = 12))
 
 # Adjust the color palette
@@ -164,5 +164,5 @@ Pamplona: Urban Growth
 
 ## References
 
-- Royé D (2019). “Visualize urban growth.”
-  <https://dominicroye.github.io/en/2019/visualize-urban-growth/>.
+Royé, Dominique. 2019. *Visualize Urban Growth*.
+<https://dominicroye.github.io/blog/visualize-urban-growth/>.

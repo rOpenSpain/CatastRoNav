@@ -1,6 +1,6 @@
 # CatastRoNav
 
-**CatastRoNav** is a package that provide access to different API
+**CatastRoNav** is a package that provides access to different API
 services of the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
 is possible to download spatial objects as buildings or cadastral
@@ -30,8 +30,8 @@ remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 
 ## Usage
 
-The WFS service allows to download vector objects of specific cadastral
-elements. The result is provided as `sf` objects (See [**sf**
+The WFS service allows downloading vector objects of specific cadastral
+elements. The result is provided as `sf` objects (See the [**sf**
 package](https://r-spatial.github.io/sf/)).
 
 ``` r
@@ -74,8 +74,8 @@ A BibTeX entry for LaTeX users is:
 ## See also
 
 The package [CatastRo](https://CRAN.R-project.org/package=CatastRo)
-provides similar functionalities for Spain excluding the Basque Country
-and Navarre.
+provides similar functionalities for the rest of Spain, excluding the
+Basque Country and Navarre.
 
 ## Terms and conditions of use
 

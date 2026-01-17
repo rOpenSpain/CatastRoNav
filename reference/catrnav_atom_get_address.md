@@ -19,7 +19,7 @@ catrnav_atom_get_address(
 
 - munic:
 
-  Municipality to extract, It can be a part of a string or the cadastral
+  Municipality to extract. It can be a part of a string or the cadastral
   code. See
   [catrnav_atom_get_address_db_all](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md).
 

@@ -2,6 +2,7 @@
 
 ## CatastRoNav (development version)
 
+- Minimum **R** version required now is **4.1.0**.
 - Adding ATOM capabilities for buildings and addresses
   ([\#11](https://github.com/rOpenSpain/CatastRoNav/issues/11),
   [\#12](https://github.com/rOpenSpain/CatastRoNav/issues/12)) by
@@ -14,7 +15,7 @@
 ## CatastRoNav 0.1.0
 
 - Improve condition handling.
-- Add a `count` parameter that allows to set the maximum number of
+- Add a `count` argument that allows to set the maximum number of
   features to be returned.
 - **New features**;
   - Support for ATOM on cadastral parcels added, see

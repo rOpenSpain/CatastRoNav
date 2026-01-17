@@ -8,7 +8,7 @@ cached data and configuration, specifically:
 
 - Deletes the `cache_dir` directory.
 
-- Deletes the values on stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
+- Deletes the values stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
 
 ## Usage
 
@@ -52,7 +52,7 @@ Other cache utilities:
 # Don't run this! It would modify your current state
 # \dontrun{
 catrnav_clear_cache(verbose = TRUE)
-#> CatastRoNav cached data deleted: C:\Users\RUNNER~1\AppData\Local\Temp\RtmpWUPOXU/CatastRoNav
+#> CatastRoNav cached data deleted: C:\Users\RUNNER~1\AppData\Local\Temp\RtmpaKNSrc/CatastRoNav
 # }
 
 Sys.getenv("CATASTRONAV_CACHE_DIR")

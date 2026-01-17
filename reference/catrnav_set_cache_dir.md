@@ -45,8 +45,8 @@ catrnav_detect_cache_dir(...)
 - install:
 
   if `TRUE`, will install the key in your local machine for use in
-  future sessions. Defaults to `FALSE.` If `cache_dir` is `FALSE` this
-  parameter is set to `FALSE` automatically.
+  future sessions. Defaults to `FALSE`. If `cache_dir` is missing or
+  empty this argument is set to `FALSE` automatically.
 
 - verbose:
 
@@ -67,7 +67,7 @@ this session
 
 ## About caching
 
-Sometimes cached files may be corrupt. On that case, try re-downloading
+Sometimes cached files may be corrupt. In that case, try re-downloading
 the data setting `update_cache = TRUE`.
 
 If you experience any problem on download, try to download the
@@ -88,10 +88,10 @@ Other cache utilities:
 # \dontrun{
 catrnav_set_cache_dir(verbose = TRUE)
 #> Using a temporary cache dir. Set 'cache_dir' to a value for store permanently
-#> CatastRoNav cache dir is: C:\Users\RUNNER~1\AppData\Local\Temp\RtmpWUPOXU/CatastRoNav
+#> CatastRoNav cache dir is: C:\Users\RUNNER~1\AppData\Local\Temp\RtmpaKNSrc/CatastRoNav
 # }
 
 
 catrnav_detect_cache_dir()
-#> [1] "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\RtmpWUPOXU/CatastRoNav"
+#> [1] "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\RtmpaKNSrc/CatastRoNav"
 ```

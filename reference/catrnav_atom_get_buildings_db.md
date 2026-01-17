@@ -1,6 +1,6 @@
 # ATOM INSPIRE: Reference database for ATOM buildings
 
-Create a database containing the urls provided in the INSPIRE ATOM
+Create a database containing the URLs provided in the INSPIRE ATOM
 service for extracting Buildings.
 
 ## Usage
@@ -49,7 +49,7 @@ information requested:
 
 - `munic`: Name of the municipality.
 
-- `url`: url for downloading information of the corresponding
+- `url`: URL for downloading information of the corresponding
   municipality.
 
 - `date`: Reference date of the data.
