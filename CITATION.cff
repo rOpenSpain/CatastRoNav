@@ -73,6 +73,7 @@ references:
     given-names: Trent
   - family-names: Davis
     given-names: Trevor
+    orcid: https://orcid.org/0000-0001-6341-4639
   year: '2026'
   doi: 10.32614/CRAN.package.rappdirs
 - type: software
@@ -149,8 +150,8 @@ references:
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
-  doi: 10.32614/CRAN.package.CatastRo
   year: '2026'
+  doi: 10.32614/CRAN.package.CatastRo
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
