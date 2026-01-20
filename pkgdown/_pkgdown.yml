@@ -1,4 +1,4 @@
-url: "https://ropenspain.github.io/CatastRoNav"
+url: https://ropenspain.github.io/CatastRoNav
 
 template:
   bootstrap: 5
@@ -6,6 +6,6 @@ template:
 
 authors:
   Diego Hernangómez:
-    href: "https://dieghernan.github.io/"
+    href: https://dieghernan.github.io/
   Francisco J. Goerlich:
     href: https://www.uv.es/goerlich/

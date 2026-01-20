@@ -68,6 +68,7 @@ ggplot(wfs_get_buildings) +
 ## Citation
 
 <p>
+
 Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
