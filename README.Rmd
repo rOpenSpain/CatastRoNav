@@ -4,7 +4,8 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   message = FALSE,
@@ -43,7 +44,8 @@ cadastral parcels.
 You can install the developing version of **CatastRoNav** using the
 [r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Install CatastRoNav in R:
 install.packages("CatastRoNav",
   repos = c(
@@ -55,7 +57,8 @@ install.packages("CatastRoNav",
 
 Alternatively, you can install the developing version of **CatastRoNav** with:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 ```
 
@@ -65,7 +68,8 @@ The WFS service allows downloading vector objects of specific cadastral
 elements. The result is provided as `sf` objects (See the [**sf**
 package](https://r-spatial.github.io/sf/)).
 
-```{r wfs}
+```{r}
+#| label: wfs
 library(CatastRoNav)
 library(ggplot2)
 
@@ -81,13 +85,17 @@ ggplot(wfs_get_buildings) +
 
 ## Citation
 
-```{r echo=FALSE, results='asis'}
+```{r}
+#| echo: false
+#| results: asis
 print(citation("CatastRoNav"), style = "html")
 ```
 
 A BibTeX entry for LaTeX users is:
 
-```{r echo=FALSE, comment=''}
+```{r}
+#| echo: false
+#| comment: ''
 toBibtex(citation("CatastRoNav"))
 ```
 
