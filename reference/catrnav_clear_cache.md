@@ -52,7 +52,7 @@ Other cache utilities:
 # Don't run this! It would modify your current state
 # \dontrun{
 catrnav_clear_cache(verbose = TRUE)
-#> CatastRoNav cached data deleted: C:\Users\RUNNER~1\AppData\Local\Temp\Rtmpm2VAp9/CatastRoNav
+#> CatastRoNav cached data deleted: /tmp/Rtmp2ckUMY/CatastRoNav
 # }
 
 Sys.getenv("CATASTRONAV_CACHE_DIR")
