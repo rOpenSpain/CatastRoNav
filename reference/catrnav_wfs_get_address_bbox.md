@@ -70,6 +70,10 @@ spatial object is projected back to the SRS of the initial object.
 downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)
 
 ad <- catrnav_wfs_get_address_bbox(downtown, srs = 4326)
+#> Malformed query: java.lang.RuntimeException: java.io.IOException
+#> java.io.IOExceptionorg.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+#> An I/O error occurred while sending to the backend.
+#> Connection reset
 
 library(ggplot2)
 
