@@ -7,6 +7,7 @@
     -   `catrnav_atom_get_address_db_all()`
     -   `catrnav_atom_get_buildings()`
     -   `catrnav_atom_get_buildings_db_all()`
+-   Adapt vignette to Quarto.
 
 # CatastRoNav 0.1.0
 
@@ -23,7 +24,7 @@
 
 # CatastRoNav 0.0.2
 
--   Make \CRANpkg{sf} objects valid with `sf::st_make_valid()`.
+-   Make `sf` objects valid with `sf::st_make_valid()`.
 
 # CatastRoNav 0.0.1
 

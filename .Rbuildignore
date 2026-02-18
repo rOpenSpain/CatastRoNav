@@ -39,3 +39,9 @@
 ^vignettes/_quarto\.yaml$
 ^vignettes/_quarto\.yml$
 ^\.quarto$
+^vignettes/*_files$
+^vignettes/CatastRoNav\.qmd\.orig$
+^README\.qmd$
+^inst/README\.qmd$
+^README_files$
+^README\.html$

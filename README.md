@@ -1,7 +1,8 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# CatastRoNav <img src="man/figures/logo.png" align="right" height="139"/>
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+# CatastRoNav <a href="https://ropenspain.github.io/CatastroNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -63,11 +64,13 @@ ggplot(wfs_get_buildings) +
   ggtitle("Olite, Navarra")
 ```
 
-<img src="man/figures/README-wfs-1.png" alt="" width="100%" />
+<img src="man/figures/README-wfs-1.png" style="width:100.0%"
+alt="Extraction of buildings with CatastroNav in Olite" />
 
 ## Citation
 
 <p>
+
 Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,

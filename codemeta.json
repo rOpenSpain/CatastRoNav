@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.5.2 (2025-10-31 ucrt)",
+  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -104,15 +104,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
+      "identifier": "quarto",
+      "name": "quarto",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+      "sameAs": "https://CRAN.R-project.org/package=quarto"
     },
     {
       "@type": "SoftwareApplication",
@@ -200,7 +200,7 @@
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "971.828KB",
+  "fileSize": "974.555KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -221,6 +221,6 @@
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/main/NEWS.md",
   "readme": "https://github.com/rOpenSpain/CatastRoNav/blob/main/README.md",
-  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yml", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
+  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

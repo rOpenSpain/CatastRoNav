@@ -1,26 +1,28 @@
 ---
-output: github_document
+format: gfm
+default-image-extension: ''
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    warning: false
+    message: false
+    dev: "ragg_png"
+    tidy: "styler"
+    fig.path: "man/figures/README-"
+    dpi: 300
+    out.width: "100%"
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  message = FALSE,
-  warning = FALSE,
-  dev = "ragg_png",
-  dpi = 300,
-  tidy = "styler",
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
+
 library(CatastRoNav)
 ```
 
-# CatastRoNav <img src="man/figures/logo.png" align="right" height="139"/>
+# CatastRoNav <a href="https://ropenspain.github.io/CatastroNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -70,6 +72,7 @@ package](https://r-spatial.github.io/sf/)).
 
 ```{r}
 #| label: wfs
+#| fig-cap: "Extraction of buildings with CatastroNav in Olite"
 library(CatastRoNav)
 library(ggplot2)
 

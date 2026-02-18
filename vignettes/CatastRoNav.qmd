@@ -1,32 +1,17 @@
 ---
 title: "Get started"
-output: rmarkdown::html_vignette
+description: "Introduction to CatastroNav"
 vignette: >
   %\VignetteIndexEntry{Get started}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 bibliography: REFERENCES.bib
 link-citations: true
 ---
 
-```{r}
-#| include: false
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  fig.path = "./",
-  comment = "#>",
-  tidy = "styler",
-  warning = FALSE,
-  message = FALSE,
-  dev = "ragg_png",
-  dpi = 300,
-  out.width = "100%"
-)
 
-knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
-```
 
-<!-- CatastRoNav.Rmd is generated from CatastRoNav.Rmd.orig. Please edit that file -->
+<!-- CatastRoNav.qmd is generated from CatastRoNav.qmd.orig. Please edit that file -->
 
 **CatastRoNav** is a package that provides access to different INSPIRE API
 services of the [Cadastre of Navarre](https://geoportal.navarra.es/es/idena).
@@ -57,9 +42,8 @@ retrieving spatial objects from the database of the cadastre:
 In this example we would retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
-```{r}
-#| label: olite
-#| fig-cap: 'Example: Olite'
+
+``` r
 library(CatastRoNav)
 # For getting coords
 library(sf)
@@ -76,10 +60,14 @@ olite <- esp_get_capimun(munic = "Olite") |>
 
 cp <- catrnav_wfs_get_parcels_bbox(olite)
 
-
 ggplot(cp) +
   geom_sf()
 ```
+
+<div class="figure">
+<img src="./olite-1.png" alt="Figure 1: Example - Olite" width="100%" />
+<p class="caption">Figure 1: Example - Olite</p>
+</div>
 
 ### Thematic maps
 
@@ -91,7 +79,8 @@ Royé](https://dominicroye.github.io) [@roye19].
 First, we extract the coordinates of the city center of Pamplona using
 **mapSpain**:
 
-```{r}
+
+``` r
 # Use mapSpain for getting the coords
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
@@ -104,17 +93,16 @@ pamp_buff <- pamp |>
 
 The next step is to extract the buildings using the WFS service:
 
-```{r }
+
+``` r
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 ```
 
 Next step for creating the visualization is to crop the buildings to the buffer
 we created before:
 
-```{r}
-#| label: minimal
-#| fig-cap: Minimal map
-#| fig-dpi: 150
+
+``` r
 # Cut buildings
 
 dataviz <- st_intersection(pamp_bu, pamp_buff)
@@ -123,9 +111,15 @@ ggplot(dataviz) +
   geom_sf()
 ```
 
+<div class="figure">
+<img src="./minimal-1.png" alt="Figure 2: Minimal map of Pamplona" width="100%" />
+<p class="caption">Figure 2: Minimal map of Pamplona</p>
+</div>
+
 Next, let's extract the construction year, available in the column `beginning`:
 
-```{r}
+
+``` r
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
 
@@ -144,10 +138,8 @@ Last step is to create groups based on the year and create the data
 visualization. We use here the function `ggplot2::cut_width()` to create
 different classes:
 
-```{r}
-#| label: dataviz
-#| crop: true
-#| fig-cap: 'Pamplona: Urban Growth'
+
+``` r
 dataviz <- dataviz |>
   mutate(year_cat = ggplot2::cut_width(year, width = 10, dig.lab = 12))
 
@@ -180,5 +172,10 @@ ggplot(dataviz) +
     plot.margin = margin(r = 40, l = 40)
   )
 ```
+
+<div class="figure">
+<img src="./dataviz-1.png" alt="Figure 3: Pamplona - Urban Growth" width="100%" />
+<p class="caption">Figure 3: Pamplona - Urban Growth</p>
+</div>
 
 ## References

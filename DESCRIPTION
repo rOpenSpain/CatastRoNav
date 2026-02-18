@@ -29,10 +29,10 @@ Suggests:
     ggplot2,
     knitr,
     mapSpain,
-    rmarkdown,
+    quarto,
     testthat (>= 3.0.0)
 VignetteBuilder: 
-    knitr
+    quarto
 Config/Needs/website: ropenspain/rostemplate, devtools, sessioninfo,
     remotes, sfheaders, rapidjsonr, jsonify, geometries, tidyverse, magick
 Config/testthat/edition: 3
