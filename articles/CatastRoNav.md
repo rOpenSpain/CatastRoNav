@@ -48,14 +48,13 @@ olite <- esp_get_capimun(munic = "Olite") |>
 
 cp <- catrnav_wfs_get_parcels_bbox(olite)
 
-
 ggplot(cp) +
   geom_sf()
 ```
 
-![Example: Olite](olite-1.png)
+![Figure 1: Example - Olite](./olite-1.png)
 
-Example: Olite
+Figure 1: Example - Olite
 
 ### Thematic maps
 
@@ -97,9 +96,9 @@ ggplot(dataviz) +
   geom_sf()
 ```
 
-![Minimal map](minimal-1.png)
+![Figure 2: Minimal map of Pamplona](./minimal-1.png)
 
-Minimal map
+Figure 2: Minimal map of Pamplona
 
 Next, let’s extract the construction year, available in the column
 `beginning`:
@@ -158,9 +157,9 @@ ggplot(dataviz) +
   )
 ```
 
-![Pamplona: Urban Growth](dataviz-1.png)
+![Figure 3: Pamplona - Urban Growth](./dataviz-1.png)
 
-Pamplona: Urban Growth
+Figure 3: Pamplona - Urban Growth
 
 ## References
 

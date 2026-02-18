@@ -48,7 +48,8 @@ ggplot(wfs_get_buildings) +
   ggtitle("Olite, Navarra")
 ```
 
-![](reference/figures/README-wfs-1.png)
+![Extraction of buildings with CatastroNav in
+Olite](reference/figures/README-wfs-1.png)
 
 ## Citation
 
@@ -135,3 +136,5 @@ Navarre](https://geoportal.navarra.es/es/inspire)
 
 - [Get
   started](https://ropenspain.github.io/CatastRoNav/articles/CatastRoNav.md):
+
+  Introduction to CatastroNav

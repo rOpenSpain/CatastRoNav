@@ -11,6 +11,7 @@
   - [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
   - [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
   - [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+- Adapt vignette to Quarto.
 
 ## CatastRoNav 0.1.0
 
@@ -30,7 +31,7 @@
 
 ## CatastRoNav 0.0.2
 
-- Make objects valid with
+- Make `sf` objects valid with
   [`sf::st_make_valid()`](https://r-spatial.github.io/sf/reference/valid.html).
 
 ## CatastRoNav 0.0.1

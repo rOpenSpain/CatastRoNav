@@ -48,7 +48,8 @@ ggplot(wfs_get_buildings) +
   ggtitle("Olite, Navarra")
 ```
 
-![](reference/figures/README-wfs-1.png)
+![Extraction of buildings with CatastroNav in
+Olite](reference/figures/README-wfs-1.png)
 
 ## Citation
 
