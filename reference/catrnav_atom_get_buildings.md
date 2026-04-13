@@ -71,6 +71,7 @@ Other buildings:
 # \donttest{
 
 s <- catrnav_atom_get_buildings("Iruña")
+#> Warning: URL 'https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_2_BU/files/BU_Navarra_201.gml.zip': status was 'Failure when receiving data from the peer'
 
 library(ggplot2)
 
