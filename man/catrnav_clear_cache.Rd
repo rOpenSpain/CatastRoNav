@@ -8,11 +8,10 @@
 catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 }
 \arguments{
-\item{config}{if \code{TRUE}, will delete the configuration folder of
+\item{config}{If \code{TRUE}, deletes the configuration folder of
 \pkg{CatastRoNav}.}
 
-\item{cached_data}{If this is set to \code{TRUE}, it will delete your
-\code{cache_dir} and all its content.}
+\item{cached_data}{If \code{TRUE}, deletes \code{cache_dir} and all its contents.}
 
 \item{verbose}{Logical, displays information. Useful for debugging,
 default is \code{FALSE}.}
@@ -21,7 +20,7 @@ default is \code{FALSE}.}
 Invisible. This function is called for its side effects.
 }
 \description{
-\strong{Use this function with caution}. This function would clear your cached
+\strong{Use this function with caution}. This function clears your cached
 data and configuration, specifically:
 \itemize{
 \item Deletes the \pkg{CatastRoNav} config directory
@@ -32,11 +31,11 @@ data and configuration, specifically:
 }
 \details{
 This is an overkill function that is intended to reset your status
-as it you would never have installed and/or used \pkg{CatastRoNav}.
+as if you had never installed or used \pkg{CatastRoNav}.
 }
 \examples{
 
-# Don't run this! It would modify your current state
+# Don't run this! It will modify your current state
 \dontrun{
 catrnav_clear_cache(verbose = TRUE)
 }

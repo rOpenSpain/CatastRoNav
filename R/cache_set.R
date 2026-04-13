@@ -10,19 +10,19 @@
 #' (invisible) character with the path to your `cache_dir`.
 #'
 #' @description
-#' [catrnav_set_cache_dir()] will store your `cache_dir` path on your local
-#' machine and would load it for future sessions.
+#' [catrnav_set_cache_dir()] stores your `cache_dir` path on your local
+#' machine and makes it available for future sessions.
 #'
 #' Alternatively, you can store the `cache_dir` manually with the following
 #' options:
-#'   * Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You would need to
-#'     run this command on each session (Similar to `install = FALSE`).
-#'   * Write this line on your .Renviron file:
-#'     `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior than
-#'     `install = TRUE`). This would store your `cache_dir` permanently.
+#'   * Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You must
+#'     run this command in each session (similar to `install = FALSE`).
+#'   * Write this line in your .Renviron file:
+#'     `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior as
+#'     `install = TRUE`). This stores your `cache_dir` permanently.
 #'
 #' @param cache_dir A path to a cache directory. On missing value the function
-#'   would store the cached files on a temporary dir (See [base::tempdir()]).
+#'   stores the cached files in a temporary dir (see [base::tempdir()]).
 #' @param overwrite If this is set to `TRUE`, it will overwrite an existing
 #'   `CATASTRONAV_CACHE_DIR` that you already have in local machine.
 #' @param install if `TRUE`, will install the key in your local machine for
@@ -43,7 +43,7 @@
 #'
 #' @examples
 #'
-#' # Don't run this! It would modify your current state
+#' # Don't run this! It will modify your current state
 #' \dontrun{
 #' catrnav_set_cache_dir(verbose = TRUE)
 #' }
@@ -100,7 +100,7 @@ catrnav_set_cache_dir <- function(
 
   if (install) {
     config_dir <- rappdirs::user_config_dir("CatastRoNav", "R")
-    # Create cache dir if not presente
+    # Create cache dir if not present
     if (!dir.exists(config_dir)) {
       dir.create(config_dir, recursive = TRUE)
     }
@@ -180,7 +180,7 @@ catrnav_hlp_detect_cache_dir <- function() {
     if (file.exists(cache_config)) {
       cached_path <- readLines(cache_config)
 
-      # Case on empty cached path - would default
+      # Case for empty cached path - defaults
       if (
         any(
           is.null(cached_path),

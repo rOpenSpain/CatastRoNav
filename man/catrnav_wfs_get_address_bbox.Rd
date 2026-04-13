@@ -20,13 +20,13 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 
 \item{srs}{SRS/CRS to use on the query. See \strong{Details}.}
 
-\item{verbose}{Logical, displays information. Useful for debugging, default
-is \code{FALSE}.}
+\item{verbose}{Logical, displays information and is useful for debugging.
+Default is \code{FALSE}.}
 
 \item{count}{integer, indicating the maximum number of features to return.
-The default value \code{NULL} does not pass this argument to the query,
-and the maximum number of features would be determined by the default value
-of the API service (5,000 in this case).}
+The default value \code{NULL} does not pass this argument to the query.
+The maximum number of features is determined by the API service default
+(5,000 in this case).}
 }
 \value{
 A \code{\link[sf:st_sf]{sf}} object.

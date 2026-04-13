@@ -8,12 +8,12 @@
 #'     the bounding box: `c(xmin, ymin, xmax, ymax)`.
 #'   - A `sf/sfc` object, as provided by the \CRANpkg{sf} package.
 #' @param srs SRS/CRS to use on the query. See **Details**.
-#' @param verbose Logical, displays information. Useful for debugging, default
-#'   is `FALSE`.
+#' @param verbose Logical, displays information and is useful for debugging.
+#'   Default is `FALSE`.
 #' @param count integer, indicating the maximum number of features to return.
-#'   The default value `NULL` does not pass this argument to the query,
-#'   and the maximum number of features would be determined by the default value
-#'   of the API service (5,000 in this case).
+#'   The default value `NULL` does not pass this argument to the query.
+#'   The maximum number of features is determined by the API service default
+#'   (5,000 in this case).
 #'
 #' @seealso [sf::st_bbox()]
 #'

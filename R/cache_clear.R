@@ -5,7 +5,7 @@
 #' @return Invisible. This function is called for its side effects.
 #'
 #' @description
-#' **Use this function with caution**. This function would clear your cached
+#' **Use this function with caution**. This function clears your cached
 #' data and configuration, specifically:
 #'
 #' * Deletes the \pkg{CatastRoNav} config directory
@@ -13,19 +13,18 @@
 #' * Deletes the `cache_dir` directory.
 #' * Deletes the values stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
 #'
-#' @param config if `TRUE`, will delete the configuration folder of
+#' @param config If `TRUE`, deletes the configuration folder of
 #'   \pkg{CatastRoNav}.
-#' @param cached_data If this is set to `TRUE`, it will delete your
-#'   `cache_dir` and all its content.
+#' @param cached_data If `TRUE`, deletes `cache_dir` and all its contents.
 #' @inheritParams catrnav_set_cache_dir
 #'
 #' @details
 #' This is an overkill function that is intended to reset your status
-#' as it you would never have installed and/or used \pkg{CatastRoNav}.
+#' as if you had never installed or used \pkg{CatastRoNav}.
 #'
 #' @examples
 #'
-#' # Don't run this! It would modify your current state
+#' # Don't run this! It will modify your current state
 #' \dontrun{
 #' catrnav_clear_cache(verbose = TRUE)
 #' }

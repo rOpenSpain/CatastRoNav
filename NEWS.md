@@ -14,7 +14,7 @@
 -   Improve condition handling.
 -   Add a `count` argument that allows to set the maximum number of features to
     be returned.
--   **New features**;
+-   **New features**:
     -   Support for ATOM on cadastral parcels added, see
         `catrnav_atom_get_parcels()`. Other ATOM capabilities to be added when
         the Cadastre of Navarra make them available.

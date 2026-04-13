@@ -16,14 +16,15 @@ catrnav_atom_get_parcels_db_all(
 )
 }
 \arguments{
-\item{cache}{A logical whether to do caching. Default is \code{TRUE}. See
-\strong{About caching} section on \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
+\item{cache}{A logical value indicating whether to use caching. Default is
+\code{TRUE}. See \strong{About caching} section on \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
 
-\item{update_cache}{A logical whether to update cache. Default is \code{FALSE}.
-When set to \code{TRUE} it would force a fresh download of the source file.}
+\item{update_cache}{A logical value indicating whether to update the cache.
+Default is \code{FALSE}. When set to \code{TRUE}, forces a fresh download of the
+source file.}
 
 \item{cache_dir}{A path to a cache directory. On missing value the function
-would store the cached files on a temporary dir (See \code{\link[base:tempdir]{base::tempdir()}}).}
+stores the cached files in a temporary dir (see \code{\link[base:tempdir]{base::tempdir()}}).}
 
 \item{verbose}{Logical, displays information. Useful for debugging,
 default is \code{FALSE}.}

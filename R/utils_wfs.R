@@ -102,7 +102,7 @@ wfs_results <- function(res, verbose) {
 wfs_bbox <- function(bbox, srs) {
   result <- list()
 
-  # Use bbox of a spatial object. The API fails on geografic coord ¿?
+  # Use bbox of a spatial object. The API fails on geographic coordinates.
   if (inherits(bbox, "sf") || inherits(bbox, "sfc")) {
     # Convert to 25830 (opinionated)
     bbox_new <- sf::st_transform(bbox, 25830)

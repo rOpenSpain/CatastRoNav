@@ -17,7 +17,7 @@ catrnav_detect_cache_dir(...)
 }
 \arguments{
 \item{cache_dir}{A path to a cache directory. On missing value the function
-would store the cached files on a temporary dir (See \code{\link[base:tempdir]{base::tempdir()}}).}
+stores the cached files in a temporary dir (see \code{\link[base:tempdir]{base::tempdir()}}).}
 
 \item{overwrite}{If this is set to \code{TRUE}, it will overwrite an existing
 \code{CATASTRONAV_CACHE_DIR} that you already have in local machine.}
@@ -39,17 +39,17 @@ default is \code{FALSE}.}
 session
 }
 \description{
-\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} will store your \code{cache_dir} path on your local
-machine and would load it for future sessions.
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} stores your \code{cache_dir} path on your local
+machine and makes it available for future sessions.
 
 Alternatively, you can store the \code{cache_dir} manually with the following
 options:
 \itemize{
-\item Run \code{Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")}. You would need to
-run this command on each session (Similar to \code{install = FALSE}).
-\item Write this line on your .Renviron file:
-\code{CATASTRONAV_CACHE_DIR = "value_for_cache_dir"} (same behavior than
-\code{install = TRUE}). This would store your \code{cache_dir} permanently.
+\item Run \code{Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")}. You must
+run this command in each session (similar to \code{install = FALSE}).
+\item Write this line in your .Renviron file:
+\code{CATASTRONAV_CACHE_DIR = "value_for_cache_dir"} (same behavior as
+\code{install = TRUE}). This stores your \code{cache_dir} permanently.
 }
 
 \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} detects and returns the path to your current
@@ -66,7 +66,7 @@ corresponding file by any other method and save it on your
 
 \examples{
 
-# Don't run this! It would modify your current state
+# Don't run this! It will modify your current state
 \dontrun{
 catrnav_set_cache_dir(verbose = TRUE)
 }
