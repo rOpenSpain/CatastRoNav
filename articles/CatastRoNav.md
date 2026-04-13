@@ -2,9 +2,8 @@
 
 **CatastRoNav** is a package that provides access to different INSPIRE
 API services of the [Cadastre of
-Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
-is possible to download spatial objects as buildings or cadastral
-parcels.
+Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
+you can download spatial objects such as buildings or cadastral parcels.
 
 ## INSPIRE Services
 
@@ -19,7 +18,7 @@ parcels.
 > *From <https://knowledge-base.inspire.ec.europa.eu/index_en>*
 
 The implementation of the INSPIRE directive on the Cadastre of Navarre
-allows retrieving spatial objects from the database of the cadastre:
+allows retrieving spatial objects from the cadastre database:
 
 - **Vector objects:** Parcels, addresses, buildings, cadastral zones and
   more. These objects are provided by **CatastRoNav** as `sf` objects
@@ -28,12 +27,12 @@ allows retrieving spatial objects from the database of the cadastre:
 
 ## Examples
 
-In this example we would retrieve the cadastral parcels of
+In this example, we retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
 ``` r
 library(CatastRoNav)
-# For getting coords
+# For obtaining coordinates
 library(sf)
 library(mapSpain)
 # Data wrangling and visualization
@@ -58,17 +57,16 @@ Figure 1: Example - Olite
 
 ### Thematic maps
 
-We can create also thematic maps using the information available on the
-spatial objects. We would produce a visualization of the urban growth of
-Pamplona using **CatastRoNav**,, replicating the map produced by
-[Dominic Royé](https://dominicroye.github.io) ([Royé
-2019](#ref-roye19)).
+We can also create thematic maps using information available in the
+spatial objects. Here we produce a visualization of the urban growth of
+Pamplona using **CatastRoNav**, replicating the map produced by [Dominic
+Royé](https://dominicroye.github.io) ([Royé 2019](#ref-roye19)).
 
 First, we extract the coordinates of the city center of Pamplona using
 **mapSpain**:
 
 ``` r
-# Use mapSpain for getting the coords
+# Use mapSpain to obtain coordinates
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
 # Transform to ETRS89 / UTM 30 N and add a buffer of 750m
@@ -78,14 +76,13 @@ pamp_buff <- pamp |>
   st_buffer(1250)
 ```
 
-The next step is to extract the buildings using the WFS service:
+The next step is to extract buildings using the WFS service:
 
 ``` r
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 ```
 
-Next step for creating the visualization is to crop the buildings to the
-buffer we created before:
+Then crop the buildings to the buffer created earlier:
 
 ``` r
 # Cut buildings
@@ -100,28 +97,27 @@ ggplot(dataviz) +
 
 Figure 2: Minimal map of Pamplona
 
-Next, let’s extract the construction year, available in the column
-`beginning`:
+Next, extract the construction year from the `beginning` column.
 
 ``` r
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
 
-# Replace all that doesn't look as a number with 0000
+# Replace values that do not look like numbers with "0000".
 year[!(year %in% 0:2500)] <- "0000"
 
-# To numeric
+# Convert to numeric
 year <- as.integer(year)
 
-# New column
+# Create new column
 dataviz <- dataviz |>
   mutate(year = year)
 ```
 
-Last step is to create groups based on the year and create the data
-visualization. We use here the function
+The last step is to group the data by year and build the visualization.
+Here we use the function
 [`ggplot2::cut_width()`](https://ggplot2.tidyverse.org/reference/cut_interval.html)
-to create different classes:
+to create classes:
 
 ``` r
 dataviz <- dataviz |>

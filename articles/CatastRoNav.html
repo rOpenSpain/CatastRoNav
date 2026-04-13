@@ -82,23 +82,23 @@
 
 
 
-    <!-- CatastRoNav.qmd is generated from CatastRoNav.qmd.orig. Please edit that file --><p><strong>CatastRoNav</strong> is a package that provides access to different INSPIRE API services of the <a href="https://geoportal.navarra.es/es/idena" class="external-link">Cadastre of Navarre</a>. With <strong>CatastRoNav</strong> it is possible to download spatial objects as buildings or cadastral parcels.</p>
+    <!-- CatastRoNav.qmd is generated from CatastRoNav.qmd.orig. Please edit that file --><p><strong>CatastRoNav</strong> is a package that provides access to different INSPIRE API services of the <a href="https://geoportal.navarra.es/es/idena" class="external-link">Cadastre of Navarre</a>. With <strong>CatastRoNav</strong>, you can download spatial objects such as buildings or cadastral parcels.</p>
 <section class="level2"><h2 id="inspire-services">INSPIRE Services<a class="anchor" aria-label="anchor" href="#inspire-services"></a>
 </h2>
 <blockquote>
 <p>The INSPIRE Directive aims to create a European Union spatial data infrastructure for the purposes of EU environmental policies and policies or activities which may have an impact on the environment. This European Spatial Data Infrastructure will enable the sharing of environmental spatial information among public sector organisations, facilitate public access to spatial information across Europe and assist in policy-making across boundaries.</p>
 <p><em>From <a href="https://knowledge-base.inspire.ec.europa.eu/index_en" class="external-link uri">https://knowledge-base.inspire.ec.europa.eu/index_en</a></em></p>
 </blockquote>
-<p>The implementation of the INSPIRE directive on the Cadastre of Navarre allows retrieving spatial objects from the database of the cadastre:</p>
+<p>The implementation of the INSPIRE directive on the Cadastre of Navarre allows retrieving spatial objects from the cadastre database:</p>
 <ul>
 <li>
 <strong>Vector objects:</strong> Parcels, addresses, buildings, cadastral zones and more. These objects are provided by <strong>CatastRoNav</strong> as <code>sf</code> objects (see <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">?sf::st_sf</a></code>).</li>
 </ul></section><section class="level2"><h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>In this example we would retrieve the cadastral parcels of <a href="https://en.wikipedia.org/wiki/Olite" class="external-link">Olite</a>:</p>
+<p>In this example, we retrieve the cadastral parcels of <a href="https://en.wikipedia.org/wiki/Olite" class="external-link">Olite</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/CatastRoNav/">CatastRoNav</a></span><span class="op">)</span></span>
-<span><span class="co"># For getting coords</span></span>
+<span><span class="co"># For obtaining coordinates</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/mapSpain/" class="external-link">mapSpain</a></span><span class="op">)</span></span>
 <span><span class="co"># Data wrangling and visualization</span></span>
@@ -122,10 +122,10 @@ Figure 1: Example - Olite
 </div>
 <section class="level3"><h3 id="thematic-maps">Thematic maps<a class="anchor" aria-label="anchor" href="#thematic-maps"></a>
 </h3>
-<p>We can create also thematic maps using the information available on the spatial objects. We would produce a visualization of the urban growth of Pamplona using <strong>CatastRoNav</strong>,, replicating the map produced by <a href="https://dominicroye.github.io" class="external-link">Dominic Royé</a> <span class="citation" data-cites="roye19">(<a href="#ref-roye19" role="doc-biblioref">Royé 2019</a>)</span>.</p>
+<p>We can also create thematic maps using information available in the spatial objects. Here we produce a visualization of the urban growth of Pamplona using <strong>CatastRoNav</strong>, replicating the map produced by <a href="https://dominicroye.github.io" class="external-link">Dominic Royé</a> <span class="citation" data-cites="roye19">(<a href="#ref-roye19" role="doc-biblioref">Royé 2019</a>)</span>.</p>
 <p>First, we extract the coordinates of the city center of Pamplona using <strong>mapSpain</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Use mapSpain for getting the coords</span></span>
+<code class="sourceCode R"><span><span class="co"># Use mapSpain to obtain coordinates</span></span>
 <span><span class="va">pamp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_capimun.html" class="external-link">esp_get_capimun</a></span><span class="op">(</span>munic <span class="op">=</span> <span class="st">"^Pamplona"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Transform to ETRS89 / UTM 30 N and add a buffer of 750m</span></span>
@@ -133,10 +133,10 @@ Figure 1: Example - Olite
 <span><span class="va">pamp_buff</span> <span class="op">&lt;-</span> <span class="va">pamp</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">25830</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="fl">1250</span><span class="op">)</span></span></code></pre></div>
-<p>The next step is to extract the buildings using the WFS service:</p>
+<p>The next step is to extract buildings using the WFS service:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pamp_bu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catrnav_wfs_get_buildings_bbox.html">catrnav_wfs_get_buildings_bbox</a></span><span class="op">(</span><span class="va">pamp_buff</span>, count <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
-<p>Next step for creating the visualization is to crop the buildings to the buffer we created before:</p>
+<p>Then crop the buildings to the buffer created earlier:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cut buildings</span></span>
 <span></span>
@@ -149,21 +149,21 @@ Figure 1: Example - Olite
 Figure 2: Minimal map of Pamplona
 </p>
 </div>
-<p>Next, let’s extract the construction year, available in the column <code>beginning</code>:</p>
+<p>Next, extract the construction year from the <code>beginning</code> column.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract 4 initial positions</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">$</span><span class="va">beginning</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Replace all that doesn't look as a number with 0000</span></span>
+<span><span class="co"># Replace values that do not look like numbers with "0000".</span></span>
 <span><span class="va">year</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">2500</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"0000"</span></span>
 <span></span>
-<span><span class="co"># To numeric</span></span>
+<span><span class="co"># Convert to numeric</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># New column</span></span>
+<span><span class="co"># Create new column</span></span>
 <span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
-<p>Last step is to create groups based on the year and create the data visualization. We use here the function <code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create different classes:</p>
+<p>The last step is to group the data by year and build the visualization. Here we use the function <code><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">ggplot2::cut_width()</a></code> to create classes:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataviz</span> <span class="op">&lt;-</span> <span class="va">dataviz</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year_cat <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html" class="external-link">cut_width</a></span><span class="op">(</span><span class="va">year</span>, width <span class="op">=</span> <span class="fl">10</span>, dig.lab <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>

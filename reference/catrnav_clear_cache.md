@@ -1,7 +1,7 @@
 # Clear your CatastRoNav cache dir
 
-**Use this function with caution**. This function would clear your
-cached data and configuration, specifically:
+**Use this function with caution**. This function clears your cached
+data and configuration, specifically:
 
 - Deletes the CatastRoNav config directory
   (`rappdirs::user_config_dir("CatastRoNav", "R")`).
@@ -20,12 +20,11 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 
 - config:
 
-  if `TRUE`, will delete the configuration folder of CatastRoNav.
+  If `TRUE`, deletes the configuration folder of CatastRoNav.
 
 - cached_data:
 
-  If this is set to `TRUE`, it will delete your `cache_dir` and all its
-  content.
+  If `TRUE`, deletes `cache_dir` and all its contents.
 
 - verbose:
 
@@ -38,8 +37,8 @@ Invisible. This function is called for its side effects.
 
 ## Details
 
-This is an overkill function that is intended to reset your status as it
-you would never have installed and/or used CatastRoNav.
+This is an overkill function that is intended to reset your status as if
+you had never installed or used CatastRoNav.
 
 ## See also
 
@@ -49,10 +48,10 @@ Other cache utilities:
 ## Examples
 
 ``` r
-# Don't run this! It would modify your current state
+# Don't run this! It will modify your current state
 # \dontrun{
 catrnav_clear_cache(verbose = TRUE)
-#> CatastRoNav cached data deleted: /tmp/Rtmpm2IHEz/CatastRoNav
+#> CatastRoNav cached data deleted: /tmp/RtmpJD5rXI/CatastRoNav
 # }
 
 Sys.getenv("CATASTRONAV_CACHE_DIR")

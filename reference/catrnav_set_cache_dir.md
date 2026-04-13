@@ -1,17 +1,17 @@
 # Set your CatastRoNav cache dir
 
-`catrnav_set_cache_dir()` will store your `cache_dir` path on your local
-machine and would load it for future sessions.
+`catrnav_set_cache_dir()` stores your `cache_dir` path on your local
+machine and makes it available for future sessions.
 
 Alternatively, you can store the `cache_dir` manually with the following
 options:
 
-- Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You would need
-  to run this command on each session (Similar to `install = FALSE`).
+- Run `Sys.setenv(CATASTRONAV_CACHE_DIR = "cache_dir")`. You must run
+  this command in each session (similar to `install = FALSE`).
 
-- Write this line on your .Renviron file:
-  `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior than
-  `install = TRUE`). This would store your `cache_dir` permanently.
+- Write this line in your .Renviron file:
+  `CATASTRONAV_CACHE_DIR = "value_for_cache_dir"` (same behavior as
+  `install = TRUE`). This stores your `cache_dir` permanently.
 
 `catrnav_detect_cache_dir()` detects and returns the path to your
 current `cache_dir`.
@@ -33,8 +33,8 @@ catrnav_detect_cache_dir(...)
 
 - cache_dir:
 
-  A path to a cache directory. On missing value the function would store
-  the cached files on a temporary dir (See
+  A path to a cache directory. On missing value the function stores the
+  cached files in a temporary dir (see
   [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 - overwrite:
@@ -84,14 +84,14 @@ Other cache utilities:
 ## Examples
 
 ``` r
-# Don't run this! It would modify your current state
+# Don't run this! It will modify your current state
 # \dontrun{
 catrnav_set_cache_dir(verbose = TRUE)
 #> Using a temporary cache dir. Set 'cache_dir' to a value for store permanently
-#> CatastRoNav cache dir is: /tmp/Rtmpm2IHEz/CatastRoNav
+#> CatastRoNav cache dir is: /tmp/RtmpJD5rXI/CatastRoNav
 # }
 
 
 catrnav_detect_cache_dir()
-#> [1] "/tmp/Rtmpm2IHEz/CatastRoNav"
+#> [1] "/tmp/RtmpJD5rXI/CatastRoNav"
 ```

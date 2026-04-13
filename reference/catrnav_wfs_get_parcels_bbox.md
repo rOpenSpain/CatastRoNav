@@ -30,15 +30,15 @@ catrnav_wfs_get_parcels_bbox(x, srs, verbose = FALSE, count = NULL)
 
 - verbose:
 
-  Logical, displays information. Useful for debugging, default is
+  Logical, displays information and is useful for debugging. Default is
   `FALSE`.
 
 - count:
 
   integer, indicating the maximum number of features to return. The
-  default value `NULL` does not pass this argument to the query, and the
-  maximum number of features would be determined by the default value of
-  the API service (5,000 in this case).
+  default value `NULL` does not pass this argument to the query. The
+  maximum number of features is determined by the API service default
+  (5,000 in this case).
 
 ## Value
 

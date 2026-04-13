@@ -25,19 +25,20 @@ catrnav_atom_get_address(
 
 - cache:
 
-  A logical whether to do caching. Default is `TRUE`. See **About
-  caching** section on
+  A logical value indicating whether to use caching. Default is `TRUE`.
+  See **About caching** section on
   [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
 
 - update_cache:
 
-  A logical whether to update cache. Default is `FALSE`. When set to
-  `TRUE` it would force a fresh download of the source file.
+  A logical value indicating whether to update the cache. Default is
+  `FALSE`. When set to `TRUE`, forces a fresh download of the source
+  file.
 
 - cache_dir:
 
-  A path to a cache directory. On missing value the function would store
-  the cached files on a temporary dir (See
+  A path to a cache directory. On missing value the function stores the
+  cached files in a temporary dir (see
   [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 - verbose:
