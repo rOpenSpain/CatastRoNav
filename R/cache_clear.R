@@ -32,6 +32,7 @@
 #'
 #' Sys.getenv("CATASTRONAV_CACHE_DIR")
 #' @export
+#' @encoding UTF-8
 catrnav_clear_cache <- function(
   config = FALSE,
   cached_data = TRUE,

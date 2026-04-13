@@ -20,6 +20,7 @@
 #'
 #' @rdname catrnav_atom_get_parcels_db
 #' @export
+#' @encoding UTF-8
 #'
 #' @return
 #' A [tibble][tibble::tibble] with the information requested:

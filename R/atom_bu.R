@@ -11,6 +11,8 @@
 #' @family buildings
 #'
 #' @export
+#' @encoding UTF-8
+#'
 #' @return A [`sf`][sf::st_sf] object.
 #'
 #' @inheritParams catrnav_atom_get_buildings_db_all

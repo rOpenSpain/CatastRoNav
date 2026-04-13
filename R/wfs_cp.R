@@ -19,6 +19,7 @@
 #' ```
 #'
 #' @export
+#' @encoding UTF-8
 #'
 #' @examples
 #' \donttest{

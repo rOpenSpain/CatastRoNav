@@ -32,3 +32,7 @@ dev
 **/.quarto/
 README_files/
 README.html
+*.rmarkdown
+index_files/
+*index.html
+pkgdown/*_files

@@ -11,6 +11,8 @@
 #' @family parcels
 #'
 #' @export
+#' @encoding UTF-8
+#'
 #' @return A [`sf`][sf::st_sf] object.
 #'
 #' @inheritParams catrnav_atom_get_parcels_db_all

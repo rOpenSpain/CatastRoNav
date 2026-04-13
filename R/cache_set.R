@@ -49,6 +49,7 @@
 #' }
 #'
 #' @export
+#' @encoding UTF-8
 catrnav_set_cache_dir <- function(
   cache_dir,
   overwrite = FALSE,
@@ -135,6 +136,7 @@ catrnav_set_cache_dir <- function(
 #' @name catrnav_detect_cache_dir
 #'
 #' @export
+#' @encoding UTF-8
 #'
 #' @description
 #' [catrnav_detect_cache_dir()] detects and returns the path to your current
