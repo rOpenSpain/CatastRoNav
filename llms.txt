@@ -12,6 +12,7 @@ You can install the developing version of **CatastRoNav** using the
 [r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
+
 # Install CatastRoNav in R:
 install.packages("CatastRoNav",
   repos = c(
@@ -25,6 +26,7 @@ Alternatively, you can install the developing version of **CatastRoNav**
 with:
 
 ``` r
+
 remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
 ```
 
@@ -35,6 +37,7 @@ elements. The results are returned as `sf` objects (see the [**sf**
 package](https://r-spatial.github.io/sf/)).
 
 ``` r
+
 library(CatastRoNav)
 library(ggplot2)
 
@@ -55,7 +58,7 @@ Olite](reference/figures/README-wfs-1.png)
 
 Hernangómez D (2026). *CatastRoNav: Interface to the API Catastro de
 Navarra*.
-[doi:10.5281/zenodo.6366407](https://doi.org/10.5281/zenodo.6366407),
+[doi:10.5281/zenodo.6366407](https://doi.org/10.5281/zenodo.6366407).
 <https://ropenspain.github.io/CatastRoNav/>.
 
 A BibTeX entry for LaTeX users is:

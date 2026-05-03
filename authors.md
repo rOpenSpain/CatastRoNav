@@ -15,7 +15,7 @@ Source:
 
 Hernangómez D (2026). *CatastRoNav: Interface to the API Catastro de
 Navarra*.
-[doi:10.5281/zenodo.6366407](https://doi.org/10.5281/zenodo.6366407),
+[doi:10.5281/zenodo.6366407](https://doi.org/10.5281/zenodo.6366407).
 <https://ropenspain.github.io/CatastRoNav/>.
 
     @Manual{R-catastronav,

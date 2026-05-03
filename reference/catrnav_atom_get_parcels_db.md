@@ -76,16 +76,16 @@ catrnav_atom_get_parcels_db_all()
 #> # A tibble: 342 × 3
 #>    munic                            url                               date      
 #>    <chr>                            <chr>                             <date>    
-#>  1 001 Abáigar                      https://filescartografia.navarra… 2025-12-31
-#>  2 002 Abárzuza / Abartzuza         https://filescartografia.navarra… 2025-12-31
-#>  3 003 Abaurregaina / Abaurrea Alta https://filescartografia.navarra… 2025-12-31
-#>  4 004 Abaurrepea / Abaurrea Baja   https://filescartografia.navarra… 2025-12-31
-#>  5 005 Aberin                       https://filescartografia.navarra… 2025-12-31
-#>  6 006 Ablitas                      https://filescartografia.navarra… 2025-12-31
-#>  7 007 Adiós                        https://filescartografia.navarra… 2025-12-31
-#>  8 008 Aguilar de Codés             https://filescartografia.navarra… 2025-12-31
-#>  9 009 Aibar / Oibar                https://filescartografia.navarra… 2025-12-31
-#> 10 010 Altsasu / Alsasua            https://filescartografia.navarra… 2025-12-31
+#>  1 001 Abáigar                      https://filescartografia.navarra… 2026-03-31
+#>  2 002 Abárzuza / Abartzuza         https://filescartografia.navarra… 2026-03-31
+#>  3 003 Abaurregaina / Abaurrea Alta https://filescartografia.navarra… 2026-03-31
+#>  4 004 Abaurrepea / Abaurrea Baja   https://filescartografia.navarra… 2026-03-31
+#>  5 005 Aberin                       https://filescartografia.navarra… 2026-03-31
+#>  6 006 Ablitas                      https://filescartografia.navarra… 2026-03-31
+#>  7 007 Adiós                        https://filescartografia.navarra… 2026-03-31
+#>  8 008 Aguilar de Codés             https://filescartografia.navarra… 2026-03-31
+#>  9 009 Aibar / Oibar                https://filescartografia.navarra… 2026-03-31
+#> 10 010 Altsasu / Alsasua            https://filescartografia.navarra… 2026-03-31
 #> # ℹ 332 more rows
 # }
 ```

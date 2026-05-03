@@ -31,6 +31,7 @@ In this example, we retrieve the cadastral parcels of
 [Olite](https://en.wikipedia.org/wiki/Olite):
 
 ``` r
+
 library(CatastRoNav)
 # For obtaining coordinates
 library(sf)
@@ -66,6 +67,7 @@ First, we extract the coordinates of the city center of Pamplona using
 **mapSpain**:
 
 ``` r
+
 # Use mapSpain to obtain coordinates
 pamp <- esp_get_capimun(munic = "^Pamplona")
 
@@ -79,12 +81,14 @@ pamp_buff <- pamp |>
 The next step is to extract buildings using the WFS service:
 
 ``` r
+
 pamp_bu <- catrnav_wfs_get_buildings_bbox(pamp_buff, count = 10000)
 ```
 
 Then crop the buildings to the buffer created earlier:
 
 ``` r
+
 # Cut buildings
 
 dataviz <- st_intersection(pamp_bu, pamp_buff)
@@ -100,6 +104,7 @@ Figure 2: Minimal map of Pamplona
 Next, extract the construction year from the `beginning` column.
 
 ``` r
+
 # Extract 4 initial positions
 year <- substr(dataviz$beginning, 1, 4)
 
@@ -120,6 +125,7 @@ Here we use the function
 to create classes:
 
 ``` r
+
 dataviz <- dataviz |>
   mutate(year_cat = ggplot2::cut_width(year, width = 10, dig.lab = 12))
 

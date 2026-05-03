@@ -48,10 +48,11 @@ Other cache utilities:
 ## Examples
 
 ``` r
+
 # Don't run this! It will modify your current state
 # \dontrun{
 catrnav_clear_cache(verbose = TRUE)
-#> CatastRoNav cached data deleted: /tmp/RtmpzXUTTC/CatastRoNav
+#> CatastRoNav cached data deleted: /tmp/RtmpgrGSXN/CatastRoNav
 # }
 
 Sys.getenv("CATASTRONAV_CACHE_DIR")
