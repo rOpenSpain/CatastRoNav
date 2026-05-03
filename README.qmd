@@ -22,7 +22,7 @@ knitr:
 library(CatastRoNav)
 ```
 
-# CatastRoNav <a href="https://ropenspain.github.io/CatastroNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
+# CatastRoNav <a href="https://ropenspain.github.io/CatastRoNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 

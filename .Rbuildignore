@@ -50,3 +50,5 @@
 ^index_files$
 ^index\.html$
 ^index\.md$
+^\.positai$
+^\.claude$

@@ -2,7 +2,7 @@
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# CatastRoNav <a href="https://ropenspain.github.io/CatastroNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
+# CatastRoNav <a href="https://ropenspain.github.io/CatastRoNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -73,7 +73,7 @@ alt="Extraction of buildings with CatastroNav in Olite" />
 
 Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
 Navarra</em>.
-<a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>,
+<a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>.
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
 
