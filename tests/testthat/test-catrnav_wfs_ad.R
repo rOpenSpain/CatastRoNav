@@ -15,12 +15,7 @@ test_that("BBOX Check projections", {
   ))
 
   expect_message(catrnav_wfs_get_address_bbox(
-    c(
-      1071071,
-      4747924,
-      1071171,
-      4748024
-    ),
+    c(1071071, 4747924, 1071171, 4748024),
     srs = 25829,
     verbose = TRUE,
     count = 5
@@ -41,10 +36,7 @@ test_that("BBOX Check projections", {
 
   # Convert to spatial object
 
-  bbox <- get_sf_from_bbox(
-    c(1071071, 4747924, 1071171, 4748024),
-    25829
-  )
+  bbox <- get_sf_from_bbox(c(1071071, 4747924, 1071171, 4748024), 25829)
   expect_s3_class(bbox, "sfc")
 
   obj2 <- catrnav_wfs_get_address_bbox(bbox)

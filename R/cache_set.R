@@ -73,11 +73,7 @@ catrnav_set_cache_dir <- function(
   }
 
   # Validate
-  stopifnot(
-    is.character(cache_dir),
-    is.logical(overwrite),
-    is.logical(install)
-  )
+  stopifnot(is.character(cache_dir), is.logical(overwrite), is.logical(install))
 
   # Expand
   cache_dir <- path.expand(cache_dir)
@@ -88,10 +84,7 @@ catrnav_set_cache_dir <- function(
   }
 
   if (verbose) {
-    message(
-      "CatastRoNav cache dir is: ",
-      cache_dir
-    )
+    message("CatastRoNav cache dir is: ", cache_dir)
   }
 
   # Install path on environ var.
@@ -181,17 +174,8 @@ catrnav_hlp_detect_cache_dir <- function() {
       cached_path <- readLines(cache_config)
 
       # Case for empty cached path - defaults
-      if (
-        any(
-          is.null(cached_path),
-          is.na(cached_path),
-          cached_path == ""
-        )
-      ) {
-        cache_dir <- catrnav_set_cache_dir(
-          overwrite = TRUE,
-          verbose = FALSE
-        )
+      if (any(is.null(cached_path), is.na(cached_path), cached_path == "")) {
+        cache_dir <- catrnav_set_cache_dir(overwrite = TRUE, verbose = FALSE)
         return(cache_dir)
       }
 
@@ -202,10 +186,7 @@ catrnav_hlp_detect_cache_dir <- function() {
     } else {
       # 4. Default cache location
 
-      cache_dir <- catrnav_set_cache_dir(
-        overwrite = TRUE,
-        verbose = FALSE
-      )
+      cache_dir <- catrnav_set_cache_dir(overwrite = TRUE, verbose = FALSE)
       cache_dir
     }
   } else {

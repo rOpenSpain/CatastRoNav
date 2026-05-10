@@ -48,9 +48,9 @@ cadastral parcels.
 The implementation of the INSPIRE directive on the Cadastre of Navarre allows
 retrieving spatial objects from the cadastre database:
 
--   **Vector objects:** Parcels, addresses, buildings, cadastral zones and more.
-    These objects are provided by **CatastRoNav** as `sf` objects (see
-    `?sf::st_sf`).
+- **Vector objects:** Parcels, addresses, buildings, cadastral zones and more.
+  These objects are provided by **CatastRoNav** as `sf` objects (see
+  `?sf::st_sf`).
 
 ## Examples
 
@@ -138,7 +138,8 @@ dataviz <- dataviz |>
   mutate(year = year)
 ```
 
-The last step is to group the data by year and build the visualization. Here we use the function `ggplot2::cut_width()` to create classes:
+The last step is to group the data by year and build the visualization. Here we
+use the function `ggplot2::cut_width()` to create classes:
 
 ```{r}
 #| label: dataviz

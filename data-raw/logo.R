@@ -55,10 +55,7 @@ p <- ggplot(finalpols) +
     show.legend = FALSE,
     alpha = 1
   ) +
-  scale_fill_gradientn(
-    colors = pal(7),
-    na.value = pal(7)[6]
-  ) +
+  scale_fill_gradientn(colors = pal(7), na.value = pal(7)[6]) +
   theme_void()
 
 

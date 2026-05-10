@@ -34,10 +34,7 @@ catr_hlp_dwnload <- function(
   } else if (update_cache || isFALSE(localfile)) {
     dwnload <- TRUE
     if (verbose) {
-      message(
-        "Downloading file from ",
-        url
-      )
+      message("Downloading file from ", url)
     }
     if (verbose && update_cache) {
       message("\nUpdating cache")

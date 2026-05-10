@@ -24,11 +24,7 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
     title <- base[[1]]
     url <- unlist(attr(base, "href"))
     date <- as.POSIXct(unlist(x$updated))
-    data.frame(
-      title = trimws(title),
-      url = trimws(url),
-      date = as.Date(date)
-    )
+    data.frame(title = trimws(title), url = trimws(url), date = as.Date(date))
   })
 
   tbl_all <- dplyr::bind_rows(tbl_all)

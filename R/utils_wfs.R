@@ -50,10 +50,7 @@ wfs_api_query <- function(entry, ..., verbose = TRUE) {
 
   # Prepare URL
   # Get URl
-  api_entry <- catrnav_wfs_get_url(
-    entry = entry,
-    params = arguments
-  )
+  api_entry <- catrnav_wfs_get_url(entry = entry, params = arguments)
 
   # Filename
   filename <- paste0(basename(tempfile()), ".gml")
@@ -72,10 +69,7 @@ wfs_api_query <- function(entry, ..., verbose = TRUE) {
 
   # Prepare outlist
 
-  outlist <- list(
-    is_sf = is_sf,
-    path = path
-  )
+  outlist <- list(is_sf = is_sf, path = path)
 
   if (!is_sf) {
     m <- unlist(xml2::as_list(xml2::read_xml(path)))
