@@ -140,10 +140,10 @@ references:
   doi: 10.32614/CRAN.package.xml2
 - type: software
   title: CatastRo
-  abstract: 'CatastRo: Interface to the API ''Sede Electronica Del Catastro'''
+  abstract: 'CatastRo: Access Spanish Cadastre Services'
   notes: Suggests
   url: https://ropenspain.github.io/CatastRo/
-  repository: https://CRAN.R-project.org/package=CatastRo
+  repository: https://dieghernan.r-universe.dev
   authors:
   - family-names: Delgado Panadero
     given-names: Ángel
