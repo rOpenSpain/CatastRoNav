@@ -19,7 +19,7 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
   feed <- feed[names(feed) == "entry"]
 
   tbl_all <- lapply(feed, function(x) {
-    x[names(x) != ""]
+    x[nzchar(names(x))]
     base <- x$content$div$ul$li$a
     title <- base[[1]]
     url <- unlist(attr(base, "href"))

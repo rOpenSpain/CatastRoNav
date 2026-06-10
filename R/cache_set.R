@@ -57,7 +57,7 @@ catrnav_set_cache_dir <- function(
   verbose = TRUE
 ) {
   # Default if not provided
-  if (missing(cache_dir) || cache_dir == "") {
+  if (missing(cache_dir) || !nzchar(cache_dir)) {
     if (verbose) {
       message(
         "Using a temporary cache dir. ",
@@ -162,7 +162,7 @@ catrnav_hlp_detect_cache_dir <- function() {
   # Try from getenv
   getvar <- Sys.getenv("CATASTRONAV_CACHE_DIR")
 
-  if (is.null(getvar) || is.na(getvar) || getvar == "") {
+  if (is.null(getvar) || is.na(getvar) || !nzchar(getvar)) {
     # Not set - tries to retrieve from cache
     cache_config <- file.path(
       rappdirs::user_config_dir("CatastRoNav", "R"),
@@ -174,7 +174,7 @@ catrnav_hlp_detect_cache_dir <- function() {
       cached_path <- readLines(cache_config)
 
       # Case for empty cached path - defaults
-      if (any(is.null(cached_path), is.na(cached_path), cached_path == "")) {
+      if (any(is.null(cached_path), is.na(cached_path), !nzchar(cached_path))) {
         cache_dir <- catrnav_set_cache_dir(overwrite = TRUE, verbose = FALSE)
         return(cache_dir)
       }
