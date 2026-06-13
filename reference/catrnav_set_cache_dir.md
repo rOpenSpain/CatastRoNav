@@ -89,10 +89,10 @@ Other cache utilities:
 # \dontrun{
 catrnav_set_cache_dir(verbose = TRUE)
 #> Using a temporary cache dir. Set 'cache_dir' to a value for store permanently
-#> CatastRoNav cache dir is: /tmp/Rtmpc0dwZU/CatastRoNav
+#> CatastRoNav cache dir is: /tmp/RtmpwC0fHQ/CatastRoNav
 # }
 
 
 catrnav_detect_cache_dir()
-#> [1] "/tmp/Rtmpc0dwZU/CatastRoNav"
+#> [1] "/tmp/RtmpwC0fHQ/CatastRoNav"
 ```
