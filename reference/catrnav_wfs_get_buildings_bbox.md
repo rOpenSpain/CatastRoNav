@@ -70,7 +70,6 @@ spatial object is projected back to the SRS of the initial object.
 downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)
 
 bu <- catrnav_wfs_get_buildings_bbox(downtown, srs = 4326)
-#> Warning: cannot open URL 'https://inspire.navarra.es/services/BU/wfs?version=2.0.0&service=WFS&request=getfeature&typenames=BU:Building&bbox=610617.766512854,4741106.72145066,611345.573637764,4741761.4626862&SRSNAME=EPSG:25830': HTTP status was '400 Bad Request'
 
 library(ggplot2)
 

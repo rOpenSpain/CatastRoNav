@@ -73,6 +73,8 @@ Other parcels:
 # \donttest{
 
 s <- catrnav_atom_get_parcels("Iruña")
+#> Warning: downloaded length 1316736 != reported length 2547705
+#> Warning: URL 'https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_1_CP/files/CP_Navarra_201.gml.zip': status was 'Transferred a partial file'
 
 library(ggplot2)
 
