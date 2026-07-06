@@ -1,7 +1,7 @@
 Type: Package
 Package: CatastRoNav
 Title: Interface to the 'INSPIRE' Services of the Cadastre of Navarre
-Version: 0.1.0.9000
+Version: 1.0.0
 Authors@R: c(
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8457-4658")),

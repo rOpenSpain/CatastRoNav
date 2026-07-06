@@ -1,4 +1,4 @@
-# CatastRoNav (development version)
+# CatastRoNav 1.0.0
 
 - The package is now licensed under GPL-2. Data from the Government of
   Navarre remain available under CC BY 4.0.
