@@ -11,7 +11,7 @@ supplied bounding box. See Bounding box."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html"><img src="../apple-touch-icon.png" alt="CatastRoNav logo" height="34" width="34" class="d-inline-block me-1">CatastRoNav</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,6 +123,9 @@ input CRS. See <code><a href="https://r-spatial.github.io/sf/reference/st_bbox.h
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">downtown</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.646812</span>, <span class="fl">42.814528</span>, <span class="op">-</span><span class="fl">1.638036</span>, <span class="fl">42.820320</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu">catrnav_wfs_get_address_bbox</span><span class="op">(</span><span class="va">downtown</span>, srs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="font-weight: bold;">HTTP error 400</span> (Bad Request): <span style="color: #0000BB; font-style: italic;">&lt;https://inspire.navarra.es/services/AD/wfs?version=2.0.0&amp;service=WFS&amp;request=getfeature&amp;typenames=AD:Address&amp;bbox=610617.766512854,4741106.72145066,611345.573637764,4741761.4626862&amp;srsname=EPSG:25830&gt;</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> If this looks like a package bug, please open an issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/ropenspain/CatastRo/issues&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Returning <span style="color: #0000BB;">"NULL"</span> because the download failed.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
