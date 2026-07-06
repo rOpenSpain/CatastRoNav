@@ -13,17 +13,17 @@
 Source:
 [`inst/CITATION`](https://github.com/rOpenSpain/CatastRoNav/blob/main/inst/CITATION)
 
-Hernangómez D (2026). *CatastRoNav: Interface to the API Catastro de
-Navarra*.
+Hernangómez D (2026). *CatastRoNav: Interface to the INSPIRE Services of
+the Cadastre of Navarre*.
 [doi:10.5281/zenodo.6366407](https://doi.org/10.5281/zenodo.6366407).
 <https://ropenspain.github.io/CatastRoNav/>.
 
     @Manual{R-catastronav,
-      title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
-      author = {Diego Hernangómez},
+      title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
       year = {2026},
       version = {0.1.0.9000},
+      author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
-      abstract = {Access public spatial data available under the INSPIRE directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},
+      abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
     }

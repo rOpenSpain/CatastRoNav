@@ -38,9 +38,14 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="inspire-services">INSPIRE services<a class="anchor" aria-label="anchor" href="#inspire-services"></a></h2>
 
+      <div class="section-desc"><p>Retrieve cadastral addresses, buildings and cadastral parcels from the Cadastre of Navarre.</p></div>
 
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="atom-downloads">ATOM downloads<a class="anchor" aria-label="anchor" href="#atom-downloads"></a></h3>
+      <div class="section-desc"><p>Download complete municipal cadastral datasets and list available municipalities.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -52,79 +57,142 @@
           <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Download all the cadastral addresses of a municipality</dd>
+        <dd>ATOM INSPIRE: download all addresses for a municipality</dd>
 
         <dt>
 
           <code><a href="catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Reference database for ATOM addresses</dd>
+        <dd>ATOM INSPIRE: list address download URLs</dd>
 
         <dt>
 
           <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Download all the cadastral buildings of a municipality</dd>
+        <dd>ATOM INSPIRE: download all buildings for a municipality</dd>
 
         <dt>
 
           <code><a href="catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Reference database for ATOM buildings</dd>
+        <dd>ATOM INSPIRE: list building download URLs</dd>
 
         <dt>
 
           <code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Download all the cadastral parcels of a municipality</dd>
+        <dd>ATOM INSPIRE: download all cadastral parcels for a municipality</dd>
 
         <dt>
 
           <code><a href="catrnav_atom_get_parcels_db.html">catrnav_atom_get_parcels_db_all()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: Reference database for ATOM cadastral parcels</dd>
+        <dd>ATOM INSPIRE: list cadastral parcel download URLs</dd>
 
         <dt>
+
+          <code><a href="catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code>
+
+        </dt>
+        <dd>ATOM INSPIRE: search for municipalities</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="wfs-queries">WFS queries<a class="anchor" aria-label="anchor" href="#wfs-queries"></a></h3>
+      <div class="section-desc"><p>Retrieve cadastral features within a supplied bounding box.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>
+
+        </dt>
+        <dd>WFS INSPIRE: retrieve addresses</dd>
+
+        <dt>
+
+          <code><a href="catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code>
+
+        </dt>
+        <dd>WFS INSPIRE: retrieve buildings</dd>
+
+        <dt>
+
+          <code><a href="catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code>
+
+        </dt>
+        <dd>WFS INSPIRE: retrieve cadastral parcels</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="wms-maps">WMS maps<a class="anchor" aria-label="anchor" href="#wms-maps"></a></h3>
+      <div class="section-desc"><p>Download georeferenced cadastral map images.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code>
+
+        </dt>
+        <dd>WMS INSPIRE: download georeferenced map images</dd>
+      </dl></div><div class="section level2">
+      <h2 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a></h2>
+
+      <div class="section-desc"><p>Configure, inspect and clear cached files.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="cache-management">Cache management<a class="anchor" aria-label="anchor" href="#cache-management"></a></h3>
+      <div class="section-desc"><p>Manage the local cache used by <strong>CatastRoNav</strong>.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
 
           <code><a href="catrnav_clear_cache.html">catrnav_clear_cache()</a></code>
 
         </dt>
-        <dd>Clear your <span class="pkg">CatastRoNav</span> cache dir</dd>
+        <dd>Clear your <span class="pkg">CatastRoNav</span> cache directory</dd>
 
         <dt>
 
           <code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> <code><a href="catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code>
 
         </dt>
-        <dd>Set your <span class="pkg">CatastRoNav</span> cache dir</dd>
+        <dd>Set your <span class="pkg">CatastRoNav</span> cache directory</dd>
+      </dl></div><div class="section level2">
+      <h2 id="package-metadata">Package metadata<a class="anchor" aria-label="anchor" href="#package-metadata"></a></h2>
 
-        <dt>
+      <div class="section-desc"><p>Read package-level documentation.</p></div>
 
-          <code><a href="catrnav_wfs_get_address_bbox.html">catrnav_wfs_get_address_bbox()</a></code>
+      <dl></dl></div><div class="section level2">
 
-        </dt>
-        <dd>Download addresses of Navarre in spatial format</dd>
 
-        <dt>
 
-          <code><a href="catrnav_wfs_get_buildings_bbox.html">catrnav_wfs_get_buildings_bbox()</a></code>
 
-        </dt>
-        <dd>Download buildings of Navarre in spatial format</dd>
+      <dl><dt>
 
-        <dt>
-
-          <code><a href="catrnav_wfs_get_parcels_bbox.html">catrnav_wfs_get_parcels_bbox()</a></code>
+          <code><a href="CatastRoNav-package.html">CatastRoNav</a></code> <code><a href="CatastRoNav-package.html">CatastRoNav-package</a></code>
 
         </dt>
-        <dd>Download cadastral parcels of Navarre in spatial format</dd>
+        <dd>CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
   </div>
 

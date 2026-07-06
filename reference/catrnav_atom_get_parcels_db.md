@@ -1,7 +1,7 @@
-# ATOM INSPIRE: Reference database for ATOM cadastral parcels
+# ATOM INSPIRE: list cadastral parcel download URLs
 
-Create a database containing the URLs provided in the INSPIRE ATOM
-service for extracting Cadastral Parcels.
+Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
+service for downloading cadastral parcels by municipality.
 
 ## Usage
 
@@ -22,56 +22,53 @@ catrnav_atom_get_parcels_db_all(
 
 - cache:
 
-  A logical value indicating whether to use caching. Default is `TRUE`.
-  See **About caching** section on
-  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
+  A logical value indicating whether to use cached files. Defaults to
+  `TRUE`.
 
 - update_cache:
 
-  A logical value indicating whether to update the cache. Default is
-  `FALSE`. When set to `TRUE`, forces a fresh download of the source
-  file.
+  Logical. Should the cached file be refreshed? Defaults to `FALSE`.
+  When set to `TRUE`, it forces a new download.
 
 - cache_dir:
 
-  A path to a cache directory. On missing value the function stores the
-  cached files in a temporary dir (see
+  Path to a cache directory. On `NULL`, the function stores cached files
+  in a temporary directory (see
   [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 - verbose:
 
-  Logical, displays information. Useful for debugging, default is
-  `FALSE`.
+  Logical. If `TRUE`, displays informational messages.
 
 ## Value
 
-A [tibble](https://tibble.tidyverse.org/reference/tibble.html) with the
-information requested:
+A [tibble](https://dplyr.tidyverse.org/reference/defunct.html) with the
+requested information in the following columns:
 
-- `munic`: Name of the municipality.
+- `munic`: Municipality name and cadastral code.
 
-- `url`: URL for downloading information of the corresponding
-  municipality.
+- `url`: ATOM URL for the corresponding municipality.
 
 - `date`: Reference date of the data.
 
 ## See also
 
-Other ATOM:
+Download data from the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),
 [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),
-[`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
-
-Other parcels:
 [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md),
-[`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels_bbox.md)
+[`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+
+Work with cadastral parcels:
+[`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md),
+[`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md),
+[`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
 
 ## Examples
 
 ``` r
-# \donttest{
 catrnav_atom_get_parcels_db_all()
 #> # A tibble: 342 × 3
 #>    munic                            url                               date      
@@ -87,5 +84,4 @@ catrnav_atom_get_parcels_db_all()
 #>  9 009 Aibar / Oibar                https://filescartografia.navarra… 2026-03-31
 #> 10 010 Altsasu / Alsasua            https://filescartografia.navarra… 2026-03-31
 #> # ℹ 332 more rows
-# }
 ```

@@ -1,8 +1,10 @@
-# CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'
+# CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre
 
-Access public spatial data available under the 'INSPIRE' directive.
-Tools for downloading references, buildings and addresses of properties
-on Navarre (Spain).
+Provides access to public spatial data from the Cadastre of Navarre
+through its 'INSPIRE' ATOM, WFS and WMS services. Supports complete
+municipal dataset downloads, bounding box feature queries and
+georeferenced map image downloads for addresses, buildings and cadastral
+parcels.
 
 ## See also
 

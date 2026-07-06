@@ -5,4 +5,4 @@
 - [Get
   started](https://ropenspain.github.io/CatastRoNav/articles/CatastRoNav.md):
 
-  Introduction to CatastroNav
+  Access Cadastre of Navarre data through INSPIRE services.

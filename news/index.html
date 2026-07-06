@@ -40,29 +40,50 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="catastronav-development-version">CatastRoNav (development version)<a class="anchor" aria-label="anchor" href="#catastronav-development-version"></a></h2>
-<ul><li>Minimum <strong>R</strong> version required now is <strong>4.1.0</strong>.</li>
-<li>Adding ATOM capabilities for buildings and addresses (<a href="https://github.com/rOpenSpain/CatastRoNav/issues/11" class="external-link">#11</a>, <a href="https://github.com/rOpenSpain/CatastRoNav/issues/12" class="external-link">#12</a>) by <a href="https://github.com/fgoerlich" class="external-link">@fgoerlich</a>. New functions:
+<ul><li>The package is now licensed under GPL-2. Data from the Government of Navarre remain available under CC BY 4.0.</li>
+<li>User-facing messages now use <strong>cli</strong> for consistent, informative output.</li>
+<li>This refactor was completed with AI assistance and reviewed by the package maintainer.</li>
+<li>Network requests now use <strong>httr2</strong> with retries. Use <code>options(catastronav_timeout = 300)</code> to set the timeout and <code>options(catastronav_ssl_verify = 1L)</code> to control SSL verification. These settings fall back to <code>catastro_timeout</code> and <code>catastro_ssl_verify</code>, respectively. Requests now detect offline sessions before downloading and failed requests return <code>NULL</code> instead of stopping execution.</li>
+<li>Spatial files now use the same UTF-8 normalization strategy as <strong>CatastRo</strong>, removing the <strong>stringi</strong> dependency and avoiding lossy transliteration.</li>
+<li>Spatial results now have valid geometries, UTF-8 metadata and normalized CRS definitions when an EPSG code is available.</li>
+<li>The minimum supported R version is now 4.1.0.</li>
+<li>Added ATOM capabilities for buildings and addresses (<a href="https://github.com/rOpenSpain/CatastRoNav/issues/11" class="external-link">#11</a>, <a href="https://github.com/rOpenSpain/CatastRoNav/issues/12" class="external-link">#12</a>) by <a href="https://github.com/fgoerlich" class="external-link">@fgoerlich</a>. New functions:
 <ul><li><code><a href="../reference/catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code></li>
 <li><code><a href="../reference/catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code></li>
 <li><code><a href="../reference/catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code></li>
 <li><code><a href="../reference/catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code></li>
 </ul></li>
-<li>Adapt vignette to Quarto.</li>
+<li>Added WMS INSPIRE support with <code><a href="../reference/catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code> using <strong>mapSpain</strong> and <strong>terra</strong>. It retrieves address, building and cadastral parcel layers, supports the <code>ELFCadastre</code> parcel style and accepts additional <strong>mapSpain</strong> request settings through <code>options</code>. Offline or failed requests return <code>NULL</code>.</li>
+<li>Adapted the vignette to Quarto.</li>
+<li>
+<code><a href="../reference/catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="../reference/catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> and <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> now select the closest municipality when a pattern matches multiple names and report the alternatives. Calls with <code>cache = FALSE</code> use temporary files and invalid arguments produce informative errors.</li>
+<li>
+<code><a href="../reference/catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> now searches the ATOM index by municipality name or cadastral code and returns all matches ordered by proximity.</li>
+<li>
+<code><a href="../reference/catrnav_clear_cache.html">catrnav_clear_cache()</a></code> now validates its arguments and reports the size of deleted cached data when <code>verbose = TRUE</code>.</li>
+<li>
+<code><a href="../reference/catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code> now reports the active cache directory.</li>
+<li>
+<code><a href="../reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> now defaults <code>cache_dir</code> to <code>NULL</code>, validates its arguments and stores persistent configuration under <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>. Existing configuration is migrated automatically from the previous location and is reliably restored in later sessions. Set <code>cache_dir = FALSE</code> to use a nonpersistent temporary cache even when <code>install = TRUE</code>.</li>
+<li>
+<code><a href="../reference/catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="../reference/catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and <code><a href="../reference/catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> now default <code>srs</code> to <code>4326</code>, validate bounding boxes, CRS values and <code>count</code> and use <code><a href="https://ropenspain.github.io/CatastRo/reference/inspire_wfs_get.html" class="external-link">CatastRo::inspire_wfs_get()</a></code> for requests. Set <code>options(catastronav_wfs_limit_km2 = ...)</code> to warn when a query exceeds a chosen area in square kilometers. The default <code>Inf</code> disables this warning.</li>
+<li>
+<code><a href="../reference/run_example.html">run_example()</a></code> now determines whether network-dependent examples should run based on CRAN status and network availability.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="catastronav-010">CatastRoNav 0.1.0<a class="anchor" aria-label="anchor" href="#catastronav-010"></a></h2>
-<ul><li>Improve condition handling.</li>
-<li>Add a <code>count</code> argument that allows to set the maximum number of features to be returned.</li>
+<ul><li>Improved condition handling.</li>
+<li>Added a <code>count</code> argument that sets the maximum number of features to be returned.</li>
 <li>
-<strong>New features</strong>:
-<ul><li>Support for ATOM on cadastral parcels added, see <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code>. Other ATOM capabilities to be added when the Cadastre of Navarra make them available.</li>
-<li>New caching system, see <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> and <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code>.</li>
-<li>New dependency: <strong>rappdirs</strong> .</li>
+<strong>New features:</strong>
+<ul><li>Added support for ATOM cadastral parcels. See <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code>. Other ATOM capabilities to be added when the Cadastre of Navarre makes them available.</li>
+<li>Added a caching system. See <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> and <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code>.</li>
+<li>Added the <strong>rappdirs</strong> dependency.</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.2" id="catastronav-002">CatastRoNav 0.0.2<a class="anchor" aria-label="anchor" href="#catastronav-002"></a></h2>
-<ul><li>Make <code>sf</code> objects valid with <code><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">sf::st_make_valid()</a></code>.</li>
+<ul><li>Made <code>sf</code> objects valid with <code><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">sf::st_make_valid()</a></code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="catastronav-001">CatastRoNav 0.0.1<a class="anchor" aria-label="anchor" href="#catastronav-001"></a></h2>
@@ -70,10 +91,9 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9000" id="catastronav-0009000">CatastRoNav 0.0.0.9000<a class="anchor" aria-label="anchor" href="#catastronav-0009000"></a></h2>
-<p><strong>This is a pre-release</strong></p>
+<p><strong>This is a pre-release.</strong></p>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Add DOI: <a href="https://doi.org/10.5281/zenodo.6366407" class="external-link uri">https://doi.org/10.5281/zenodo.6366407</a>
-</li>
+<li>Added DOI: <a href="https://doi.org/10.5281/zenodo.6366407" class="external-link uri">https://doi.org/10.5281/zenodo.6366407</a>.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

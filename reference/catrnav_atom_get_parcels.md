@@ -1,7 +1,7 @@
-# ATOM INSPIRE: Download all the cadastral parcels of a municipality
+# ATOM INSPIRE: download all cadastral parcels for a municipality
 
-Get the spatial data of all the cadastral parcels belonging to a single
-municipality using the INSPIRE ATOM service.
+Downloads spatial data for all cadastral parcels in a municipality using
+the ATOM INSPIRE service provided by the Cadastre of Navarre.
 
 ## Usage
 
@@ -15,66 +15,63 @@ catrnav_atom_get_parcels(
 )
 ```
 
+## Source
+
+[SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+
 ## Arguments
 
 - munic:
 
-  Municipality to extract. It can be a part of a string or the cadastral
-  code. See
-  [catrnav_atom_get_parcels_db_all](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md).
+  Municipality name, partial name or cadastral code. Use
+  [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  to search for available municipalities.
 
 - cache:
 
-  A logical value indicating whether to use caching. Default is `TRUE`.
-  See **About caching** section on
-  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
+  A logical value indicating whether to use cached files. Defaults to
+  `TRUE`.
 
 - update_cache:
 
-  A logical value indicating whether to update the cache. Default is
-  `FALSE`. When set to `TRUE`, forces a fresh download of the source
-  file.
+  Logical. Should the cached file be refreshed? Defaults to `FALSE`.
+  When set to `TRUE`, it forces a new download.
 
 - cache_dir:
 
-  A path to a cache directory. On missing value the function stores the
-  cached files in a temporary dir (see
+  Path to a cache directory. On `NULL`, the function stores cached files
+  in a temporary directory (see
   [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 - verbose:
 
-  Logical, displays information. Useful for debugging, default is
-  `FALSE`.
+  Logical. If `TRUE`, displays informational messages.
 
 ## Value
 
-A [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object.
-
-## References
-
-[SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
+`NULL` if the data cannot be retrieved.
 
 ## See also
 
-Other ATOM:
+Download data from the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),
 [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),
-[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
-
-Other parcels:
 [`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md),
-[`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels_bbox.md)
+[`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+
+Work with cadastral parcels:
+[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md),
+[`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md),
+[`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
 
 ## Examples
 
 ``` r
-# \donttest{
 
 s <- catrnav_atom_get_parcels("Iruña")
-#> Warning: downloaded length 1316736 != reported length 2547705
-#> Warning: URL 'https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_1_CP/files/CP_Navarra_201.gml.zip': status was 'Transferred a partial file'
 
 library(ggplot2)
 
@@ -84,6 +81,4 @@ ggplot(s) +
     title = "Cadastral Zoning",
     subtitle = "Pamplona / Iruña"
   )
-
-# }
 ```

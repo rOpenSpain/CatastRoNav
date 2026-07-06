@@ -1,7 +1,7 @@
-# ATOM INSPIRE: Download all the cadastral buildings of a municipality
+# ATOM INSPIRE: download all buildings for a municipality
 
-Get the spatial data of all the cadastral buildings belonging to a
-single municipality using the INSPIRE ATOM service.
+Downloads spatial data for all buildings in a municipality using the
+ATOM INSPIRE service provided by the Cadastre of Navarre.
 
 ## Usage
 
@@ -15,63 +15,64 @@ catrnav_atom_get_buildings(
 )
 ```
 
+## Source
+
+[SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+
 ## Arguments
 
 - munic:
 
-  Municipality to extract. It can be a part of a string or the cadastral
-  code. See
-  [catrnav_atom_get_buildings_db_all](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md).
+  Municipality name, partial name or cadastral code. Use
+  [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  to search for available municipalities.
 
 - cache:
 
-  A logical value indicating whether to use caching. Default is `TRUE`.
-  See **About caching** section on
-  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
+  A logical value indicating whether to use cached files. Defaults to
+  `TRUE`.
 
 - update_cache:
 
-  A logical value indicating whether to update the cache. Default is
-  `FALSE`. When set to `TRUE`, forces a fresh download of the source
-  file.
+  Logical. Should the cached file be refreshed? Defaults to `FALSE`.
+  When set to `TRUE`, it forces a new download.
 
 - cache_dir:
 
-  A path to a cache directory. On missing value the function stores the
-  cached files in a temporary dir (see
+  Path to a cache directory. On `NULL`, the function stores cached files
+  in a temporary directory (see
   [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 - verbose:
 
-  Logical, displays information. Useful for debugging, default is
-  `FALSE`.
+  Logical. If `TRUE`, displays informational messages.
 
 ## Value
 
-A [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object.
-
-## References
-
-[SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
+`NULL` if the data cannot be retrieved.
 
 ## See also
 
-Other ATOM:
+Download data from the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),
 [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md),
-[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
+[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md),
+[`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
 
-Other buildings:
-[`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+Work with cadastral buildings:
+[`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),
+[`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_buildings.md),
+[`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
 
 ## Examples
 
 ``` r
-# \donttest{
 
 s <- catrnav_atom_get_buildings("Iruña")
+#> ! Reading a large spatial file ("25.1 Mb").
 
 library(ggplot2)
 
@@ -81,6 +82,4 @@ ggplot(s) +
     title = "Buildings",
     subtitle = "Pamplona / Iruña"
   )
-
-# }
 ```

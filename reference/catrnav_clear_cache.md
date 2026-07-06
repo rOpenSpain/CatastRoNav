@@ -1,14 +1,14 @@
-# Clear your CatastRoNav cache dir
+# Clear your CatastRoNav cache directory
 
-**Use this function with caution**. This function clears your cached
-data and configuration, specifically:
+Use this function with caution. It clears cached data and configuration,
+specifically:
 
-- Deletes the CatastRoNav config directory
-  (`rappdirs::user_config_dir("CatastRoNav", "R")`).
+- Deletes the CatastRoNav configuration directory
+  (`tools::R_user_dir("CatastRoNav", "config")`).
 
 - Deletes the `cache_dir` directory.
 
-- Deletes the values stored on `Sys.getenv("CATASTRONAV_CACHE_DIR")`.
+- Clears the `CATASTRONAV_CACHE_DIR` environment variable.
 
 ## Usage
 
@@ -20,41 +20,52 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 
 - config:
 
-  If `TRUE`, deletes the configuration folder of CatastRoNav.
+  A logical value indicating whether to delete the CatastRoNav
+  configuration directory.
 
 - cached_data:
 
-  If `TRUE`, deletes `cache_dir` and all its contents.
+  If `TRUE`, deletes your `cache_dir` and all its contents.
 
 - verbose:
 
-  Logical, displays information. Useful for debugging, default is
-  `FALSE`.
+  Logical. If `TRUE`, displays informational messages.
 
 ## Value
 
-Invisible. This function is called for its side effects.
+`NULL`, invisibly. This function is called for its side effects.
 
 ## Details
 
-This is an overkill function that is intended to reset your status as if
-you had never installed or used CatastRoNav.
+This function resets the cache state as if you had never used
+CatastRoNav.
 
 ## See also
 
-Other cache utilities:
+Manage the local cache:
 [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
 
 ## Examples
 
 ``` r
 
-# Don't run this! It will modify your current state
+# Caution! This modifies your current state.
 # \dontrun{
-catrnav_clear_cache(verbose = TRUE)
-#> CatastRoNav cached data deleted: /tmp/Rtmp8WalXR/CatastRoNav
-# }
+my_cache <- catrnav_detect_cache_dir()
+#> ℹ /tmp/Rtmp702kUL/CatastRoNav
 
-Sys.getenv("CATASTRONAV_CACHE_DIR")
-#> [1] ""
+example_cache <- file.path(tempdir(), "example", "cache")
+catrnav_set_cache_dir(example_cache, verbose = FALSE)
+
+catrnav_clear_cache(verbose = TRUE)
+#> ! Deleted CatastRoNav cached data from /tmp/Rtmp702kUL/example/cache ("0 bytes").
+
+# Restore the initial cache.
+catrnav_set_cache_dir(my_cache)
+#> ℹ CatastRoNav cache directory is /tmp/Rtmp702kUL/CatastRoNav.
+#> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
+identical(my_cache, catrnav_detect_cache_dir())
+#> ℹ /tmp/Rtmp702kUL/CatastRoNav
+#> [1] TRUE
+# }
 ```
