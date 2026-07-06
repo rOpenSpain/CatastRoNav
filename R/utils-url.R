@@ -78,7 +78,7 @@ download_url <- function(
   if (is_404()) {
     req <- httr2::req_url(
       req,
-      "http://ovc.catastro.meh.es/urlnoexist/fake"
+      "https://ropenspain.github.io/CatastRoNav/fake_url"
     )
     file_local <- tempfile(fileext = ".txt")
   }
