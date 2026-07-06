@@ -78,9 +78,6 @@ Work with cadastral addresses:
 downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)
 
 ad <- catrnav_wfs_get_address_bbox(downtown, srs = 4326)
-#> ✖ HTTP error 400 (Bad Request): <https://inspire.navarra.es/services/AD/wfs?version=2.0.0&service=WFS&request=getfeature&typenames=AD:Address&bbox=610617.766512854,4741106.72145066,611345.573637764,4741761.4626862&srsname=EPSG:25830>.
-#> ! If this looks like a package bug, please open an issue at <https://github.com/ropenspain/CatastRo/issues>
-#> → Returning "NULL" because the download failed.
 
 library(ggplot2)
 
