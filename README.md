@@ -141,13 +141,3 @@ tracker](https://github.com/rOpenSpain/CatastRoNav) on GitHub.
 The [**CatastRo**](https://CRAN.R-project.org/package=CatastRo) package
 provides similar functionality for the rest of Spain, excluding the
 Basque Country and Navarre.
-
-## Terms and conditions of use
-
-Data provided by the Government of Navarre under [Creative Commons
-Attribution (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
-The service is provided “as is”, and without guarantee of any kind,
-implicit or explicit.
-
-Data source: [SITNA – Government of
-Navarre](https://geoportal.navarra.es/es/inspire)
