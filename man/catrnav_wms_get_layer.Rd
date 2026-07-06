@@ -4,6 +4,9 @@
 \name{catrnav_wms_get_layer}
 \alias{catrnav_wms_get_layer}
 \title{WMS INSPIRE: download georeferenced map images}
+\source{
+\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
+}
 \usage{
 catrnav_wms_get_layer(
   x,
@@ -26,8 +29,8 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 \item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
 }}
 
-\item{srs}{SRS/CRS to use in the query. Defaults to \code{4326}. See
-\strong{Bounding box}.}
+\item{srs}{CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
+box}.}
 
 \item{what}{WMS layer to download. See \strong{Layers and styles}.}
 
@@ -61,23 +64,22 @@ supported.}
   }}
 }
 \value{
-A \code{\link[terra:rast]{SpatRaster}} with three RGB or four RGBA layers. See
-\code{\link[terra:RGB]{terra::RGB()}}. Returns \code{NULL} when the request cannot be completed.
+A \code{\link[terra:rast]{SpatRaster}} with three RGB or four RGBA layers, or \code{NULL}
+when the request cannot be completed. See \code{\link[terra:RGB]{terra::RGB()}}.
 }
 \description{
-Retrieve georeferenced map images from the Cadastre of Navarre WMS service.
+Downloads georeferenced map images from the Cadastre of Navarre WMS service.
 This function wraps \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles()}}.
 }
 \section{Bounding box}{
 
-When \code{x} is a numeric vector, make sure that the \code{srs} matches the
-coordinate values. When \code{x} is a \code{\link[sf:st_sf]{sf}} object, the value
-\code{srs} is ignored.
+When \code{x} is a numeric vector, make sure that \code{srs} matches the coordinate
+values. When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{sfc} object, \code{srs} is ignored.
 
-The query uses \href{https://epsg.io/3857}{EPSG:3857} (Web Mercator), then
-transforms the tile back to the SRS of \code{x}. If the tile appears distorted,
-provide a spatial object as \code{x} or set \code{srs} to the SRS of the requested
-tile. See \strong{Examples}.
+The query uses \href{https://epsg.io/3857}{EPSG:3857}, Web Mercator, then
+transforms the image back to the input CRS. If the image appears distorted,
+provide a spatial object as \code{x} or set \code{srs} to the CRS of the requested
+image.
 }
 
 \section{Layers and styles}{
@@ -120,7 +122,7 @@ library(tidyterra)
 ggplot() +
   geom_spatraster_rgb(data = bu)
 
-# parcels
+# Parcels
 parc <- catrnav_wms_get_layer(
   c(-1.646812, 42.814528, -1.638036, 42.820320),
   srs = 4326,
@@ -138,5 +140,23 @@ ggplot() +
 \item \code{\link[terra:RGB]{terra::RGB()}} identifies RGB channels.
 \item \code{\link[terra:plotRGB]{terra::plotRGB()}} and \code{\link[tidyterra:geom_spatraster_rgb]{tidyterra::geom_spatraster_rgb()}} plot RGB rasters.
 }
+
+Work with cadastral addresses:
+\code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
+\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
+\code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}}
+
+Work with cadastral buildings:
+\code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
+\code{\link[=catrnav_atom_get_buildings_db_all]{catrnav_atom_get_buildings_db_all()}},
+\code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}}
+
+Work with cadastral parcels:
+\code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}},
+\code{\link[=catrnav_atom_get_parcels_db_all]{catrnav_atom_get_parcels_db_all()}},
+\code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}}
 }
+\concept{addresses}
+\concept{buildings}
+\concept{parcels}
 \concept{wms}

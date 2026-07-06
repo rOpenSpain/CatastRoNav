@@ -16,7 +16,8 @@ catrnav_atom_get_buildings_db_all(
 )
 }
 \arguments{
-\item{cache}{Logical. Whether to use the cache. Defaults to \code{TRUE}.}
+\item{cache}{A logical value indicating whether to use cached files. Defaults
+to \code{TRUE}.}
 
 \item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
 \code{FALSE}. When set to \code{TRUE}, it forces a new download.}
@@ -36,7 +37,7 @@ columns:
 }
 }
 \description{
-Create a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
+Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
 service for downloading buildings by municipality.
 }
 \examples{
@@ -45,7 +46,7 @@ catrnav_atom_get_buildings_db_all()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Download data from ATOM INSPIRE services:
+Download data from the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
@@ -55,7 +56,8 @@ Download data from ATOM INSPIRE services:
 
 Work with cadastral buildings:
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
-\code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}}
+\code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}},
+\code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
 \concept{atom}
 \concept{buildings}

@@ -1,9 +1,10 @@
 #' Read and sanitize a spatial file
 #'
-#' @param file_local Character string containing a local file path or URL.
-#' @param verbose Logical. Whether to display reading information.
-#' @param hint Character string used to identify files in ZIP archives.
-#' @param layer_hint Optional character string used to identify layer names.
+#' @param file_local A character string containing a local file path or URL.
+#' @param verbose A logical value indicating whether to display reading
+#'   information.
+#' @param hint A character string used to identify files in ZIP archives.
+#' @param layer_hint An optional character string used to identify layer names.
 #' @param ... Additional arguments passed to [sf::read_sf()].
 #'
 #' @return An `sf` object or `NULL` when no spatial layer can be read.
@@ -38,17 +39,14 @@ read_geo_file_sf <- function(
     if (size > 20 * (1024^2)) {
       class(size) <- class(object.size("a"))
       cli::cli_alert_warning(
-        "Reading a large spatial file ({format(size, units = 'auto')})."
+        "Reading a large spatial file ({.val {format(size, units = 'auto')}})."
       )
     }
   }
 
-  layers <- tryCatch(
-    sf::st_layers(file_local),
-    error = function(cnd) {
-      NULL
-    }
-  )
+  layers <- tryCatch(sf::st_layers(file_local), error = function(cnd) {
+    NULL
+  })
 
   if (is.null(layers) || length(layers$name) == 0L) {
     cli::cli_alert_warning("No spatial layers found.")
@@ -70,12 +68,7 @@ read_geo_file_sf <- function(
   }
 
   out <- tryCatch(
-    sf::read_sf(
-      file_local,
-      layer = spatial_layers[1],
-      quiet = !verbose,
-      ...
-    ),
+    sf::read_sf(file_local, layer = spatial_layers[1], quiet = !verbose, ...),
     error = function(cnd) {
       cli::cli_alert_warning("The spatial result could not be read.")
       NULL

@@ -1,7 +1,7 @@
 #' Set your \pkg{CatastRoNav} cache directory
 #'
 #' @description
-#' Configure the cache directory used by \pkg{CatastRoNav}. Use
+#' Configures the cache directory used by \pkg{CatastRoNav}. Use
 #' `Sys.getenv("CATASTRONAV_CACHE_DIR")` or
 #' [catrnav_detect_cache_dir()] to inspect the current path.
 #'
@@ -13,13 +13,13 @@
 #' path to a configuration file under
 #' `tools::R_user_dir("CatastRoNav", "config")`.
 #'
-#' @param overwrite Logical. If `TRUE`, overwrites an existing
-#'   `CATASTRONAV_CACHE_DIR` value already configured on your machine.
+#' @param overwrite A logical value indicating whether to overwrite an existing
+#'   `CATASTRONAV_CACHE_DIR` value.
 #' @inheritParams CatastRo::catr_set_cache_dir cache_dir install verbose
 #'
 #' @return
-#' `catrnav_set_cache_dir()` invisibly returns a character string containing
-#' the cache path. It is primarily called for its side effect.
+#' `catrnav_set_cache_dir()` invisibly returns the cache path as a character
+#' string. It is primarily called for its side effect.
 #'
 #' @section Caching strategies:
 #'
@@ -52,7 +52,6 @@
 #'
 #' @family cache_utilities
 #' @rdname catrnav_set_cache_dir
-#'
 #' @encoding UTF-8
 #' @export
 #' @examples
@@ -88,12 +87,10 @@ catrnav_set_cache_dir <- function(
 
   if (is.null(cache_dir)) {
     if (verbose) {
-      cli::cli_alert_info(
-        paste0(
-          "Using a temporary cache directory (see {.fn base::tempdir}). ",
-          "Set {.arg cache_dir} to a value to store permanently."
-        )
-      )
+      cli::cli_alert_info(paste0(
+        "Using a temporary cache directory (see {.fn base::tempdir}). ",
+        "Set {.arg cache_dir} to a path to make the cache persistent."
+      ))
     }
     cache_dir <- file.path(tempdir(), "CatastRoNav")
     is_temp <- TRUE
@@ -102,14 +99,8 @@ catrnav_set_cache_dir <- function(
     is_temp <- FALSE
   }
 
-  if (
-    !is.character(cache_dir) ||
-      length(cache_dir) != 1L ||
-      is.na(cache_dir)
-  ) {
-    cli::cli_abort(
-      "{.arg cache_dir} must be a single {.cls character} value."
-    )
+  if (!is.character(cache_dir) || length(cache_dir) != 1L || is.na(cache_dir)) {
+    cli::cli_abort("{.arg cache_dir} must be a single {.cls character} value.")
   }
   cache_dir <- create_cache_dir(cache_dir)
   make_msg(
@@ -157,6 +148,7 @@ catrnav_set_cache_dir <- function(
 #' session.
 #'
 #' @rdname catrnav_set_cache_dir
+#' @encoding UTF-8
 #' @export
 #' @examples
 #'
@@ -182,12 +174,11 @@ catrnav_detect_cache_dir <- function() {
 #' This function resets the cache state as if you had never used
 #' \pkg{CatastRoNav}.
 #'
-#' @param config If `TRUE`, deletes the \pkg{CatastRoNav} configuration
-#'   directory.
+#' @param config A logical value indicating whether to delete the
+#'   \pkg{CatastRoNav} configuration directory.
 #' @inheritParams CatastRo::catr_clear_cache cached_data verbose
 #'
-#' @return Invisibly returns `NULL`. This function is called for its side
-#'   effects.
+#' @return `NULL`, invisibly. This function is called for its side effects.
 #'
 #' @inherit CatastRo::catr_clear_cache seealso
 #'
@@ -229,7 +220,7 @@ catrnav_clear_cache <- function(
     unlink(config_dir, recursive = TRUE, force = TRUE)
     if (verbose) {
       cli::cli_alert_warning(
-        "{.pkg CatastRoNav} cache configuration deleted."
+        "Deleted the {.pkg CatastRoNav} cache configuration."
       )
     }
   }
@@ -243,12 +234,10 @@ catrnav_clear_cache <- function(
 
     unlink(data_dir, recursive = TRUE, force = TRUE)
     if (verbose) {
-      cli::cli_alert_warning(
-        paste0(
-          "{.pkg CatastRoNav} cached data deleted: ",
-          "{.path {data_dir}} ({size})."
-        )
-      )
+      cli::cli_alert_warning(paste0(
+        "Deleted {.pkg CatastRoNav} cached data from ",
+        "{.path {data_dir}} ({.val {size}})."
+      ))
     }
   }
 
@@ -282,9 +271,7 @@ detect_cache_dir_muted <- function() {
 
       # Use the default path when the configured path is invalid.
       if (
-        length(cached_path) != 1L ||
-          is.na(cached_path) ||
-          !nzchar(cached_path)
+        length(cached_path) != 1L || is.na(cached_path) || !nzchar(cached_path)
       ) {
         cache_dir <- catrnav_set_cache_dir(overwrite = TRUE, verbose = FALSE)
         return(cache_dir)
@@ -354,8 +341,8 @@ migrate_cache <- function(
         verbose = FALSE
       )
       cli::cli_alert_success(c(
-        "{.pkg CatastRoNav} cache configuration migrated for version ",
-        "{.val 0.1.0} or later. See the {.strong Note} section in ",
+        "The {.pkg CatastRoNav} cache configuration migrated successfully for ",
+        "version {.val 0.1.0} or later. See the {.strong Note} section in ",
         "{.help CatastRoNav::catrnav_set_cache_dir}."
       ))
       cli::cli_alert_info("This one-time message will not be shown again.")

@@ -1,14 +1,17 @@
-#' WFS INSPIRE: download cadastral parcels
+#' WFS INSPIRE: retrieve cadastral parcels
 #'
 #' @description
-#' Retrieve spatial cadastral parcel data from the Cadastre of Navarre WFS
-#' INSPIRE service. `catrnav_wfs_get_parcels_bbox()` retrieves objects included
-#' in the provided bounding box. See **Bounding box**.
+#' Retrieves spatial cadastral parcel data from the Cadastre of Navarre WFS
+#' INSPIRE service. `catrnav_wfs_get_parcels_bbox()` retrieves features within
+#' the supplied bounding box. See **Bounding box**.
 #'
 #' @inheritParams catrnav_wfs_get_address_bbox
-#' @inherit catrnav_wfs_get_address_bbox return references
+#' @inherit catrnav_wfs_get_address_bbox return
 #' @inheritSection catrnav_wfs_get_address_bbox API limits
 #' @inheritSection catrnav_wfs_get_address_bbox Bounding box
+#'
+#' @inherit catrnav_wfs_get_address_bbox source
+#'
 #' @family wfs
 #' @family parcels
 #' @rdname catrnav_wfs_get_parcels

@@ -19,8 +19,8 @@ catrnav_detect_cache_dir()
 \item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
 stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
 
-\item{overwrite}{Logical. If \code{TRUE}, overwrites an existing
-\code{CATASTRONAV_CACHE_DIR} value already configured on your machine.}
+\item{overwrite}{A logical value indicating whether to overwrite an existing
+\code{CATASTRONAV_CACHE_DIR} value.}
 
 \item{install}{Logical. If \code{TRUE}, installs the key on your local
 machine for use in future sessions. Defaults to \code{FALSE}. If \code{cache_dir}
@@ -29,14 +29,14 @@ is \code{FALSE}, this argument is set to \code{FALSE} automatically.}
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-\code{catrnav_set_cache_dir()} invisibly returns a character string containing
-the cache path. It is primarily called for its side effect.
+\code{catrnav_set_cache_dir()} invisibly returns the cache path as a character
+string. It is primarily called for its side effect.
 
 \code{catrnav_detect_cache_dir()} returns the cache path used in the current
 session.
 }
 \description{
-Configure the cache directory used by \pkg{CatastRoNav}. Use
+Configures the cache directory used by \pkg{CatastRoNav}. Use
 \code{Sys.getenv("CATASTRONAV_CACHE_DIR")} or
 \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} to inspect the current path.
 }

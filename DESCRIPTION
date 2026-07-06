@@ -1,6 +1,6 @@
 Type: Package
 Package: CatastRoNav
-Title: Interface to the 'INSPIRE' services of 'Catastro de Navarra'
+Title: Interface to the 'INSPIRE' Services of the Cadastre of Navarre
 Version: 0.1.0.9000
 Authors@R: c(
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre"),
@@ -8,9 +8,11 @@ Authors@R: c(
     person("Francisco J.", "Goerlich", role = "ctb",
            comment = c(ORCID = "0000-0003-1626-525X"))
   )
-Description: Access public spatial data from the Cadastre of Navarre
-    through its 'INSPIRE' services. Retrieve cadastral parcel, building
-    and address data for Navarre (Spain).
+Description: Provides access to public spatial data from the Cadastre of
+    Navarre through its 'INSPIRE' ATOM, WFS and WMS services. Supports
+    complete municipal dataset downloads, bounding box feature queries and
+    georeferenced map image downloads for addresses, buildings and
+    cadastral parcels.
 License: GPL-2
 URL: https://ropenspain.github.io/CatastRoNav/,
     https://github.com/rOpenSpain/CatastRoNav
@@ -45,7 +47,7 @@ Config/roxygen2/markdown: TRUE
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Copyright: Data Source: SITNA – Catastro de Navarra
+Copyright: Data source: SITNA – Catastro de Navarra
     <https://geoportal.navarra.es/es/inspire>
 Encoding: UTF-8
 X-schema.org-isPartOf: https://ropenspain.es/

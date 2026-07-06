@@ -1,14 +1,16 @@
 #' Download and cache a file from a URL
 #'
-#' @param url Character string containing the URL to download.
-#' @param name Character string specifying the destination file name.
-#' @param cache_dir Character string specifying the cache directory.
-#' @param update_cache Logical. Whether to refresh the cached file.
-#' @param cache Logical. Whether to cache the downloaded file.
-#' @param verbose Logical. Whether to display informational messages.
+#' @param url A character string containing the URL to download.
+#' @param name A character string specifying the destination file name.
+#' @param cache_dir A character string specifying the cache directory.
+#' @param update_cache A logical value indicating whether to refresh the cached
+#'   file.
+#' @param cache A logical value indicating whether to cache the downloaded file.
+#' @param verbose A logical value indicating whether to display informational
+#'   messages.
 #'
-#' @return A character string containing the downloaded file path. Returns
-#'   `NULL` if the download fails.
+#' @return A character string containing the downloaded file path, or `NULL` if
+#'   the download fails.
 #'
 #' @noRd
 download_url <- function(
@@ -32,13 +34,7 @@ download_url <- function(
   file_on_cache <- file.exists(file_local)
 
   if (isTRUE(cache) && isFALSE(update_cache) && file_on_cache) {
-    make_msg(
-      "success",
-      verbose,
-      "Using cached file {.file ",
-      file_local,
-      "}."
-    )
+    make_msg("success", verbose, "Using cached file {.file ", file_local, "}.")
     return(file_local)
   }
 
@@ -88,7 +84,9 @@ download_url <- function(
     error = function(cnd) {
       unlink(file_local, force = TRUE)
       cli::cli_alert_danger("Download failed for {.url {url}}.")
-      cli::cli_alert("Returning {.val NULL}: {conditionMessage(cnd)}")
+      cli::cli_alert(
+        "Returning {.val NULL}. Reason: {.emph {conditionMessage(cnd)}}"
+      )
       NULL
     }
   )
@@ -102,7 +100,7 @@ download_url <- function(
     status <- httr2::resp_status(resp) # nolint
     description <- httr2::resp_status_desc(resp) # nolint
     cli::cli_alert_danger(
-      "HTTP error {.val {status}} ({description}): {.url {url}}."
+      "HTTP error {.val {status}} ({.emph {description}}): {.url {url}}."
     )
     cli::cli_alert_warning(paste0(
       "If this looks like a package bug, open an issue at ",
@@ -115,12 +113,10 @@ download_url <- function(
   if (verbose) {
     size <- file.size(file_local)
     class(size) <- class(object.size("a"))
-    cli::cli_alert_success(
-      paste0(
-        "Downloaded file to {.file {file_local}} ",
-        "({format(size, units = 'auto')})."
-      )
-    )
+    cli::cli_alert_success(paste0(
+      "Downloaded file to {.file {file_local}} ",
+      "({.val {format(size, units = 'auto')}})."
+    ))
   }
 
   file_local

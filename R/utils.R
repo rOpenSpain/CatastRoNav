@@ -1,19 +1,15 @@
 #' Emit a message conditionally
 #'
-#' @param type Message type.
-#' @param verbose Logical. Whether to emit the message.
-#' @param ... Message components passed to `cli`.
-#' @param .envir Environment used to evaluate inline `cli` expressions.
+#' @param type Character string specifying the message type.
+#' @param verbose A logical value indicating whether to emit the message.
+#' @param ... Message components passed to \CRANpkg{cli}.
+#' @param .envir An environment used to evaluate inline \CRANpkg{cli}
+#'   expressions.
 #'
 #' @return `NULL`, invisibly.
 #'
 #' @noRd
-make_msg <- function(
-  type = "generic",
-  verbose,
-  ...,
-  .envir = parent.frame()
-) {
+make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
   cli_abort_if_not(
     "{.arg verbose} must be {.code TRUE} or {.code FALSE}." = is.logical(
       verbose
@@ -43,22 +39,20 @@ make_msg <- function(
 #' @noRd
 validate_flag <- function(value, arg) {
   cli_abort_if_not(
-    "{.arg {arg}} must be {.code TRUE} or {.code FALSE}." = is.logical(
-      value
-    ) &&
+    "{.arg {arg}} must be {.code TRUE} or {.code FALSE}." = is.logical(value) &&
       length(value) == 1L &&
       !is.na(value)
   )
   invisible(value)
 }
 
-#' Match argument with pretty error message
+#' Match an argument with a clear error message
 #'
-#' @param arg Argument to match.
-#' @param choices Possible choices for the argument.
+#' @param arg The argument to match.
+#' @param choices A vector of possible values for `arg`.
 #'
 #' @return
-#' The matched argument.
+#' The matched value.
 #'
 #' @noRd
 match_arg_pretty <- function(arg, choices) {
@@ -146,12 +140,7 @@ validate_non_empty_arg <- function(arg, call = parent.frame(1)) {
 #' Validate arguments shared by cached downloads
 #'
 #' @noRd
-validate_cache_args <- function(
-  cache,
-  update_cache,
-  cache_dir,
-  verbose
-) {
+validate_cache_args <- function(cache, update_cache, cache_dir, verbose) {
   validate_flag(cache, "cache")
   validate_flag(update_cache, "update_cache")
   validate_flag(verbose, "verbose")
@@ -196,13 +185,13 @@ validate_wfs_args <- function(verbose, count) {
   invisible()
 }
 
-#' Validate a vector with an associated SRS
+#' Validate a vector with an associated CRS
 #'
 #' @noRd
 validate_vector_with_srs <- function(x, srs, expected_length) {
   if (!is.numeric(x)) {
     cli::cli_abort(
-      "{.arg x} must be an {.cls sf} object or a numeric vector."
+      "{.arg x} must be a numeric vector or an {.cls sf} or {.cls sfc} object."
     )
   }
   if (length(x) != expected_length) {
@@ -215,9 +204,7 @@ validate_vector_with_srs <- function(x, srs, expected_length) {
     cli::cli_abort("{.arg x} must contain only finite, non-missing values.")
   }
   if (is.null(srs) || length(srs) == 0L || anyNA(srs)) {
-    cli::cli_abort(
-      "Provide {.arg srs} when {.arg x} is a numeric vector."
-    )
+    cli::cli_abort("Provide {.arg srs} when {.arg x} is a numeric vector.")
   }
 
   invisible()
@@ -249,12 +236,7 @@ cli_abort_if_not <- function(
       all(condition)
 
     if (!condition_is_true) {
-      cli::cli_abort(
-        message,
-        call = .call,
-        .envir = .envir,
-        .frame = .frame
-      )
+      cli::cli_abort(message, call = .call, .envir = .envir, .frame = .frame)
     }
   }
   invisible(NULL)

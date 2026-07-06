@@ -90,12 +90,7 @@ wfs_bbox <- function(bbox, srs = NULL) {
 #' Prepare a bounding box for a WFS query
 #'
 #' @noRd
-wfs_get_bbox <- function(
-  x,
-  srs = NULL,
-  srs_dest = 25830,
-  limit_km2 = Inf
-) {
+wfs_get_bbox <- function(x, srs = NULL, srs_dest = 25830, limit_km2 = Inf) {
   srs <- ensure_null(srs)
 
   if (!(inherits(x, "sf") || inherits(x, "sfc"))) {
@@ -122,8 +117,8 @@ wfs_get_bbox <- function(
 
   if (area > limit_km2) {
     cli::cli_alert_warning(paste0(
-      "Configured WFS limit is {.val {limit_km2}} km2. ",
-      "The query covers {.val {area}} km2."
+      "The configured WFS limit is {.val {limit_km2}} km\u00b2. ",
+      "The query covers {.val {area}} km\u00b2."
     ))
     cli::cli_alert_info(
       "The request may fail. Consider using a smaller area in {.arg x}."

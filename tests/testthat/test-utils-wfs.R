@@ -39,13 +39,11 @@ test_that("WFS queries omit empty optional arguments", {
 
 test_that("WFS helpers handle failed and empty responses", {
   local_mocked_bindings(inspire_wfs_get_fun = function(...) NULL)
-  expect_null(
-    wfs_read_bbox_query(
-      c(-1, 40, 0, 41),
-      path = "services/CP/wfs",
-      typenames = "CP:CadastralParcel"
-    )
-  )
+  expect_null(wfs_read_bbox_query(
+    c(-1, 40, 0, 41),
+    path = "services/CP/wfs",
+    typenames = "CP:CadastralParcel"
+  ))
 
   response <- tempfile(fileext = ".gml")
   writeLines("not spatial data", response)
@@ -53,25 +51,21 @@ test_that("WFS helpers handle failed and empty responses", {
     inspire_wfs_get_fun = function(...) response,
     read_geo_file_sf = function(...) NULL
   )
-  expect_null(
-    wfs_read_bbox_query(
-      c(-1, 40, 0, 41),
-      path = "services/CP/wfs",
-      typenames = "CP:CadastralParcel"
-    )
-  )
+  expect_null(wfs_read_bbox_query(
+    c(-1, 40, 0, 41),
+    path = "services/CP/wfs",
+    typenames = "CP:CadastralParcel"
+  ))
 })
 
 test_that("WFS bounding boxes report invalid CRS and configured limits", {
-  no_crs <- sf::st_sfc(
-    sf::st_polygon(list(rbind(
-      c(0, 0),
-      c(1, 0),
-      c(1, 1),
-      c(0, 1),
-      c(0, 0)
-    )))
-  )
+  no_crs <- sf::st_sfc(sf::st_polygon(list(rbind(
+    c(0, 0),
+    c(1, 0),
+    c(1, 1),
+    c(0, 1),
+    c(0, 0)
+  ))))
   expect_snapshot(error = TRUE, wfs_get_bbox(no_crs))
 
   large <- sf::st_set_crs(no_crs, 4326)

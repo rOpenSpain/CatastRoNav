@@ -1,11 +1,7 @@
 test_that("read_geo_file_sf() reads and filters spatial layers", {
   source <- system.file("shape/nc.shp", package = "sf")
 
-  result <- read_geo_file_sf(
-    source,
-    layer_hint = "^nc$",
-    verbose = FALSE
-  )
+  result <- read_geo_file_sf(source, layer_hint = "^nc$", verbose = FALSE)
 
   expect_s3_class(result, "sf")
   expect_true(all(sf::st_is_valid(result)))
@@ -35,11 +31,7 @@ test_that("sanitize_sf() preserves the geometry column", {
 
 test_that("read_geo_file_sf() reads matching files from ZIP archives", {
   source_dir <- system.file("shape", package = "sf")
-  source_files <- list.files(
-    source_dir,
-    pattern = "^nc\\.",
-    full.names = TRUE
-  )
+  source_files <- list.files(source_dir, pattern = "^nc\\.", full.names = TRUE)
   archive_dir <- withr::local_tempdir(pattern = "catrnav-zip-")
   file.copy(source_files, archive_dir)
   archive <- file.path(archive_dir, "nc.zip")
@@ -61,9 +53,7 @@ test_that("read_geo_file_sf() handles missing ZIP members", {
   withr::defer(setwd(old))
   zip(archive, "README.txt")
 
-  expect_snapshot(
-    result <- read_geo_file_sf(archive, hint = "missing.shp")
-  )
+  expect_snapshot(result <- read_geo_file_sf(archive, hint = "missing.shp"))
   expect_null(result)
 })
 
@@ -90,10 +80,7 @@ test_that("read_geo_file_sf() handles missing layers and read errors", {
   expect_null(no_layer)
 
   expect_snapshot(
-    unreadable <- read_geo_file_sf(
-      source,
-      query = "SELECT * FROM missing"
-    )
+    unreadable <- read_geo_file_sf(source, query = "SELECT * FROM missing")
   )
   expect_null(unreadable)
 })

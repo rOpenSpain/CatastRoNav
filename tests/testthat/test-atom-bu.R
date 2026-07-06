@@ -4,9 +4,7 @@ test_that("building ATOM data returns NULL when offline", {
   local_mocked_bindings(is_online_fun = function(...) FALSE)
   cdir <- withr::local_tempdir(pattern = "catrnav-bu-offline-")
 
-  expect_snapshot(
-    result <- catrnav_atom_get_buildings("061", cache_dir = cdir)
-  )
+  expect_snapshot(result <- catrnav_atom_get_buildings("061", cache_dir = cdir))
   expect_null(result)
 })
 
@@ -16,9 +14,7 @@ test_that("building ATOM data handles HTTP 404 responses", {
   local_mocked_bindings(is_404 = function(...) TRUE)
   cdir <- withr::local_tempdir(pattern = "catrnav-bu-404-")
 
-  expect_snapshot(
-    result <- catrnav_atom_get_buildings("061", cache_dir = cdir)
-  )
+  expect_snapshot(result <- catrnav_atom_get_buildings("061", cache_dir = cdir))
   expect_null(result)
 })
 

@@ -1,16 +1,12 @@
 catr_read_atom <- function(file, encoding = "UTF-8") {
-  # Encoding error sometimes, thanks @dr_xeo
-  feed <- try(
-    read_atom_xml(file, encoding),
-    silent = TRUE
-  )
+  # Retry without an explicit encoding if parsing fails.
+  feed <- try(read_atom_xml(file, encoding), silent = TRUE)
 
-  # On error try without encoding
   if (inherits(feed, "try-error")) {
     feed <- read_atom_xml(file)
   }
 
-  # Prepare data
+  # Keep only feed entries.
   feed <- feed$feed
   feed <- feed[names(feed) == "entry"]
 
@@ -33,11 +29,7 @@ read_atom_xml <- function(file, encoding = NULL) {
   if (is.null(encoding)) {
     xml <- xml2::read_xml(file, options = "NOCDATA")
   } else {
-    xml <- xml2::read_xml(
-      file,
-      options = "NOCDATA",
-      encoding = encoding
-    )
+    xml <- xml2::read_xml(file, options = "NOCDATA", encoding = encoding)
   }
   xml2::as_list(xml)
 }
@@ -146,27 +138,18 @@ catrnav_atom_read_munic <- function(
 #' Select a municipality from an ATOM index
 #'
 #' @noRd
-catrnav_atom_select_munic <- function(
-  all,
-  munic,
-  db_name,
-  verbose = FALSE
-) {
+catrnav_atom_select_munic <- function(all, munic, db_name, verbose = FALSE) {
   candidates <- catrnav_atom_match_munic(all, munic)
   if (is.null(candidates)) {
-    cli::cli_alert_info(
-      "Check available municipalities with {.fn {db_name}}."
-    )
+    cli::cli_alert_info("Check available municipalities with {.fn {db_name}}.")
     return(NULL)
   }
 
   if (nrow(candidates) > 1L) {
     cli::cli_alert_info(
-      "Found {nrow(candidates)} municipalities matching {.str {munic}}."
+      "Found {.val {nrow(candidates)}} municipalities matching {.str {munic}}."
     )
-    cli::cli_alert_success(
-      "Using closest match {.str {candidates$munic[1]}}."
-    )
+    cli::cli_alert_success("Using closest match {.str {candidates$munic[1]}}.")
     cli::cli_alert_info("Other matches:")
 
     bullets <- paste0("{.str ", candidates$munic[-1], "}")

@@ -1,13 +1,13 @@
 #' ATOM INSPIRE: list cadastral parcel download URLs
 #'
 #' @description
-#' Create a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
+#' Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
 #' service for downloading cadastral parcels by municipality.
 #'
 #' @inheritParams catrnav_atom_get_address_db_all
 #' @inherit catrnav_atom_get_address_db_all return
-#' @source
-#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#'
+#' @inherit catrnav_atom_get_address_db_all source
 #'
 #' @family atom
 #' @family parcels

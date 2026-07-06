@@ -14,10 +14,10 @@ catrnav_atom_search_munic(
 )
 }
 \arguments{
-\item{munic}{Municipality name, partial name or cadastral code. Use
-\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}} to inspect available municipalities.}
+\item{munic}{Municipality name, partial name or cadastral code to search for.}
 
-\item{cache}{Logical. Whether to use the cache. Defaults to \code{TRUE}.}
+\item{cache}{A logical value indicating whether to use cached files. Defaults
+to \code{TRUE}.}
 
 \item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
 \code{FALSE}. When set to \code{TRUE}, it forces a new download.}
@@ -29,10 +29,10 @@ stores cached files in a temporary directory (see \code{\link[base:tempdir]{base
 }
 \value{
 A \link[dplyr:tbl_df]{tibble} with the municipality name and cadastral
-code. Returns \code{NULL} if no match is found.
+code, or \code{NULL} if no match is found.
 }
 \description{
-Search for a municipality by name or cadastral code in the Cadastre of
+Searches for a municipality by name or cadastral code in the Cadastre of
 Navarre ATOM index.
 }
 \examples{
@@ -41,7 +41,7 @@ catrnav_atom_search_munic("Pamplona")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Download data from ATOM INSPIRE services:
+Download data from the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},

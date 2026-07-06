@@ -1,10 +1,11 @@
 #' ATOM INSPIRE: list address download URLs
 #'
 #' @description
-#' Create a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
+#' Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
 #' service for downloading addresses by municipality.
 #'
-#' @param cache Logical. Whether to use the cache. Defaults to `TRUE`.
+#' @param cache A logical value indicating whether to use cached files. Defaults
+#'   to `TRUE`.
 #'
 #' @inheritParams CatastRo::catr_atom_get_address_db_all -cache -to
 #'

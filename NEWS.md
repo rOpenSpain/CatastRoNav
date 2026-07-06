@@ -1,6 +1,6 @@
 # CatastRoNav (development version)
 
-- The package software is now licensed under GPL-2. Data from the Government of
+- The package is now licensed under GPL-2. Data from the Government of
   Navarre remain available under CC BY 4.0.
 - User-facing messages now use **cli** for consistent, informative output.
 - This refactor was completed with AI assistance and reviewed by the package
@@ -15,15 +15,15 @@
   removing the **stringi** dependency and avoiding lossy transliteration.
 - Spatial results now have valid geometries, UTF-8 metadata and normalized CRS
   definitions when an EPSG code is available.
-- Minimum **R** version required now is **4.1.0**.
+- The minimum supported R version is now 4.1.0.
 - Added ATOM capabilities for buildings and addresses (#11, #12) by \@fgoerlich.
   New functions:
   - `catrnav_atom_get_address()`
   - `catrnav_atom_get_address_db_all()`
   - `catrnav_atom_get_buildings()`
   - `catrnav_atom_get_buildings_db_all()`
-- Added **WMS INSPIRE** capabilities with `catrnav_wms_get_layer()` using
-  **mapSpain** and **terra**. It retrieves building, parcel and address layers,
+- Added WMS INSPIRE support with `catrnav_wms_get_layer()` using **mapSpain**
+  and **terra**. It retrieves address, building and cadastral parcel layers,
   supports the `ELFCadastre` parcel style and accepts additional **mapSpain**
   request settings through `options`. Offline or failed requests return `NULL`.
 - Adapted the vignette to Quarto.
@@ -44,9 +44,9 @@
   nonpersistent temporary cache even when `install = TRUE`.
 - `catrnav_wfs_get_address_bbox()`, `catrnav_wfs_get_buildings_bbox()` and
   `catrnav_wfs_get_parcels_bbox()` now default `srs` to `4326`, validate
-  bounding boxes, CRS values and `count`, and use `CatastRo::inspire_wfs_get()`
+  bounding boxes, CRS values and `count` and use `CatastRo::inspire_wfs_get()`
   for requests. Set `options(catastronav_wfs_limit_km2 = ...)` to warn when a
-  query exceeds a chosen area in square kilometres; the default `Inf` disables
+  query exceeds a chosen area in square kilometers. The default `Inf` disables
   this warning.
 - `run_example()` now determines whether network-dependent examples should run
   based on CRAN status and network availability.
@@ -58,7 +58,7 @@
   returned.
 - **New features:**
   - Added support for ATOM cadastral parcels. See `catrnav_atom_get_parcels()`.
-    Other ATOM capabilities to be added when the Cadastre of Navarra makes them
+    Other ATOM capabilities to be added when the Cadastre of Navarre makes them
     available.
   - Added a caching system. See `catrnav_set_cache_dir()` and
     `catrnav_detect_cache_dir()`.

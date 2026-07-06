@@ -1,10 +1,6 @@
 test_that("municipality matching handles cadastral codes and aliases", {
   all <- dplyr::tibble(
-    munic = c(
-      "202 Pamplona Norte",
-      "201 Pamplona / Iruña",
-      "061 El Busto"
-    ),
+    munic = c("202 Pamplona Norte", "201 Pamplona / Iruña", "061 El Busto"),
     url = c("url-1", "url-2", "url-3"),
     date = as.Date("2026-01-01")
   )
@@ -45,13 +41,11 @@ test_that("ATOM database readers propagate download failures", {
 
 test_that("municipality readers propagate unavailable data", {
   null_db <- function(...) NULL
-  expect_null(
-    catrnav_atom_read_munic(
-      "Pamplona",
-      db_getter = null_db,
-      db_name = "null_db"
-    )
-  )
+  expect_null(catrnav_atom_read_munic(
+    "Pamplona",
+    db_getter = null_db,
+    db_name = "null_db"
+  ))
 
   db <- function(...) {
     dplyr::tibble(
@@ -62,13 +56,11 @@ test_that("municipality readers propagate unavailable data", {
   }
   local_mocked_bindings(download_url = function(...) NULL)
 
-  expect_null(
-    catrnav_atom_read_munic(
-      "Pamplona",
-      db_getter = db,
-      db_name = "db"
-    )
-  )
+  expect_null(catrnav_atom_read_munic(
+    "Pamplona",
+    db_getter = db,
+    db_name = "db"
+  ))
 })
 
 test_that("municipality readers reject invalid names", {
@@ -103,15 +95,13 @@ test_that("ATOM parsing retries without an explicit encoding", {
       )
     )
   )
-  local_mocked_bindings(
-    read_atom_xml = function(file, encoding = NULL) {
-      calls <<- calls + 1L
-      if (calls == 1L) {
-        stop("Encoding failed.")
-      }
-      feed
+  local_mocked_bindings(read_atom_xml = function(file, encoding = NULL) {
+    calls <<- calls + 1L
+    if (calls == 1L) {
+      stop("Encoding failed.")
     }
-  )
+    feed
+  })
 
   result <- catr_read_atom("feed.xml")
 

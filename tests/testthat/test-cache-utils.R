@@ -100,12 +100,9 @@ test_that("legacy cache configuration is migrated once", {
   old_lowercase <- file.path(old, "catastronav_cache_dir")
   new_file <- file.path(new, "CATASTRONAV_CACHE_DIR")
 
-  old_values <- lapply(
-    c(old_file, old_lowercase, new_file),
-    function(path) {
-      if (file.exists(path)) readLines(path, warn = FALSE) else NULL
-    }
-  )
+  old_values <- lapply(c(old_file, old_lowercase, new_file), function(path) {
+    if (file.exists(path)) readLines(path, warn = FALSE) else NULL
+  })
 
   withr::defer({
     unlink(c(old_file, old_lowercase, new_file))
@@ -191,10 +188,7 @@ test_that("catrnav_set_cache_dir() validates arguments", {
       verbose = FALSE
     )
   )
-  expect_snapshot(
-    error = TRUE,
-    catrnav_set_cache_dir(verbose = NA)
-  )
+  expect_snapshot(error = TRUE, catrnav_set_cache_dir(verbose = NA))
 })
 
 test_that("catrnav_clear_cache() validates arguments", {

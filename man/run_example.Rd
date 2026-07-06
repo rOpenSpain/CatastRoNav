@@ -11,7 +11,7 @@ run_example()
 Logical. \code{TRUE} if examples should run, \code{FALSE} otherwise.
 }
 \description{
-Determine whether an example should run based on CRAN status and network
+Determines whether an example should run based on CRAN status and network
 availability.
 }
 \details{

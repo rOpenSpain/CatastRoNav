@@ -28,9 +28,7 @@ test_that("Test 404 all", {
     TRUE
   })
 
-  expect_snapshot(
-    fend <- catrnav_atom_get_address("Olite", cache_dir = cdir)
-  )
+  expect_snapshot(fend <- catrnav_atom_get_address("Olite", cache_dir = cdir))
   expect_null(fend)
 
   local_mocked_bindings(is_404 = function(...) {
@@ -38,9 +36,7 @@ test_that("Test 404 all", {
   })
   unlink(cdir, recursive = TRUE, force = TRUE)
   # Otherwise work
-  expect_silent(
-    fend <- catrnav_atom_get_address("Olite", cache_dir = cdir)
-  )
+  expect_silent(fend <- catrnav_atom_get_address("Olite", cache_dir = cdir))
   expect_gt(nrow(fend), 20)
 })
 

@@ -1,6 +1,6 @@
 ---
 title: "Get started"
-description: Access Cadastre of Navarre data with CatastRoNav.
+description: Access Cadastre of Navarre data through INSPIRE services.
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{quarto::html}
@@ -15,8 +15,8 @@ link-citations: true
 
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**, you can
-retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM and
-WFS services.
+retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM
+and WFS services, and download georeferenced images through its WMS service.
 
 ## INSPIRE services
 
@@ -32,28 +32,30 @@ WFS services.
 
 The Cadastre of Navarre implements the INSPIRE directive through three services:
 
-1.  **ATOM service:** Downloads complete municipal datasets.
-2.  **WFS service:** Downloads vector objects for a selected bounding box.
+1.  **ATOM service:** Downloads complete municipal cadastral datasets.
+2.  **WFS service:** Retrieves cadastral features within a supplied bounding
+    box.
 3.  **WMS service:** Downloads georeferenced map images for different cadastral
     elements.
 
-ATOM and WFS provide addresses, buildings and cadastral parcels as `sf` objects
-from **sf**. WMS provides georeferenced images as `SpatRaster` objects from
-**terra**.
+ATOM download and WFS query functions return addresses, buildings and cadastral
+parcels as `sf` objects from the **sf** package. ATOM index and search functions
+return tibbles. WMS returns georeferenced images as `SpatRaster` objects from
+the **terra** package.
 
 ## Examples
 
 ### Working with layers
 
-This example demonstrates some of the main capabilities of the package by
-recreating a cadastral map of the surroundings of the [El Sadar
+This example demonstrates the main capabilities of **CatastRoNav** by recreating
+a cadastral map of the surroundings of [El Sadar
 Stadium](https://en.wikipedia.org/wiki/El_Sadar_Stadium). We use the WMS and WFS
 services to retrieve different layers.
 
 
 ``` r
-# Extract buildings by bounding box.
-# Check https://boundingbox.klokantech.com/
+# Retrieve buildings within a bounding box.
+# Coordinates can be obtained from https://boundingbox.klokantech.com/.
 
 library(CatastRoNav)
 library(dplyr)
@@ -66,7 +68,7 @@ stadium <- catrnav_wfs_get_buildings_bbox(
   srs = 4326
 )
 
-# Transform to the tile CRS.
+# Transform to the WMS query CRS.
 
 stadium_parcel_pr <- sf::st_transform(stadium, 3857)
 
@@ -78,7 +80,7 @@ labs <- catrnav_wms_get_layer(
   srs = 3857
 )
 
-# Plot.
+# Plot the layers.
 library(tidyterra) # Plot SpatRaster layers.
 
 ggplot() +
@@ -88,15 +90,15 @@ ggplot() +
 ```
 
 <div class="figure">
-<img src="./sadar-1.png" alt="Figure 1: El Sadar example" width="100%" />
-<p class="caption">Figure 1: El Sadar example</p>
+<img src="./sadar-1.png" alt="Figure 1: Cadastral layers around El Sadar Stadium" width="100%" />
+<p class="caption">Figure 1: Cadastral layers around El Sadar Stadium</p>
 </div>
 
 ### Thematic maps
 
-We can also create thematic maps from attributes in the spatial objects. This
-example visualizes Pamplona's urban growth with **CatastRoNav**, reproducing a
-map by [Dominic Royé](https://dominicroye.github.io) [@roye19].
+We can also create thematic maps from attributes in spatial objects. This
+example visualizes urban growth in Pamplona with **CatastRoNav**, reproducing
+a map by [Dominic Royé](https://dominicroye.github.io) [@roye19].
 
 First, we retrieve the geometry of Pamplona's city center with **mapSpain**:
 
@@ -111,7 +113,7 @@ pamp_buff <- pamp |>
   st_buffer(1250)
 ```
 
-Next, we extract buildings using the WFS service:
+Next, we retrieve buildings using the WFS service:
 
 
 ``` r
@@ -131,8 +133,8 @@ ggplot(dataviz) +
 ```
 
 <div class="figure">
-<img src="./minimal-1.png" alt="Figure 2: Minimal map of Pamplona" width="100%" />
-<p class="caption">Figure 2: Minimal map of Pamplona</p>
+<img src="./minimal-1.png" alt="Figure 2: Buildings within the Pamplona buffer" width="100%" />
+<p class="caption">Figure 2: Buildings within the Pamplona buffer</p>
 </div>
 
 Next, we extract the construction year from the `beginning` column:
@@ -153,8 +155,8 @@ dataviz <- dataviz |>
   mutate(year = year)
 ```
 
-The last step is to group the data by construction year and create the
-visualization. Here, `cut()` creates classes for each decade from 1900 onward:
+Finally, we group the data by construction year and create the visualization.
+Here, `cut()` creates classes for each decade from 1900 onward:
 
 
 ``` r
@@ -194,8 +196,8 @@ ggplot(dataviz) +
 ```
 
 <div class="figure">
-<img src="./dataviz-1.png" alt="Figure 3: Pamplona - urban growth" width="100%" />
-<p class="caption">Figure 3: Pamplona - urban growth</p>
+<img src="./dataviz-1.png" alt="Figure 3: Urban growth in Pamplona" width="100%" />
+<p class="caption">Figure 3: Urban growth in Pamplona</p>
 </div>
 
 ## References

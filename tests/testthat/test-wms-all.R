@@ -39,9 +39,7 @@ test_that("WMS requests handle offline sessions and 404 responses", {
   cdir <- withr::local_tempdir(pattern = "catrnav-wms-")
 
   local_mocked_bindings(is_online_fun = function(...) FALSE)
-  expect_snapshot(
-    offline <- catrnav_wms_get_layer(bbox, cache_dir = cdir)
-  )
+  expect_snapshot(offline <- catrnav_wms_get_layer(bbox, cache_dir = cdir))
   expect_null(offline)
 
   local_mocked_bindings(
@@ -49,9 +47,7 @@ test_that("WMS requests handle offline sessions and 404 responses", {
     esp_get_tiles_fun = function(...) NULL
   )
   # mapSpain returns NULL when its download receives an HTTP error such as 404.
-  expect_snapshot(
-    not_found <- catrnav_wms_get_layer(bbox, cache_dir = cdir)
-  )
+  expect_snapshot(not_found <- catrnav_wms_get_layer(bbox, cache_dir = cdir))
   expect_null(not_found)
 })
 

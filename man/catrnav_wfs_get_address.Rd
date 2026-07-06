@@ -3,7 +3,10 @@
 \encoding{UTF-8}
 \name{catrnav_wfs_get_address_bbox}
 \alias{catrnav_wfs_get_address_bbox}
-\title{WFS INSPIRE: download addresses}
+\title{WFS INSPIRE: retrieve addresses}
+\source{
+\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
+}
 \usage{
 catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 }
@@ -15,8 +18,8 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 \item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
 }}
 
-\item{srs}{SRS/CRS to use in the query. Defaults to \code{4326}. See
-\strong{Bounding box}.}
+\item{srs}{CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
+box}.}
 
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 
@@ -24,13 +27,13 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 to return. If \code{NULL}, the service default applies.}
 }
 \value{
-An \code{\link[sf:st_sf]{sf}} object. Returns \code{NULL} if the data cannot be
+An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be
 retrieved.
 }
 \description{
-Retrieve spatial address data from the Cadastre of Navarre WFS INSPIRE
-service. \code{catrnav_wfs_get_address_bbox()} retrieves objects included in the
-provided bounding box. See \strong{Bounding box}.
+Retrieves spatial address data from the Cadastre of Navarre WFS INSPIRE
+service. \code{catrnav_wfs_get_address_bbox()} retrieves features within the
+supplied bounding box. See \strong{Bounding box}.
 }
 \section{API limits}{
 
@@ -42,12 +45,12 @@ request a smaller result.
 
 When \code{x} is a numeric vector, make sure that \code{srs} matches the coordinate
 values. The function queries the bounding box in
-\href{https://epsg.io/25830}{EPSG:25830}, ETRS89 / UTM zone 30N, then transforms
-the result back to \code{srs}.
+\href{https://epsg.io/25830}{EPSG:25830}, ETRS89 / UTM zone 30N, then transforms the
+result back to \code{srs}.
 
-When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{sfc} object, \code{srs} is ignored. The
-object's bounding box is used for the query and the result is transformed
-back to the input CRS. See \code{\link[sf:st_bbox]{sf::st_bbox()}}.
+When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{sfc} object, \code{srs} is ignored. The object's
+bounding box is used for the query and the result is transformed back to the
+input CRS. See \code{\link[sf:st_bbox]{sf::st_bbox()}}.
 }
 
 \examples{
@@ -62,17 +65,15 @@ ggplot(ad) +
   geom_sf()
 \dontshow{\}) # examplesIf}
 }
-\references{
-\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
-}
 \seealso{
-Query data from WFS INSPIRE services:
+Query data from the WFS INSPIRE service:
 \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}},
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}}
 
 Work with cadastral addresses:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
-\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}}
+\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
+\code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
 \concept{addresses}
 \concept{wfs}

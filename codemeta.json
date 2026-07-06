@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "CatastRoNav",
-  "description": "Access public spatial data from the Cadastre of Navarre through its 'INSPIRE' services. Retrieve cadastral parcel, building and address data for Navarre (Spain).",
-  "name": "CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'",
+  "description": "Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.",
+  "name": "CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre",
   "relatedLink": "https://ropenspain.github.io/CatastRoNav/",
   "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
   "issueTracker": "https://github.com/rOpenSpain/CatastRoNav/issues",
@@ -150,7 +150,7 @@
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "1271.705KB",
+  "fileSize": "1273.149KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -162,7 +162,7 @@
           "familyName": "Hernangómez"
         }
       ],
-      "name": "{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}",
+      "name": "{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre",
       "identifier": "10.5281/zenodo.6366407",
       "url": "https://ropenspain.github.io/CatastRoNav/",
       "@id": "https://doi.org/10.5281/zenodo.6366407",
@@ -171,6 +171,6 @@
   ],
   "releaseNotes": "https://github.com/rOpenSpain/CatastRoNav/blob/main/NEWS.md",
   "readme": "https://github.com/rOpenSpain/CatastRoNav/blob/main/README.md",
-  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml", "https://app.codecov.io/gh/rOpenSpain/CatastroNav"],
+  "contIntegration": ["https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml", "https://app.codecov.io/gh/rOpenSpain/CatastRoNav"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

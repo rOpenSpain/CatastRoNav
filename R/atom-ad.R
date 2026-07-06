@@ -1,18 +1,19 @@
 #' ATOM INSPIRE: download all addresses for a municipality
 #'
 #' @description
-#' Retrieve spatial data for all addresses in a municipality using the ATOM
+#' Downloads spatial data for all addresses in a municipality using the ATOM
 #' INSPIRE service provided by the Cadastre of Navarre.
 #'
 #' @param munic Municipality name, partial name or cadastral code. Use
-#'   [catrnav_atom_get_address_db_all()] to inspect available municipalities.
-#' @param cache Logical. Whether to use the cache. Defaults to `TRUE`.
+#'   [catrnav_atom_search_munic()] to search for available municipalities.
+#' @param cache A logical value indicating whether to use cached files. Defaults
+#'   to `TRUE`.
 #'
 #' @inheritParams CatastRo::catr_atom_get_address update_cache cache_dir verbose
-#' @return An [`sf`][sf::st_sf] object. Returns `NULL` if the data cannot be
+#' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
 #'   retrieved.
 #'
-#' @references
+#' @source
 #' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @family atom

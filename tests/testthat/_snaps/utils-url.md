@@ -21,5 +21,5 @@
         verbose = FALSE)
     Message
       x Download failed for <https://example.com/data.xml>.
-      > Returning "NULL": Simulated transport failure.
+      > Returning "NULL". Reason: Simulated transport failure.
 

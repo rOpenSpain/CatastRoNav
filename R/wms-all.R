@@ -1,7 +1,7 @@
 #' WMS INSPIRE: download georeferenced map images
 #'
 #' @description
-#' Retrieve georeferenced map images from the Cadastre of Navarre WMS service.
+#' Downloads georeferenced map images from the Cadastre of Navarre WMS service.
 #' This function wraps [mapSpain::esp_get_tiles()].
 #'
 #' @param what WMS layer to download. See **Layers and styles**.
@@ -13,18 +13,17 @@
 #' @inheritDotParams mapSpain::esp_get_tiles res:mask
 #'
 #' @return
-#' A [`SpatRaster`][terra::rast] with three RGB or four RGBA layers. See
-#' [terra::RGB()]. Returns `NULL` when the request cannot be completed.
+#' A [`SpatRaster`][terra::rast] with three RGB or four RGBA layers, or `NULL`
+#' when the request cannot be completed. See [terra::RGB()].
 #'
 #' @section Bounding box:
-#' When `x` is a numeric vector, make sure that the `srs` matches the
-#' coordinate values. When `x` is a [`sf`][sf::st_sf] object, the value
-#' `srs` is ignored.
+#' When `x` is a numeric vector, make sure that `srs` matches the coordinate
+#' values. When `x` is an [`sf`][sf::st_sf] or `sfc` object, `srs` is ignored.
 #'
-#' The query uses [EPSG:3857](https://epsg.io/3857) (Web Mercator), then
-#' transforms the tile back to the SRS of `x`. If the tile appears distorted,
-#' provide a spatial object as `x` or set `srs` to the SRS of the requested
-#' tile. See **Examples**.
+#' The query uses [EPSG:3857](https://epsg.io/3857), Web Mercator, then
+#' transforms the image back to the input CRS. If the image appears distorted,
+#' provide a spatial object as `x` or set `srs` to the CRS of the requested
+#' image.
 #'
 #' @section Layers and styles:
 #'
@@ -41,12 +40,18 @@
 #' - `"building"`: `"default"`.
 #' - `"address"`: `"default"`.
 #'
+#' @source
+#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#'
 #' @seealso
 #' - [mapSpain::esp_get_tiles()] downloads map tiles.
 #' - [terra::RGB()] identifies RGB channels.
 #' - [terra::plotRGB()] and [tidyterra::geom_spatraster_rgb()] plot RGB rasters.
 #'
 #' @family wms
+#' @family addresses
+#' @family buildings
+#' @family parcels
 #' @encoding UTF-8
 #' @export
 #'
@@ -65,7 +70,7 @@
 #' ggplot() +
 #'   geom_spatraster_rgb(data = bu)
 #'
-#' # parcels
+#' # Parcels
 #' parc <- catrnav_wms_get_layer(
 #'   c(-1.646812, 42.814528, -1.638036, 42.820320),
 #'   srs = 4326,
@@ -78,11 +83,7 @@
 catrnav_wms_get_layer <- function(
   x,
   srs = 4326,
-  what = c(
-    "building",
-    "parcel",
-    "address"
-  ),
+  what = c("building", "parcel", "address"),
   styles = c("default", "ELFCadastre"),
   update_cache = FALSE,
   cache_dir = NULL,
@@ -103,13 +104,11 @@ catrnav_wms_get_layer <- function(
 
   # Map the requested value to a WMS layer name.
 
-  what <- match_arg_pretty(what)
-  styles <- match_arg_pretty(styles)
+  what <- match_arg_pretty(what) # nolint: object_usage_linter
+  styles <- match_arg_pretty(styles) # nolint: object_usage_linter
 
   if (all(what != "parcel", styles != "default")) {
-    cli::cli_abort(
-      "Layer {.val {what}} only supports {.val default} style."
-    )
+    cli::cli_abort("Layer {.str {what}} only supports style {.str default}.")
   }
 
   base_url <- "https://inspire.navarra.es/services/"

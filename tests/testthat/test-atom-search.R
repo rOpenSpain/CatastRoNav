@@ -4,9 +4,7 @@ test_that("catrnav_atom_search_munic() returns ordered matches", {
     url = c("url-1", "url-2", "url-3"),
     date = as.Date("2026-01-01")
   )
-  local_mocked_bindings(
-    catrnav_atom_get_address_db_all = function(...) all
-  )
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) all)
 
   result <- catrnav_atom_search_munic("Pamplona")
 
@@ -22,18 +20,14 @@ test_that("catrnav_atom_search_munic() handles missing matches", {
     url = "url",
     date = as.Date("2026-01-01")
   )
-  local_mocked_bindings(
-    catrnav_atom_get_address_db_all = function(...) all
-  )
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) all)
 
   expect_snapshot(result <- catrnav_atom_search_munic("missing"))
   expect_null(result)
 })
 
 test_that("catrnav_atom_search_munic() propagates unavailable indexes", {
-  local_mocked_bindings(
-    catrnav_atom_get_address_db_all = function(...) NULL
-  )
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) NULL)
 
   expect_null(catrnav_atom_search_munic("Pamplona"))
 })

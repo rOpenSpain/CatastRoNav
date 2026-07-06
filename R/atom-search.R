@@ -1,13 +1,14 @@
 #' ATOM INSPIRE: search for municipalities
 #'
 #' @description
-#' Search for a municipality by name or cadastral code in the Cadastre of
+#' Searches for a municipality by name or cadastral code in the Cadastre of
 #' Navarre ATOM index.
 #'
+#' @param munic Municipality name, partial name or cadastral code to search for.
 #' @inheritParams catrnav_atom_get_address
 #'
 #' @return A [tibble][dplyr::tbl_df] with the municipality name and cadastral
-#'   code. Returns `NULL` if no match is found.
+#'   code, or `NULL` if no match is found.
 #'
 #' @family atom
 #' @family search

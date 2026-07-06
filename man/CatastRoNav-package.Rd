@@ -5,11 +5,11 @@
 \name{CatastRoNav-package}
 \alias{CatastRoNav}
 \alias{CatastRoNav-package}
-\title{CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'}
+\title{CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Access public spatial data from the Cadastre of Navarre through its 'INSPIRE' services. Retrieve cadastral parcel, building and address data for Navarre (Spain).
+Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.
 }
 \seealso{
 Useful links:

@@ -8,16 +8,15 @@
 catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 }
 \arguments{
-\item{config}{If \code{TRUE}, deletes the \pkg{CatastRoNav} configuration
-directory.}
+\item{config}{A logical value indicating whether to delete the
+\pkg{CatastRoNav} configuration directory.}
 
 \item{cached_data}{If \code{TRUE}, deletes your \code{cache_dir} and all its contents.}
 
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-Invisibly returns \code{NULL}. This function is called for its side
-effects.
+\code{NULL}, invisibly. This function is called for its side effects.
 }
 \description{
 Use this function with caution. It clears cached data and configuration,

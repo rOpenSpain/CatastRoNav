@@ -7,11 +7,13 @@ cff-version: 1.2.0
 message: 'To cite package "CatastRoNav" in publications use:'
 type: software
 license: GPL-2.0-only
-title: 'CatastRoNav: Interface to the ''INSPIRE'' services of ''Catastro de Navarra'''
+title: 'CatastRoNav: Interface to the ''INSPIRE'' Services of the Cadastre of Navarre'
 version: 0.1.0.9000
 doi: 10.5281/zenodo.6366407
-abstract: Access public spatial data from the Cadastre of Navarre through its 'INSPIRE'
-  services. Retrieve cadastral parcel, building and address data for Navarre (Spain).
+abstract: Provides access to public spatial data from the Cadastre of Navarre through
+  its 'INSPIRE' ATOM, WFS and WMS services. Supports complete municipal dataset downloads,
+  bounding box feature queries and georeferenced map image downloads for addresses,
+  buildings and cadastral parcels.
 authors:
 - family-names: Hernangómez
   given-names: Diego
@@ -19,7 +21,7 @@ authors:
   orcid: https://orcid.org/0000-0001-8457-4658
 preferred-citation:
   type: manual
-  title: 'CatastRoNav: Interface to the API Catastro de Navarra'
+  title: 'CatastRoNav: Interface to the INSPIRE Services of the Cadastre of Navarre'
   authors:
   - family-names: Hernangómez
     given-names: Diego
@@ -29,8 +31,10 @@ preferred-citation:
   version: 0.1.0.9000
   doi: 10.5281/zenodo.6366407
   url: https://ropenspain.github.io/CatastRoNav/
-  abstract: Access public spatial data from the Cadastre of Navarre through its INSPIRE
-    services. Retrieve cadastral parcel, building and address data for Navarre (Spain).
+  abstract: Provides access to public spatial data from the Cadastre of Navarre through
+    its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads,
+    bounding box feature queries and georeferenced map image downloads for addresses,
+    buildings and cadastral parcels.
 repository-code: https://github.com/rOpenSpain/CatastRoNav
 url: https://ropenspain.github.io/CatastRoNav/
 contact:

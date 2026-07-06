@@ -1,17 +1,17 @@
 year <- format(Sys.time(), "%Y")
 abs <- trimws(gsub("\\s+", " ", meta$Description))
 abs <- gsub("'", "", abs)
-doi <- "10.5281/zenodo.6366407"
+title <- gsub("'", "", meta$Title)
 
 bibentry(
   "Manual",
-  header = paste0("To cite '", meta$Package, "' in publications use:"),
-  title = "{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}",
-  author = person("Diego", "Hernangómez"),
+  header = "To cite the 'CatastRoNav' package in publications use:",
+  title = paste("{CatastRoNav}:", title),
   year = year,
-  key = "R-catastronav",
   version = meta$Version,
-  doi = doi,
+  author = person("Diego", "Hernangómez"),
+  doi = "10.5281/zenodo.6366407",
   url = unlist(strsplit(meta$URL, ","))[1],
-  abstract = abs
+  abstract = abs,
+  key = "R-catastronav"
 )

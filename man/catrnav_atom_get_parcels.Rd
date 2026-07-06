@@ -4,6 +4,9 @@
 \name{catrnav_atom_get_parcels}
 \alias{catrnav_atom_get_parcels}
 \title{ATOM INSPIRE: download all cadastral parcels for a municipality}
+\source{
+\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
+}
 \usage{
 catrnav_atom_get_parcels(
   munic,
@@ -15,9 +18,10 @@ catrnav_atom_get_parcels(
 }
 \arguments{
 \item{munic}{Municipality name, partial name or cadastral code. Use
-\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}} to inspect available municipalities.}
+\code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} to search for available municipalities.}
 
-\item{cache}{Logical. Whether to use the cache. Defaults to \code{TRUE}.}
+\item{cache}{A logical value indicating whether to use cached files. Defaults
+to \code{TRUE}.}
 
 \item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
 \code{FALSE}. When set to \code{TRUE}, it forces a new download.}
@@ -28,11 +32,11 @@ stores cached files in a temporary directory (see \code{\link[base:tempdir]{base
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-An \code{\link[sf:st_sf]{sf}} object. Returns \code{NULL} if the data cannot be
+An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be
 retrieved.
 }
 \description{
-Retrieve spatial data for all cadastral parcels in a municipality using the
+Downloads spatial data for all cadastral parcels in a municipality using the
 ATOM INSPIRE service provided by the Cadastre of Navarre.
 }
 \examples{
@@ -50,11 +54,8 @@ ggplot(s) +
   )
 \dontshow{\}) # examplesIf}
 }
-\references{
-\href{https://geoportal.navarra.es/es/inspire}{SITNA – Catastro de Navarra}
-}
 \seealso{
-Download data from ATOM INSPIRE services:
+Download data from the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
@@ -64,7 +65,8 @@ Download data from ATOM INSPIRE services:
 
 Work with cadastral parcels:
 \code{\link[=catrnav_atom_get_parcels_db_all]{catrnav_atom_get_parcels_db_all()}},
-\code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}}
+\code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}},
+\code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
 \concept{atom}
 \concept{parcels}

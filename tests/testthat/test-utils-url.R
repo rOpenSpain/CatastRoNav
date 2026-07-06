@@ -17,11 +17,7 @@ test_that("download_url() handles uncached offline sessions", {
   local_mocked_bindings(is_online_fun = function(...) FALSE)
 
   expect_snapshot(
-    result <- download_url(
-      atom_test_url,
-      cache = FALSE,
-      verbose = FALSE
-    )
+    result <- download_url(atom_test_url, cache = FALSE, verbose = FALSE)
   )
   expect_null(result)
 })

@@ -4,7 +4,7 @@
       catrnav_wfs_get_buildings_bbox(x = "1234")
     Condition
       Error in `validate_vector_with_srs()`:
-      ! `x` must be an <sf> object or a numeric vector.
+      ! `x` must be a numeric vector or an <sf> or <sfc> object.
 
 ---
 
@@ -12,7 +12,7 @@
       catrnav_wfs_get_buildings_bbox(c("1234", "a", "3", "4"))
     Condition
       Error in `validate_vector_with_srs()`:
-      ! `x` must be an <sf> object or a numeric vector.
+      ! `x` must be a numeric vector or an <sf> or <sfc> object.
 
 ---
 

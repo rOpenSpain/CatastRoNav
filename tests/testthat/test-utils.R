@@ -9,10 +9,7 @@ test_that("ensure_null() normalizes empty values", {
 test_that("make_msg() validates and emits messages", {
   expect_snapshot(make_msg("info", TRUE, "Informative message."))
   expect_silent(make_msg("info", FALSE, "Hidden message."))
-  expect_snapshot(
-    error = TRUE,
-    make_msg("info", NA, "Invalid message.")
-  )
+  expect_snapshot(error = TRUE, make_msg("info", NA, "Invalid message."))
 })
 
 test_that("cli_abort_if_not() validates named conditions", {
@@ -20,10 +17,7 @@ test_that("cli_abort_if_not() validates named conditions", {
     error = TRUE,
     cli_abort_if_not("A named condition failed." = FALSE)
   )
-  expect_snapshot(
-    error = TRUE,
-    cli_abort_if_not(TRUE)
-  )
+  expect_snapshot(error = TRUE, cli_abort_if_not(TRUE))
   expect_null(cli_abort_if_not("Condition passed." = TRUE))
 })
 

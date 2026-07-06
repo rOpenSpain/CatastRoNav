@@ -14,8 +14,8 @@ figures:
 home:
   title: CatastRoNav
   description: >
-    Access public spatial data from the Cadastre of Navarre through INSPIRE
-    ATOM, WFS and WMS services.
+    Access complete municipal datasets, bounding box features and georeferenced
+    map images from the Cadastre of Navarre.
 
 authors:
   Diego Hernangómez:
@@ -26,16 +26,17 @@ authors:
 reference:
 - title: INSPIRE services
   desc: >
-    Retrieve cadastral addresses, buildings and parcels from the Cadastre of
-    Navarre.
+    Retrieve cadastral addresses, buildings and cadastral parcels from the
+    Cadastre of Navarre.
 - subtitle: ATOM downloads
   desc: >
-    Download complete municipal cadastral datasets and query their metadata.
+    Download complete municipal cadastral datasets and list available
+    municipalities.
 - contents:
   - has_concept("atom")
 - subtitle: WFS queries
   desc: >
-    Retrieve cadastral features for a selected bounding box.
+    Retrieve cadastral features within a supplied bounding box.
 - contents:
   - has_concept("wfs")
 - subtitle: WMS maps
@@ -46,7 +47,7 @@ reference:
 
 - title: Utilities
   desc: >
-    Configure, detect and clear downloaded files.
+    Configure, inspect and clear cached files.
 - subtitle: Cache management
   desc: >
     Manage the local cache used by **CatastRoNav**.
@@ -58,9 +59,3 @@ reference:
     Read package-level documentation.
 - contents:
   - CatastRoNav-package
-
-articles:
-- title: Service guide
-  navbar: ~
-  contents:
-  - CatastRoNav

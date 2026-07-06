@@ -10,7 +10,7 @@
 [![CatastRoNav status
 badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev/CatastRoNav)
 [![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml)
-[![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
+[![codecov](https://codecov.io/gh/rOpenSpain/CatastRoNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastRoNav)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
 [![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
@@ -27,7 +27,7 @@ You can install the development version of **CatastRoNav** from
 [r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
-# Install CatastRoNav in R.
+# Install CatastRoNav from r-universe.
 install.packages(
   "CatastRoNav",
   repos = c(
@@ -37,8 +37,8 @@ install.packages(
 )
 ```
 
-Alternatively, you can install the development version of
-**CatastRoNav** with:
+Alternatively, install the development version from GitHub with the
+**pak** package:
 
 ``` r
 pak::pak("rOpenSpain/CatastRoNav")
@@ -46,30 +46,36 @@ pak::pak("rOpenSpain/CatastRoNav")
 
 ## Package API
 
-The functions of **CatastRoNav** are organized by source service. The
-package naming convention is `catrnav_*service*_*description*`.
+Functions in **CatastRoNav** are organized by source service. Function
+names follow the `catrnav_*service*_*description*` convention.
 
 ### INSPIRE services
 
-INSPIRE functions retrieve spatial objects from the Cadastre of Navarre
-using the **sf** package. There are two INSPIRE services:
+**CatastRoNav** retrieves cadastral data from the Cadastre of Navarre
+through three INSPIRE services:
 
 #### ATOM service
 
-The ATOM service downloads complete municipal datasets for different
-cadastral elements. Results are returned as `sf` objects from the **sf**
-package.
+The ATOM service downloads complete municipal datasets for addresses,
+buildings and cadastral parcels. Download functions return `sf` objects
+from the **sf** package. Index and search functions return tibbles.
 
 These functions use the `catrnav_atom_get_*()` prefix.
 
 #### WFS service
 
-The WFS service downloads vector objects for specific cadastral elements
-within a selected bounding box. Results are returned as `sf` objects
-from the [**sf**](https://r-spatial.github.io/sf/) package. For full
-municipal downloads, prefer the ATOM service.
+The WFS service retrieves cadastral features within a supplied bounding
+box. Results are returned as `sf` objects from the
+[**sf**](https://r-spatial.github.io/sf/) package. For full municipal
+downloads, prefer the ATOM service.
 
 These functions use the `catrnav_wfs_get_*()` prefix.
+
+#### WMS service
+
+The WMS service downloads georeferenced map images for addresses,
+buildings and cadastral parcels. `catrnav_wms_get_layer()` returns a
+`SpatRaster` object from the **terra** package.
 
 #### Terms and conditions of use
 
@@ -84,7 +90,7 @@ Navarre](https://geoportal.navarra.es/es/inspire).
 
 ## Examples
 
-### Extract geometries using the WFS service
+### Retrieve features with the WFS service
 
 ``` r
 library(CatastRoNav)
@@ -94,7 +100,7 @@ wfs_get_buildings <- catrnav_wfs_get_buildings_bbox(
   c(-1.652563, 42.478016, -1.646919, 42.483333),
   srs = 4326
 )
-# Map.
+# Plot the buildings.
 ggplot(wfs_get_buildings) +
   geom_sf() +
   ggtitle("Olite, Navarra")
@@ -113,8 +119,8 @@ inspect the active cache, `catrnav_set_cache_dir()` to configure it and
 
 <p>
 
-Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
-Navarra</em>.
+Hernangómez D (2026). <em>CatastRoNav: Interface to the INSPIRE Services
+of the Cadastre of Navarre</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>.
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
@@ -122,13 +128,13 @@ Navarra</em>.
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-catastronav,
-      title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
-      author = {Diego Hernangómez},
+      title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
       year = {2026},
       version = {0.1.0.9000},
+      author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
-      abstract = {Access public spatial data from the Cadastre of Navarre through its INSPIRE services. Retrieve cadastral parcel, building and address data for Navarre (Spain).},
+      abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
     }
 
 ## Contributing

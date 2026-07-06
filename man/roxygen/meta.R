@@ -1,12 +1,12 @@
 list(
   rd_family_title = list(
-    atom = "Download data from ATOM INSPIRE services:",
-    wfs = "Query data from WFS INSPIRE services:",
-    wms = "Download maps from WMS INSPIRE services:",
+    atom = "Download data from the ATOM INSPIRE service:",
+    wfs = "Query data from the WFS INSPIRE service:",
+    wms = "Download maps from the WMS INSPIRE service:",
     addresses = "Work with cadastral addresses:",
     buildings = "Work with cadastral buildings:",
     parcels = "Work with cadastral parcels:",
-    search = "Search for cadastral identifiers:",
+    search = "Search for municipalities:",
     cache_utilities = "Manage the local cache:"
   )
 )

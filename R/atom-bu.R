@@ -1,11 +1,13 @@
 #' ATOM INSPIRE: download all buildings for a municipality
 #'
 #' @description
-#' Retrieve spatial data for all buildings in a municipality using the ATOM
+#' Downloads spatial data for all buildings in a municipality using the ATOM
 #' INSPIRE service provided by the Cadastre of Navarre.
 #'
 #' @inheritParams catrnav_atom_get_address
-#' @inherit catrnav_atom_get_address references return
+#' @inherit catrnav_atom_get_address return
+#'
+#' @inherit catrnav_atom_get_address source
 #'
 #' @family atom
 #' @family buildings

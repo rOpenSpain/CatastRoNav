@@ -1,17 +1,17 @@
-#' WFS INSPIRE: download addresses
+#' WFS INSPIRE: retrieve addresses
 #'
 #' @description
-#' Retrieve spatial address data from the Cadastre of Navarre WFS INSPIRE
-#' service. `catrnav_wfs_get_address_bbox()` retrieves objects included in the
-#' provided bounding box. See **Bounding box**.
+#' Retrieves spatial address data from the Cadastre of Navarre WFS INSPIRE
+#' service. `catrnav_wfs_get_address_bbox()` retrieves features within the
+#' supplied bounding box. See **Bounding box**.
 #'
-#' @param srs SRS/CRS to use in the query. Defaults to `4326`. See
-#'   **Bounding box**.
+#' @param srs CRS to use for the query. Defaults to `4326`. See **Bounding
+#'   box**.
 #' @param count Positive whole number specifying the maximum number of features
 #'   to return. If `NULL`, the service default applies.
 #'
 #' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
-#' @return An [`sf`][sf::st_sf] object. Returns `NULL` if the data cannot be
+#' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
 #'   retrieved.
 #'
 #' @section API limits:
@@ -19,16 +19,10 @@
 #' request a smaller result.
 #'
 #' @section Bounding box:
-#' When `x` is a numeric vector, make sure that `srs` matches the coordinate
-#' values. The function queries the bounding box in
-#' [EPSG:25830](https://epsg.io/25830), ETRS89 / UTM zone 30N, then transforms
-#' the result back to `srs`.
+#' ```{r child = "man/chunks/spatdet.Rmd"}
+#' ```
 #'
-#' When `x` is an [`sf`][sf::st_sf] or `sfc` object, `srs` is ignored. The
-#' object's bounding box is used for the query and the result is transformed
-#' back to the input CRS. See [sf::st_bbox()].
-#'
-#' @references
+#' @source
 #' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
 #'
 #' @family wfs

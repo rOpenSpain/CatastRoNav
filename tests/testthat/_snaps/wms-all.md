@@ -20,7 +20,7 @@
       catrnav_wms_get_layer(c(760926, 4019259, 761155, 4019366), srs = 25829, styles = "ELFCadastre")
     Condition
       Error in `catrnav_wms_get_layer()`:
-      ! Layer "building" only supports "default" style.
+      ! Layer "building" only supports style "default".
 
 ---
 
@@ -29,7 +29,7 @@
       styles = "ELFCadastre")
     Condition
       Error in `catrnav_wms_get_layer()`:
-      ! Layer "address" only supports "default" style.
+      ! Layer "address" only supports style "default".
 
 # WMS requests handle offline sessions and 404 responses
 
