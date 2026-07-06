@@ -1,11 +1,61 @@
 url: https://ropenspain.github.io/CatastRoNav
 
+repo:
+  branch: main
+
 template:
   bootstrap: 5
   package: rostemplate
+
+figures:
+  dpi: 300
+  fig.retina: 2
+
+home:
+  title: CatastRoNav
+  description: >
+    Access complete municipal datasets, bounding box features and georeferenced
+    map images from the Cadastre of Navarre.
 
 authors:
   Diego Hernangómez:
     href: https://dieghernan.github.io/
   Francisco J. Goerlich:
     href: https://www.uv.es/goerlich/
+
+reference:
+- title: INSPIRE services
+  desc: >
+    Retrieve cadastral addresses, buildings and cadastral parcels from the
+    Cadastre of Navarre.
+- subtitle: ATOM downloads
+  desc: >
+    Download complete municipal cadastral datasets and list available
+    municipalities.
+- contents:
+  - has_concept("atom")
+- subtitle: WFS queries
+  desc: >
+    Retrieve cadastral features within a supplied bounding box.
+- contents:
+  - has_concept("wfs")
+- subtitle: WMS maps
+  desc: >
+    Download georeferenced cadastral map images.
+- contents:
+  - has_concept("wms")
+
+- title: Utilities
+  desc: >
+    Configure, inspect and clear cached files.
+- subtitle: Cache management
+  desc: >
+    Manage the local cache used by **CatastRoNav**.
+- contents:
+  - has_concept("cache_utilities")
+
+- title: Package metadata
+  desc: >
+    Read package-level documentation.
+- contents:
+  - CatastRoNav-package

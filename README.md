@@ -10,26 +10,26 @@
 [![CatastRoNav status
 badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev/CatastRoNav)
 [![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml)
-[![codecov](https://codecov.io/gh/rOpenSpain/CatastroNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastroNav)
+[![codecov](https://codecov.io/gh/rOpenSpain/CatastRoNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastRoNav)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
 [![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 <!-- badges: end -->
 
-**CatastRoNav** is a package that provides access to different API
-services of the [Cadastre of
-Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav** it
-is possible to download spatial objects such as buildings or cadastral
-parcels.
+**CatastRoNav** provides access to services from the [Cadastre of
+Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
+you can retrieve addresses, buildings and cadastral parcels through its
+INSPIRE ATOM, WFS and WMS services.
 
 ## Installation
 
-You can install the developing version of **CatastRoNav** using the
+You can install the development version of **CatastRoNav** from
 [r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
-# Install CatastRoNav in R:
-install.packages("CatastRoNav",
+# Install CatastRoNav from r-universe.
+install.packages(
+  "CatastRoNav",
   repos = c(
     "https://ropenspain.r-universe.dev",
     "https://cloud.r-project.org"
@@ -37,18 +37,60 @@ install.packages("CatastRoNav",
 )
 ```
 
-Alternatively, you can install the developing version of **CatastRoNav**
-with:
+Alternatively, install the development version from GitHub with the
+**pak** package:
 
 ``` r
-remotes::install_github("rOpenSpain/CatastRoNav", dependencies = TRUE)
+pak::pak("rOpenSpain/CatastRoNav")
 ```
 
-## Usage
+## Package API
 
-The WFS service allows downloading vector objects of specific cadastral
-elements. The results are returned as `sf` objects (see the [**sf**
-package](https://r-spatial.github.io/sf/)).
+Functions in **CatastRoNav** are organized by source service. Function
+names follow the `catrnav_*service*_*description*` convention.
+
+### INSPIRE services
+
+**CatastRoNav** retrieves cadastral data from the Cadastre of Navarre
+through three INSPIRE services:
+
+#### ATOM service
+
+The ATOM service downloads complete municipal datasets for addresses,
+buildings and cadastral parcels. Download functions return `sf` objects
+from the **sf** package. Index and search functions return tibbles.
+
+These functions use the `catrnav_atom_get_*()` prefix.
+
+#### WFS service
+
+The WFS service retrieves cadastral features within a supplied bounding
+box. Results are returned as `sf` objects from the
+[**sf**](https://r-spatial.github.io/sf/) package. For full municipal
+downloads, prefer the ATOM service.
+
+These functions use the `catrnav_wfs_get_*()` prefix.
+
+#### WMS service
+
+The WMS service downloads georeferenced map images for addresses,
+buildings and cadastral parcels. `catrnav_wms_get_layer()` returns a
+`SpatRaster` object from the **terra** package.
+
+#### Terms and conditions of use
+
+Data are provided by the Government of Navarre under the [Creative
+Commons Attribution 4.0 International (CC BY
+4.0)](https://creativecommons.org/licenses/by/4.0/) license. The service
+is provided “as is” without warranties of any kind, either express or
+implied.
+
+Data source: [SITNA – Government of
+Navarre](https://geoportal.navarra.es/es/inspire).
+
+## Examples
+
+### Retrieve features with the WFS service
 
 ``` r
 library(CatastRoNav)
@@ -58,21 +100,27 @@ wfs_get_buildings <- catrnav_wfs_get_buildings_bbox(
   c(-1.652563, 42.478016, -1.646919, 42.483333),
   srs = 4326
 )
-# Map
+# Plot the buildings.
 ggplot(wfs_get_buildings) +
   geom_sf() +
   ggtitle("Olite, Navarra")
 ```
 
 <img src="man/figures/README-wfs-1.png" style="width:100.0%"
-alt="Extraction of buildings with CatastroNav in Olite" />
+alt="Buildings retrieved with CatastRoNav in Olite" />
+
+## Cache management
+
+Downloaded files are cached locally. Use `catrnav_detect_cache_dir()` to
+inspect the active cache, `catrnav_set_cache_dir()` to configure it and
+`catrnav_clear_cache()` to remove cached data.
 
 ## Citation
 
 <p>
 
-Hernangómez D (2026). <em>CatastRoNav: Interface to the API Catastro de
-Navarra</em>.
+Hernangómez D (2026). <em>CatastRoNav: Interface to the INSPIRE Services
+of the Cadastre of Navarre</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>.
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
@@ -80,27 +128,22 @@ Navarra</em>.
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-catastronav,
-      title = {{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}},
-      author = {Diego Hernangómez},
+      title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
       year = {2026},
       version = {0.1.0.9000},
+      author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
-      abstract = {Access public spatial data available under the INSPIRE directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).},
+      abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
     }
+
+## Contributing
+
+See the [source code and issue
+tracker](https://github.com/rOpenSpain/CatastRoNav) on GitHub.
 
 ## See also
 
-The package [CatastRo](https://CRAN.R-project.org/package=CatastRo)
+The [**CatastRo**](https://CRAN.R-project.org/package=CatastRo) package
 provides similar functionality for the rest of Spain, excluding the
 Basque Country and Navarre.
-
-## Terms and conditions of use
-
-Data provided by the Government of Navarre under [Creative Commons
-Attribution (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
-The service is provided “as is”, and without guarantee of any kind,
-implicit or explicit.
-
-Data source: [SITNA – Government of
-Navarre](https://geoportal.navarra.es/es/inspire)

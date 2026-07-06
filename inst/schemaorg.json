@@ -17,15 +17,15 @@
         "familyName": "Goerlich",
         "givenName": "Francisco J."
       },
-      "description": "Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).",
-      "license": "https://spdx.org/licenses/CC-BY-4.0",
-      "name": "CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'",
+      "description": "Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.",
+      "license": "https://spdx.org/licenses/GPL-2.0",
+      "name": "CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre",
       "programmingLanguage": {
         "type": "ComputerLanguage",
         "name": "R",
         "url": "https://r-project.org"
       },
-      "runtimePlatform": "R version 4.6.0 (2026-04-24 ucrt)",
+      "runtimePlatform": "R version 4.6.1 (2026-06-24 ucrt)",
       "version": "0.1.0.9000"
     },
     {
@@ -36,7 +36,7 @@
         "familyName": "Hernangómez",
         "givenName": "Diego"
       },
-      "name": "{CatastRoNav}: Interface to the {API} {Catastro} de {Navarra}"
+      "name": "{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre"
     }
   ]
 }

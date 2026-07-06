@@ -1,6 +1,5 @@
 linters: linters_with_defaults(
-          object_length_linter = NULL,
-          pipe_consistency_linter("|>")
+           object_length_linter = NULL
          )
 encoding: "UTF-8"
 exclusions: list("data-raw")

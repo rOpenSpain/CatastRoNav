@@ -1,17 +1,19 @@
-# --------------------------------------------
-# CITATION file created with {cffr} R package
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# --------------------------------------------
+# ------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "CatastRoNav" in publications use:'
 type: software
-license: CC-BY-4.0
-title: 'CatastRoNav: Interface to the ''INSPIRE'' services of ''Catastro de Navarra'''
+license: GPL-2.0-only
+title: 'CatastRoNav: Interface to the ''INSPIRE'' Services of the Cadastre of Navarre'
 version: 0.1.0.9000
 doi: 10.5281/zenodo.6366407
-abstract: Access public spatial data available under the 'INSPIRE' directive. Tools
-  for downloading references, buildings and addresses of properties on Navarre (Spain).
+abstract: Provides access to public spatial data from the Cadastre of Navarre through
+  its 'INSPIRE' ATOM, WFS and WMS services. Supports complete municipal dataset downloads,
+  bounding box feature queries and georeferenced map image downloads for addresses,
+  buildings and cadastral parcels.
 authors:
 - family-names: Hernangómez
   given-names: Diego
@@ -19,7 +21,7 @@ authors:
   orcid: https://orcid.org/0000-0001-8457-4658
 preferred-citation:
   type: manual
-  title: 'CatastRoNav: Interface to the API Catastro de Navarra'
+  title: 'CatastRoNav: Interface to the INSPIRE Services of the Cadastre of Navarre'
   authors:
   - family-names: Hernangómez
     given-names: Diego
@@ -29,8 +31,10 @@ preferred-citation:
   version: 0.1.0.9000
   doi: 10.5281/zenodo.6366407
   url: https://ropenspain.github.io/CatastRoNav/
-  abstract: Access public spatial data available under the INSPIRE directive. Tools
-    for downloading references, buildings and addresses of properties on Navarre (Spain).
+  abstract: Provides access to public spatial data from the Cadastre of Navarre through
+    its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads,
+    bounding box feature queries and georeferenced map image downloads for addresses,
+    buildings and cadastral parcels.
 repository-code: https://github.com/rOpenSpain/CatastRoNav
 url: https://ropenspain.github.io/CatastRoNav/
 contact:
@@ -63,85 +67,9 @@ references:
   doi: 10.32614/R.manuals
   version: '>= 4.1.0'
 - type: software
-  title: rappdirs
-  abstract: 'rappdirs: Application Directories: Determine Where to Save Data, Caches,
-    and Logs'
-  notes: Imports
-  url: https://rappdirs.r-lib.org
-  repository: https://CRAN.R-project.org/package=rappdirs
-  authors:
-  - family-names: Ratnakumar
-    given-names: Sridhar
-  - family-names: Mick
-    given-names: Trent
-  - family-names: Davis
-    given-names: Trevor
-    orcid: https://orcid.org/0000-0001-6341-4639
-  year: '2026'
-  doi: 10.32614/CRAN.package.rappdirs
-- type: software
-  title: sf
-  abstract: 'sf: Simple Features for R'
-  notes: Imports
-  url: https://r-spatial.github.io/sf/
-  repository: https://CRAN.R-project.org/package=sf
-  authors:
-  - family-names: Pebesma
-    given-names: Edzer
-    email: edzer.pebesma@uni-muenster.de
-    orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2026'
-  doi: 10.32614/CRAN.package.sf
-  version: '>= 1.0.0'
-- type: software
-  title: stringi
-  abstract: 'stringi: Fast and Portable Character String Processing Facilities'
-  notes: Imports
-  url: https://stringi.gagolewski.com/
-  repository: https://CRAN.R-project.org/package=stringi
-  authors:
-  - family-names: Gagolewski
-    given-names: Marek
-    email: marek@gagolewski.com
-    orcid: https://orcid.org/0000-0003-0637-6028
-  year: '2026'
-  doi: 10.32614/CRAN.package.stringi
-- type: software
-  title: tibble
-  abstract: 'tibble: Simple Data Frames'
-  notes: Imports
-  url: https://tibble.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=tibble
-  authors:
-  - family-names: Müller
-    given-names: Kirill
-    email: kirill@cynkra.com
-    orcid: https://orcid.org/0000-0002-1416-3412
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2026'
-  doi: 10.32614/CRAN.package.tibble
-- type: software
-  title: xml2
-  abstract: 'xml2: Parse XML'
-  notes: Imports
-  url: https://xml2.r-lib.org
-  repository: https://CRAN.R-project.org/package=xml2
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-  - family-names: Hester
-    given-names: Jim
-  - family-names: Ooms
-    given-names: Jeroen
-    email: jeroenooms@gmail.com
-  year: '2026'
-  doi: 10.32614/CRAN.package.xml2
-- type: software
   title: CatastRo
   abstract: 'CatastRo: Interface to the Spanish ''Catastro'' Web Services'
-  notes: Suggests
+  notes: Imports
   url: https://ropenspain.github.io/CatastRo/
   repository: https://CRAN.R-project.org/package=CatastRo
   authors:
@@ -155,10 +83,23 @@ references:
     orcid: https://orcid.org/0000-0001-8457-4658
   year: '2026'
   doi: 10.32614/CRAN.package.CatastRo
+  version: '>= 1.0.2'
+- type: software
+  title: cli
+  abstract: 'cli: Helpers for Developing Command Line Interfaces'
+  notes: Imports
+  url: https://cli.r-lib.org
+  repository: https://CRAN.R-project.org/package=cli
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+    email: gabor@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.cli
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
-  notes: Suggests
+  notes: Imports
   url: https://dplyr.tidyverse.org
   repository: https://CRAN.R-project.org/package=dplyr
   authors:
@@ -180,6 +121,126 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2026'
   doi: 10.32614/CRAN.package.dplyr
+- type: software
+  title: httr2
+  abstract: 'httr2: Perform HTTP Requests and Process the Responses'
+  notes: Imports
+  url: https://httr2.r-lib.org
+  repository: https://CRAN.R-project.org/package=httr2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.httr2
+  version: '>= 1.0.0'
+- type: software
+  title: mapSpain
+  abstract: 'mapSpain: Administrative Boundaries and Static Map Tiles for Spain'
+  notes: Imports
+  url: https://ropenspain.github.io/mapSpain/
+  repository: https://CRAN.R-project.org/package=mapSpain
+  authors:
+  - family-names: Hernangómez
+    given-names: Diego
+    email: diego.hernangomezherrero@gmail.com
+    orcid: https://orcid.org/0000-0001-8457-4658
+  year: '2026'
+  doi: 10.32614/CRAN.package.mapSpain
+  version: '>= 1.0.0'
+- type: software
+  title: rappdirs
+  abstract: 'rappdirs: Application Directories: Determine Where to Save Data, Caches,
+    and Logs'
+  notes: Imports
+  url: https://rappdirs.r-lib.org
+  repository: https://CRAN.R-project.org/package=rappdirs
+  authors:
+  - family-names: Ratnakumar
+    given-names: Sridhar
+  - family-names: Mick
+    given-names: Trent
+  - family-names: Davis
+    given-names: Trevor
+    orcid: https://orcid.org/0000-0001-6341-4639
+  year: '2026'
+  doi: 10.32614/CRAN.package.rappdirs
+  version: '>= 0.3.0'
+- type: software
+  title: sf
+  abstract: 'sf: Simple Features for R'
+  notes: Imports
+  url: https://r-spatial.github.io/sf/
+  repository: https://CRAN.R-project.org/package=sf
+  authors:
+  - family-names: Pebesma
+    given-names: Edzer
+    email: edzer.pebesma@uni-muenster.de
+    orcid: https://orcid.org/0000-0001-8049-7069
+  year: '2026'
+  doi: 10.32614/CRAN.package.sf
+  version: '>= 1.0.0'
+- type: software
+  title: terra
+  abstract: 'terra: Spatial Data Analysis'
+  notes: Imports
+  url: https://rspatial.org/
+  repository: https://CRAN.R-project.org/package=terra
+  authors:
+  - family-names: Hijmans
+    given-names: Robert J.
+    email: r.hijmans@gmail.com
+    orcid: https://orcid.org/0000-0001-5872-2872
+  - family-names: Brown
+    given-names: Andrew
+    orcid: https://orcid.org/0000-0002-4565-533X
+  - family-names: Barbosa
+    given-names: Márcia
+    orcid: https://orcid.org/0000-0001-8972-7713
+  year: '2026'
+  doi: 10.32614/CRAN.package.terra
+- type: software
+  title: tools
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+- type: software
+  title: xml2
+  abstract: 'xml2: Parse XML'
+  notes: Imports
+  url: https://xml2.r-lib.org
+  repository: https://CRAN.R-project.org/package=xml2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.xml2
 - type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
@@ -234,24 +295,10 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.knitr
 - type: software
-  title: mapSpain
-  abstract: 'mapSpain: Administrative Boundaries of Spain'
-  notes: Suggests
-  url: https://ropenspain.github.io/mapSpain/
-  repository: https://CRAN.R-project.org/package=mapSpain
-  authors:
-  - family-names: Hernangómez
-    given-names: Diego
-    email: diego.hernangomezherrero@gmail.com
-    orcid: https://orcid.org/0000-0001-8457-4658
-  year: '2026'
-  doi: 10.32614/CRAN.package.mapSpain
-- type: software
   title: quarto
   abstract: 'quarto: R Interface to ''Quarto'' Markdown Publishing System'
   notes: Suggests
   url: https://quarto-dev.github.io/quarto-r/
-  repository: https://CRAN.R-project.org/package=quarto
   authors:
   - family-names: Allaire
     given-names: JJ
@@ -262,7 +309,6 @@ references:
     email: cderv@posit.co
     orcid: https://orcid.org/0000-0003-4474-2498
   year: '2026'
-  doi: 10.32614/CRAN.package.quarto
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -276,4 +322,59 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Suggests
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.tibble
+- type: software
+  title: tidyterra
+  abstract: 'tidyterra: ''tidyverse'' Methods and ''ggplot2'' Helpers for ''terra''
+    Objects'
+  notes: Suggests
+  url: https://dieghernan.github.io/tidyterra/
+  repository: https://CRAN.R-project.org/package=tidyterra
+  authors:
+  - family-names: Hernangómez
+    given-names: Diego
+    email: diego.hernangomezherrero@gmail.com
+    orcid: https://orcid.org/0000-0001-8457-4658
+  year: '2026'
+  doi: 10.32614/CRAN.package.tidyterra
+- type: software
+  title: withr
+  abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
+  notes: Suggests
+  url: https://withr.r-lib.org
+  repository: https://CRAN.R-project.org/package=withr
+  authors:
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Müller
+    given-names: Kirill
+    email: krlmlr+r@mailbox.org
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevinushey@gmail.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Chang
+    given-names: Winston
+  year: '2026'
+  doi: 10.32614/CRAN.package.withr
 
