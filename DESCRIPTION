@@ -8,29 +8,35 @@ Authors@R: c(
     person("Francisco J.", "Goerlich", role = "ctb",
            comment = c(ORCID = "0000-0003-1626-525X"))
   )
-Description: Access public spatial data available under the 'INSPIRE'
-    directive. Tools for downloading references, buildings and addresses
-    of properties on Navarre (Spain).
-License: CC BY 4.0
+Description: Access public spatial data from the Cadastre of Navarre
+    through its 'INSPIRE' services. Retrieve cadastral parcel, building
+    and address data for Navarre (Spain).
+License: GPL-2
 URL: https://ropenspain.github.io/CatastRoNav/,
     https://github.com/rOpenSpain/CatastRoNav
 BugReports: https://github.com/rOpenSpain/CatastRoNav/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    rappdirs,
+    CatastRo (>= 1.0.2),
+    cli,
+    dplyr,
+    httr2 (>= 1.0.0),
+    mapSpain (>= 1.0.0),
+    rappdirs (>= 0.3.0),
     sf (>= 1.0.0),
-    stringi,
-    tibble,
+    terra,
+    tools,
+    utils,
     xml2
 Suggests:
-    CatastRo,
-    dplyr,
     ggplot2,
     knitr,
-    mapSpain,
     quarto,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble,
+    tidyterra,
+    withr
 VignetteBuilder: 
     quarto
 Config/Needs/website: ropenspain/rostemplate, devtools, sessioninfo,

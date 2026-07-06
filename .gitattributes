@@ -1,0 +1,41 @@
+* text=auto eol=lf
+
+*.R text eol=lf
+*.r text eol=lf
+*.Rmd text eol=lf
+*.rmd text eol=lf
+*.Rnw text eol=lf
+*.Rd text eol=lf
+*.qmd text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.tsv text eol=lf
+*.txt text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+*.Renviron text eol=lf
+*.Rprofile text eol=lf
+
+*.bmp binary
+*.eot binary
+*.gif binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.rda binary
+*.rds binary
+*.tif binary
+*.tiff binary
+*.ttf binary
+*.otf binary
+*.webp binary
+*.gpkg binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.gz binary

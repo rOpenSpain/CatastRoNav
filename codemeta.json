@@ -2,19 +2,19 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "CatastRoNav",
-  "description": "Access public spatial data available under the 'INSPIRE' directive. Tools for downloading references, buildings and addresses of properties on Navarre (Spain).",
+  "description": "Access public spatial data from the Cadastre of Navarre through its 'INSPIRE' services. Retrieve cadastral parcel, building and address data for Navarre (Spain).",
   "name": "CatastRoNav: Interface to the 'INSPIRE' services of 'Catastro de Navarra'",
   "relatedLink": "https://ropenspain.github.io/CatastRoNav/",
   "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
   "issueTracker": "https://github.com/rOpenSpain/CatastRoNav/issues",
-  "license": "https://spdx.org/licenses/CC-BY-4.0",
+  "license": "https://spdx.org/licenses/GPL-2.0",
   "version": "0.1.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.6.0 (2026-04-24 ucrt)",
+  "runtimePlatform": "R version 4.6.1 (2026-06-24 ucrt)",
   "author": [
     {
       "@type": "Person",
@@ -44,88 +44,39 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "CatastRo",
-      "name": "CatastRo",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=CatastRo"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
-      "name": "ggplot2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+      "name": "ggplot2"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "mapSpain",
-      "name": "mapSpain",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=mapSpain"
+      "name": "knitr"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "quarto",
-      "name": "quarto",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=quarto"
+      "name": "quarto"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
+      "version": ">= 3.0.0"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyterra",
+      "name": "tidyterra"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "withr",
+      "name": "withr"
     }
   ],
   "softwareRequirements": {
@@ -137,70 +88,69 @@
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "rappdirs",
-      "name": "rappdirs",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rappdirs"
+      "identifier": "CatastRo",
+      "name": "CatastRo",
+      "version": ">= 1.0.2"
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "sf",
-      "name": "sf",
-      "version": ">= 1.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=sf"
+      "identifier": "cli",
+      "name": "cli"
     },
     "4": {
       "@type": "SoftwareApplication",
-      "identifier": "stringi",
-      "name": "stringi",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
+      "identifier": "dplyr",
+      "name": "dplyr"
     },
     "5": {
       "@type": "SoftwareApplication",
-      "identifier": "tibble",
-      "name": "tibble",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tibble"
+      "identifier": "httr2",
+      "name": "httr2",
+      "version": ">= 1.0.0"
     },
     "6": {
       "@type": "SoftwareApplication",
+      "identifier": "mapSpain",
+      "name": "mapSpain",
+      "version": ">= 1.0.0"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "rappdirs",
+      "name": "rappdirs",
+      "version": ">= 0.3.0"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "version": ">= 1.0.0"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "terra",
+      "name": "terra"
+    },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "tools",
+      "name": "tools"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    "12": {
+      "@type": "SoftwareApplication",
       "identifier": "xml2",
-      "name": "xml2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=xml2"
+      "name": "xml2"
     },
     "SystemRequirements": null
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "973.245KB",
+  "fileSize": "1271.705KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

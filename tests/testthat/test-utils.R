@@ -1,21 +1,88 @@
-test_that("Check bbox work", {
-  bbox <- wfs_bbox(c(-1, 40, 0, 41), srs = 4326)
+test_that("ensure_null() normalizes empty values", {
+  expect_null(ensure_null(NULL))
+  expect_null(ensure_null(c(NULL, NA)))
+  expect_null(ensure_null(c(NULL, NA, "")))
+  expect_null(ensure_null(c("", character(0))))
+  expect_identical(ensure_null(c(1, 2)), c(1, 2))
+})
 
-  expect_equal(bbox$outcrs, sf::st_crs(4326))
-  expect_equal(bbox$incrs, 25830)
+test_that("make_msg() validates and emits messages", {
+  expect_snapshot(make_msg("info", TRUE, "Informative message."))
+  expect_silent(make_msg("info", FALSE, "Hidden message."))
+  expect_snapshot(
+    error = TRUE,
+    make_msg("info", NA, "Invalid message.")
+  )
+})
 
-  # On Mercator
+test_that("cli_abort_if_not() validates named conditions", {
+  expect_snapshot(
+    error = TRUE,
+    cli_abort_if_not("A named condition failed." = FALSE)
+  )
+  expect_snapshot(
+    error = TRUE,
+    cli_abort_if_not(TRUE)
+  )
+  expect_null(cli_abort_if_not("Condition passed." = TRUE))
+})
 
-  bbox2 <- wfs_bbox(-c(10, 0, 10, 10), 3847)
-  expect_equal(bbox2$outcrs, sf::st_crs(3847))
-  expect_equal(bbox2$incrs, 25830)
+test_that("validate_non_empty_arg() rejects missing arguments", {
+  wrapper <- function(arg) {
+    validate_non_empty_arg(arg)
+  }
 
-  # With sf object
-  sfobj <- sf::st_sfc(sf::st_point(c(3, 35)), crs = 4326)
-  sfobj <- sf::st_transform(sfobj, 3035)
-  sfobj <- sf::st_buffer(sfobj, 1000)
-  bbox_lau <- wfs_bbox(sfobj)
+  expect_snapshot(error = TRUE, wrapper())
+  expect_identical(wrapper("value"), "value")
+})
 
-  expect_equal(bbox_lau$outcrs, sf::st_crs(sfobj))
-  expect_equal(bbox_lau$incrs, 25830)
+test_that("shared validators report invalid values", {
+  expect_snapshot(
+    error = TRUE,
+    validate_cache_args(TRUE, FALSE, cache_dir = 1, verbose = FALSE)
+  )
+  expect_snapshot(error = TRUE, validate_wfs_args(FALSE, count = 0))
+  expect_snapshot(
+    error = TRUE,
+    validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
+  )
+})
+test_that("Pretty match", {
+  skip_on_cran()
+  my_fun <- function(arg_one = c(10, 1000, 3000, 5000)) {
+    match_arg_pretty(arg_one)
+  }
+
+  # OK, returns character
+  expect_identical(my_fun(1000), "1000")
+  expect_identical(my_fun("1000"), "1000")
+  expect_identical(my_fun(NULL), "10")
+  expect_identical(my_fun(), "10")
+  # Some errors here
+  # Single value no match
+  expect_snapshot(my_fun("error here"), error = TRUE)
+
+  # Several values no match
+  expect_snapshot(my_fun(c("an", "error")), error = TRUE)
+
+  # One value regex
+  expect_snapshot(my_fun("5"), error = TRUE)
+  # Several value regex
+  expect_snapshot(my_fun("00"), error = TRUE)
+
+  my_fun2 <- function(year = 20) {
+    match_arg_pretty(year)
+  }
+
+  # Pass more options than expected
+  expect_snapshot(my_fun2(c(1, 2)), error = TRUE)
+
+  # With custom options
+  my_fun3 <- function(an_arg = 20) {
+    match_arg_pretty(an_arg, c("30", "20"))
+  }
+  expect_identical(my_fun3(), "20")
+  expect_snapshot(my_fun3("3"), error = TRUE)
+  # Pass more options than expected
+  expect_snapshot(my_fun2(c(1, 2)), error = TRUE)
 })
