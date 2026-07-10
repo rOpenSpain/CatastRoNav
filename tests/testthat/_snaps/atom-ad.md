@@ -1,15 +1,15 @@
-# Test offline
+# address ATOM data returns NULL when offline
 
     Code
-      fend <- catrnav_atom_get_address("Pamplona", cache_dir = cdir)
+      result <- catrnav_atom_get_address("Pamplona", cache_dir = cdir)
     Message
       x No internet connection detected.
       > Returning "NULL" because the request cannot run.
 
-# Test 404 all
+# address ATOM data handles HTTP 404 responses
 
     Code
-      fend <- catrnav_atom_get_address("Olite", cache_dir = cdir)
+      result <- catrnav_atom_get_address("Olite", cache_dir = cdir)
     Message
       x HTTP error 404 (Not Found): <https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_3_AD/Addresses_ServiceATOM_Navarra.xml>.
       ! If this looks like a package bug, open an issue at <https://github.com/ropenspain/CatastRoNav/issues>.

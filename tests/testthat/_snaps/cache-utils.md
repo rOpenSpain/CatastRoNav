@@ -1,3 +1,12 @@
+# cache configuration can be installed and overwritten
+
+    Code
+      catrnav_set_cache_dir(other_cache_dir, install = TRUE, verbose = FALSE)
+    Condition
+      Error in `catrnav_set_cache_dir()`:
+      ! A `cache_dir` value is already configured.
+      Set `overwrite` to `TRUE` to replace it.
+
 # catrnav_set_cache_dir() validates arguments
 
     Code

@@ -29,8 +29,8 @@ test_that("building WFS returns the requested CRS", {
     count = 10
   )
 
-  expect_true(sf::st_crs(obj) == sf::st_crs(25829))
-  expect_true(nrow(obj) == 10)
+  expect_equal(sf::st_crs(obj), sf::st_crs(25829))
+  expect_equal(nrow(obj), 10)
 
   # test conversion
   testconv <- get_sf_from_bbox(obj[1, ])
@@ -42,7 +42,7 @@ test_that("building WFS returns the requested CRS", {
   expect_s3_class(bbox, "sfc")
 
   obj2 <- catrnav_wfs_get_buildings_bbox(bbox)
-  expect_true(sf::st_crs(obj2) == sf::st_crs(25829))
+  expect_equal(sf::st_crs(obj2), sf::st_crs(25829))
 
   # Transform object to geographic coords
   bbox2 <- sf::st_transform(obj2[1, ], 4326)
@@ -52,7 +52,7 @@ test_that("building WFS returns the requested CRS", {
   obj3 <- catrnav_wfs_get_buildings_bbox(bbox2)
 
   expect_true(sf::st_is_longlat(obj3))
-  expect_true(sf::st_crs(obj3) == sf::st_crs(4326))
+  expect_equal(sf::st_crs(obj3), sf::st_crs(4326))
 
   # BBox with coordinates
 
@@ -61,5 +61,5 @@ test_that("building WFS returns the requested CRS", {
   obj4 <- catrnav_wfs_get_buildings_bbox(vec, srs = 4326)
 
   expect_true(sf::st_is_longlat(obj4))
-  expect_true(sf::st_crs(obj4) == sf::st_crs(4326))
+  expect_equal(sf::st_crs(obj4), sf::st_crs(4326))
 })

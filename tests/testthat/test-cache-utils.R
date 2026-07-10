@@ -20,11 +20,7 @@ test_that("cache directory can be set and cleared", {
   # Reset the cache to exercise verbose deletion.
   testdir <- file.path(tempdir(), "CatastRo", "testthat")
   expect_message(catrnav_set_cache_dir(testdir))
-
-  skip_on_cran()
-  skip_if_offline()
-
-  expect_message(catrnav_atom_get_parcels_db_all(verbose = TRUE))
+  writeLines("cached", file.path(testdir, "cached-file.txt"))
 
   expect_true(dir.exists(testdir))
 
@@ -52,33 +48,91 @@ test_that("cache helpers create and reuse directories", {
   expect_identical(create_cache_dir(), nested)
 })
 
-test_that("cache configuration is restored after a simulated restart", {
-  skip_on_cran()
+test_that("cache configuration can be installed and overwritten", {
+  config_parent <- withr::local_tempdir(pattern = "catrnav-config-")
+  config_dir <- file.path(config_parent, "config")
+  cache_dir <- withr::local_tempdir(pattern = "catrnav-cache-")
+  other_cache_dir <- withr::local_tempdir(pattern = "catrnav-cache-")
+  local_mocked_bindings(catrnav_user_config_dir = function() config_dir)
+
+  expect_silent(catrnav_set_cache_dir(
+    cache_dir,
+    install = TRUE,
+    verbose = FALSE
+  ))
+
+  config_file <- file.path(config_dir, "CATASTRONAV_CACHE_DIR")
+  expect_equal(readLines(config_file, warn = FALSE), cache_dir)
+
+  expect_snapshot(
+    error = TRUE,
+    catrnav_set_cache_dir(
+      other_cache_dir,
+      install = TRUE,
+      verbose = FALSE
+    )
+  )
+
+  expect_silent(catrnav_set_cache_dir(
+    other_cache_dir,
+    install = TRUE,
+    overwrite = TRUE,
+    verbose = FALSE
+  ))
+  expect_equal(readLines(config_file, warn = FALSE), other_cache_dir)
+})
+
+test_that("cache configuration can be restored after a simulated restart", {
+  config_dir <- withr::local_tempdir(pattern = "catrnav-config-")
+  cache_dir <- withr::local_tempdir(pattern = "catrnav-cache-")
+  config_file <- file.path(config_dir, "CATASTRONAV_CACHE_DIR")
+  writeLines(cache_dir, config_file)
+
+  local_mocked_bindings(catrnav_user_config_dir = function() config_dir)
   withr::local_envvar(CATASTRONAV_CACHE_DIR = NA)
 
-  cache_config <- file.path(
-    tools::R_user_dir("CatastRoNav", "config"),
-    "CATASTRONAV_CACHE_DIR"
-  )
-  config_existed <- file.exists(cache_config)
-  config_value <- if (config_existed) {
-    readLines(cache_config, warn = FALSE)
-  } else {
-    NULL
-  }
+  expect_identical(detect_cache_dir_muted(), cache_dir)
+  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), cache_dir)
+})
 
-  withr::defer({
-    unlink(cache_config)
-    if (config_existed) {
-      dir.create(dirname(cache_config), recursive = TRUE, showWarnings = FALSE)
-      writeLines(config_value, cache_config)
-    }
-  })
+test_that("invalid cache configuration falls back to a temporary cache", {
+  config_dir <- withr::local_tempdir(pattern = "catrnav-config-")
+  config_file <- file.path(config_dir, "CATASTRONAV_CACHE_DIR")
+  local_mocked_bindings(catrnav_user_config_dir = function() config_dir)
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = NA)
 
-  if (config_existed) {
-    catrnav_clear_cache(cached_data = FALSE, config = TRUE)
-    expect_false(file.exists(cache_config))
-  }
+  writeLines(character(), config_file)
+  empty <- detect_cache_dir_muted()
+  expect_identical(empty, file.path(tempdir(), "CatastRoNav"))
+
+  Sys.setenv(CATASTRONAV_CACHE_DIR = "")
+  writeLines(c("one", "two"), config_file)
+  multiple <- detect_cache_dir_muted()
+  expect_identical(multiple, file.path(tempdir(), "CatastRoNav"))
+})
+
+test_that("cache configuration can be cleared", {
+  config_dir <- withr::local_tempdir(pattern = "catrnav-config-")
+  cache_dir <- withr::local_tempdir(pattern = "catrnav-cache-")
+  writeLines("configured", file.path(config_dir, "CATASTRONAV_CACHE_DIR"))
+
+  local_mocked_bindings(catrnav_user_config_dir = function() config_dir)
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = cache_dir)
+
+  expect_message(catrnav_clear_cache(
+    config = TRUE,
+    cached_data = FALSE,
+    verbose = TRUE
+  ))
+
+  expect_false(dir.exists(config_dir))
+  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), "")
+})
+
+test_that("cache configuration defaults after a simulated restart", {
+  config_dir <- withr::local_tempdir(pattern = "catrnav-config-")
+  local_mocked_bindings(catrnav_user_config_dir = function() config_dir)
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = NA)
 
   first <- detect_cache_dir_muted()
   created <- create_cache_dir()
@@ -91,56 +145,38 @@ test_that("cache configuration is restored after a simulated restart", {
 })
 
 test_that("legacy cache configuration is migrated once", {
-  skip_on_cran()
+  old <- withr::local_tempdir(pattern = "catrnav-old-config-")
+  new <- withr::local_tempdir(pattern = "catrnav-new-config-")
+  local_mocked_bindings(catrnav_user_config_dir = function() new)
   withr::local_envvar(CATASTRONAV_CACHE_DIR = NA)
 
-  old <- rappdirs::user_config_dir("CatastRoNav", "R")
-  new <- tools::R_user_dir("CatastRoNav", "config")
   old_file <- file.path(old, "CATASTRONAV_CACHE_DIR")
   old_lowercase <- file.path(old, "catastronav_cache_dir")
   new_file <- file.path(new, "CATASTRONAV_CACHE_DIR")
 
-  old_values <- lapply(c(old_file, old_lowercase, new_file), function(path) {
-    if (file.exists(path)) readLines(path, warn = FALSE) else NULL
-  })
-
-  withr::defer({
-    unlink(c(old_file, old_lowercase, new_file))
-    paths <- c(old_file, old_lowercase, new_file)
-    for (i in seq_along(paths)) {
-      if (!is.null(old_values[[i]])) {
-        dir.create(dirname(paths[i]), recursive = TRUE, showWarnings = FALSE)
-        writeLines(old_values[[i]], paths[i])
-      }
-    }
-  })
-
-  unlink(c(old_file, old_lowercase, new_file))
-  dir.create(old, recursive = TRUE, showWarnings = FALSE)
   writeLines(tempdir(), old_file)
 
   expect_message(
-    detected <- detect_cache_dir_muted(),
+    migrate_cache(old = old, new = new),
     "cache configuration migrated"
   )
-  expect_silent(detected_again <- detect_cache_dir_muted())
 
-  expect_identical(detected, tempdir())
-  expect_identical(detected, detected_again)
-  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), detected)
+  expect_identical(readLines(new_file, warn = FALSE), tempdir())
+  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), tempdir())
   expect_false(file.exists(old_file))
   expect_true(file.exists(new_file))
 
   unlink(new_file)
-  dir.create(old, recursive = TRUE, showWarnings = FALSE)
+  dir.create(old, recursive = TRUE)
   writeLines(tempdir(), old_lowercase)
   Sys.setenv(CATASTRONAV_CACHE_DIR = "")
 
   expect_message(
-    lowercase_detected <- detect_cache_dir_muted(),
+    migrate_cache(old = old, new = new),
     "cache configuration migrated"
   )
-  expect_identical(lowercase_detected, tempdir())
+  expect_identical(readLines(new_file, warn = FALSE), tempdir())
+  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), tempdir())
   expect_false(file.exists(old_lowercase))
   expect_true(file.exists(new_file))
 })
@@ -169,6 +205,13 @@ test_that("cache_dir = FALSE uses a nonpersistent temporary cache", {
 
   expect_identical(cache_dir, file.path(tempdir(), "CatastRoNav"))
   expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), cache_dir)
+})
+
+test_that("catrnav_user_config_dir() wraps tools::R_user_dir()", {
+  expect_identical(
+    catrnav_user_config_dir(),
+    tools::R_user_dir("CatastRoNav", "config")
+  )
 })
 
 test_that("catrnav_set_cache_dir() validates arguments", {

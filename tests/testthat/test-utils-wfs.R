@@ -27,7 +27,10 @@ test_that("WFS queries omit empty optional arguments", {
   bbox <- list(bbox = "1,2,3,4", incrs = 25830)
 
   query <- wfs_build_bbox_query("CP:CadastralParcel", bbox)
-  expect_false("count" %in% names(query))
+  expect_named(
+    query,
+    c("version", "service", "request", "typenames", "bbox", "SRSNAME")
+  )
 
   query_with_count <- wfs_build_bbox_query(
     "CP:CadastralParcel",

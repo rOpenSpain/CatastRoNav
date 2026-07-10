@@ -46,9 +46,7 @@ test_that("catrnav_atom_search_munic() returns NULL when offline", {
 })
 
 test_that("catrnav_atom_search_munic() returns NULL after HTTP errors", {
-  skip_on_cran()
-  skip_if_offline()
-  local_mocked_bindings(is_404 = function(...) TRUE)
+  local_mock_http_error()
 
   expect_snapshot(
     result <- catrnav_atom_search_munic(
@@ -61,7 +59,7 @@ test_that("catrnav_atom_search_munic() returns NULL after HTTP errors", {
   expect_null(result)
 })
 
-test_that("Test search", {
+test_that("catrnav_atom_search_munic() downloads and filters matches", {
   skip_on_cran()
   skip_if_offline()
   cdir <- withr::local_tempdir(pattern = "testthat_ex2")

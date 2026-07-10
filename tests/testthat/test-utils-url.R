@@ -70,10 +70,8 @@ test_that("download_url() reuses cached files", {
 })
 
 test_that("download_url() handles HTTP errors", {
-  skip_on_cran()
-  skip_if_offline()
   cache_dir <- withr::local_tempdir(pattern = "catrnav-404-")
-  local_mocked_bindings(is_404 = function(...) TRUE)
+  local_mock_http_error()
 
   expect_message(
     result <- download_url(

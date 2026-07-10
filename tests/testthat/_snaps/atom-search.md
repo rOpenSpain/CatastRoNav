@@ -23,7 +23,7 @@
       ! If this looks like a package bug, open an issue at <https://github.com/ropenspain/CatastRoNav/issues>.
       > Returning "NULL" because the download failed.
 
-# Test search
+# catrnav_atom_search_munic() downloads and filters matches
 
     Code
       c <- catrnav_atom_search_munic("XXX", cache_dir = cdir)

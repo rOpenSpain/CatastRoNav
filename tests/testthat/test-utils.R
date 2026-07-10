@@ -41,8 +41,7 @@ test_that("shared validators report invalid values", {
     validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
   )
 })
-test_that("Pretty match", {
-  skip_on_cran()
+test_that("match_arg_pretty() validates and normalizes arguments", {
   my_fun <- function(arg_one = c(10, 1000, 3000, 5000)) {
     match_arg_pretty(arg_one)
   }

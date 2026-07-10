@@ -1,4 +1,4 @@
-# Check error
+# WMS requests validate layer and style arguments
 
     Code
       catrnav_wms_get_layer(c(760926, 4019259, 761155, 4019366), srs = 25829, what = "aa")

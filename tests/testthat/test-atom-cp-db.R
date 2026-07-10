@@ -1,6 +1,4 @@
 test_that("parcel ATOM index returns NULL when offline", {
-  skip_on_cran()
-  skip_if_offline()
   local_mocked_bindings(is_online_fun = function(...) FALSE)
   cdir <- withr::local_tempdir(pattern = "catrnav-cp-db-offline-")
 
@@ -9,9 +7,7 @@ test_that("parcel ATOM index returns NULL when offline", {
 })
 
 test_that("parcel ATOM index handles HTTP 404 responses", {
-  skip_on_cran()
-  skip_if_offline()
-  local_mocked_bindings(is_404 = function(...) TRUE)
+  local_mock_http_error()
   cdir <- withr::local_tempdir(pattern = "catrnav-cp-db-404-")
 
   expect_snapshot(result <- catrnav_atom_get_parcels_db_all(cache_dir = cdir))

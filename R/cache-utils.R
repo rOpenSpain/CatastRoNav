@@ -111,9 +111,8 @@ catrnav_set_cache_dir <- function(
     "}."
   )
 
-  # nocov start
   if (install) {
-    config_dir <- tools::R_user_dir("CatastRoNav", "config")
+    config_dir <- catrnav_user_config_dir()
     if (!dir.exists(config_dir)) {
       dir.create(config_dir, recursive = TRUE)
     }
@@ -128,7 +127,6 @@ catrnav_set_cache_dir <- function(
         "Set {.arg overwrite} to {.code TRUE} to replace it."
       ))
     }
-    # nocov end
   } else {
     make_msg(
       "info",
@@ -212,10 +210,9 @@ catrnav_clear_cache <- function(
 
   migrate_cache()
 
-  config_dir <- tools::R_user_dir("CatastRoNav", "config")
+  config_dir <- catrnav_user_config_dir()
   data_dir <- detect_cache_dir_muted()
 
-  # nocov start
   if (config && dir.exists(config_dir)) {
     unlink(config_dir, recursive = TRUE, force = TRUE)
     if (verbose) {
@@ -224,7 +221,6 @@ catrnav_clear_cache <- function(
       )
     }
   }
-  # nocov end
 
   if (cached_data && dir.exists(data_dir)) {
     size <- file.size(list.files(data_dir, recursive = TRUE, full.names = TRUE))
@@ -261,11 +257,10 @@ detect_cache_dir_muted <- function() {
   if (is.null(getvar) || is.na(getvar) || !nzchar(getvar)) {
     # Read the cache path from the configuration file.
     cache_config <- file.path(
-      tools::R_user_dir("CatastRoNav", "config"),
+      catrnav_user_config_dir(),
       "CATASTRONAV_CACHE_DIR"
     )
 
-    # nocov start
     if (file.exists(cache_config)) {
       cached_path <- readLines(cache_config, warn = FALSE)
 
@@ -280,7 +275,6 @@ detect_cache_dir_muted <- function() {
       # Return the configured cache path.
       Sys.setenv(CATASTRONAV_CACHE_DIR = cached_path)
       cached_path
-      # nocov end
     } else {
       # Use the default cache location.
       cache_dir <- catrnav_set_cache_dir(overwrite = TRUE, verbose = FALSE)
@@ -310,12 +304,19 @@ create_cache_dir <- function(cache_dir = NULL) {
   cache_dir
 }
 
+#' Detect the user configuration directory
+#'
+#' @noRd
+catrnav_user_config_dir <- function() {
+  tools::R_user_dir("CatastRoNav", "config")
+}
+
 #' Migrate the cache configuration
 #'
 #' @noRd
 migrate_cache <- function(
   old = rappdirs::user_config_dir("CatastRoNav", "R"),
-  new = tools::R_user_dir("CatastRoNav", "config")
+  new = catrnav_user_config_dir()
 ) {
   new_file <- file.path(new, "CATASTRONAV_CACHE_DIR")
   old_files <- file.path(

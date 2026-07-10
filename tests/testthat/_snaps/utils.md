@@ -61,7 +61,7 @@
       Error in `validate_vector_with_srs()`:
       ! `x` must contain only finite, non-missing values.
 
-# Pretty match
+# match_arg_pretty() validates and normalizes arguments
 
     Code
       my_fun("error here")

@@ -1,4 +1,4 @@
-test_that("Check error", {
+test_that("WMS requests validate layer and style arguments", {
   expect_snapshot(
     error = TRUE,
     catrnav_wms_get_layer(
@@ -81,7 +81,7 @@ test_that("WMS options are passed to mapSpain", {
   expect_identical(received, list(version = "1.1.0"))
 })
 
-test_that("Check tiles", {
+test_that("WMS tiles can be downloaded and transformed", {
   skip_on_cran()
   skip_if_offline()
   cdir <- withr::local_tempdir(pattern = "testthat_ex")
@@ -101,7 +101,7 @@ test_that("Check tiles", {
     cache_dir = cdir
   )
 
-  expect_true(terra::nrow(obj) > terra::nrow(objcrop))
+  expect_gt(terra::nrow(obj), terra::nrow(objcrop))
   expect_true(terra::has.RGB(obj))
 
   # Convert to spatial object
