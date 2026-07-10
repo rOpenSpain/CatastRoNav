@@ -86,6 +86,28 @@ test_that("download_url() handles HTTP errors", {
   expect_length(list.files(cache_dir), 0L)
 })
 
+test_that("download_url() supports simulated HTTP 404 responses", {
+  cache_dir <- withr::local_tempdir(pattern = "catrnav-simulated-404-")
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    is_404 = function(...) TRUE,
+    req_perform_fun = function(...) {
+      httr2::response(status_code = 404L, url = atom_test_url)
+    }
+  )
+
+  expect_message(
+    result <- download_url(
+      atom_test_url,
+      cache_dir = cache_dir,
+      verbose = FALSE
+    ),
+    "HTTP error"
+  )
+  expect_null(result)
+  expect_length(list.files(cache_dir), 0L)
+})
+
 test_that("download_url() downloads and refreshes cached files", {
   skip_on_cran()
   skip_if_offline()
