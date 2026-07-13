@@ -72,7 +72,7 @@ Work with cadastral buildings:
 ``` r
 
 s <- catrnav_atom_get_buildings("Iruña")
-#> ! Reading a large spatial file ("25.1 Mb").
+#> ! Reading a large spatial file ("25.2 Mb").
 
 library(ggplot2)
 
