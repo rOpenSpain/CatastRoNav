@@ -104,27 +104,27 @@ Manage the local cache:
 # Caution! This modifies your current state.
 # \dontrun{
 my_cache <- catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpX6XBhc/CatastRoNav
+#> ℹ /tmp/RtmpJ3u8sl/CatastRoNav
 
 example_cache <- file.path(tempdir(), "example", "cache")
 catrnav_set_cache_dir(example_cache)
-#> ℹ CatastRoNav cache directory is /tmp/RtmpX6XBhc/example/cache.
+#> ℹ CatastRoNav cache directory is /tmp/RtmpJ3u8sl/example/cache.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 
 catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpX6XBhc/example/cache
-#> [1] "/tmp/RtmpX6XBhc/example/cache"
+#> ℹ /tmp/RtmpJ3u8sl/example/cache
+#> [1] "/tmp/RtmpJ3u8sl/example/cache"
 
 # Restore the initial cache.
 catrnav_set_cache_dir(my_cache)
-#> ℹ CatastRoNav cache directory is /tmp/RtmpX6XBhc/CatastRoNav.
+#> ℹ CatastRoNav cache directory is /tmp/RtmpJ3u8sl/CatastRoNav.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 identical(my_cache, catrnav_detect_cache_dir())
-#> ℹ /tmp/RtmpX6XBhc/CatastRoNav
+#> ℹ /tmp/RtmpJ3u8sl/CatastRoNav
 #> [1] TRUE
 # }
 
 catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpX6XBhc/CatastRoNav
-#> [1] "/tmp/RtmpX6XBhc/CatastRoNav"
+#> ℹ /tmp/RtmpJ3u8sl/CatastRoNav
+#> [1] "/tmp/RtmpJ3u8sl/CatastRoNav"
 ```
