@@ -52,7 +52,8 @@ test_that("WMS requests handle offline sessions and 404 responses", {
 })
 
 test_that("WMS options are passed to mapSpain", {
-  received <- NULL
+  env <- new.env(parent = emptyenv())
+  env$received <- NULL
   tile <- terra::rast(
     nrows = 1,
     ncols = 1,
@@ -67,7 +68,7 @@ test_that("WMS options are passed to mapSpain", {
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     esp_get_tiles_fun = function(..., options = NULL) {
-      received <<- options
+      env$received <- options
       tile
     }
   )
@@ -78,7 +79,7 @@ test_that("WMS options are passed to mapSpain", {
   )
 
   expect_s4_class(result, "SpatRaster")
-  expect_identical(received, list(version = "1.1.0"))
+  expect_identical(env$received, list(version = "1.1.0"))
 })
 
 test_that("WMS tiles can be downloaded and transformed", {

@@ -40,7 +40,7 @@ Downloads spatial data for all addresses in a municipality using the ATOM
 INSPIRE service provided by the Cadastre of Navarre.
 }
 \examples{
-\dontshow{if (run_example()) withAutoprint(\{ # examplesIf}
+\dontshow{if (run_example() && requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
 s <- catrnav_atom_get_address("Tudela")
 

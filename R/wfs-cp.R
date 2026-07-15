@@ -18,7 +18,7 @@
 #' @encoding UTF-8
 #' @export
 #'
-#' @examplesIf run_example()
+#' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #' downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)
 #'
 #' cp <- catrnav_wfs_get_parcels_bbox(downtown, srs = 4326)

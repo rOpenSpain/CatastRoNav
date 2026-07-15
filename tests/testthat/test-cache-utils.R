@@ -32,7 +32,7 @@ test_that("cache directory can be set and cleared", {
   # Restore the original cache.
   expect_message(catrnav_set_cache_dir(current, verbose = TRUE))
   expect_silent(catrnav_set_cache_dir(current, verbose = FALSE))
-  expect_equal(current, Sys.getenv("CATASTRONAV_CACHE_DIR"))
+  expect_identical(current, Sys.getenv("CATASTRONAV_CACHE_DIR"))
   expect_true(dir.exists(current))
 })
 
@@ -62,7 +62,7 @@ test_that("cache configuration can be installed and overwritten", {
   ))
 
   config_file <- file.path(config_dir, "CATASTRONAV_CACHE_DIR")
-  expect_equal(readLines(config_file, warn = FALSE), cache_dir)
+  expect_identical(readLines(config_file, warn = FALSE), cache_dir)
 
   expect_snapshot(
     error = TRUE,
@@ -79,7 +79,7 @@ test_that("cache configuration can be installed and overwritten", {
     overwrite = TRUE,
     verbose = FALSE
   ))
-  expect_equal(readLines(config_file, warn = FALSE), other_cache_dir)
+  expect_identical(readLines(config_file, warn = FALSE), other_cache_dir)
 })
 
 test_that("cache configuration can be restored after a simulated restart", {

@@ -54,7 +54,7 @@ input CRS. See \code{\link[sf:st_bbox]{sf::st_bbox()}}.
 }
 
 \examples{
-\dontshow{if (run_example()) withAutoprint(\{ # examplesIf}
+\dontshow{if (run_example() && requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)
 
 ad <- catrnav_wfs_get_address_bbox(downtown, srs = 4326)

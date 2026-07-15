@@ -75,7 +75,8 @@ test_that("municipality readers reject invalid names", {
 })
 
 test_that("ATOM parsing retries without an explicit encoding", {
-  calls <- 0L
+  env <- new.env(parent = emptyenv())
+  env$calls <- 0L
   feed <- list(
     feed = list(
       entry = list(
@@ -96,8 +97,8 @@ test_that("ATOM parsing retries without an explicit encoding", {
     )
   )
   local_mocked_bindings(read_atom_xml = function(file, encoding = NULL) {
-    calls <<- calls + 1L
-    if (calls == 1L) {
+    env$calls <- env$calls + 1L
+    if (env$calls == 1L) {
       stop("Encoding failed.")
     }
     feed
@@ -105,19 +106,19 @@ test_that("ATOM parsing retries without an explicit encoding", {
 
   result <- catr_read_atom("feed.xml")
 
-  expect_identical(calls, 2L)
+  expect_identical(env$calls, 2L)
   expect_identical(result$title, "001 Municipality")
 })
 
 test_that("ATOM XML can be read without an explicit encoding", {
-  source <- tempfile(fileext = ".xml")
+  source <- withr::local_tempfile(fileext = ".xml")
   writeLines("<feed></feed>", source)
 
   expect_type(read_atom_xml(source), "list")
 })
 
 test_that("municipality readers handle temporary extracted data", {
-  archive <- tempfile(fileext = ".zip")
+  archive <- withr::local_tempfile(fileext = ".zip")
   writeBin(raw(), archive)
   db <- function(...) {
     dplyr::tibble(
