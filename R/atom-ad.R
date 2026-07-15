@@ -6,9 +6,8 @@
 #'
 #' @param munic Municipality name, partial name or cadastral code. Use
 #'   [catrnav_atom_search_munic()] to search for available municipalities.
-#' @param cache A logical value indicating whether to use cached files. Defaults
-#'   to `TRUE`.
 #'
+#' @inheritParams catrnav_atom_get_address_db_all
 #' @inheritParams CatastRo::catr_atom_get_address update_cache cache_dir verbose
 #' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
 #'   retrieved.
@@ -21,7 +20,7 @@
 #' @encoding UTF-8
 #' @export
 #'
-#' @examplesIf run_example()
+#' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #'
 #' s <- catrnav_atom_get_address("Tudela")
 #'

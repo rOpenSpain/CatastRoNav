@@ -55,7 +55,8 @@ read_geo_file_sf <- function(
 
   if (!is.null(layer_hint)) {
     layers <- layers[
-      grepl(layer_hint, layers$name, ignore.case = TRUE), ,
+      grepl(layer_hint, layers$name, ignore.case = TRUE),
+      ,
       drop = FALSE
     ]
   }

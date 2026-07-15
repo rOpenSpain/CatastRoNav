@@ -14,7 +14,7 @@
 #' @encoding UTF-8
 #' @export
 #'
-#' @examplesIf run_example()
+#' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #'
 #' s <- catrnav_atom_get_buildings("Iruña")
 #'

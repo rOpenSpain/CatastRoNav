@@ -35,8 +35,7 @@ test_that("read_geo_file_sf() reads matching files from ZIP archives", {
   archive_dir <- withr::local_tempdir(pattern = "catrnav-zip-")
   file.copy(source_files, archive_dir)
   archive <- file.path(archive_dir, "nc.zip")
-  old <- setwd(archive_dir)
-  withr::defer(setwd(old))
+  withr::local_dir(archive_dir)
   zip(archive, basename(source_files))
 
   result <- read_geo_file_sf(archive, hint = "nc.shp")
@@ -49,8 +48,7 @@ test_that("read_geo_file_sf() handles missing ZIP members", {
   archive_dir <- withr::local_tempdir(pattern = "catrnav-empty-zip-")
   writeLines("not spatial", file.path(archive_dir, "README.txt"))
   archive <- file.path(archive_dir, "data.zip")
-  old <- setwd(archive_dir)
-  withr::defer(setwd(old))
+  withr::local_dir(archive_dir)
   zip(archive, "README.txt")
 
   expect_snapshot(result <- read_geo_file_sf(archive, hint = "missing.shp"))
@@ -58,7 +56,7 @@ test_that("read_geo_file_sf() handles missing ZIP members", {
 })
 
 test_that("read_geo_file_sf() handles invalid large files", {
-  source <- tempfile(fileext = ".gml")
+  source <- withr::local_tempfile(fileext = ".gml")
   connection <- file(source, open = "wb")
   seek(connection, where = 21 * 1024^2)
   writeBin(as.raw(0), connection)

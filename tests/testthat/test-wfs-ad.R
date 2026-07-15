@@ -31,7 +31,7 @@ test_that("address WFS returns the requested CRS", {
   )
 
   expect_equal(sf::st_crs(obj), sf::st_crs(25829))
-  expect_equal(nrow(obj), 10)
+  expect_identical(nrow(obj), 10L)
 
   # test conversion
   testconv <- get_sf_from_bbox(obj[1, ])

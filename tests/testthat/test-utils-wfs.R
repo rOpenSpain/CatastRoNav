@@ -5,13 +5,13 @@ test_that("WFS bounding boxes preserve output CRS", {
   bbox <- wfs_bbox(c(-1, 40, 0, 41), srs = 4326)
 
   expect_equal(bbox$outcrs, sf::st_crs(4326))
-  expect_equal(bbox$incrs, 25830)
+  expect_identical(bbox$incrs, 25830)
 
   # On Mercator
 
   bbox2 <- wfs_bbox(-c(10, 0, 10, 10), 3847)
   expect_equal(bbox2$outcrs, sf::st_crs(3847))
-  expect_equal(bbox2$incrs, 25830)
+  expect_identical(bbox2$incrs, 25830)
 
   # With sf object
   sfobj <- sf::st_sfc(sf::st_point(c(3, 35)), crs = 4326)
@@ -20,7 +20,7 @@ test_that("WFS bounding boxes preserve output CRS", {
   bbox_lau <- wfs_bbox(sfobj)
 
   expect_equal(bbox_lau$outcrs, sf::st_crs(sfobj))
-  expect_equal(bbox_lau$incrs, 25830)
+  expect_identical(bbox_lau$incrs, 25830)
 })
 
 test_that("WFS queries omit empty optional arguments", {
@@ -48,7 +48,7 @@ test_that("WFS helpers handle failed and empty responses", {
     typenames = "CP:CadastralParcel"
   ))
 
-  response <- tempfile(fileext = ".gml")
+  response <- withr::local_tempfile(fileext = ".gml")
   writeLines("not spatial data", response)
   local_mocked_bindings(
     inspire_wfs_get_fun = function(...) response,

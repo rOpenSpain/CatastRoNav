@@ -23,7 +23,8 @@ make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
     return(invisible())
   }
 
-  fun <- switch(type,
+  fun <- switch(
+    type,
     danger = cli::cli_alert_danger,
     info = cli::cli_alert_info,
     success = cli::cli_alert_success,
