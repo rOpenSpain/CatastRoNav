@@ -1,10 +1,10 @@
 # CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre
 
 Provides access to public spatial data from the Cadastre of Navarre
-through its 'INSPIRE' ATOM, WFS and WMS services. Supports complete
-municipal dataset downloads, bounding box feature queries and
-georeferenced map image downloads for addresses, buildings and cadastral
-parcels.
+through its 'INSPIRE' Atom feeds, Web Feature Service and Web Map
+Service endpoints. Supports complete municipal dataset downloads,
+bounding box feature queries and georeferenced map image downloads for
+addresses, buildings and cadastral parcels.
 
 ## See also
 
@@ -19,12 +19,12 @@ Useful links:
 ## Author
 
 **Maintainer**: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
-([ORCID](https://orcid.org/0000-0001-8457-4658))
+([ORCID](https://orcid.org/0000-0001-8457-4658)) \[copyright holder\]
 
 Authors:
 
 - Diego Hernangómez <diego.hernangomezherrero@gmail.com>
-  ([ORCID](https://orcid.org/0000-0001-8457-4658))
+  ([ORCID](https://orcid.org/0000-0001-8457-4658)) \[copyright holder\]
 
 Other contributors:
 
