@@ -124,7 +124,7 @@ A BibTeX entry for LaTeX users is:
   author = {Diego Hernangómez},
   doi = {10.5281/zenodo.6366407},
   url = {https://ropenspain.github.io/CatastRoNav/},
-  abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM, WFS and WMS services. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
+  abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
 }
 ```
 
