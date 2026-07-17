@@ -81,7 +81,7 @@ wfs_bbox <- function(bbox, srs = NULL) {
   )
 
   list(
-    bbox = paste0(as.double(bbox_new), collapse = ","),
+    bbox = paste(as.double(bbox_new), collapse = ","),
     outcrs = outcrs,
     incrs = 25830
   )

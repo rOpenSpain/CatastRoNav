@@ -23,7 +23,8 @@ make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
     return(invisible())
   }
 
-  fun <- switch(type,
+  fun <- switch(
+    type,
     danger = cli::cli_alert_danger,
     info = cli::cli_alert_info,
     success = cli::cli_alert_success,
@@ -87,21 +88,21 @@ match_arg_pretty <- function(arg, choices) {
       msg <- paste0("{.str ", choices, "}")
     } else {
       l_choices <- length(choices)
-      msg <- paste0("{.str ", choices[-l_choices], "}", collapse = ", ")
+      msg <- paste(sprintf("{.str %s}", choices[-l_choices]), collapse = ", ")
       msg <- paste0(msg, " or {.str ", choices[l_choices], "}")
       # Add "one of" at the beginning.
       msg <- paste0("one of ", msg)
     }
 
     msg <- paste0(msg, ", not ")
-    bad_arg <- paste0("{.str ", arg, "}", collapse = " or ")
+    bad_arg <- paste(sprintf("{.str %s}", arg), collapse = " or ")
     msg <- paste0(msg, bad_arg, ".")
 
     # Suggest an approximate match.
     reg_msg <- NULL
     if (!is.na(aproxmatch)) {
       aprox <- choices[aproxmatch]
-      aprox_val <- paste0("{.str ", aprox, "}", collapse = " or ")
+      aprox_val <- paste(sprintf("{.str %s}", aprox), collapse = " or ")
       reg_msg <- paste0("Did you mean ", aprox_val, "?")
     }
 
