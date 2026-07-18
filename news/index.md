@@ -21,20 +21,6 @@
 - Spatial results now have valid geometries, UTF-8 metadata and
   normalized CRS definitions when an EPSG code is available.
 - The minimum supported R version is now 4.1.0.
-- Added ATOM capabilities for buildings and addresses
-  ([\#11](https://github.com/rOpenSpain/CatastRoNav/issues/11),
-  [\#12](https://github.com/rOpenSpain/CatastRoNav/issues/12)) by
-  [@fgoerlich](https://github.com/fgoerlich). New functions:
-  - [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md)
-  - [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
-  - [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
-  - [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
-- Added WMS INSPIRE support with
-  [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
-  using **mapSpain** and **terra**. It retrieves address, building and
-  cadastral parcel layers, supports the `ELFCadastre` parcel style and
-  accepts additional **mapSpain** request settings through `options`.
-  Offline or failed requests return `NULL`.
 - Adapted the vignette to Quarto.
 - [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
   [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
@@ -43,6 +29,15 @@
   now select the closest municipality when a pattern matches multiple
   names and report the alternatives. Calls with `cache = FALSE` use
   temporary files and invalid arguments produce informative errors.
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+  and
+  [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+  add ATOM capabilities for buildings and addresses
+  ([\#11](https://github.com/rOpenSpain/CatastRoNav/issues/11),
+  [\#12](https://github.com/rOpenSpain/CatastRoNav/issues/12)) by
+  [@fgoerlich](https://github.com/fgoerlich).
 - [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
   now searches the ATOM index by municipality name or cadastral code and
   returns all matches ordered by proximity.
@@ -69,6 +64,11 @@
   for requests. Set `options(catastronav_wfs_limit_km2 = ...)` to warn
   when a query exceeds a chosen area in square kilometers. The default
   `Inf` disables this warning.
+- [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
+  adds WMS INSPIRE support using **mapSpain** and **terra**. It
+  retrieves address, building and cadastral parcel layers, supports the
+  `ELFCadastre` parcel style and accepts additional **mapSpain** request
+  settings through `options`. Offline or failed requests return `NULL`.
 - [`run_example()`](https://ropenspain.github.io/CatastRoNav/reference/run_example.md)
   now determines whether network-dependent examples should run based on
   CRAN status and network availability.

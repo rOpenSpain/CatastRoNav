@@ -3,7 +3,8 @@
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
 you can retrieve addresses, buildings and cadastral parcels through its
-INSPIRE ATOM, WFS and WMS services.
+INSPIRE ATOM and WFS services, and download georeferenced images through
+its WMS service.
 
 ## Installation
 
@@ -91,7 +92,7 @@ wfs_get_buildings <- catrnav_wfs_get_buildings_bbox(
 # Plot the buildings.
 ggplot(wfs_get_buildings) +
   geom_sf() +
-  ggtitle("Olite, Navarra")
+  ggtitle("Olite, Navarre")
 ```
 
 ![Buildings retrieved with CatastRoNav in
@@ -219,4 +220,4 @@ Read package-level documentation.
 - [Get
   started](https://ropenspain.github.io/CatastRoNav/articles/CatastRoNav.md):
 
-  Access Cadastre of Navarre data through INSPIRE services.
+  Access data from the Cadastre of Navarre through INSPIRE services.
