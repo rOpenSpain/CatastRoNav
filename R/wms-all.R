@@ -112,23 +112,20 @@ catrnav_wms_get_layer <- function(
   }
 
   base_url <- "https://inspire.navarra.es/services/"
-  endpoint <- switch(
-    what,
+  endpoint <- switch(what,
     "building" = "BU/wms?",
     "parcel" = "CP/wms?",
     "address" = "AD/wms?"
   )
 
-  layer <- switch(
-    what,
+  layer <- switch(what,
     "building" = "BU:Building",
     "parcel" = "CP:CadastralParcel",
     "address" = "AD:Address"
   )
 
   if (styles == "default") {
-    styles <- switch(
-      what,
+    styles <- switch(what,
       "building" = "BU:Building.Default",
       "parcel" = "CP:CP.CadastralParcel.Default",
       "address" = "AD:Address.Default"
