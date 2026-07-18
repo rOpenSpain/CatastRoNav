@@ -38,8 +38,8 @@ badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain
 
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**, you can
-retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM,
-WFS and WMS services.
+retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM and
+WFS services, and download georeferenced images through its WMS service.
 
 ## Installation
 
@@ -126,7 +126,7 @@ wfs_get_buildings <- catrnav_wfs_get_buildings_bbox(
 # Plot the buildings.
 ggplot(wfs_get_buildings) +
   geom_sf() +
-  ggtitle("Olite, Navarra")
+  ggtitle("Olite, Navarre")
 ```
 
 ## Cache management

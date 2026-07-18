@@ -1,6 +1,6 @@
 ---
 title: "Get started"
-description: Access Cadastre of Navarre data through INSPIRE services.
+description: Access data from the Cadastre of Navarre through INSPIRE services.
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{quarto::html}

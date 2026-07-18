@@ -18,9 +18,9 @@ bug, create an associated issue and illustrate the bug with a minimal
 ## Pull request process
 
 -   We recommend that you create a Git branch for each pull request (PR).
--   Look at the `R-CMD-check` build status before. After making changes, run
-    `devtools::check()` and ensure no new Notes, Warnings or Errors are
-    appearing.
+-   Check the `R-CMD-check` build status before making changes. After making
+    changes, run `devtools::check()` and ensure no new Notes, Warnings or
+    Errors are appearing.
 -   We recommend the tidyverse [style guide](http://style.tidyverse.org). We
     also use the [styler](https://CRAN.R-project.org/package=styler) package to
     apply these styles, but please **don't restyle code that has nothing to do
@@ -32,7 +32,7 @@ bug, create an associated issue and illustrate the bug with a minimal
     current development version header describing the changes made followed by
     your GitHub username, and links to relevant issue(s)/PR(s).
 
-## Prefer to Email?
+## Prefer email?
 
 Email the person listed as maintainer in the `DESCRIPTION` file of this repo.
 
