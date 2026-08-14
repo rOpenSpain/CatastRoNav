@@ -15,8 +15,10 @@ export(catrnav_wfs_get_buildings_bbox)
 export(catrnav_wfs_get_parcels_bbox)
 export(catrnav_wms_get_layer)
 export(run_example)
-importFrom(utils,URLencode)
-importFrom(utils,adist)
-importFrom(utils,object.size)
-importFrom(utils,unzip)
-importFrom(utils,zip)
+importFrom(utils,
+  URLencode,
+  adist,
+  object.size,
+  unzip,
+  zip
+)
