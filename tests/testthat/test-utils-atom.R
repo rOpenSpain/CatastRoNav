@@ -99,7 +99,7 @@ test_that("ATOM parsing retries without an explicit encoding", {
   local_mocked_bindings(read_atom_xml = function(file, encoding = NULL) {
     env$calls <- env$calls + 1L
     if (env$calls == 1L) {
-      stop("Encoding failed.")
+      stop("Encoding failed.", call. = FALSE)
     }
     feed
   })

@@ -17,7 +17,6 @@ test_that("building ATOM data handles HTTP 404 responses", {
 test_that("building ATOM data can be downloaded", {
   skip_on_cran()
   skip_if_offline()
-  cdir <- withr::local_tempdir(pattern = "testthat_ex222")
 
   expect_snapshot(catrnav_atom_get_buildings("xyxghx", cache = FALSE))
 

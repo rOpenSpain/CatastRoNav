@@ -66,11 +66,7 @@ test_that("cache configuration can be installed and overwritten", {
 
   expect_snapshot(
     error = TRUE,
-    catrnav_set_cache_dir(
-      other_cache_dir,
-      install = TRUE,
-      verbose = FALSE
-    )
+    catrnav_set_cache_dir(other_cache_dir, install = TRUE, verbose = FALSE)
   )
 
   expect_silent(catrnav_set_cache_dir(

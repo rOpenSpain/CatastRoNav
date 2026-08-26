@@ -93,15 +93,15 @@ wfs_bbox <- function(bbox, srs = NULL) {
 wfs_get_bbox <- function(x, srs = NULL, srs_dest = 25830, limit_km2 = Inf) {
   srs <- ensure_null(srs)
 
-  if (!(inherits(x, "sf") || inherits(x, "sfc"))) {
+  if (inherits(x, "sf") || inherits(x, "sfc")) {
+    sfobj <- sf::st_as_sfc(sf::st_bbox(x))
+  } else {
     validate_vector_with_srs(x, srs, 4L)
 
     sfobj <- x
     class(sfobj) <- "bbox"
     sfobj <- sf::st_as_sfc(sfobj)
     sfobj <- sf::st_set_crs(sfobj, srs)
-  } else {
-    sfobj <- sf::st_as_sfc(sf::st_bbox(x))
   }
 
   if (is.na(sf::st_crs(sfobj))) {

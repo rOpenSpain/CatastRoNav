@@ -34,7 +34,7 @@ test_that("download_url() handles transport failures", {
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(...) {
-      stop("Simulated transport failure.")
+      stop("Simulated transport failure.", call. = FALSE)
     }
   )
 
