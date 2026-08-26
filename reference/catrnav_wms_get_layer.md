@@ -177,6 +177,7 @@ bu <- catrnav_wms_get_layer(
   srs = 4326,
   what = "building"
 )
+#> Warning: [rast] unknown extent
 
 library(mapSpain)
 library(ggplot2)
@@ -189,7 +190,6 @@ library(tidyterra)
 
 ggplot() +
   geom_spatraster_rgb(data = bu)
-#> ! `data` has 4 layers. Selecting layers 1, 2, and 3.
 
 
 # Parcels
@@ -198,10 +198,10 @@ parc <- catrnav_wms_get_layer(
   srs = 4326,
   what = "parcel"
 )
+#> Warning: [rast] unknown extent
 
 ggplot() +
   geom_spatraster_rgb(data = parc)
-#> ! `data` has 4 layers. Selecting layers 1, 2, and 3.
 
 # }
 ```

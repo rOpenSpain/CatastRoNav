@@ -203,6 +203,7 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 <span class="r-in"><span>  srs <span class="op">=</span> <span class="fl">4326</span>,</span></span>
 <span class="r-in"><span>  what <span class="op">=</span> <span class="st">"building"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>[rast] unknown extent</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropenspain.github.io/mapSpain/" class="external-link">mapSpain</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
@@ -215,7 +216,6 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">geom_spatraster_rgb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bu</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `data` has 4 layers. Selecting layers <span style="color: #0000BB;">1</span>, <span style="color: #0000BB;">2</span>, and <span style="color: #0000BB;">3</span>.</span>
 <span class="r-plt img"><img src="catrnav_wms_get_layer-1.png" alt="" width="2188" height="1352"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Parcels</span></span></span>
@@ -224,10 +224,10 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 <span class="r-in"><span>  srs <span class="op">=</span> <span class="fl">4326</span>,</span></span>
 <span class="r-in"><span>  what <span class="op">=</span> <span class="st">"parcel"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>[rast] unknown extent</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">geom_spatraster_rgb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">parc</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `data` has 4 layers. Selecting layers <span style="color: #0000BB;">1</span>, <span style="color: #0000BB;">2</span>, and <span style="color: #0000BB;">3</span>.</span>
 <span class="r-plt img"><img src="catrnav_wms_get_layer-2.png" alt="" width="2188" height="1352"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
