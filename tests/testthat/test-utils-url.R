@@ -97,7 +97,10 @@ test_that("download_url() reports cached refreshes and downloads", {
       update_cache = TRUE,
       verbose = TRUE
     ),
-    transform = \(x) gsub(cache_dir, "<cache-dir>", x, fixed = TRUE)
+    transform = function(x) {
+      x <- gsub(cache_dir, "<cache-dir>", x, fixed = TRUE)
+      gsub('"[0-9]+ bytes"', '"<n> bytes"', x)
+    }
   )
   expect_identical(result, cached_file)
   expect_identical(readLines(result), "fresh")

@@ -30,7 +30,10 @@ test_that("cache directory can be set and cleared", {
 
   expect_snapshot(
     catrnav_clear_cache(config = FALSE, verbose = TRUE),
-    transform = \(x) gsub(testdir, "<cache-dir>", x, fixed = TRUE)
+    transform = function(x) {
+      x <- gsub(testdir, "<cache-dir>", x, fixed = TRUE)
+      gsub('"[0-9]+ bytes"', '"<n> bytes"', x)
+    }
   )
 
   # Confirm that the cache directory was deleted.

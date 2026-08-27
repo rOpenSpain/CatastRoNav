@@ -3,7 +3,7 @@
     Code
       catrnav_clear_cache(config = FALSE, verbose = TRUE)
     Message
-      v Deleted CatastRoNav cached data from '<cache-dir>' ("8 bytes").
+      v Deleted CatastRoNav cached data from '<cache-dir>' ("<n> bytes").
 
 # cache configuration can be installed and overwritten
 
