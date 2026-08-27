@@ -28,7 +28,8 @@ catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 
 - srs:
 
-  CRS to use for the query. Defaults to `4326`. See **Bounding box**.
+  The CRS to use for the query. Defaults to `4326`. See **Bounding
+  box**.
 
 - verbose:
 
@@ -36,7 +37,7 @@ catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 
 - count:
 
-  Positive whole number specifying the maximum number of features to
+  A positive whole number specifying the maximum number of features to
   return. If `NULL`, the service default applies.
 
 ## Value

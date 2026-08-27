@@ -39,7 +39,8 @@ catrnav_wms_get_layer(
 
 - srs:
 
-  CRS to use for the query. Defaults to `4326`. See **Bounding box**.
+  The CRS to use for the query. Defaults to `4326`. See **Bounding
+  box**.
 
 - what:
 

@@ -5,10 +5,16 @@
 Retrieve cadastral addresses, buildings and cadastral parcels from the
 Cadastre of Navarre.
 
+### Municipality search
+
+Find available municipalities by name or cadastral code.
+
+- [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  : ATOM INSPIRE: search for municipalities
+
 ### ATOM downloads
 
-Download complete municipal cadastral datasets and list available
-municipalities.
+Download complete municipal cadastral datasets through the ATOM service.
 
 - [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md)
   : ATOM INSPIRE: download all addresses for a municipality
@@ -22,8 +28,6 @@ municipalities.
   : ATOM INSPIRE: download all cadastral parcels for a municipality
 - [`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
   : ATOM INSPIRE: list cadastral parcel download URLs
-- [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
-  : ATOM INSPIRE: search for municipalities
 
 ### WFS queries
 
@@ -43,13 +47,9 @@ Download georeferenced cadastral map images.
 - [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
   : WMS INSPIRE: download georeferenced map images
 
-## Utilities
+## Cache management
 
-Configure, inspect and clear cached files.
-
-### Cache management
-
-Manage the local cache used by **CatastRoNav**.
+Configure, inspect and clear the local cache used by **CatastRoNav**.
 
 - [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
   :

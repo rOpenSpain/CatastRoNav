@@ -53,7 +53,7 @@ requested information in the following columns:
 
 ## See also
 
-Download data from the ATOM INSPIRE service:
+Use the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),

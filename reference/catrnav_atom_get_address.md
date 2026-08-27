@@ -23,7 +23,7 @@ catrnav_atom_get_address(
 
 - munic:
 
-  Municipality name, partial name or cadastral code. Use
+  A municipality name, partial name or cadastral code. Use
   [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
   to search for available municipalities.
 
@@ -54,7 +54,7 @@ An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
 
 ## See also
 
-Download data from the ATOM INSPIRE service:
+Use the ATOM INSPIRE service:
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),
 [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),

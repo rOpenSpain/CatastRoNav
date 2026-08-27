@@ -46,8 +46,8 @@
 <li>Network requests now use <strong>httr2</strong> with retries. Use <code>options(catastronav_timeout = 300)</code> to set the timeout and <code>options(catastronav_ssl_verify = 1L)</code> to control SSL verification. These settings fall back to <code>catastro_timeout</code> and <code>catastro_ssl_verify</code>, respectively. Requests now detect offline sessions before downloading and failed requests return <code>NULL</code> instead of stopping execution.</li>
 <li>Spatial files now use the same UTF-8 normalization strategy as <strong>CatastRo</strong>, removing the <strong>stringi</strong> dependency and avoiding lossy transliteration.</li>
 <li>Spatial results now have valid geometries, UTF-8 metadata and normalized CRS definitions when an EPSG code is available.</li>
-<li>The minimum supported R version is now 4.1.0.</li>
-<li>Adapted the vignette to Quarto.</li>
+<li>The minimum supported <strong>R</strong> version is now 4.1.0.</li>
+<li>The vignette was migrated to <strong>Quarto</strong>.</li>
 <li>
 <code><a href="../reference/catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="../reference/catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> and <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> now select the closest municipality when a pattern matches multiple names and report the alternatives. Calls with <code>cache = FALSE</code> use temporary files and invalid arguments produce informative errors.</li>
 <li>
@@ -61,11 +61,11 @@
 <li>
 <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> now defaults <code>cache_dir</code> to <code>NULL</code>, validates its arguments and stores persistent configuration under <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>. Existing configuration is migrated automatically from the previous location and is reliably restored in later sessions. Set <code>cache_dir = FALSE</code> to use a nonpersistent temporary cache even when <code>install = TRUE</code>.</li>
 <li>
-<code><a href="../reference/catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="../reference/catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and <code><a href="../reference/catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> now default <code>srs</code> to <code>4326</code>, validate bounding boxes, CRS values and <code>count</code> and use <code><a href="https://ropenspain.github.io/CatastRo/reference/inspire_wfs_get.html" class="external-link">CatastRo::inspire_wfs_get()</a></code> for requests. Set <code>options(catastronav_wfs_limit_km2 = ...)</code> to warn when a query exceeds a chosen area in square kilometers. The default <code>Inf</code> disables this warning.</li>
+<code><a href="../reference/catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="../reference/catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and <code><a href="../reference/catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> now default <code>srs</code> to <code>4326</code>, validate bounding boxes, CRS values and <code>count</code>, then use the <strong>CatastRo</strong> function <code>inspire_wfs_get()</code> for requests. Set <code>options(catastronav_wfs_limit_km2 = ...)</code> to warn when a query exceeds a chosen area in square kilometers. The default <code>Inf</code> disables this warning.</li>
 <li>
 <code><a href="../reference/catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code> adds WMS INSPIRE support using <strong>mapSpain</strong> and <strong>terra</strong>. It retrieves address, building and cadastral parcel layers, supports the <code>ELFCadastre</code> parcel style and accepts additional <strong>mapSpain</strong> request settings through <code>options</code>. Offline or failed requests return <code>NULL</code>.</li>
 <li>
-<code><a href="../reference/run_example.html">run_example()</a></code> now determines whether network-dependent examples should run based on CRAN status and network availability.</li>
+<code><a href="../reference/run_example.html">run_example()</a></code> now determines whether network-dependent examples should run based on <strong>CRAN</strong> status and network availability.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="catastronav-010">CatastRoNav 0.1.0<a class="anchor" aria-label="anchor" href="#catastronav-010"></a></h2>

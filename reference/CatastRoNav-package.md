@@ -8,13 +8,32 @@ addresses, buildings and cadastral parcels.
 
 ## See also
 
-Useful links:
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+  and
+  [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+  download complete municipal datasets.
 
-- <https://ropenspain.github.io/CatastRoNav/>
+- [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  searches for available municipalities.
 
-- <https://github.com/rOpenSpain/CatastRoNav>
+- [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md),
+  [`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_buildings.md)
+  and
+  [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
+  query features within a bounding box.
 
-- Report bugs at <https://github.com/rOpenSpain/CatastRoNav/issues>
+- [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
+  downloads georeferenced map images.
+
+- [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+  configures the local cache.
+
+- The [package website](https://ropenspain.github.io/CatastRoNav/)
+  provides articles and the complete reference index.
+
+- Browse the [source code](https://github.com/rOpenSpain/CatastRoNav) or
+  [report an issue](https://github.com/rOpenSpain/CatastRoNav/issues).
 
 ## Author
 

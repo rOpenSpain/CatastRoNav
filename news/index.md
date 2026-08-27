@@ -20,8 +20,8 @@
   transliteration.
 - Spatial results now have valid geometries, UTF-8 metadata and
   normalized CRS definitions when an EPSG code is available.
-- The minimum supported R version is now 4.1.0.
-- Adapted the vignette to Quarto.
+- The minimum supported **R** version is now 4.1.0.
+- The vignette was migrated to **Quarto**.
 - [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
   [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
   and
@@ -59,11 +59,10 @@
   and
   [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
   now default `srs` to `4326`, validate bounding boxes, CRS values and
-  `count` and use
-  [`CatastRo::inspire_wfs_get()`](https://ropenspain.github.io/CatastRo/reference/inspire_wfs_get.html)
-  for requests. Set `options(catastronav_wfs_limit_km2 = ...)` to warn
-  when a query exceeds a chosen area in square kilometers. The default
-  `Inf` disables this warning.
+  `count`, then use the **CatastRo** function `inspire_wfs_get()` for
+  requests. Set `options(catastronav_wfs_limit_km2 = ...)` to warn when
+  a query exceeds a chosen area in square kilometers. The default `Inf`
+  disables this warning.
 - [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
   adds WMS INSPIRE support using **mapSpain** and **terra**. It
   retrieves address, building and cadastral parcel layers, supports the
@@ -71,7 +70,7 @@
   settings through `options`. Offline or failed requests return `NULL`.
 - [`run_example()`](https://ropenspain.github.io/CatastRoNav/reference/run_example.md)
   now determines whether network-dependent examples should run based on
-  CRAN status and network availability.
+  **CRAN** status and network availability.
 
 ## CatastRoNav 0.1.0
 
