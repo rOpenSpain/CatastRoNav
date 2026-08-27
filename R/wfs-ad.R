@@ -5,10 +5,10 @@
 #' service. `catrnav_wfs_get_address_bbox()` retrieves features within the
 #' supplied bounding box. See **Bounding box**.
 #'
-#' @param srs CRS to use for the query. Defaults to `4326`. See **Bounding
+#' @param srs The CRS to use for the query. Defaults to `4326`. See **Bounding
 #'   box**.
-#' @param count Positive whole number specifying the maximum number of features
-#'   to return. If `NULL`, the service default applies.
+#' @param count A positive whole number specifying the maximum number of
+#'   features to return. If `NULL`, the service default applies.
 #'
 #' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
 #' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
@@ -23,13 +23,14 @@
 #' ```
 #'
 #' @source
-#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#' ```{r child = "man/chunks/sitna.Rmd"}
+#' ```
 #'
 #' @family wfs
 #' @family addresses
 #' @rdname catrnav_wfs_get_address
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #' downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)

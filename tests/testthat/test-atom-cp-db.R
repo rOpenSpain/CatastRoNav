@@ -18,5 +18,12 @@ test_that("parcel ATOM index can be downloaded", {
   skip_on_cran()
   skip_if_offline()
 
-  expect_message(catrnav_atom_get_parcels_db_all(verbose = TRUE, cache = FALSE))
+  expect_message(
+    result <- catrnav_atom_get_parcels_db_all(verbose = TRUE, cache = FALSE),
+    "Downloaded file"
+  )
+
+  expect_s3_class(result, "tbl_df")
+  expect_named(result, c("munic", "url", "date"))
+  expect_gt(nrow(result), 0L)
 })

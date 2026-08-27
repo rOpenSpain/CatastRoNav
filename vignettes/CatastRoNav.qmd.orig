@@ -45,7 +45,8 @@ and WFS services, and download georeferenced images through its WMS service.
 > *Source: [INSPIRE Knowledge
 > Base](https://knowledge-base.inspire.ec.europa.eu/overview_en).*
 
-The Cadastre of Navarre implements the INSPIRE directive through three services:
+The Cadastre of Navarre implements the INSPIRE Directive through three
+services:
 
 1.  **ATOM service:** Downloads complete municipal cadastral datasets.
 2.  **WFS service:** Retrieves cadastral features within a supplied bounding
@@ -55,8 +56,8 @@ The Cadastre of Navarre implements the INSPIRE directive through three services:
 
 ATOM download and WFS query functions return addresses, buildings and cadastral
 parcels as `sf` objects from the **sf** package. ATOM index and search functions
-return tibbles. WMS returns georeferenced images as `SpatRaster` objects from
-the **terra** package.
+return tibbles. WMS functions return georeferenced images as `SpatRaster`
+objects from the **terra** package.
 
 ## Examples
 

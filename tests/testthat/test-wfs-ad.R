@@ -7,6 +7,20 @@ test_that("address WFS validates bounding boxes", {
   expect_snapshot(error = TRUE, catrnav_wfs_get_address_bbox(c(1, 2, 3)))
 })
 
+test_that("address WFS uses the address service contract", {
+  received <- NULL
+  local_mocked_bindings(inspire_wfs_get_fun = function(...) {
+    received <<- list(...)
+    NULL
+  })
+
+  result <- catrnav_wfs_get_address_bbox(c(-1, 40, 0, 41), srs = 4326)
+
+  expect_null(result)
+  expect_identical(received$path, "services/AD/wfs")
+  expect_identical(received$query$typenames, "AD:Address")
+})
+
 
 test_that("address WFS returns the requested CRS", {
   skip_on_cran()

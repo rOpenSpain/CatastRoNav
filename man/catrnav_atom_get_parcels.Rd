@@ -17,7 +17,7 @@ catrnav_atom_get_parcels(
 )
 }
 \arguments{
-\item{munic}{Municipality name, partial name or cadastral code. Use
+\item{munic}{A municipality name, partial name or cadastral code. Use
 \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} to search for available municipalities.}
 
 \item{cache}{A logical value indicating whether to use cached files. Defaults
@@ -55,7 +55,7 @@ ggplot(s) +
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Download data from the ATOM INSPIRE service:
+Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},

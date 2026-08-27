@@ -22,10 +22,7 @@
 ---
 
     Code
-      unreadable <- read_geo_file_sf(source, query = "SELECT * FROM missing")
-    Condition
-      Warning in `CPL_read_ogr()`:
-      GDAL Error 1: SELECT from table missing failed, no such table/featureclass.
+      unreadable <- suppressWarnings(read_geo_file_sf(source, query = "SELECT * FROM missing"))
     Message
       ! The spatial result could not be read.
 

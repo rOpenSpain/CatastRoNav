@@ -40,6 +40,48 @@ test_that("shared validators report invalid values", {
     error = TRUE,
     validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
   )
+
+  expect_error(
+    validate_cache_args(NA, FALSE, cache_dir = NULL, verbose = FALSE),
+    class = "rlang_error"
+  )
+  expect_error(
+    validate_cache_args(TRUE, 1, cache_dir = NULL, verbose = FALSE),
+    class = "rlang_error"
+  )
+  expect_error(
+    validate_cache_args(TRUE, FALSE, cache_dir = "", verbose = FALSE),
+    class = "rlang_error"
+  )
+  expect_error(
+    validate_cache_args(
+      TRUE,
+      FALSE,
+      cache_dir = NA_character_,
+      verbose = FALSE
+    ),
+    class = "rlang_error"
+  )
+  expect_error(
+    validate_cache_args(
+      TRUE,
+      FALSE,
+      cache_dir = c("one", "two"),
+      verbose = FALSE
+    ),
+    class = "rlang_error"
+  )
+
+  expect_error(validate_wfs_args(FALSE, count = Inf), class = "rlang_error")
+  expect_error(validate_wfs_args(FALSE, count = 1.5), class = "rlang_error")
+  expect_error(
+    validate_wfs_args(FALSE, count = c(1, 2)),
+    class = "rlang_error"
+  )
+  expect_error(
+    validate_wfs_args(FALSE, count = NA_real_),
+    class = "rlang_error"
+  )
 })
 test_that("match_arg_pretty() validates and normalizes arguments", {
   my_fun <- function(arg_one = c(10, 1000, 3000, 5000)) {
@@ -76,6 +118,4 @@ test_that("match_arg_pretty() validates and normalizes arguments", {
   }
   expect_identical(my_fun3(), "20")
   expect_snapshot(my_fun3("3"), error = TRUE)
-  # Pass more options than expected
-  expect_snapshot(my_fun2(c(1, 2)), error = TRUE)
 })

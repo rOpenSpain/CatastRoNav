@@ -4,8 +4,8 @@ test_that("read_geo_file_sf() reads and filters spatial layers", {
   result <- read_geo_file_sf(source, layer_hint = "^nc$", verbose = FALSE)
 
   expect_s3_class(result, "sf")
-  expect_true(all(sf::st_is_valid(result)))
-  expect_true(all(validUTF8(names(result))))
+  expect_all_true(sf::st_is_valid(result))
+  expect_all_true(validUTF8(names(result)))
 })
 
 test_that("read_geo_file_sf() handles missing spatial inputs", {
@@ -15,18 +15,28 @@ test_that("read_geo_file_sf() handles missing spatial inputs", {
 
 test_that("sanitize_sf() preserves the geometry column", {
   geometry <- sf::st_sfc(sf::st_point(c(0, 0)), crs = 4326)
+  field <- "municipio_\u00f1"
+  value <- "Pamplona / Iru\u00f1a"
+  Encoding(field) <- "UTF-8"
+  Encoding(value) <- "UTF-8"
   source <- sf::st_sf(
-    label = "Pamplona",
+    label = value,
     shape = geometry,
     sf_column_name = "shape"
   )
+  names(source)[1] <- field
 
   result <- sanitize_sf(source)
 
   expect_s3_class(result, "sf")
   expect_identical(attr(result, "sf_column"), "shape")
-  expect_true(sf::st_is_valid(result))
-  expect_true(all(validUTF8(names(result))))
+  expect_all_true(sf::st_is_valid(result))
+  expect_all_true(validUTF8(names(result)))
+  expect_all_true(validUTF8(result[[field]]))
+  expect_identical(names(result)[1], field)
+  expect_identical(result[[field]], value)
+  expect_identical(Encoding(names(result)[1]), "UTF-8")
+  expect_identical(Encoding(result[[field]]), "UTF-8")
 })
 
 test_that("read_geo_file_sf() reads matching files from ZIP archives", {
@@ -41,7 +51,7 @@ test_that("read_geo_file_sf() reads matching files from ZIP archives", {
   result <- read_geo_file_sf(archive, hint = "nc.shp")
 
   expect_s3_class(result, "sf")
-  expect_true(all(sf::st_is_valid(result)))
+  expect_all_true(sf::st_is_valid(result))
 })
 
 test_that("read_geo_file_sf() handles missing ZIP members", {
@@ -78,7 +88,9 @@ test_that("read_geo_file_sf() handles missing layers and read errors", {
   expect_null(no_layer)
 
   expect_snapshot(
-    unreadable <- read_geo_file_sf(source, query = "SELECT * FROM missing")
+    unreadable <- suppressWarnings(
+      read_geo_file_sf(source, query = "SELECT * FROM missing")
+    )
   )
   expect_null(unreadable)
 })

@@ -4,9 +4,6 @@ test_that("address ATOM index returns NULL when offline", {
   cdir <- withr::local_tempdir(pattern = "testthat_ex1")
   expect_snapshot(result <- catrnav_atom_get_address_db_all(cache_dir = cdir))
   expect_null(result)
-
-  local_mocked_bindings(is_online_fun = function(...) httr2::is_online())
-  expect_identical(is_online_fun(), httr2::is_online())
 })
 
 test_that("address ATOM index handles HTTP 404 responses", {
@@ -23,8 +20,12 @@ test_that("address ATOM index can be downloaded", {
 
   cdir <- withr::local_tempdir(pattern = "testthat_ex2")
 
-  expect_message(catrnav_atom_get_address_db_all(
-    verbose = TRUE,
-    cache_dir = cdir
-  ))
+  expect_message(
+    result <- catrnav_atom_get_address_db_all(verbose = TRUE, cache_dir = cdir),
+    "Downloaded file"
+  )
+
+  expect_s3_class(result, "tbl_df")
+  expect_named(result, c("munic", "url", "date"))
+  expect_gt(nrow(result), 0L)
 })

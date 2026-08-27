@@ -59,6 +59,7 @@ test_that("WFS helpers handle failed and empty responses", {
     path = "services/CP/wfs",
     typenames = "CP:CadastralParcel"
   ))
+  expect_false(file.exists(response))
 })
 
 test_that("WFS bounding boxes report invalid CRS and configured limits", {
@@ -72,5 +73,8 @@ test_that("WFS bounding boxes report invalid CRS and configured limits", {
   expect_snapshot(error = TRUE, wfs_get_bbox(no_crs))
 
   large <- sf::st_set_crs(no_crs, 4326)
-  expect_snapshot(wfs_get_bbox(large, limit_km2 = 1))
+  expect_snapshot(result <- wfs_get_bbox(large, limit_km2 = 1))
+  expect_s3_class(result, "bbox")
+  expect_length(result, 4L)
+  expect_all_true(is.finite(result))
 })

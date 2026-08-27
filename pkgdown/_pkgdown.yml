@@ -28,12 +28,17 @@ reference:
   desc: >
     Retrieve cadastral addresses, buildings and cadastral parcels from the
     Cadastre of Navarre.
+- subtitle: Municipality search
+  desc: >
+    Find available municipalities by name or cadastral code.
+- contents:
+  - has_concept("search")
 - subtitle: ATOM downloads
   desc: >
-    Download complete municipal cadastral datasets and list available
-    municipalities.
+    Download complete municipal cadastral datasets through the ATOM service.
 - contents:
   - has_concept("atom")
+  - -has_concept("search")
 - subtitle: WFS queries
   desc: >
     Retrieve cadastral features within a supplied bounding box.
@@ -45,12 +50,9 @@ reference:
 - contents:
   - has_concept("wms")
 
-- title: Utilities
+- title: Cache management
   desc: >
-    Configure, inspect and clear cached files.
-- subtitle: Cache management
-  desc: >
-    Manage the local cache used by **CatastRoNav**.
+    Configure, inspect and clear the local cache used by **CatastRoNav**.
 - contents:
   - has_concept("cache_utilities")
 

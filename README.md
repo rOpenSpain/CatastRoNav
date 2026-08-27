@@ -25,7 +25,7 @@ its WMS service.
 ## Installation
 
 You can install the development version of **CatastRoNav** from
-[r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
+[**r-universe**](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ``` r
 # Install CatastRoNav from r-universe.
@@ -38,7 +38,7 @@ install.packages(
 )
 ```
 
-Alternatively, install the development version from GitHub with the
+Alternatively, install the development version from **GitHub** with the
 **pak** package:
 
 ``` r
@@ -86,7 +86,7 @@ Commons Attribution 4.0 International (CC BY
 is provided “as is” without warranties of any kind, either express or
 implied.
 
-Data source: [SITNA – Government of
+Data source: [**SITNA** – Government of
 Navarre](https://geoportal.navarra.es/es/inspire).
 
 ## Examples
@@ -126,7 +126,7 @@ of the Cadastre of Navarre</em>.
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
 
-A BibTeX entry for LaTeX users is:
+A **BibTeX** entry for **LaTeX** users is:
 
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
@@ -141,7 +141,7 @@ A BibTeX entry for LaTeX users is:
 ## Contributing
 
 See the [source code and issue
-tracker](https://github.com/rOpenSpain/CatastRoNav) on GitHub.
+tracker](https://github.com/rOpenSpain/CatastRoNav) on **GitHub**.
 
 ## See also
 

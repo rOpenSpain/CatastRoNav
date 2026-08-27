@@ -19,8 +19,15 @@ test_that("building ATOM index can be downloaded", {
   skip_if_offline()
   cdir <- withr::local_tempdir(pattern = "testthat_ex2")
 
-  expect_message(catrnav_atom_get_buildings_db_all(
-    verbose = TRUE,
-    cache_dir = cdir
-  ))
+  expect_message(
+    result <- catrnav_atom_get_buildings_db_all(
+      verbose = TRUE,
+      cache_dir = cdir
+    ),
+    "Downloaded file"
+  )
+
+  expect_s3_class(result, "tbl_df")
+  expect_named(result, c("munic", "url", "date"))
+  expect_gt(nrow(result), 0L)
 })

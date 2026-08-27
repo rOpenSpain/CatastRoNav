@@ -25,11 +25,8 @@
 ---
 
     Code
-      wfs_get_bbox(large, limit_km2 = 1)
+      result <- wfs_get_bbox(large, limit_km2 = 1)
     Message
       ! The configured WFS limit is 1 km². The query covers 12392.7 km².
       i The request may fail. Consider using a smaller area in `x`.
-    Output
-          xmin     ymin     xmax     ymax 
-      833927.9      0.0 945464.3 110801.8 
 

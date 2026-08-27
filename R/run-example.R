@@ -10,8 +10,8 @@
 #' @inherit CatastRo::run_example return
 #'
 #' @keywords internal
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #' @examples
 #' run_example()
 run_example <- function() {
@@ -27,7 +27,7 @@ run_example <- function() {
 
 #' Check whether code is running on CRAN
 #'
-#' @return Logical. `TRUE` if running on CRAN, `FALSE` otherwise.
+#' @return A logical value, `TRUE` if running on CRAN and `FALSE` otherwise.
 #'
 #' @noRd
 on_cran <- function() {

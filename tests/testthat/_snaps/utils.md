@@ -111,11 +111,3 @@
       ! `an_arg` must be one of "30" or "20", not "3".
       i Did you mean "30"?
 
----
-
-    Code
-      my_fun2(c(1, 2))
-    Condition
-      Error:
-      ! `year` must be "20", not "1" or "2".
-

@@ -15,8 +15,8 @@
 #' @family wfs
 #' @family buildings
 #' @rdname catrnav_wfs_get_buildings
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #' downtown <- c(-1.646812, 42.814528, -1.638036, 42.820320)

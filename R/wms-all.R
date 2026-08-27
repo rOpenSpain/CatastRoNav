@@ -41,7 +41,8 @@
 #' - `"address"`: `"default"`.
 #'
 #' @source
-#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#' ```{r child = "man/chunks/sitna.Rmd"}
+#' ```
 #'
 #' @seealso
 #' - [mapSpain::esp_get_tiles()] downloads map tiles.
@@ -52,8 +53,8 @@
 #' @family addresses
 #' @family buildings
 #' @family parcels
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example()
 #' \donttest{
@@ -98,7 +99,7 @@ catrnav_wms_get_layer <- function(
 
   if (!is_online_fun()) {
     cli::cli_alert_danger("No internet connection detected.")
-    cli::cli_alert("Returning {.val NULL} because the request cannot run.")
+    cli::cli_alert("Returning {.code NULL} because the request cannot run.")
     return(NULL)
   }
 
@@ -160,7 +161,7 @@ catrnav_wms_get_layer <- function(
 
   if (is.null(out)) {
     cli::cli_alert_danger("The WMS request failed.")
-    cli::cli_alert("Returning {.val NULL} because the request failed.")
+    cli::cli_alert("Returning {.code NULL} because the request failed.")
     return(NULL)
   }
 

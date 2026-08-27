@@ -44,7 +44,7 @@ WFS services, and download georeferenced images through its WMS service.
 ## Installation
 
 You can install the development version of **CatastRoNav** from
-[r-universe](https://ropenspain.r-universe.dev/CatastRoNav):
+[**r-universe**](https://ropenspain.r-universe.dev/CatastRoNav):
 
 ```{r}
 #| eval: false
@@ -58,7 +58,7 @@ install.packages(
 )
 ```
 
-Alternatively, install the development version from GitHub with the **pak**
+Alternatively, install the development version from **GitHub** with the **pak**
 package:
 
 ```{r}
@@ -106,7 +106,7 @@ Attribution 4.0 International (CC BY
 4.0)](https://creativecommons.org/licenses/by/4.0/) license. The service is
 provided "as is" without warranties of any kind, either express or implied.
 
-Data source: [SITNA -- Government of
+Data source: [**SITNA** -- Government of
 Navarre](https://geoportal.navarra.es/es/inspire).
 
 ## Examples
@@ -143,7 +143,7 @@ the active cache, `catrnav_set_cache_dir()` to configure it and
 print(citation("CatastRoNav"), style = "html")
 ```
 
-A BibTeX entry for LaTeX users is:
+A **BibTeX** entry for **LaTeX** users is:
 
 ```{r}
 #| echo: false
@@ -154,7 +154,7 @@ toBibtex(citation("CatastRoNav"))
 ## Contributing
 
 See the [source code and issue
-tracker](https://github.com/rOpenSpain/CatastRoNav) on GitHub.
+tracker](https://github.com/rOpenSpain/CatastRoNav) on **GitHub**.
 
 ## See also
 

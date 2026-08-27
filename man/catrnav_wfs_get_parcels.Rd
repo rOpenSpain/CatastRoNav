@@ -18,13 +18,13 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 \item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
 }}
 
-\item{srs}{CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
+\item{srs}{The CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
 box}.}
 
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 
-\item{count}{Positive whole number specifying the maximum number of features
-to return. If \code{NULL}, the service default applies.}
+\item{count}{A positive whole number specifying the maximum number of
+features to return. If \code{NULL}, the service default applies.}
 }
 \value{
 An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be

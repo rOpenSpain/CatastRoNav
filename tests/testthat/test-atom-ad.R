@@ -6,9 +6,6 @@ test_that("address ATOM data returns NULL when offline", {
     result <- catrnav_atom_get_address("Pamplona", cache_dir = cdir)
   )
   expect_null(result)
-
-  local_mocked_bindings(is_online_fun = function(...) httr2::is_online())
-  expect_identical(is_online_fun(), httr2::is_online())
 })
 
 test_that("address ATOM data handles HTTP 404 responses", {
@@ -31,4 +28,9 @@ test_that("address ATOM data can be downloaded", {
     "Retrieving information for"
   )
   expect_s3_class(s, "sf")
+  expect_gt(nrow(s), 0L)
+  expect_gt(ncol(sf::st_drop_geometry(s)), 0L)
+  expect_false(is.na(sf::st_crs(s)))
+  expect_all_true(sf::st_is_valid(s))
+  expect_true(attr(s, "sf_column") %in% names(s))
 })

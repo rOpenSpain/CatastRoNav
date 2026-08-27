@@ -83,14 +83,14 @@ match_arg_pretty <- function(arg, choices) {
   aproxmatch <- pmatch(arg, choices)[1]
 
   if (length(arg) > 1 || is.na(lmatch)) {
-    # Create error message.
+    # Create the error message.
     if (length(choices) == 1) {
       msg <- paste0("{.str ", choices, "}")
     } else {
       l_choices <- length(choices)
       msg <- paste(sprintf("{.str %s}", choices[-l_choices]), collapse = ", ")
       msg <- paste0(msg, " or {.str ", choices[l_choices], "}")
-      # Add "one of" at the beginning.
+      # Prefix the message with "one of".
       msg <- paste0("one of ", msg)
     }
 

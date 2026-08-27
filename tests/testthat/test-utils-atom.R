@@ -76,7 +76,7 @@ test_that("municipality readers reject invalid names", {
 
 test_that("ATOM parsing retries without an explicit encoding", {
   env <- new.env(parent = emptyenv())
-  env$calls <- 0L
+  env$encodings <- list()
   feed <- list(
     feed = list(
       entry = list(
@@ -97,8 +97,8 @@ test_that("ATOM parsing retries without an explicit encoding", {
     )
   )
   local_mocked_bindings(read_atom_xml = function(file, encoding = NULL) {
-    env$calls <- env$calls + 1L
-    if (env$calls == 1L) {
+    env$encodings <- append(env$encodings, list(encoding))
+    if (!is.null(encoding)) {
       stop("Encoding failed.", call. = FALSE)
     }
     feed
@@ -106,7 +106,7 @@ test_that("ATOM parsing retries without an explicit encoding", {
 
   result <- catr_read_atom("feed.xml")
 
-  expect_identical(env$calls, 2L)
+  expect_identical(env$encodings, list("UTF-8", NULL))
   expect_identical(result$title, "001 Municipality")
 })
 
@@ -131,10 +131,25 @@ test_that("municipality readers handle temporary extracted data", {
     id = 1L,
     geometry = sf::st_sfc(sf::st_point(c(0, 0)), crs = 4326)
   )
+  env <- new.env(parent = emptyenv())
+  env$unzip <- NULL
+  env$files <- NULL
   local_mocked_bindings(
     download_url = function(...) archive,
-    unzip = function(...) invisible(),
-    read_geo_file_sf = function(...) expected
+    unzip = function(zipfile, exdir, junkpaths, overwrite) {
+      env$unzip <- list(
+        zipfile = zipfile,
+        exdir = exdir,
+        junkpaths = junkpaths,
+        overwrite = overwrite
+      )
+      writeLines("gml", file.path(exdir, "data.gml"))
+      invisible()
+    },
+    read_geo_file_sf = function(files, ...) {
+      env$files <- files
+      expected
+    }
   )
 
   result <- catrnav_atom_read_munic(
@@ -144,4 +159,12 @@ test_that("municipality readers handle temporary extracted data", {
     cache = FALSE
   )
   expect_identical(result, expected)
+  expect_identical(env$unzip$zipfile, archive)
+  expect_true(env$unzip$junkpaths)
+  expect_true(env$unzip$overwrite)
+  expect_identical(basename(env$files), "data.gml")
+  expect_identical(
+    normalizePath(dirname(env$files), winslash = "/"),
+    normalizePath(env$unzip$exdir, winslash = "/")
+  )
 })

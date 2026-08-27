@@ -149,11 +149,13 @@ catrnav_atom_select_munic <- function(all, munic, db_name, verbose = FALSE) {
     cli::cli_alert_info(
       "Found {.val {nrow(candidates)}} municipalities matching {.str {munic}}."
     )
-    cli::cli_alert_success("Using closest match {.str {candidates$munic[1]}}.")
+    cli::cli_alert_success(
+      "Using the closest match {.str {candidates$munic[1]}}."
+    )
     cli::cli_alert_info("Other matches:")
 
     bullets <- paste0("{.str ", candidates$munic[-1], "}")
-    names(bullets) <- rep(" ", length(bullets))
+    names(bullets) <- rep("*", length(bullets))
     cli::cli_bullets(bullets)
   }
 
@@ -175,7 +177,9 @@ catrnav_atom_match_munic <- function(all, munic) {
   matches <- grep(munic, all$munic, ignore.case = TRUE)
 
   if (length(matches) == 0L) {
-    cli::cli_alert_warning("No municipality matched pattern {.str {munic}}.")
+    cli::cli_alert_warning(
+      "No municipality matched the pattern {.str {munic}}."
+    )
     return(NULL)
   }
 

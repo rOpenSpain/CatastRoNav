@@ -4,7 +4,7 @@
 #' Downloads spatial data for all addresses in a municipality using the ATOM
 #' INSPIRE service provided by the Cadastre of Navarre.
 #'
-#' @param munic Municipality name, partial name or cadastral code. Use
+#' @param munic A municipality name, partial name or cadastral code. Use
 #'   [catrnav_atom_search_munic()] to search for available municipalities.
 #'
 #' @inheritParams catrnav_atom_get_address_db_all
@@ -12,13 +12,12 @@
 #' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
 #'   retrieved.
 #'
-#' @source
-#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#' @inherit catrnav_atom_get_address_db_all source
 #'
 #' @family atom
 #' @family addresses
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #'

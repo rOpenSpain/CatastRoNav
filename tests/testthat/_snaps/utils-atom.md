@@ -5,9 +5,9 @@
         verbose = TRUE)
     Message
       i Found 2 municipalities matching "Pamplona".
-      v Using closest match "201 Pamplona / Iruña".
+      v Using the closest match "201 Pamplona / Iruña".
       i Other matches:
-        "202 Pamplona Norte"
+      * "202 Pamplona Norte"
       i Retrieving information for "201 Pamplona / Iruña".
 
 # municipality readers reject invalid names

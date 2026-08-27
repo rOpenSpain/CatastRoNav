@@ -46,7 +46,7 @@ catrnav_atom_get_address_db_all()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Download data from the ATOM INSPIRE service:
+Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
 \code{\link[=catrnav_atom_get_buildings_db_all]{catrnav_atom_get_buildings_db_all()}},

@@ -37,7 +37,7 @@
       offline <- catrnav_wms_get_layer(bbox, cache_dir = cdir)
     Message
       x No internet connection detected.
-      > Returning "NULL" because the request cannot run.
+      > Returning `NULL` because the request cannot run.
 
 ---
 
@@ -45,5 +45,5 @@
       not_found <- catrnav_wms_get_layer(bbox, cache_dir = cdir)
     Message
       x The WMS request failed.
-      > Returning "NULL" because the request failed.
+      > Returning `NULL` because the request failed.
 

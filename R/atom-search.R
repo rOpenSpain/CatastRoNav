@@ -4,7 +4,8 @@
 #' Searches for a municipality by name or cadastral code in the Cadastre of
 #' Navarre ATOM index.
 #'
-#' @param munic Municipality name, partial name or cadastral code to search for.
+#' @param munic A municipality name, partial name or cadastral code to search
+#'   for.
 #' @inheritParams catrnav_atom_get_address
 #'
 #' @return A [tibble][dplyr::tbl_df] with the municipality name and cadastral
@@ -12,8 +13,8 @@
 #'
 #' @family atom
 #' @family search
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example()
 #' catrnav_atom_search_munic("Pamplona")

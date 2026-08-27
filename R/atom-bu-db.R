@@ -12,8 +12,8 @@
 #' @family atom
 #' @family buildings
 #' @rdname catrnav_atom_get_buildings_db
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example()
 #' catrnav_atom_get_buildings_db_all()

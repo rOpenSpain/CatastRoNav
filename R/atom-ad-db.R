@@ -17,13 +17,14 @@
 #' - `date`: Reference date of the data.
 #'
 #' @source
-#' [SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+#' ```{r child = "man/chunks/sitna.Rmd"}
+#' ```
 #'
 #' @family atom
 #' @family addresses
 #' @rdname catrnav_atom_get_address_db
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example()
 #' catrnav_atom_get_address_db_all()

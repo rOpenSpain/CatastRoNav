@@ -1,6 +1,6 @@
 list(
   rd_family_title = list(
-    atom = "Download data from the ATOM INSPIRE service:",
+    atom = "Use the ATOM INSPIRE service:",
     wfs = "Query data from the WFS INSPIRE service:",
     wms = "Download maps from the WMS INSPIRE service:",
     addresses = "Work with cadastral addresses:",

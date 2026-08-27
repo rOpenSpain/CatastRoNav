@@ -1,8 +1,8 @@
 #' Read and sanitize a spatial file
 #'
 #' @param file_local A character string containing a local file path or URL.
-#' @param verbose A logical value indicating whether to display reading
-#'   information.
+#' @param verbose A logical value indicating whether to display information
+#'   about reading the file.
 #' @param hint A character string used to identify files in ZIP archives.
 #' @param layer_hint An optional character string used to identify layer names.
 #' @param ... Additional arguments passed to [sf::read_sf()].

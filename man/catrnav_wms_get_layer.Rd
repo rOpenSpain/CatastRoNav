@@ -29,7 +29,7 @@ the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
 \item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
 }}
 
-\item{srs}{CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
+\item{srs}{The CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
 box}.}
 
 \item{what}{WMS layer to download. See \strong{Layers and styles}.}

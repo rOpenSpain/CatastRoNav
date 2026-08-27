@@ -23,4 +23,9 @@ test_that("parcel ATOM data can be downloaded", {
   s <- catrnav_atom_get_parcels("061", verbose = TRUE, cache = FALSE)
 
   expect_s3_class(s, "sf")
+  expect_gt(nrow(s), 0L)
+  expect_gt(ncol(sf::st_drop_geometry(s)), 0L)
+  expect_false(is.na(sf::st_crs(s)))
+  expect_all_true(sf::st_is_valid(s))
+  expect_true(attr(s, "sf_column") %in% names(s))
 })

@@ -7,6 +7,20 @@ test_that("parcel WFS validates bounding boxes", {
   expect_snapshot(error = TRUE, catrnav_wfs_get_parcels_bbox(c(1, 2, 3)))
 })
 
+test_that("parcel WFS uses the parcel service contract", {
+  received <- NULL
+  local_mocked_bindings(inspire_wfs_get_fun = function(...) {
+    received <<- list(...)
+    NULL
+  })
+
+  result <- catrnav_wfs_get_parcels_bbox(c(-1, 40, 0, 41), srs = 4326)
+
+  expect_null(result)
+  expect_identical(received$path, "services/CP/wfs")
+  expect_identical(received$query$typenames, "CP:CadastralParcel")
+})
+
 
 test_that("parcel WFS returns the requested CRS", {
   skip_on_cran()

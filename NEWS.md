@@ -15,8 +15,8 @@
   removing the **stringi** dependency and avoiding lossy transliteration.
 - Spatial results now have valid geometries, UTF-8 metadata and normalized CRS
   definitions when an EPSG code is available.
-- The minimum supported R version is now 4.1.0.
-- Adapted the vignette to Quarto.
+- The minimum supported **R** version is now 4.1.0.
+- The vignette was migrated to **Quarto**.
 - `catrnav_atom_get_address()`, `catrnav_atom_get_buildings()` and
   `catrnav_atom_get_parcels()` now select the closest municipality when a
   pattern matches multiple names and report the alternatives. Calls with
@@ -37,16 +37,16 @@
   nonpersistent temporary cache even when `install = TRUE`.
 - `catrnav_wfs_get_address_bbox()`, `catrnav_wfs_get_buildings_bbox()` and
   `catrnav_wfs_get_parcels_bbox()` now default `srs` to `4326`, validate
-  bounding boxes, CRS values and `count` and use `CatastRo::inspire_wfs_get()`
-  for requests. Set `options(catastronav_wfs_limit_km2 = ...)` to warn when a
-  query exceeds a chosen area in square kilometers. The default `Inf` disables
-  this warning.
+  bounding boxes, CRS values and `count`, then use the **CatastRo** function
+  `inspire_wfs_get()` for requests. Set
+  `options(catastronav_wfs_limit_km2 = ...)` to warn when a query exceeds a
+  chosen area in square kilometers. The default `Inf` disables this warning.
 - `catrnav_wms_get_layer()` adds WMS INSPIRE support using **mapSpain** and
   **terra**. It retrieves address, building and cadastral parcel layers,
   supports the `ELFCadastre` parcel style and accepts additional **mapSpain**
   request settings through `options`. Offline or failed requests return `NULL`.
 - `run_example()` now determines whether network-dependent examples should run
-  based on CRAN status and network availability.
+  based on **CRAN** status and network availability.
 
 # CatastRoNav 0.1.0
 

@@ -7,12 +7,12 @@
 #' @inheritParams catrnav_atom_get_address
 #' @inherit catrnav_atom_get_address return
 #'
-#' @inherit catrnav_atom_get_address source
+#' @inherit catrnav_atom_get_address_db_all source
 #'
 #' @family atom
 #' @family parcels
-#' @encoding UTF-8
 #' @export
+#' @encoding UTF-8
 #'
 #' @examplesIf run_example() && requireNamespace("ggplot2", quietly = TRUE)
 #'

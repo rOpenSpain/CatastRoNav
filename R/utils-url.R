@@ -39,14 +39,14 @@ download_url <- function(
   }
 
   if (isTRUE(cache) && file_on_cache) {
-    make_msg("warning", verbose, "Refreshing cached file.")
+    make_msg("info", verbose, "Refreshing cached file.")
   }
 
   make_msg("info", verbose, "Downloading {.url ", url, "}.")
 
   if (!is_online_fun()) {
     cli::cli_alert_danger("No internet connection detected.")
-    cli::cli_alert("Returning {.val NULL} because the request cannot run.")
+    cli::cli_alert("Returning {.code NULL} because the request cannot run.")
     return(NULL)
   }
 
@@ -71,21 +71,13 @@ download_url <- function(
     req <- httr2::req_progress(req)
   }
 
-  if (is_404()) {
-    req <- httr2::req_url(
-      req,
-      "https://ropenspain.github.io/CatastRoNav/fake_url"
-    )
-    file_local <- tempfile(fileext = ".txt")
-  }
-
   resp <- tryCatch(
     req_perform_fun(req, path = file_local),
     error = function(cnd) {
       unlink(file_local, force = TRUE)
       cli::cli_alert_danger("Download failed for {.url {url}}.")
       cli::cli_alert(
-        "Returning {.val NULL}. Reason: {.emph {conditionMessage(cnd)}}"
+        "Returning {.code NULL}. Reason: {.emph {conditionMessage(cnd)}}"
       )
       NULL
     }
@@ -106,7 +98,7 @@ download_url <- function(
       "If this looks like a package bug, open an issue at ",
       "{.url https://github.com/ropenspain/CatastRoNav/issues}."
     ))
-    cli::cli_alert("Returning {.val NULL} because the download failed.")
+    cli::cli_alert("Returning {.code NULL} because the download failed.")
     return(NULL)
   }
 
@@ -131,11 +123,4 @@ req_perform_fun <- function(...) {
 #' @noRd
 is_online_fun <- function(...) {
   httr2::is_online()
-}
-
-#' Report a simulated HTTP 404 response for testing
-#'
-#' @noRd
-is_404 <- function(...) {
-  FALSE
 }

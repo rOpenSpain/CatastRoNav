@@ -14,7 +14,8 @@ catrnav_atom_search_munic(
 )
 }
 \arguments{
-\item{munic}{Municipality name, partial name or cadastral code to search for.}
+\item{munic}{A municipality name, partial name or cadastral code to search
+for.}
 
 \item{cache}{A logical value indicating whether to use cached files. Defaults
 to \code{TRUE}.}
@@ -41,7 +42,7 @@ catrnav_atom_search_munic("Pamplona")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Download data from the ATOM INSPIRE service:
+Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
