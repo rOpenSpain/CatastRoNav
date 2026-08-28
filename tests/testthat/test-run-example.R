@@ -23,12 +23,11 @@ test_that("run_example() is false on CRAN", {
   expect_false(run_example())
 })
 
-test_that("on_cran() falls back to interactive()", {
-  skip_on_cran()
-
+test_that("on_cran() uses the session mode when NOT_CRAN is unset", {
   withr::local_envvar(c(NOT_CRAN = ""))
 
-  expect_identical(on_cran(), !interactive())
+  expect_true(on_cran(is_interactive = FALSE))
+  expect_false(on_cran(is_interactive = TRUE))
 })
 
 test_that("run_example() is true outside CRAN", {

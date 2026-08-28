@@ -14,11 +14,23 @@ test_that("parcel ATOM data handles HTTP 404 responses", {
   expect_null(result)
 })
 
+test_that("parcel ATOM data reports unknown municipalities", {
+  index <- dplyr::tibble(
+    munic = "061 El Busto",
+    url = "https://example.com/parcel.zip",
+    date = as.Date("2026-01-01")
+  )
+  local_mocked_bindings(
+    catrnav_atom_get_parcels_db_all = function(...) index
+  )
+
+  expect_snapshot(result <- catrnav_atom_get_parcels("xyxghx"))
+  expect_identical(result, NA)
+})
+
 test_that("parcel ATOM data can be downloaded", {
   skip_on_cran()
   skip_if_offline()
-
-  expect_snapshot(catrnav_atom_get_parcels("xyxghx", cache = FALSE))
 
   s <- catrnav_atom_get_parcels("061", verbose = TRUE, cache = FALSE)
 

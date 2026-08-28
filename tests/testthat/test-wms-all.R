@@ -126,12 +126,19 @@ test_that("WMS providers map layers, styles and options", {
 test_that("WMS tiles can be downloaded and cropped", {
   skip_on_cran()
   skip_if_offline()
+  muffle_extent_warning <- function(code) {
+    withCallingHandlers(code, warning = function(cnd) {
+      if (grepl("[rast] unknown extent", conditionMessage(cnd), fixed = TRUE)) {
+        invokeRestart("muffleWarning")
+      }
+    })
+  }
   cdir <- withr::local_tempdir(pattern = "testthat_ex")
-  obj <- catrnav_wms_get_layer(
+  obj <- muffle_extent_warning(catrnav_wms_get_layer(
     c(-1.646812, 42.814528, -1.638036, 42.820320),
     srs = 4326,
     cache_dir = cdir
-  )
+  ))
 
   expect_s4_class(obj, "SpatRaster")
   expect_gt(terra::nlyr(obj), 2L)
@@ -139,12 +146,12 @@ test_that("WMS tiles can be downloaded and cropped", {
   expect_true(terra::same.crs(obj, "EPSG:4326"))
   expect_all_true(is.finite(as.vector(terra::ext(obj))))
 
-  objcrop <- catrnav_wms_get_layer(
+  objcrop <- muffle_extent_warning(catrnav_wms_get_layer(
     c(-1.646812, 42.814528, -1.638036, 42.820320),
     srs = 4326,
     crop = TRUE,
     cache_dir = cdir
-  )
+  ))
 
   expect_s4_class(objcrop, "SpatRaster")
   expect_gt(terra::nrow(obj), terra::nrow(objcrop))

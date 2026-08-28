@@ -16,12 +16,24 @@ test_that("address ATOM data handles HTTP 404 responses", {
   expect_null(result)
 })
 
+test_that("address ATOM data reports unknown municipalities", {
+  index <- dplyr::tibble(
+    munic = "061 El Busto",
+    url = "https://example.com/address.zip",
+    date = as.Date("2026-01-01")
+  )
+  local_mocked_bindings(
+    catrnav_atom_get_address_db_all = function(...) index
+  )
+
+  expect_snapshot(result <- catrnav_atom_get_address("xyxghx"))
+  expect_identical(result, NA)
+})
+
 test_that("address ATOM data can be downloaded", {
   skip_on_cran()
   skip_if_offline()
   cdir <- withr::local_tempdir(pattern = "testthat_ex2")
-
-  expect_snapshot(catrnav_atom_get_address("xyxghx", cache_dir = cdir))
 
   expect_message(
     s <- catrnav_atom_get_address("061", verbose = TRUE, cache_dir = cdir),

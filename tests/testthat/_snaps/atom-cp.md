@@ -15,10 +15,10 @@
       ! If this looks like a package bug, open an issue at <https://github.com/ropenspain/CatastRoNav/issues>.
       > Returning `NULL` because the download failed.
 
-# parcel ATOM data can be downloaded
+# parcel ATOM data reports unknown municipalities
 
     Code
-      catrnav_atom_get_parcels("xyxghx", cache = FALSE)
+      result <- catrnav_atom_get_parcels("xyxghx")
     Message
       ! No municipality matched the pattern "xyxghx".
       i Check available municipalities with `catrnav_atom_get_parcels_db_all()`.

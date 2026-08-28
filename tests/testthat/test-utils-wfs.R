@@ -23,6 +23,22 @@ test_that("WFS bounding boxes preserve output CRS", {
   expect_identical(bbox_lau$incrs, 25830)
 })
 
+test_that("spatial bounding boxes are preserved and converted", {
+  spatial <- sf::st_sfc(sf::st_point(c(-1, 40)), crs = 4326)
+
+  expect_identical(get_sf_from_bbox(spatial), spatial)
+
+  numeric <- get_sf_from_bbox(c(-1, 40, 0, 41), srs = 4326)
+  expect_s3_class(numeric, "sfc")
+  expect_equal(sf::st_crs(numeric), sf::st_crs(4326))
+})
+
+test_that("WFS bounding boxes validate numeric inputs", {
+  expect_snapshot(error = TRUE, wfs_get_bbox("1234", srs = 4326))
+  expect_snapshot(error = TRUE, wfs_get_bbox(c(1, 2, 3), srs = 4326))
+  expect_snapshot(error = TRUE, wfs_get_bbox(c(1, 2, 3, Inf), srs = 4326))
+})
+
 test_that("WFS queries omit empty optional arguments", {
   bbox <- list(bbox = "1,2,3,4", incrs = 25830)
 
@@ -59,6 +75,30 @@ test_that("WFS helpers handle failed and empty responses", {
     path = "services/CP/wfs",
     typenames = "CP:CadastralParcel"
   ))
+  expect_false(file.exists(response))
+})
+
+test_that("WFS helpers transform successful responses and clean up", {
+  response <- withr::local_tempfile(fileext = ".gml")
+  writeLines("spatial response", response)
+  source <- sf::st_sf(
+    id = 1L,
+    geometry = sf::st_sfc(sf::st_point(c(500000, 4700000)), crs = 25830)
+  )
+  local_mocked_bindings(
+    inspire_wfs_get_fun = function(...) response,
+    read_geo_file_sf = function(...) source
+  )
+
+  result <- wfs_read_bbox_query(
+    c(-1, 40, 0, 41),
+    srs = 4326,
+    path = "services/CP/wfs",
+    typenames = "CP:CadastralParcel"
+  )
+
+  expect_s3_class(result, "sf")
+  expect_equal(sf::st_crs(result), sf::st_crs(4326))
   expect_false(file.exists(response))
 })
 

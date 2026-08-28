@@ -271,7 +271,7 @@
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "1284.27KB",
+  "fileSize": "1283.676KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

@@ -1,4 +1,4 @@
-# cache directory can be set and cleared
+# cached data reports verbose deletion
 
     Code
       catrnav_clear_cache(config = FALSE, verbose = TRUE)
@@ -21,7 +21,7 @@
     Message
       v Deleted the CatastRoNav cache configuration.
 
-# legacy cache configuration is migrated once
+# uppercase legacy cache configuration is migrated once
 
     Code
       migrate_cache(old = old, new = new)
@@ -29,7 +29,7 @@
       v The CatastRoNav cache configuration migrated successfully for version "0.1.0" or later. See the `?Note` section in `?CatastRoNav::catrnav_set_cache_dir()`.
       i This one-time message will not be shown again.
 
----
+# lowercase legacy cache configuration is migrated once
 
     Code
       migrate_cache(old = old, new = new)

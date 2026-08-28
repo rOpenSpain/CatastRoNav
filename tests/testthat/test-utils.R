@@ -30,17 +30,11 @@ test_that("validate_non_empty_arg() rejects missing arguments", {
   expect_identical(wrapper("value"), "value")
 })
 
-test_that("shared validators report invalid values", {
+test_that("validate_cache_args() rejects invalid flags and paths", {
   expect_snapshot(
     error = TRUE,
     validate_cache_args(TRUE, FALSE, cache_dir = 1, verbose = FALSE)
   )
-  expect_snapshot(error = TRUE, validate_wfs_args(FALSE, count = 0))
-  expect_snapshot(
-    error = TRUE,
-    validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
-  )
-
   expect_error(
     validate_cache_args(NA, FALSE, cache_dir = NULL, verbose = FALSE),
     class = "rlang_error"
@@ -71,7 +65,10 @@ test_that("shared validators report invalid values", {
     ),
     class = "rlang_error"
   )
+})
 
+test_that("validate_wfs_args() rejects invalid feature counts", {
+  expect_snapshot(error = TRUE, validate_wfs_args(FALSE, count = 0))
   expect_error(validate_wfs_args(FALSE, count = Inf), class = "rlang_error")
   expect_error(validate_wfs_args(FALSE, count = 1.5), class = "rlang_error")
   expect_error(
@@ -83,6 +80,14 @@ test_that("shared validators report invalid values", {
     class = "rlang_error"
   )
 })
+
+test_that("validate_vector_with_srs() rejects invalid coordinates", {
+  expect_snapshot(
+    error = TRUE,
+    validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
+  )
+})
+
 test_that("match_arg_pretty() validates and normalizes arguments", {
   my_fun <- function(arg_one = c(10, 1000, 3000, 5000)) {
     match_arg_pretty(arg_one)

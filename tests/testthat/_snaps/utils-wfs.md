@@ -14,6 +14,30 @@
       Error in `validate_vector_with_srs()`:
       ! Provide `srs` when `x` is a numeric vector.
 
+# WFS bounding boxes validate numeric inputs
+
+    Code
+      wfs_get_bbox("1234", srs = 4326)
+    Condition
+      Error in `validate_vector_with_srs()`:
+      ! `x` must be a numeric vector or an <sf> or <sfc> object.
+
+---
+
+    Code
+      wfs_get_bbox(c(1, 2, 3), srs = 4326)
+    Condition
+      Error in `validate_vector_with_srs()`:
+      ! `x` must have length 4, not 3.
+
+---
+
+    Code
+      wfs_get_bbox(c(1, 2, 3, Inf), srs = 4326)
+    Condition
+      Error in `validate_vector_with_srs()`:
+      ! `x` must contain only finite, non-missing values.
+
 # WFS bounding boxes report invalid CRS and configured limits
 
     Code

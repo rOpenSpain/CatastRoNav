@@ -30,10 +30,10 @@ run_example <- function() {
 #' @return A logical value, `TRUE` if running on CRAN and `FALSE` otherwise.
 #'
 #' @noRd
-on_cran <- function() {
+on_cran <- function(is_interactive = interactive()) {
   env <- Sys.getenv("NOT_CRAN")
   if (identical(env, "")) {
-    !interactive()
+    !is_interactive
   } else {
     !isTRUE(as.logical(env))
   }

@@ -37,7 +37,7 @@
       Error in `wrapper()`:
       ! `arg` cannot be missing.
 
-# shared validators report invalid values
+# validate_cache_args() rejects invalid flags and paths
 
     Code
       validate_cache_args(TRUE, FALSE, cache_dir = 1, verbose = FALSE)
@@ -45,7 +45,7 @@
       Error in `validate_cache_args()`:
       ! `cache_dir` must be `NULL` or a non-empty character value.
 
----
+# validate_wfs_args() rejects invalid feature counts
 
     Code
       validate_wfs_args(FALSE, count = 0)
@@ -53,7 +53,7 @@
       Error in `validate_wfs_args()`:
       ! `count` must be `NULL` or a positive whole number.
 
----
+# validate_vector_with_srs() rejects invalid coordinates
 
     Code
       validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
