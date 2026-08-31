@@ -22,7 +22,7 @@ the Cadastre of Navarre*.
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
       year = {2026},
-      version = {1.0.0},
+      version = {1.0.0.9000},
       author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
