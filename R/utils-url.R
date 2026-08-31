@@ -56,15 +56,9 @@ download_url <- function(
   })
   req <- httr2::req_options(
     req,
-    ssl_verifypeer = getOption(
-      "catastronav_ssl_verify",
-      getOption("catastro_ssl_verify", 1L)
-    )
+    ssl_verifypeer = catrnav_ssl_verify()
   )
-  req <- httr2::req_timeout(
-    req,
-    getOption("catastronav_timeout", getOption("catastro_timeout", 300))
-  )
+  req <- httr2::req_timeout(req, catrnav_timeout())
   req <- httr2::req_retry(req, max_tries = 3)
 
   if (verbose) {
@@ -123,4 +117,48 @@ req_perform_fun <- function(...) {
 #' @noRd
 is_online_fun <- function(...) {
   httr2::is_online()
+}
+
+#' Get an HTTP configuration value from options or environment variables
+#'
+#' @noRd
+catrnav_http_config <- function(option, envvar, default) {
+  opt <- getOption(option, NULL)
+  if (!is.null(opt)) {
+    return(opt)
+  }
+
+  env <- Sys.getenv(envvar, unset = NA_character_)
+  if (is.na(env) || identical(env, "")) {
+    return(default)
+  }
+
+  env_num <- suppressWarnings(as.numeric(env))
+  if (is.na(env_num)) {
+    return(default)
+  }
+
+  env_num
+}
+
+#' Get the SSL verification setting for CatastRoNav HTTP requests
+#'
+#' @noRd
+catrnav_ssl_verify <- function() {
+  catrnav_http_config(
+    "catastronav_ssl_verify",
+    "CATASTRONAV_SSL_VERIFY",
+    getOption("catastro_ssl_verify", 1L)
+  )
+}
+
+#' Get the timeout setting for CatastRoNav HTTP requests
+#'
+#' @noRd
+catrnav_timeout <- function() {
+  catrnav_http_config(
+    "catastronav_timeout",
+    "CATASTRONAV_TIMEOUT",
+    getOption("catastro_timeout", 300)
+  )
 }

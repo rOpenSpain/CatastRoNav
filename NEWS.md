@@ -1,3 +1,7 @@
+# CatastRoNav (development version)
+
+- **CatastRoNav** users can now configure HTTP timeout and SSL verification with the `CATASTRONAV_TIMEOUT` and `CATASTRONAV_SSL_VERIFY` environment variables. The existing `catastronav_timeout` and `catastronav_ssl_verify` options still take precedence.
+
 # CatastRoNav 1.0.0
 
 - The package is now licensed under GPL-2. Data from the Government of
