@@ -178,7 +178,6 @@ bu <- catrnav_wms_get_layer(
   srs = 4326,
   what = "building"
 )
-#> Warning: [rast] unknown extent
 
 library(mapSpain)
 library(ggplot2)
@@ -199,7 +198,6 @@ parc <- catrnav_wms_get_layer(
   srs = 4326,
   what = "parcel"
 )
-#> Warning: [rast] unknown extent
 
 ggplot() +
   geom_spatraster_rgb(data = parc)
