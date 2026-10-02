@@ -33,7 +33,8 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 
 ## Value
 
-`NULL`, invisibly. This function is called for its side effects.
+[NULL](https://rdrr.io/r/base/NULL.html), invisibly. This function is
+called for its side effects.
 
 ## Details
 
@@ -41,6 +42,11 @@ This function resets the cache state as if you had never used
 CatastRoNav.
 
 ## See also
+
+[`catrnav_detect_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+identifies the active cache path before deletion.
+[`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+configures a new cache afterward.
 
 Manage the local cache:
 [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
@@ -52,20 +58,20 @@ Manage the local cache:
 # Caution! This modifies your current state.
 # \dontrun{
 my_cache <- catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpknFILw/CatastRoNav
+#> ℹ /tmp/RtmpbIPnyR/CatastRoNav
 
 example_cache <- file.path(tempdir(), "example", "cache")
 catrnav_set_cache_dir(example_cache, verbose = FALSE)
 
 catrnav_clear_cache(verbose = TRUE)
-#> ✔ Deleted CatastRoNav cached data from /tmp/RtmpknFILw/example/cache ("0 bytes").
+#> ✔ Deleted CatastRoNav cached data from /tmp/RtmpbIPnyR/example/cache ("0 bytes").
 
 # Restore the initial cache.
 catrnav_set_cache_dir(my_cache)
-#> ℹ CatastRoNav cache directory is /tmp/RtmpknFILw/CatastRoNav.
+#> ℹ CatastRoNav cache directory is /tmp/RtmpbIPnyR/CatastRoNav.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 identical(my_cache, catrnav_detect_cache_dir())
-#> ℹ /tmp/RtmpknFILw/CatastRoNav
+#> ℹ /tmp/RtmpbIPnyR/CatastRoNav
 #> [1] TRUE
 # }
 ```

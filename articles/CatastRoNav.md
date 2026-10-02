@@ -3,8 +3,8 @@
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
 you can retrieve addresses, buildings and cadastral parcels through its
-INSPIRE ATOM and WFS services, and download georeferenced images through
-its WMS service.
+INSPIRE ATOM and WFS services. You can also download georeferenced
+images through its WMS service.
 
 ## INSPIRE services
 
@@ -24,8 +24,8 @@ services:
 1.  **ATOM service:** Downloads complete municipal cadastral datasets.
 2.  **WFS service:** Retrieves cadastral features within a supplied
     bounding box.
-3.  **WMS service:** Downloads georeferenced map images for different
-    cadastral elements.
+3.  **WMS service:** Downloads georeferenced map images for addresses,
+    buildings and cadastral parcels.
 
 ATOM download and WFS query functions return addresses, buildings and
 cadastral parcels as `sf` objects from the **sf** package. ATOM index
@@ -37,7 +37,7 @@ images as `SpatRaster` objects from the **terra** package.
 ### Working with layers
 
 This example demonstrates the main capabilities of **CatastRoNav** by
-recreating a cadastral map of the surroundings of [El Sadar
+recreating a cadastral map of the area around [El Sadar
 Stadium](https://en.wikipedia.org/wiki/El_Sadar_Stadium). We use the WMS
 and WFS services to retrieve different layers.
 
@@ -78,7 +78,10 @@ ggplot() +
   coord_sf(crs = 25830)
 ```
 
-![Figure 1: Cadastral layers around El Sadar Stadium](./sadar-1.png)
+![Map with building footprints in translucent red over cadastral parcel
+boundaries and numeric parcel labels. Longitude is on the horizontal
+axis and latitude on the vertical axis. The overlay locates buildings
+within parcels around El Sadar Stadium. ](./sadar-1.png)
 
 Figure 1: Cadastral layers around El Sadar Stadium
 
@@ -122,7 +125,11 @@ ggplot(dataviz) +
   geom_sf()
 ```
 
-![Figure 2: Buildings within the Pamplona buffer](./minimal-1.png)
+![Map of building footprints clipped to a 1,250 m buffer around central
+Pamplona. Longitude is on the horizontal axis and latitude on the
+vertical axis. Dense, small footprints cluster near the upper center,
+while larger, more widely spaced buildings appear toward the edges.
+](./minimal-1.png)
 
 Figure 2: Buildings within the Pamplona buffer
 
@@ -130,13 +137,13 @@ Next, we extract the construction year from the `beginning` column:
 
 ``` r
 
-# Extract the first four positions.
+# Extract the first four characters.
 year <- substr(dataviz$beginning, 1, 4)
 
 # Replace entries that do not look like years with "0000".
 year[!(year %in% 0:2500)] <- "0000"
 
-# Convert to integer.
+# Convert the years to integers.
 year <- as.integer(year)
 
 # Add a new column.
@@ -185,7 +192,12 @@ ggplot(dataviz) +
   )
 ```
 
-![Figure 3: Urban growth in Pamplona](./dataviz-1.png)
+![Thematic map of building footprints colored by construction period,
+with a legend on the right and no coordinate axes. Classes cover years
+up to 1900 and subsequent decades through 2030. Buildings from 1900 or
+earlier cluster in the historic center, while later periods predominate
+in surrounding neighborhoods, illustrating outward urban growth.
+](./dataviz-1.png)
 
 Figure 3: Urban growth in Pamplona
 

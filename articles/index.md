@@ -1,6 +1,9 @@
 # Articles
 
-### All vignettes
+### Get started
+
+Combine cadastral map layers around El Sadar Stadium and create a
+thematic map of building construction periods in Pamplona.
 
 - [Get
   started](https://ropenspain.github.io/CatastRoNav/articles/CatastRoNav.md):

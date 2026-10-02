@@ -3,8 +3,8 @@
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
 you can retrieve addresses, buildings and cadastral parcels through its
-INSPIRE ATOM and WFS services, and download georeferenced images through
-its WMS service.
+INSPIRE ATOM and WFS services. You can also download georeferenced
+images through its WMS service.
 
 ## Installation
 
@@ -121,7 +121,7 @@ A **BibTeX** entry for **LaTeX** users is:
 @Manual{R-catastronav,
   title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
   year = {2026},
-  version = {1.0.0},
+  version = {1.0.0.9000},
   author = {Diego Hernangómez},
   doi = {10.5281/zenodo.6366407},
   url = {https://ropenspain.github.io/CatastRoNav/},

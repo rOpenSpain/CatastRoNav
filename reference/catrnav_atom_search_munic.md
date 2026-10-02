@@ -43,10 +43,24 @@ catrnav_atom_search_munic(
 
 ## Value
 
-A [tibble](https://dplyr.tidyverse.org/reference/defunct.html) with the
-municipality name and cadastral code, or `NULL` if no match is found.
+A [tibble](https://tibble.tidyverse.org/reference/tbl_df-class.html)
+with the municipality name and cadastral code, or `NULL` if no match is
+found or the data cannot be retrieved.
 
 ## See also
+
+[`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
+provides the index used by this search.
+[`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+and
+[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
+list downloads for the other data types. Use the selected name or
+cadastral code with
+[`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+[`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+or
+[`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+to download a complete municipal dataset.
 
 Use the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),

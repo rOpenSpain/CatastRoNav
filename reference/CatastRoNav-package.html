@@ -19,6 +19,7 @@ Provides access to public spatial data from the Cadastre of Navarre through its 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/CatastRoNav.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -52,11 +53,15 @@ Provides access to public spatial data from the Cadastre of Navarre through its 
     <div class="dont-index">
 <ul><li><p><code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> and
 <code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> download complete municipal datasets.</p></li>
+<li><p><code><a href="catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code>,
+<code><a href="catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code> and
+<code><a href="catrnav_atom_get_parcels_db.html">catrnav_atom_get_parcels_db_all()</a></code> list municipal download URLs.</p></li>
 <li><p><code><a href="catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> searches for available municipalities.</p></li>
 <li><p><code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and
 <code><a href="catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> query features within a bounding box.</p></li>
 <li><p><code><a href="catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code> downloads georeferenced map images.</p></li>
-<li><p><code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> configures the local cache.</p></li>
+<li><p><code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code>, <code><a href="catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code> and
+<code><a href="catrnav_clear_cache.html">catrnav_clear_cache()</a></code> configure, inspect and clear the local cache.</p></li>
 <li><p>The <a href="https://ropenspain.github.io/CatastRoNav/">package website</a> provides
 articles and the complete reference index.</p></li>
 <li><p>Browse the <a href="https://github.com/rOpenSpain/CatastRoNav" class="external-link">source code</a> or
@@ -79,7 +84,7 @@ articles and the complete reference index.</p></li>
 <footer id="footer"><div class="container">
     <div class="row">
       <div class="col-md">
-        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav Logo" height="24" class="round-logo">
+        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
         <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>. <br>Part of the <span class="ROS-light">rOpenSpain</span> project.
 </p>
@@ -88,7 +93,7 @@ articles and the complete reference index.</p></li>
         <h4 data-toc-skip>About <img src="../ROS-logo.png" alt="rOpenSpain logo" height="24" class="round-logo"><span class="ROS-light">
             rOpenSpain</span></h4>
         <p><a href="https://ropenspain.es/" class="external-link"><span class="ROS-light">rOpenSpain</span></a> is a community of
-          enthusiasts of <strong>R</strong>, open data and reproducibility that
+          <strong>R</strong>, open data and reproducibility enthusiasts that
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>

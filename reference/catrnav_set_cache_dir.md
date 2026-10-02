@@ -42,11 +42,14 @@ catrnav_detect_cache_dir()
 
 ## Value
 
-`catrnav_set_cache_dir()` invisibly returns the cache path as a
-character string. It is primarily called for its side effect.
+`catrnav_set_cache_dir()` returns a
+[character](https://rdrr.io/r/base/character.html) string containing the
+cache path, invisibly. This function is primarily called for its side
+effects.
 
-`catrnav_detect_cache_dir()` returns the cache path used in the current
-session.
+`catrnav_detect_cache_dir()` returns a
+[character](https://rdrr.io/r/base/character.html) string containing the
+cache path used in the current session.
 
 ## Details
 
@@ -94,6 +97,11 @@ If a download fails, use `verbose = TRUE` to inspect the request and
 
 ## See also
 
+[`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html) determines
+the persistent configuration directory.
+[`base::tempdir()`](https://rdrr.io/r/base/tempfile.html) provides the
+default temporary cache directory.
+
 Manage the local cache:
 [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
 
@@ -104,27 +112,27 @@ Manage the local cache:
 # Caution! This modifies your current state.
 # \dontrun{
 my_cache <- catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpknFILw/CatastRoNav
+#> ℹ /tmp/RtmpbIPnyR/CatastRoNav
 
 example_cache <- file.path(tempdir(), "example", "cache")
 catrnav_set_cache_dir(example_cache)
-#> ℹ CatastRoNav cache directory is /tmp/RtmpknFILw/example/cache.
+#> ℹ CatastRoNav cache directory is /tmp/RtmpbIPnyR/example/cache.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 
 catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpknFILw/example/cache
-#> [1] "/tmp/RtmpknFILw/example/cache"
+#> ℹ /tmp/RtmpbIPnyR/example/cache
+#> [1] "/tmp/RtmpbIPnyR/example/cache"
 
 # Restore the initial cache.
 catrnav_set_cache_dir(my_cache)
-#> ℹ CatastRoNav cache directory is /tmp/RtmpknFILw/CatastRoNav.
+#> ℹ CatastRoNav cache directory is /tmp/RtmpbIPnyR/CatastRoNav.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 identical(my_cache, catrnav_detect_cache_dir())
-#> ℹ /tmp/RtmpknFILw/CatastRoNav
+#> ℹ /tmp/RtmpbIPnyR/CatastRoNav
 #> [1] TRUE
 # }
 
 catrnav_detect_cache_dir()
-#> ℹ /tmp/RtmpknFILw/CatastRoNav
-#> [1] "/tmp/RtmpknFILw/CatastRoNav"
+#> ℹ /tmp/RtmpbIPnyR/CatastRoNav
+#> [1] "/tmp/RtmpbIPnyR/CatastRoNav"
 ```

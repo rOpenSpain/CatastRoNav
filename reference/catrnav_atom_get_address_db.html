@@ -19,6 +19,7 @@ service for downloading addresses by municipality."><meta property="og:image" co
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/CatastRoNav.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -85,14 +86,17 @@ stores cached files in a temporary directory (see <code><a href="https://rdrr.io
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="https://dplyr.tidyverse.org/reference/defunct.html" class="external-link">tibble</a> with the requested information in the following
-columns:</p><ul><li><p><code>munic</code>: Municipality name and cadastral code.</p></li>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tbl_df-class.html" class="external-link">tibble</a> with the following columns, or <code>NULL</code> if
+the data cannot be retrieved:</p><ul><li><p><code>munic</code>: Municipality name and cadastral code.</p></li>
 <li><p><code>url</code>: ATOM URL for the corresponding municipality.</p></li>
 <li><p><code>date</code>: Reference date of the data.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Use the ATOM INSPIRE service:
+    <div class="dont-index"><p><code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code> downloads addresses for a municipality listed in
+this index. <code><a href="catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> finds municipality names and
+cadastral codes.</p>
+<p>Use the ATOM INSPIRE service:
 <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>,
 <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>,
 <code><a href="catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code>,
@@ -133,7 +137,7 @@ columns:</p><ul><li><p><code>munic</code>: Municipality name and cadastral code.
 <footer id="footer"><div class="container">
     <div class="row">
       <div class="col-md">
-        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav Logo" height="24" class="round-logo">
+        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
         <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>. <br>Part of the <span class="ROS-light">rOpenSpain</span> project.
 </p>
@@ -142,7 +146,7 @@ columns:</p><ul><li><p><code>munic</code>: Municipality name and cadastral code.
         <h4 data-toc-skip>About <img src="../ROS-logo.png" alt="rOpenSpain logo" height="24" class="round-logo"><span class="ROS-light">
             rOpenSpain</span></h4>
         <p><a href="https://ropenspain.es/" class="external-link"><span class="ROS-light">rOpenSpain</span></a> is a community of
-          enthusiasts of <strong>R</strong>, open data and reproducibility that
+          <strong>R</strong>, open data and reproducibility enthusiasts that
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>

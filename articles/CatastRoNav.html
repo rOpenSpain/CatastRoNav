@@ -45,6 +45,7 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/CatastRoNav.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -82,7 +83,7 @@
 
 
 
-    <!-- CatastRoNav.qmd is generated from CatastRoNav.qmd.orig. Please edit that file. --><p><strong>CatastRoNav</strong> provides access to services from the <a href="https://geoportal.navarra.es/es/idena" class="external-link">Cadastre of Navarre</a>. With <strong>CatastRoNav</strong>, you can retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM and WFS services, and download georeferenced images through its WMS service.</p>
+    <!-- CatastRoNav.qmd is generated from CatastRoNav.qmd.orig. Please edit that file. --><p><strong>CatastRoNav</strong> provides access to services from the <a href="https://geoportal.navarra.es/es/idena" class="external-link">Cadastre of Navarre</a>. With <strong>CatastRoNav</strong>, you can retrieve addresses, buildings and cadastral parcels through its INSPIRE ATOM and WFS services. You can also download georeferenced images through its WMS service.</p>
 <section class="level2"><h2 id="inspire-services">INSPIRE services<a class="anchor" aria-label="anchor" href="#inspire-services"></a>
 </h2>
 <blockquote>
@@ -96,14 +97,14 @@
 <li>
 <strong>WFS service:</strong> Retrieves cadastral features within a supplied bounding box.</li>
 <li>
-<strong>WMS service:</strong> Downloads georeferenced map images for different cadastral elements.</li>
+<strong>WMS service:</strong> Downloads georeferenced map images for addresses, buildings and cadastral parcels.</li>
 </ol>
 <p>ATOM download and WFS query functions return addresses, buildings and cadastral parcels as <code>sf</code> objects from the <strong>sf</strong> package. ATOM index and search functions return tibbles. WMS functions return georeferenced images as <code>SpatRaster</code> objects from the <strong>terra</strong> package.</p>
 </section><section class="level2"><h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <section class="level3"><h3 id="working-with-layers">Working with layers<a class="anchor" aria-label="anchor" href="#working-with-layers"></a>
 </h3>
-<p>This example demonstrates the main capabilities of <strong>CatastRoNav</strong> by recreating a cadastral map of the surroundings of <a href="https://en.wikipedia.org/wiki/El_Sadar_Stadium" class="external-link">El Sadar Stadium</a>. We use the WMS and WFS services to retrieve different layers.</p>
+<p>This example demonstrates the main capabilities of <strong>CatastRoNav</strong> by recreating a cadastral map of the area around <a href="https://en.wikipedia.org/wiki/El_Sadar_Stadium" class="external-link">El Sadar Stadium</a>. We use the WMS and WFS services to retrieve different layers.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve buildings within a bounding box.</span></span>
 <span><span class="co"># Coordinates can be obtained from https://boundingbox.klokantech.com/.</span></span>
@@ -139,7 +140,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">stadium</span>, fill <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">coord_sf</a></span><span class="op">(</span>crs <span class="op">=</span> <span class="fl">25830</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="./sadar-1.png" alt="Figure 1: Cadastral layers around El Sadar Stadium" width="100%"><p class="caption">
+<img src="./sadar-1.png" alt="Map with building footprints in translucent red over cadastral parcel boundaries and numeric parcel labels. Longitude is on the horizontal axis and latitude on the vertical axis. The overlay locates buildings within parcels around El Sadar Stadium.
+" width="100%"><p class="caption">
 Figure 1: Cadastral layers around El Sadar Stadium
 </p>
 </div>
@@ -167,19 +169,20 @@ Figure 1: Cadastral layers around El Sadar Stadium
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="./minimal-1.png" alt="Figure 2: Buildings within the Pamplona buffer" width="100%"><p class="caption">
+<img src="./minimal-1.png" alt="Map of building footprints clipped to a 1,250 m buffer around central Pamplona. Longitude is on the horizontal axis and latitude on the vertical axis. Dense, small footprints cluster near the upper center, while larger, more widely spaced buildings appear toward the edges.
+" width="100%"><p class="caption">
 Figure 2: Buildings within the Pamplona buffer
 </p>
 </div>
 <p>Next, we extract the construction year from the <code>beginning</code> column:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Extract the first four positions.</span></span>
+<code class="sourceCode R"><span><span class="co"># Extract the first four characters.</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">dataviz</span><span class="op">$</span><span class="va">beginning</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Replace entries that do not look like years with "0000".</span></span>
 <span><span class="va">year</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">2500</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"0000"</span></span>
 <span></span>
-<span><span class="co"># Convert to integer.</span></span>
+<span><span class="co"># Convert the years to integers.</span></span>
 <span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add a new column.</span></span>
@@ -221,7 +224,8 @@ Figure 2: Buildings within the Pamplona buffer
 <span>    plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">40</span>, l <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="./dataviz-1.png" alt="Figure 3: Urban growth in Pamplona" width="100%"><p class="caption">
+<img src="./dataviz-1.png" alt="Thematic map of building footprints colored by construction period, with a legend on the right and no coordinate axes. Classes cover years up to 1900 and subsequent decades through 2030. Buildings from 1900 or earlier cluster in the historic center, while later periods predominate in surrounding neighborhoods, illustrating outward urban growth.
+" width="100%"><p class="caption">
 Figure 3: Urban growth in Pamplona
 </p>
 </div>
@@ -325,7 +329,7 @@ Royé, Dominic. 2019. <em>Visualize Urban Growth</em>. <a href="https://dominicr
 <footer id="footer"><div class="container">
     <div class="row">
       <div class="col-md">
-        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav Logo" height="24" class="round-logo">
+        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
         <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>. <br>Part of the <span class="ROS-light">rOpenSpain</span> project.
 </p>
@@ -336,7 +340,7 @@ Royé, Dominic. 2019. <em>Visualize Urban Growth</em>. <a href="https://dominicr
             rOpenSpain</span>
 </h4>
         <p><a href="https://ropenspain.es/" class="external-link"><span class="ROS-light">rOpenSpain</span></a> is a community of
-          enthusiasts of <strong>R</strong>, open data and reproducibility that
+          <strong>R</strong>, open data and reproducibility enthusiasts that
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>

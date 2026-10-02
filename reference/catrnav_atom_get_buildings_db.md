@@ -42,8 +42,8 @@ catrnav_atom_get_buildings_db_all(
 
 ## Value
 
-A [tibble](https://dplyr.tidyverse.org/reference/defunct.html) with the
-requested information in the following columns:
+A [tibble](https://tibble.tidyverse.org/reference/tbl_df-class.html)
+with the following columns, or `NULL` if the data cannot be retrieved:
 
 - `munic`: Municipality name and cadastral code.
 
@@ -52,6 +52,11 @@ requested information in the following columns:
 - `date`: Reference date of the data.
 
 ## See also
+
+[`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+downloads buildings for a municipality listed in this index.
+[`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+finds municipality names and cadastral codes.
 
 Use the ATOM INSPIRE service:
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),

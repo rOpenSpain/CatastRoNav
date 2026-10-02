@@ -19,6 +19,7 @@ This function wraps mapSpain::esp_get_tiles()."><meta property="og:image" conten
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/CatastRoNav.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -137,15 +138,16 @@ supported.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">SpatRaster</a></code> with three RGB or four RGBA layers, or <code>NULL</code>
-when the request cannot be completed. See <code><a href="https://rspatial.github.io/terra/reference/RGB.html" class="external-link">terra::RGB()</a></code>.</p>
+    <p>A <code>SpatRaster</code> with 3 (RGB) or 4 (RGBA) layers, depending on
+the provider. See <code><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">terra::rast()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="bounding-box">Bounding box<a class="anchor" aria-label="anchor" href="#bounding-box"></a></h2>
 
 
 <p>When <code>x</code> is a numeric vector, make sure that <code>srs</code> matches the coordinate
-values. When <code>x</code> is an <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> or <code>sfc</code> object, <code>srs</code> is ignored.</p>
+values. When <code>x</code> is an <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> or <code><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">sfc</a></code> object,
+<code>srs</code> is ignored.</p>
 <p>The query uses <a href="https://epsg.io/3857" class="external-link">EPSG:3857</a>, Web Mercator, then
 transforms the image back to the input CRS. If the image appears distorted,
 provide a spatial object as <code>x</code> or set <code>srs</code> to the CRS of the requested
@@ -178,7 +180,11 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><code><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html" class="external-link">mapSpain::esp_get_tiles()</a></code> downloads map tiles.</p></li>
+<ul><li><p><code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and
+<code><a href="catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> retrieve individual spatial features
+within a bounding box.</p></li>
+<li><p><code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> configures where downloaded images are cached.</p></li>
+<li><p><code><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html" class="external-link">mapSpain::esp_get_tiles()</a></code> downloads map tiles.</p></li>
 <li><p><code><a href="https://rspatial.github.io/terra/reference/RGB.html" class="external-link">terra::RGB()</a></code> identifies RGB channels.</p></li>
 <li><p><code><a href="https://rspatial.github.io/terra/reference/plotRGB.html" class="external-link">terra::plotRGB()</a></code> and <code><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">tidyterra::geom_spatraster_rgb()</a></code> plot RGB rasters.</p></li>
 </ul><p>Work with cadastral addresses:
@@ -217,16 +223,18 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 <span class="r-in"><span>  <span class="fu"><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">geom_spatraster_rgb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bu</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="catrnav_wms_get_layer-1.png" alt="" width="2188" height="1352"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Parcels</span></span></span>
+<span class="r-in"><span><span class="co"># Download cadastral parcels.</span></span></span>
 <span class="r-in"><span><span class="va">parc</span> <span class="op">&lt;-</span> <span class="fu">catrnav_wms_get_layer</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.646812</span>, <span class="fl">42.814528</span>, <span class="op">-</span><span class="fl">1.638036</span>, <span class="fl">42.820320</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  srs <span class="op">=</span> <span class="fl">4326</span>,</span></span>
 <span class="r-in"><span>  what <span class="op">=</span> <span class="st">"parcel"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [rast] cannot open this file as a SpatRaster: /tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>        (GDAL) `/tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png' not recognized as a supported file format.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">geom_spatraster_rgb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">parc</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="catrnav_wms_get_layer-2.png" alt="" width="2188" height="1352"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'parc' not found</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -239,7 +247,7 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 <footer id="footer"><div class="container">
     <div class="row">
       <div class="col-md">
-        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav Logo" height="24" class="round-logo">
+        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
         <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>. <br>Part of the <span class="ROS-light">rOpenSpain</span> project.
 </p>
@@ -248,7 +256,7 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
         <h4 data-toc-skip>About <img src="../ROS-logo.png" alt="rOpenSpain logo" height="24" class="round-logo"><span class="ROS-light">
             rOpenSpain</span></h4>
         <p><a href="https://ropenspain.es/" class="external-link"><span class="ROS-light">rOpenSpain</span></a> is a community of
-          enthusiasts of <strong>R</strong>, open data and reproducibility that
+          <strong>R</strong>, open data and reproducibility enthusiasts that
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>

@@ -88,7 +88,7 @@
 - **New features:**
   - Added support for ATOM cadastral parcels. See
     [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md).
-    Other ATOM capabilities to be added when the Cadastre of Navarre
+    Other ATOM capabilities will be added when the Cadastre of Navarre
     makes them available.
   - Added a caching system. See
     [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)

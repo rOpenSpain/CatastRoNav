@@ -58,11 +58,18 @@ coordinate values. The function queries the bounding box in
 transforms the result back to `srs`.
 
 When `x` is an [`sf`](https://r-spatial.github.io/sf/reference/sf.html)
-or `sfc` object, `srs` is ignored. The object's bounding box is used for
-the query and the result is transformed back to the input CRS. See
+or [`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object,
+`srs` is ignored. The object's bounding box is used for the query and
+the result is transformed back to the input CRS. See
 [`sf::st_bbox()`](https://r-spatial.github.io/sf/reference/st_bbox.html).
 
 ## See also
+
+[`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+downloads all cadastral parcels for a municipality.
+[`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
+retrieves a georeferenced map image rather than individual spatial
+features.
 
 Query data from the WFS INSPIRE service:
 [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md),

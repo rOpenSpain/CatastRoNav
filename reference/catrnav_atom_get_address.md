@@ -50,9 +50,16 @@ catrnav_atom_get_address(
 ## Value
 
 An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
-`NULL` if the data cannot be retrieved.
+`NULL` if the data cannot be retrieved. Returns `NA` invisibly if no
+municipality matches `munic`.
 
 ## See also
+
+[`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
+lists available municipal downloads.
+[`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md)
+retrieves addresses within a bounding box instead of downloading a
+complete municipal dataset.
 
 Use the ATOM INSPIRE service:
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),

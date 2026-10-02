@@ -101,17 +101,17 @@ catrnav_wms_get_layer(
 
 ## Value
 
-A [`SpatRaster`](https://rspatial.github.io/terra/reference/rast.html)
-with three RGB or four RGBA layers, or `NULL` when the request cannot be
-completed. See
-[`terra::RGB()`](https://rspatial.github.io/terra/reference/RGB.html).
+A `SpatRaster` with 3 (RGB) or 4 (RGBA) layers, depending on the
+provider. See
+[`terra::rast()`](https://rspatial.github.io/terra/reference/rast.html).
 
 ## Bounding box
 
 When `x` is a numeric vector, make sure that `srs` matches the
 coordinate values. When `x` is an
-[`sf`](https://r-spatial.github.io/sf/reference/sf.html) or `sfc`
-object, `srs` is ignored.
+[`sf`](https://r-spatial.github.io/sf/reference/sf.html) or
+[`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object, `srs`
+is ignored.
 
 The query uses [EPSG:3857](https://epsg.io/3857), Web Mercator, then
 transforms the image back to the input CRS. If the image appears
@@ -142,6 +142,15 @@ argument). Available styles include:
 - `"address"`: `"default"`.
 
 ## See also
+
+- [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md),
+  [`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_buildings.md)
+  and
+  [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
+  retrieve individual spatial features within a bounding box.
+
+- [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+  configures where downloaded images are cached.
 
 - [`mapSpain::esp_get_tiles()`](https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html)
   downloads map tiles.
@@ -192,15 +201,17 @@ ggplot() +
   geom_spatraster_rgb(data = bu)
 
 
-# Parcels
+# Download cadastral parcels.
 parc <- catrnav_wms_get_layer(
   c(-1.646812, 42.814528, -1.638036, 42.820320),
   srs = 4326,
   what = "parcel"
 )
+#> Error: [rast] cannot open this file as a SpatRaster: /tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png
+#>        (GDAL) `/tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png' not recognized as a supported file format.
 
 ggplot() +
   geom_spatraster_rgb(data = parc)
-
+#> Error: object 'parc' not found
 # }
 ```

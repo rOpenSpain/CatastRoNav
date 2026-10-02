@@ -11,7 +11,8 @@ run_example()
 
 ## Value
 
-Logical. `TRUE` if examples should run, `FALSE` otherwise.
+A [logical](https://rdrr.io/r/base/logical.html) value, `TRUE` if online
+and not running on CRAN, `FALSE` otherwise.
 
 ## Details
 

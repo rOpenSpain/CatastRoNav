@@ -19,6 +19,7 @@ INSPIRE service provided by the Cadastre of Navarre."><meta property="og:image" 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/CatastRoNav.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -92,11 +93,14 @@ stores cached files in a temporary directory (see <code><a href="https://rdrr.io
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> object, or <code>NULL</code> if the data cannot be
-retrieved.</p>
+retrieved. Returns <code>NA</code> invisibly if no municipality matches <code>munic</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Use the ATOM INSPIRE service:
+    <div class="dont-index"><p><code><a href="catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code> lists available municipal downloads.
+<code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code> retrieves addresses within a bounding box
+instead of downloading a complete municipal dataset.</p>
+<p>Use the ATOM INSPIRE service:
 <code><a href="catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code>,
 <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>,
 <code><a href="catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code>,
@@ -134,7 +138,7 @@ retrieved.</p>
 <footer id="footer"><div class="container">
     <div class="row">
       <div class="col-md">
-        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav Logo" height="24" class="round-logo">
+        <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
         <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>. <br>Part of the <span class="ROS-light">rOpenSpain</span> project.
 </p>
@@ -143,7 +147,7 @@ retrieved.</p>
         <h4 data-toc-skip>About <img src="../ROS-logo.png" alt="rOpenSpain logo" height="24" class="round-logo"><span class="ROS-light">
             rOpenSpain</span></h4>
         <p><a href="https://ropenspain.es/" class="external-link"><span class="ROS-light">rOpenSpain</span></a> is a community of
-          enthusiasts of <strong>R</strong>, open data and reproducibility that
+          <strong>R</strong>, open data and reproducibility enthusiasts that
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>
