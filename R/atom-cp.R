@@ -4,13 +4,22 @@
 #' Downloads spatial data for all cadastral parcels in a municipality using the
 #' ATOM INSPIRE service provided by the Cadastre of Navarre.
 #'
-#' @inheritParams catrnav_atom_get_address
+#' @inheritParams catrnav_atom_get_address munic
+#' @inheritParams catrnav_atom_get_address_db_all cache update_cache
+#' @inheritParams catrnav_atom_get_address_db_all cache_dir verbose
+#'
 #' @inherit catrnav_atom_get_address return
 #'
 #' @inherit catrnav_atom_get_address_db_all source
 #'
+#' @seealso
+#' [catrnav_atom_get_parcels_db_all()] lists available municipal downloads.
+#' [catrnav_wfs_get_parcels_bbox()] retrieves cadastral parcels within a
+#' bounding box instead of downloading a complete municipal dataset.
+#'
 #' @family atom
 #' @family parcels
+#'
 #' @export
 #' @encoding UTF-8
 #'

@@ -4,14 +4,23 @@
 #' Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
 #' service for downloading buildings by municipality.
 #'
-#' @inheritParams catrnav_atom_get_address_db_all
+#' @inheritParams catrnav_atom_get_address_db_all cache update_cache
+#' @inheritParams catrnav_atom_get_address_db_all cache_dir verbose
+#'
 #' @inherit catrnav_atom_get_address_db_all return
 #'
 #' @inherit catrnav_atom_get_address_db_all source
 #'
+#' @seealso
+#' [catrnav_atom_get_buildings()] downloads buildings for a municipality listed
+#' in this index. [catrnav_atom_search_munic()] finds municipality names and
+#' cadastral codes.
+#'
 #' @family atom
 #' @family buildings
+#'
 #' @rdname catrnav_atom_get_buildings_db
+#'
 #' @export
 #' @encoding UTF-8
 #'

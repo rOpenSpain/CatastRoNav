@@ -8,7 +8,8 @@
 run_example()
 }
 \value{
-Logical. \code{TRUE} if examples should run, \code{FALSE} otherwise.
+A \link[base:logical]{logical} value, \code{TRUE} if online and not running
+on CRAN, \code{FALSE} otherwise.
 }
 \description{
 Determines whether an example should run based on CRAN status and network

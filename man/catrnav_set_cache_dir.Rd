@@ -29,11 +29,12 @@ is \code{FALSE}, this argument is set to \code{FALSE} automatically.}
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-\code{catrnav_set_cache_dir()} invisibly returns the cache path as a character
-string. It is primarily called for its side effect.
+\code{catrnav_set_cache_dir()} returns a \link[base:character]{character}
+string containing the cache path, invisibly. This function is primarily
+called for its side effects.
 
-\code{catrnav_detect_cache_dir()} returns the cache path used in the current
-session.
+\code{catrnav_detect_cache_dir()} returns a \link[base:character]{character}
+string containing the cache path used in the current session.
 }
 \description{
 Configures the cache directory used by \pkg{CatastRoNav}. Use
@@ -41,9 +42,10 @@ Configures the cache directory used by \pkg{CatastRoNav}. Use
 \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} to inspect the current path.
 }
 \details{
-By default, when no \code{cache_dir} is set, \pkg{CatastRoNav} uses a directory
-inside \code{\link[base:tempdir]{base::tempdir()}}. Files in this directory are temporary and are
-removed when the \R session ends. To persist a cache across \R sessions, use
+By default, when no \code{cache_dir} is set, \pkg{CatastRoNav} uses a
+directory inside \code{\link[base:tempdir]{base::tempdir()}}. Files in this directory are temporary
+and are removed when the \R session ends. To persist a cache across \R
+sessions, use
 \code{catrnav_set_cache_dir(cache_dir, install = TRUE)}. This writes the chosen
 path to a configuration file under
 \code{tools::R_user_dir("CatastRoNav", "config")}.
@@ -97,6 +99,9 @@ identical(my_cache, catrnav_detect_cache_dir())
 catrnav_detect_cache_dir()
 }
 \seealso{
+\code{\link[tools:R_user_dir]{tools::R_user_dir()}} determines the persistent configuration directory.
+\code{\link[base:tempdir]{base::tempdir()}} provides the default temporary cache directory.
+
 Manage the local cache:
 \code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}}
 }

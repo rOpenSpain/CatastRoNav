@@ -4,18 +4,25 @@
 #' Downloads spatial data for all addresses in a municipality using the ATOM
 #' INSPIRE service provided by the Cadastre of Navarre.
 #'
+#' @inheritParams catrnav_atom_get_address_db_all cache update_cache
+#' @inheritParams catrnav_atom_get_address_db_all cache_dir verbose
+#'
 #' @param munic A municipality name, partial name or cadastral code. Use
 #'   [catrnav_atom_search_munic()] to search for available municipalities.
 #'
-#' @inheritParams catrnav_atom_get_address_db_all
-#' @inheritParams CatastRo::catr_atom_get_address update_cache cache_dir verbose
-#' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
-#'   retrieved.
+#' @returns An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
+#'   retrieved. Returns `NA` invisibly if no municipality matches `munic`.
 #'
 #' @inherit catrnav_atom_get_address_db_all source
 #'
+#' @seealso
+#' [catrnav_atom_get_address_db_all()] lists available municipal downloads.
+#' [catrnav_wfs_get_address_bbox()] retrieves addresses within a bounding box
+#' instead of downloading a complete municipal dataset.
+#'
 #' @family atom
 #' @family addresses
+#'
 #' @export
 #' @encoding UTF-8
 #'

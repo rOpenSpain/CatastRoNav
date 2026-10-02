@@ -4,15 +4,25 @@
 #' Searches for a municipality by name or cadastral code in the Cadastre of
 #' Navarre ATOM index.
 #'
+#' @inheritParams catrnav_atom_get_address_db_all cache update_cache
+#' @inheritParams catrnav_atom_get_address_db_all cache_dir verbose
+#'
 #' @param munic A municipality name, partial name or cadastral code to search
 #'   for.
-#' @inheritParams catrnav_atom_get_address
 #'
-#' @return A [tibble][dplyr::tbl_df] with the municipality name and cadastral
-#'   code, or `NULL` if no match is found.
+#' @returns A [tibble][tibble::tbl_df] with the municipality name and cadastral
+#'   code, or `NULL` if no match is found or the data cannot be retrieved.
+#'
+#' @seealso
+#' [catrnav_atom_get_address_db_all()] provides the index used by this search.
+#' [catrnav_atom_get_buildings_db_all()] and [catrnav_atom_get_parcels_db_all()]
+#' list downloads for the other data types. Use the selected name or cadastral
+#' code with [catrnav_atom_get_address()], [catrnav_atom_get_buildings()] or
+#' [catrnav_atom_get_parcels()] to download a complete municipal dataset.
 #'
 #' @family atom
 #' @family search
+#'
 #' @export
 #' @encoding UTF-8
 #'

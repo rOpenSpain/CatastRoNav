@@ -9,8 +9,8 @@
 #' @param verbose A logical value indicating whether to display informational
 #'   messages.
 #'
-#' @return A character string containing the downloaded file path, or `NULL` if
-#'   the download fails.
+#' @returns A [character][base::character] string containing the downloaded
+#'   file path, or `NULL` if the download fails.
 #'
 #' @noRd
 download_url <- function(

@@ -4,27 +4,24 @@
 #' Downloads georeferenced map images from the Cadastre of Navarre WMS service.
 #' This function wraps [mapSpain::esp_get_tiles()].
 #'
+#' @inheritParams catrnav_wfs_get_address_bbox x srs verbose
+#' @inheritParams catrnav_atom_get_address_db_all update_cache cache_dir
+#' @inheritParams mapSpain::esp_get_tiles crop options
+#' @inheritDotParams mapSpain::esp_get_tiles res:mask
+#'
 #' @param what WMS layer to download. See **Layers and styles**.
 #' @param styles Style to apply to the selected WMS layer. See
 #'   **Layers and styles**.
-#' @inheritParams catrnav_wfs_get_address_bbox
-#' @inheritParams catrnav_atom_get_address_db_all
-#' @inheritParams mapSpain::esp_get_tiles
-#' @inheritDotParams mapSpain::esp_get_tiles res:mask
-#'
-#' @return
-#' A [`SpatRaster`][terra::rast] with three RGB or four RGBA layers, or `NULL`
-#' when the request cannot be completed. See [terra::RGB()].
 #'
 #' @section Bounding box:
 #' When `x` is a numeric vector, make sure that `srs` matches the coordinate
-#' values. When `x` is an [`sf`][sf::st_sf] or `sfc` object, `srs` is ignored.
+#' values. When `x` is an [`sf`][sf::st_sf] or [`sfc`][sf::st_sfc] object,
+#' `srs` is ignored.
 #'
 #' The query uses [EPSG:3857](https://epsg.io/3857), Web Mercator, then
 #' transforms the image back to the input CRS. If the image appears distorted,
 #' provide a spatial object as `x` or set `srs` to the CRS of the requested
 #' image.
-#'
 #' @section Layers and styles:
 #'
 #' ## Layers
@@ -40,11 +37,15 @@
 #' - `"building"`: `"default"`.
 #' - `"address"`: `"default"`.
 #'
-#' @source
-#' ```{r child = "man/chunks/sitna.Rmd"}
-#' ```
+#' @inherit catrnav_atom_get_address_db_all source
+#' @inherit mapSpain::esp_get_tiles return
+
 #'
 #' @seealso
+#' - [catrnav_wfs_get_address_bbox()], [catrnav_wfs_get_buildings_bbox()] and
+#'   [catrnav_wfs_get_parcels_bbox()] retrieve individual spatial features
+#'   within a bounding box.
+#' - [catrnav_set_cache_dir()] configures where downloaded images are cached.
 #' - [mapSpain::esp_get_tiles()] downloads map tiles.
 #' - [terra::RGB()] identifies RGB channels.
 #' - [terra::plotRGB()] and [tidyterra::geom_spatraster_rgb()] plot RGB rasters.
@@ -53,6 +54,7 @@
 #' @family addresses
 #' @family buildings
 #' @family parcels
+#'
 #' @export
 #' @encoding UTF-8
 #'
@@ -71,7 +73,7 @@
 #' ggplot() +
 #'   geom_spatraster_rgb(data = bu)
 #'
-#' # Parcels
+#' # Download cadastral parcels.
 #' parc <- catrnav_wms_get_layer(
 #'   c(-1.646812, 42.814528, -1.638036, 42.820320),
 #'   srs = 4326,

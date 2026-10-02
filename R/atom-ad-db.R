@@ -4,14 +4,13 @@
 #' Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
 #' service for downloading addresses by municipality.
 #'
+#' @inheritParams CatastRo::catr_atom_get_address_db_all -cache -to
+#'
 #' @param cache A logical value indicating whether to use cached files. Defaults
 #'   to `TRUE`.
 #'
-#' @inheritParams CatastRo::catr_atom_get_address_db_all -cache -to
-#'
-#' @return
-#' A [tibble][dplyr::tbl_df] with the requested information in the following
-#' columns:
+#' @returns A [tibble][tibble::tbl_df] with the following columns, or `NULL` if
+#'   the data cannot be retrieved:
 #' - `munic`: Municipality name and cadastral code.
 #' - `url`: ATOM URL for the corresponding municipality.
 #' - `date`: Reference date of the data.
@@ -20,9 +19,16 @@
 #' ```{r child = "man/chunks/sitna.Rmd"}
 #' ```
 #'
+#' @seealso
+#' [catrnav_atom_get_address()] downloads addresses for a municipality listed in
+#' this index. [catrnav_atom_search_munic()] finds municipality names and
+#' cadastral codes.
+#'
 #' @family atom
 #' @family addresses
+#'
 #' @rdname catrnav_atom_get_address_db
+#'
 #' @export
 #' @encoding UTF-8
 #'

@@ -28,8 +28,8 @@ stores cached files in a temporary directory (see \code{\link[base:tempdir]{base
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-A \link[dplyr:tbl_df]{tibble} with the requested information in the following
-columns:
+A \link[tibble:tbl_df]{tibble} with the following columns, or \code{NULL} if
+the data cannot be retrieved:
 \itemize{
 \item \code{munic}: Municipality name and cadastral code.
 \item \code{url}: ATOM URL for the corresponding municipality.
@@ -46,6 +46,10 @@ catrnav_atom_get_buildings_db_all()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} downloads buildings for a municipality listed
+in this index. \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} finds municipality names and
+cadastral codes.
+
 Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},

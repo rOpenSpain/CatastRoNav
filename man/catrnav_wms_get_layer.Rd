@@ -64,8 +64,8 @@ supported.}
   }}
 }
 \value{
-A \code{\link[terra:rast]{SpatRaster}} with three RGB or four RGBA layers, or \code{NULL}
-when the request cannot be completed. See \code{\link[terra:RGB]{terra::RGB()}}.
+A \code{SpatRaster} with 3 (RGB) or 4 (RGBA) layers, depending on
+the provider. See \code{\link[terra:rast]{terra::rast()}}.
 }
 \description{
 Downloads georeferenced map images from the Cadastre of Navarre WMS service.
@@ -74,7 +74,8 @@ This function wraps \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles(
 \section{Bounding box}{
 
 When \code{x} is a numeric vector, make sure that \code{srs} matches the coordinate
-values. When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{sfc} object, \code{srs} is ignored.
+values. When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{\link[sf:st_sfc]{sfc}} object,
+\code{srs} is ignored.
 
 The query uses \href{https://epsg.io/3857}{EPSG:3857}, Web Mercator, then
 transforms the image back to the input CRS. If the image appears distorted,
@@ -122,7 +123,7 @@ library(tidyterra)
 ggplot() +
   geom_spatraster_rgb(data = bu)
 
-# Parcels
+# Download cadastral parcels.
 parc <- catrnav_wms_get_layer(
   c(-1.646812, 42.814528, -1.638036, 42.820320),
   srs = 4326,
@@ -136,6 +137,10 @@ ggplot() +
 }
 \seealso{
 \itemize{
+\item \code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}}, \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}} and
+\code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}} retrieve individual spatial features
+within a bounding box.
+\item \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} configures where downloaded images are cached.
 \item \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles()}} downloads map tiles.
 \item \code{\link[terra:RGB]{terra::RGB()}} identifies RGB channels.
 \item \code{\link[terra:plotRGB]{terra::plotRGB()}} and \code{\link[tidyterra:geom_spatraster_rgb]{tidyterra::geom_spatraster_rgb()}} plot RGB rasters.

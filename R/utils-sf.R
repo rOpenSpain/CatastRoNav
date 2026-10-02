@@ -7,7 +7,8 @@
 #' @param layer_hint An optional character string used to identify layer names.
 #' @param ... Additional arguments passed to [sf::read_sf()].
 #'
-#' @return An `sf` object or `NULL` when no spatial layer can be read.
+#' @returns An [`sf`][sf::st_sf] object, or `NULL` if no spatial layer can be
+#'   read.
 #'
 #' @noRd
 read_geo_file_sf <- function(
@@ -84,9 +85,10 @@ read_geo_file_sf <- function(
 
 #' Normalize an `sf` object
 #'
-#' @param data_sf An `sf` object.
+#' @param data_sf An [`sf`][sf::st_sf] object.
 #'
-#' @return A valid `sf` object with UTF-8 metadata.
+#' @returns An [`sf`][sf::st_sf] object with valid geometries and UTF-8
+#'   metadata.
 #'
 #' @noRd
 sanitize_sf <- function(data_sf) {

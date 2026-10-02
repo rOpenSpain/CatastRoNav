@@ -24,40 +24,60 @@ authors:
     href: https://www.uv.es/goerlich/
 
 reference:
-- title: INSPIRE services
+- title: Find municipalities
   desc: >
-    Retrieve cadastral addresses, buildings and cadastral parcels from the
-    Cadastre of Navarre.
-- subtitle: Municipality search
-  desc: >
-    Find available municipalities by name or cadastral code.
+    Search by municipality name or cadastral code before downloading data.
 - contents:
   - has_concept("search")
-- subtitle: ATOM downloads
+
+- title: Download municipal datasets
   desc: >
-    Download complete municipal cadastral datasets through the ATOM service.
+    Use the ATOM service to retrieve complete municipal datasets for addresses,
+    buildings and cadastral parcels.
+- subtitle: Explore download URLs
+  desc: >
+    List available municipalities, download URLs and data reference dates.
+- contents:
+  - ends_with("_db_all")
+- subtitle: Download spatial features
+  desc: >
+    Download all features of a selected type for one municipality as an
+    **sf** object.
 - contents:
   - has_concept("atom")
   - -has_concept("search")
-- subtitle: WFS queries
+  - -ends_with("_db_all")
+
+- title: Query features within a bounding box
   desc: >
-    Retrieve cadastral features within a supplied bounding box.
+    Use the WFS service to retrieve addresses, buildings or cadastral parcels
+    for a selected area as an **sf** object.
 - contents:
   - has_concept("wfs")
-- subtitle: WMS maps
+
+- title: Download map images
   desc: >
-    Download georeferenced cadastral map images.
+    Use the WMS service to download georeferenced cadastral map images as a
+    **terra** SpatRaster object.
 - contents:
   - has_concept("wms")
 
-- title: Cache management
+- title: Manage the cache
   desc: >
     Configure, inspect and clear the local cache used by **CatastRoNav**.
 - contents:
   - has_concept("cache_utilities")
 
-- title: Package metadata
+- title: Package overview
   desc: >
-    Read package-level documentation.
+    Read the package overview and follow links to the main workflows.
 - contents:
   - CatastRoNav-package
+
+articles:
+- title: Get started
+  desc: >
+    Combine cadastral map layers around El Sadar Stadium and create a thematic
+    map of building construction periods in Pamplona.
+  contents:
+  - CatastRoNav

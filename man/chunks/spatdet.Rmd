@@ -3,6 +3,6 @@ values. The function queries the bounding box in
 [EPSG:25830](https://epsg.io/25830), ETRS89 / UTM zone 30N, then transforms the
 result back to `srs`.
 
-When `x` is an [`sf`][sf::st_sf] or `sfc` object, `srs` is ignored. The object's
-bounding box is used for the query and the result is transformed back to the
-input CRS. See [sf::st_bbox()].
+When `x` is an [`sf`][sf::st_sf] or [`sfc`][sf::st_sfc] object, `srs` is ignored.
+The object's bounding box is used for the query and the result is transformed
+back to the input CRS. See [sf::st_bbox()].

@@ -6,7 +6,7 @@
 #' @param .envir An environment used to evaluate inline \CRANpkg{cli}
 #'   expressions.
 #'
-#' @return `NULL`, invisibly.
+#' @returns [NULL][base::NULL], invisibly.
 #'
 #' @noRd
 make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
@@ -51,8 +51,7 @@ validate_flag <- function(value, arg) {
 #' @param arg The argument to match.
 #' @param choices A vector of possible values for `arg`.
 #'
-#' @return
-#' The matched value.
+#' @returns A [character][base::character] string containing the matched value.
 #'
 #' @noRd
 match_arg_pretty <- function(arg, choices) {

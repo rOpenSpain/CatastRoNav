@@ -6,20 +6,22 @@
 #' [catrnav_detect_cache_dir()] to inspect the current path.
 #'
 #' @details
-#' By default, when no `cache_dir` is set, \pkg{CatastRoNav} uses a directory
-#' inside [base::tempdir()]. Files in this directory are temporary and are
-#' removed when the \R session ends. To persist a cache across \R sessions, use
+#' By default, when no `cache_dir` is set, \pkg{CatastRoNav} uses a
+#' directory inside [base::tempdir()]. Files in this directory are temporary
+#' and are removed when the \R session ends. To persist a cache across \R
+#' sessions, use
 #' `catrnav_set_cache_dir(cache_dir, install = TRUE)`. This writes the chosen
 #' path to a configuration file under
 #' `tools::R_user_dir("CatastRoNav", "config")`.
 #'
-#' @param overwrite A logical value indicating whether to overwrite an existing
-#'   `CATASTRONAV_CACHE_DIR` value.
 #' @inheritParams CatastRo::catr_set_cache_dir cache_dir install verbose
 #'
-#' @return
-#' `catrnav_set_cache_dir()` invisibly returns the cache path as a character
-#' string. It is primarily called for its side effect.
+#' @param overwrite A logical value indicating whether to overwrite an existing
+#'   `CATASTRONAV_CACHE_DIR` value.
+#'
+#' @returns `catrnav_set_cache_dir()` returns a [character][base::character]
+#'   string containing the cache path, invisibly. This function is primarily
+#'   called for its side effects.
 #'
 #' @section Caching strategies:
 #'
@@ -48,12 +50,17 @@
 #' `tools::R_user_dir("CatastRoNav", "config")`. Existing configuration files
 #' are migrated automatically. A migration message is shown only once.
 #'
-#' @inherit CatastRo::catr_set_cache_dir seealso
+#' @seealso
+#' [tools::R_user_dir()] determines the persistent configuration directory.
+#' [base::tempdir()] provides the default temporary cache directory.
 #'
 #' @family cache_utilities
+#'
 #' @rdname catrnav_set_cache_dir
+#'
 #' @export
 #' @encoding UTF-8
+#'
 #' @examples
 #'
 #' # Caution! This modifies your current state.
@@ -140,13 +147,14 @@ catrnav_set_cache_dir <- function(
   invisible(cache_dir)
 }
 
-#' @return
-#' `catrnav_detect_cache_dir()` returns the cache path used in the current
-#' session.
+#' @returns `catrnav_detect_cache_dir()` returns a [character][base::character]
+#'   string containing the cache path used in the current session.
 #'
 #' @rdname catrnav_set_cache_dir
+#'
 #' @export
 #' @encoding UTF-8
+#'
 #' @examples
 #'
 #' catrnav_detect_cache_dir()
@@ -171,18 +179,25 @@ catrnav_detect_cache_dir <- function() {
 #' This function resets the cache state as if you had never used
 #' \pkg{CatastRoNav}.
 #'
-#' @param config A logical value indicating whether to delete the
-#'   \pkg{CatastRoNav} configuration directory.
 #' @inheritParams CatastRo::catr_clear_cache cached_data verbose
 #'
-#' @return `NULL`, invisibly. This function is called for its side effects.
+#' @param config A logical value indicating whether to delete the
+#'   \pkg{CatastRoNav} configuration directory.
 #'
-#' @inherit CatastRo::catr_clear_cache seealso
+#' @returns [NULL][base::NULL], invisibly. This function is called for its side
+#'   effects.
+#'
+#' @seealso
+#' [catrnav_detect_cache_dir()] identifies the active cache path before
+#' deletion. [catrnav_set_cache_dir()] configures a new cache afterward.
 #'
 #' @family cache_utilities
+#'
 #' @rdname catrnav_clear_cache
+#'
 #' @export
 #' @encoding UTF-8
+#'
 #' @examples
 #'
 #' # Caution! This modifies your current state.
@@ -238,7 +253,7 @@ catrnav_clear_cache <- function(
 
   Sys.setenv(CATASTRONAV_CACHE_DIR = "")
 
-  # Reset the cache directory.
+  # Return invisibly after clearing the cache state.
   invisible()
 }
 

@@ -16,7 +16,8 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-\code{NULL}, invisibly. This function is called for its side effects.
+\link[base:NULL]{NULL}, invisibly. This function is called for its side
+effects.
 }
 \description{
 Use this function with caution. It clears cached data and configuration,
@@ -49,6 +50,9 @@ identical(my_cache, catrnav_detect_cache_dir())
 }
 }
 \seealso{
+\code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} identifies the active cache path before
+deletion. \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} configures a new cache afterward.
+
 Manage the local cache:
 \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}
 }

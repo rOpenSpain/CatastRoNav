@@ -7,11 +7,14 @@
 #' @details
 #' Returns `FALSE` on CRAN or when offline.
 #'
-#' @inherit CatastRo::run_example return
+#' @returns A [logical][base::logical] value, `TRUE` if online and not running
+#'   on CRAN, `FALSE` otherwise.
 #'
 #' @keywords internal
+#'
 #' @export
 #' @encoding UTF-8
+#'
 #' @examples
 #' run_example()
 run_example <- function() {
@@ -27,7 +30,8 @@ run_example <- function() {
 
 #' Check whether code is running on CRAN
 #'
-#' @return A logical value, `TRUE` if running on CRAN and `FALSE` otherwise.
+#' @returns A [logical][base::logical] value, `TRUE` if running on CRAN,
+#'   `FALSE` otherwise.
 #'
 #' @noRd
 on_cran <- function(is_interactive = interactive()) {

@@ -48,9 +48,9 @@ values. The function queries the bounding box in
 \href{https://epsg.io/25830}{EPSG:25830}, ETRS89 / UTM zone 30N, then transforms the
 result back to \code{srs}.
 
-When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{sfc} object, \code{srs} is ignored. The object's
-bounding box is used for the query and the result is transformed back to the
-input CRS. See \code{\link[sf:st_bbox]{sf::st_bbox()}}.
+When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{\link[sf:st_sfc]{sfc}} object, \code{srs} is ignored.
+The object's bounding box is used for the query and the result is transformed
+back to the input CRS. See \code{\link[sf:st_bbox]{sf::st_bbox()}}.
 }
 
 \examples{
@@ -66,6 +66,10 @@ ggplot(ad) +
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}} downloads all addresses for a municipality.
+\code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}} retrieves a georeferenced map image rather than
+individual spatial features.
+
 Query data from the WFS INSPIRE service:
 \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}},
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}}

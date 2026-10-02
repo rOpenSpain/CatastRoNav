@@ -1,10 +1,11 @@
 #' Run a Navarre WFS bounding box query
 #'
-#' @param path WFS endpoint path.
-#' @param typenames WFS feature type.
 #' @inheritParams catrnav_wfs_get_buildings_bbox
 #'
-#' @return An `sf` object or `NULL` when the request fails.
+#' @param path WFS endpoint path.
+#' @param typenames WFS feature type.
+#'
+#' @inherit catrnav_wfs_get_address_bbox return
 #'
 #' @noRd
 wfs_read_bbox_query <- function(

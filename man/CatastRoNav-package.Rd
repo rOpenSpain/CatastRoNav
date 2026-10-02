@@ -15,11 +15,15 @@ Provides access to public spatial data from the Cadastre of Navarre through its 
 \itemize{
 \item \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}}, \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} and
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} download complete municipal datasets.
+\item \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
+\code{\link[=catrnav_atom_get_buildings_db_all]{catrnav_atom_get_buildings_db_all()}} and
+\code{\link[=catrnav_atom_get_parcels_db_all]{catrnav_atom_get_parcels_db_all()}} list municipal download URLs.
 \item \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} searches for available municipalities.
 \item \code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}}, \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}} and
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}} query features within a bounding box.
 \item \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}} downloads georeferenced map images.
-\item \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} configures the local cache.
+\item \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}, \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} and
+\code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}} configure, inspect and clear the local cache.
 \item The \href{https://ropenspain.github.io/CatastRoNav/}{package website} provides
 articles and the complete reference index.
 \item Browse the \href{https://github.com/rOpenSpain/CatastRoNav}{source code} or

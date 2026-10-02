@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
   "issueTracker": "https://github.com/rOpenSpain/CatastRoNav/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.0.0",
+  "version": "1.0.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -271,7 +271,7 @@
   },
   "isPartOf": "https://ropenspain.es/",
   "keywords": ["catastro", "maps", "navarra", "r", "r-package", "r-stats", "ropenspain", "spain"],
-  "fileSize": "1283.676KB",
+  "fileSize": "1292.031KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

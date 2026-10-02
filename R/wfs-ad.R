@@ -5,30 +5,35 @@
 #' service. `catrnav_wfs_get_address_bbox()` retrieves features within the
 #' supplied bounding box. See **Bounding box**.
 #'
+#' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
+#'
 #' @param srs The CRS to use for the query. Defaults to `4326`. See **Bounding
 #'   box**.
 #' @param count A positive whole number specifying the maximum number of
 #'   features to return. If `NULL`, the service default applies.
 #'
-#' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
-#' @return An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
+#' @returns An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
 #'   retrieved.
 #'
 #' @section API limits:
 #' The service returns a maximum of 5,000 features by default. Use `count` to
 #' request a smaller result.
-#'
 #' @section Bounding box:
 #' ```{r child = "man/chunks/spatdet.Rmd"}
 #' ```
 #'
-#' @source
-#' ```{r child = "man/chunks/sitna.Rmd"}
-#' ```
+#' @inherit catrnav_atom_get_address_db_all source
+#'
+#' @seealso
+#' [catrnav_atom_get_address()] downloads all addresses for a municipality.
+#' [catrnav_wms_get_layer()] retrieves a georeferenced map image rather than
+#' individual spatial features.
 #'
 #' @family wfs
 #' @family addresses
+#'
 #' @rdname catrnav_wfs_get_address
+#'
 #' @export
 #' @encoding UTF-8
 #'

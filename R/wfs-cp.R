@@ -5,16 +5,25 @@
 #' INSPIRE service. `catrnav_wfs_get_parcels_bbox()` retrieves features within
 #' the supplied bounding box. See **Bounding box**.
 #'
-#' @inheritParams catrnav_wfs_get_address_bbox
+#' @inheritParams catrnav_wfs_get_address_bbox x srs verbose count
+#'
 #' @inherit catrnav_wfs_get_address_bbox return
+#'
 #' @inheritSection catrnav_wfs_get_address_bbox API limits
 #' @inheritSection catrnav_wfs_get_address_bbox Bounding box
 #'
-#' @inherit catrnav_wfs_get_address_bbox source
+#' @inherit catrnav_atom_get_address_db_all source
+#'
+#' @seealso
+#' [catrnav_atom_get_parcels()] downloads all cadastral parcels for a
+#' municipality. [catrnav_wms_get_layer()] retrieves a georeferenced map image
+#' rather than individual spatial features.
 #'
 #' @family wfs
 #' @family parcels
+#'
 #' @rdname catrnav_wfs_get_parcels
+#'
 #' @export
 #' @encoding UTF-8
 #'

@@ -29,8 +29,8 @@ stores cached files in a temporary directory (see \code{\link[base:tempdir]{base
 \item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
 }
 \value{
-A \link[dplyr:tbl_df]{tibble} with the municipality name and cadastral
-code, or \code{NULL} if no match is found.
+A \link[tibble:tbl_df]{tibble} with the municipality name and cadastral
+code, or \code{NULL} if no match is found or the data cannot be retrieved.
 }
 \description{
 Searches for a municipality by name or cadastral code in the Cadastre of
@@ -42,6 +42,12 @@ catrnav_atom_search_munic("Pamplona")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}} provides the index used by this search.
+\code{\link[=catrnav_atom_get_buildings_db_all]{catrnav_atom_get_buildings_db_all()}} and \code{\link[=catrnav_atom_get_parcels_db_all]{catrnav_atom_get_parcels_db_all()}}
+list downloads for the other data types. Use the selected name or cadastral
+code with \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}}, \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} or
+\code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} to download a complete municipal dataset.
+
 Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},

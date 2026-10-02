@@ -2,25 +2,29 @@
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# CatastRoNav <a href="https://ropenspain.github.io/CatastRoNav/"><img src="man/figures/logo.png" alt="CatastRoNav website" align="right" height="139"/></a>
+# CatastRoNav <a href="https://ropenspain.github.io/CatastRoNav/"><img src="man/figures/logo.png" alt="CatastRoNav logo, visit the package website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
-[![rOS-badge](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
+[![rOpenSpain](https://ropenspain.github.io/rostemplate/reference/figures/ropenspain-badge.svg)](https://ropenspain.es/)
 [![CatastRoNav status
 badge](https://ropenspain.r-universe.dev/badges/CatastRoNav)](https://ropenspain.r-universe.dev/CatastRoNav)
-[![R-CMD-check](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml)
-[![codecov](https://codecov.io/gh/rOpenSpain/CatastRoNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastRoNav)
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
-[![Project-Status:Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R CMD check
+status](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml/badge.svg)](https://github.com/rOpenSpain/CatastRoNav/actions/workflows/roscron-check-standard.yaml)
+[![Test
+coverage](https://codecov.io/gh/rOpenSpain/CatastRoNav/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rOpenSpain/CatastRoNav)
+[![DOI:
+10.5281/zenodo.6366407](https://img.shields.io/badge/DOI-10.5281/zenodo.6366407-blue)](https://doi.org/10.5281/zenodo.6366407)
+[![Project status:
+active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 <!-- badges: end -->
 
 **CatastRoNav** provides access to services from the [Cadastre of
 Navarre](https://geoportal.navarra.es/es/idena). With **CatastRoNav**,
 you can retrieve addresses, buildings and cadastral parcels through its
-INSPIRE ATOM and WFS services, and download georeferenced images through
-its WMS service.
+INSPIRE ATOM and WFS services. You can also download georeferenced
+images through its WMS service.
 
 ## Installation
 
@@ -108,6 +112,7 @@ ggplot(wfs_get_buildings) +
 ```
 
 <img src="man/figures/README-wfs-1.png" style="width:100.0%"
+data-fig-alt="Map of building footprints in Olite, Navarre. Longitude is on the horizontal axis and latitude on the vertical axis. Closely packed buildings follow curved streets in the center, with more scattered footprints toward the edges. "
 alt="Buildings retrieved with CatastRoNav in Olite" />
 
 ## Cache management
@@ -131,7 +136,7 @@ A **BibTeX** entry for **LaTeX** users is:
     @Manual{R-catastronav,
       title = {{CatastRoNav}: Interface to the INSPIRE Services of the Cadastre of Navarre},
       year = {2026},
-      version = {1.0.0},
+      version = {1.0.0.9000},
       author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},

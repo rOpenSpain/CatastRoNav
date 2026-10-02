@@ -33,7 +33,7 @@ stores cached files in a temporary directory (see \code{\link[base:tempdir]{base
 }
 \value{
 An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be
-retrieved.
+retrieved. Returns \code{NA} invisibly if no municipality matches \code{munic}.
 }
 \description{
 Downloads spatial data for all addresses in a municipality using the ATOM
@@ -55,6 +55,10 @@ ggplot(s) +
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}} lists available municipal downloads.
+\code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}} retrieves addresses within a bounding box
+instead of downloading a complete municipal dataset.
+
 Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
