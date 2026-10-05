@@ -1,0 +1,229 @@
+# WMS INSPIRE: download georeferenced map images
+
+Downloads georeferenced map images from the Cadastre of Navarre WMS
+service. This function wraps
+[`mapSpain::esp_get_tiles()`](https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html).
+
+## Usage
+
+``` r
+catrnav_wms_get_layer(
+  x,
+  srs = 4326,
+  what = c("building", "parcel", "address"),
+  styles = c("default", "ELFCadastre"),
+  update_cache = FALSE,
+  cache_dir = NULL,
+  verbose = FALSE,
+  crop = FALSE,
+  options = NULL,
+  ...
+)
+```
+
+## Source
+
+[SITNA – Catastro de Navarra](https://geoportal.navarra.es/es/inspire)
+
+## Arguments
+
+- x:
+
+  Input defining the query area. See **Bounding box**. It can be:
+
+  - A numeric vector of length 4 with the coordinates that define the
+    bounding box: `c(xmin, ymin, xmax, ymax)`.
+
+  - An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) or
+    [`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object
+    from [sf](https://CRAN.R-project.org/package=sf).
+
+- srs:
+
+  The CRS to use for the query. Defaults to `4326`. See **Bounding
+  box**.
+
+- what:
+
+  WMS layer to download. See **Layers and styles**.
+
+- styles:
+
+  Style to apply to the selected WMS layer. See **Layers and styles**.
+
+- update_cache:
+
+  Logical. Whether to refresh the cached file. Defaults to `FALSE`.
+
+- cache_dir:
+
+  Path to a cache directory. If `NULL`, uses the configured cache or a
+  directory inside
+  [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html). See
+  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_set_cache_dir.md).
+
+- verbose:
+
+  Logical. Whether to display informational messages.
+
+- crop:
+
+  Logical. If `TRUE`, crop results to the specified `x` extent. If `x`
+  is an [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object
+  with one `POINT`, `crop` is set to `FALSE`. See
+  [`terra::crop()`](https://rspatial.github.io/terra/reference/crop.html).
+
+- options:
+
+  A named list containing additional options to pass to the query.
+
+- ...:
+
+  Arguments passed on to
+  [`mapSpain::esp_get_tiles`](https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html)
+
+  `res`
+
+  :   Character string or number. Only valid for WMS providers.
+      Resolution (in pixels) of the final tile.
+
+  `bbox_expand`
+
+  :   Number. Expansion percentage of the bounding box of `x`.
+
+  `transparent`
+
+  :   Logical. Whether to use a transparent background, if supported.
+
+  `mask`
+
+  :   Logical. `TRUE` to mask the result to `x`. See
+      [`terra::mask()`](https://rspatial.github.io/terra/reference/mask.html).
+
+## Value
+
+A [`SpatRaster`](https://rspatial.github.io/terra/reference/rast.html)
+with three RGB or four RGBA layers. Returns
+[`NULL`](https://rdrr.io/r/base/NULL.html) if the request cannot run or
+no image can be retrieved. See
+[`terra::RGB()`](https://rspatial.github.io/terra/reference/RGB.html).
+
+## Details
+
+Returns `NULL` if the request cannot run or no image can be retrieved.
+
+## Layers and styles
+
+### Layers
+
+The `what` argument selects one of the following API layers:
+
+- `"parcel"`: `CP.CadastralParcel`.
+
+- `"building"`: `BU.Building`.
+
+- `"address"`: `AD.Address`.
+
+### Styles
+
+The WMS service provides different styles for each layer (`what`
+argument). Available styles include:
+
+- `"parcel"`: `"default"` and `"ELFCadastre"`.
+
+- `"building"`: `"default"`.
+
+- `"address"`: `"default"`.
+
+## Bounding box
+
+When `x` is a numeric vector, make sure that `srs` matches the
+coordinate values. When `x` is an
+[`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, the
+`srs` value is ignored.
+
+The query uses [EPSG:3857](https://epsg.io/3857) (Web Mercator), then
+transforms the tile back to the SRS of `x`. If the tile appears
+distorted, provide a spatial object as `x` or set `srs` to the SRS of
+the requested tile. See **Examples**.
+
+## See also
+
+- [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_address.md),
+  [`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_buildings.md)
+  and
+  [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_parcels.md)
+  retrieve individual spatial features within a bounding box.
+
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_buildings.md)
+  and
+  [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_parcels.md)
+  download complete municipal vector datasets.
+
+- [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_set_cache_dir.md)
+  configures where downloaded images are cached.
+  [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_clear_cache.md)
+  removes cached images.
+
+- [`mapSpain::esp_get_tiles()`](https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html)
+  downloads map tiles.
+
+- [`terra::RGB()`](https://rspatial.github.io/terra/reference/RGB.html)
+  identifies RGB channels.
+
+- [`terra::plotRGB()`](https://rspatial.github.io/terra/reference/plotRGB.html)
+  and
+  [`tidyterra::geom_spatraster_rgb()`](https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html)
+  plot RGB rasters.
+
+Work with cadastral addresses:
+[`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_address.md),
+[`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_address_db.md),
+[`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_address.md)
+
+Work with cadastral buildings:
+[`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_buildings.md),
+[`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_buildings_db.md),
+[`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_buildings.md)
+
+Work with cadastral parcels:
+[`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_parcels.md),
+[`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_atom_get_parcels_db.md),
+[`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/dev/reference/catrnav_wfs_get_parcels.md)
+
+## Examples
+
+``` r
+# \donttest{
+bu <- catrnav_wms_get_layer(
+  c(-1.646812, 42.814528, -1.638036, 42.820320),
+  srs = 4326,
+  what = "building"
+)
+
+library(mapSpain)
+library(ggplot2)
+library(tidyterra)
+#> 
+#> Attaching package: ‘tidyterra’
+#> The following object is masked from ‘package:stats’:
+#> 
+#>     filter
+
+ggplot() +
+  geom_spatraster_rgb(data = bu)
+
+
+# Download cadastral parcels.
+parc <- catrnav_wms_get_layer(
+  c(-1.646812, 42.814528, -1.638036, 42.820320),
+  srs = 4326,
+  what = "parcel"
+)
+
+ggplot() +
+  geom_spatraster_rgb(data = parc)
+
+# }
+```
