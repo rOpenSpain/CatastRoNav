@@ -193,23 +193,38 @@ validate_wfs_args <- function(verbose, count) {
   invisible()
 }
 
-validate_vector_with_srs <- function(x, srs, expected_length) {
+validate_vector_with_srs <- function(
+  x,
+  srs,
+  expected_length,
+  call = parent.frame()
+) {
   if (!is.numeric(x)) {
     cli::cli_abort(
-      "{.arg x} must be a numeric vector or an {.cls sf} or {.cls sfc} object."
+      "{.arg x} must be a numeric vector or an {.cls sf} or {.cls sfc} object.",
+      call = call
     )
   }
   if (length(x) != expected_length) {
-    cli::cli_abort(paste0(
-      "{.arg x} must have length {.val {expected_length}}, not ",
-      "{.val {length(x)}}."
-    ))
+    cli::cli_abort(
+      paste0(
+        "{.arg x} must have length {.val {expected_length}}, not ",
+        "{.val {length(x)}}."
+      ),
+      call = call
+    )
   }
   if (anyNA(x) || !all(is.finite(x))) {
-    cli::cli_abort("{.arg x} must contain only finite, non-missing values.")
+    cli::cli_abort(
+      "{.arg x} must contain only finite, non-missing values.",
+      call = call
+    )
   }
   if (is.null(srs) || length(srs) == 0L || anyNA(srs)) {
-    cli::cli_abort("Provide {.arg srs} when {.arg x} is a numeric vector.")
+    cli::cli_abort(
+      "Provide {.arg srs} when {.arg x} is a numeric vector.",
+      call = call
+    )
   }
 
   invisible()

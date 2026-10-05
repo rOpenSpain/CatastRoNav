@@ -39,3 +39,10 @@
       Error:
       ! Query execution failed, cannot open layer.
 
+# read_geo_file_sf() handles sources without layers
+
+    Code
+      result <- read_geo_file_sf("empty.gpkg")
+    Message
+      ! No spatial layers found.
+

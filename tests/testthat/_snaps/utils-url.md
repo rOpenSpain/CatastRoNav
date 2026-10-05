@@ -83,3 +83,12 @@
     Message
       ! Download size is 21 Mb.
 
+# request failures include the condition message
+
+    Code
+      report_request_failure(simpleError("Connection failed."), "request")
+    Message
+      x The request could not be completed.
+      ! Connection failed.
+      Returning `NULL` because the request failed.
+

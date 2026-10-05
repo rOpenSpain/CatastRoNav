@@ -58,7 +58,7 @@
     Code
       validate_vector_with_srs(c(1, NA), 4326, expected_length = 2L)
     Condition
-      Error in `validate_vector_with_srs()`:
+      Error:
       ! `x` must contain only finite, non-missing values.
 
 # match_arg_pretty() validates and normalizes arguments

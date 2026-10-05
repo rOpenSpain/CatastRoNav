@@ -100,3 +100,21 @@ test_that("read_geo_file_sf() handles missing layers and read errors", {
     )
   )
 })
+
+test_that("read_geo_file_sf() handles sources without layers", {
+  local_mocked_bindings(st_layers_fun = function(...) list(name = character()))
+  expect_snapshot(result <- read_geo_file_sf("empty.gpkg"))
+  expect_null(result)
+})
+
+test_that("spatial validation identifies the public caller", {
+  cnd <- tryCatch(catrnav_wms_get_layer(c(1, 2)), error = identity)
+  expect_s3_class(cnd, "rlang_error")
+  expect_identical(conditionCall(cnd), quote(catrnav_wms_get_layer(c(1, 2))))
+  cnd <- tryCatch(catrnav_wfs_get_parcels_bbox(c(1, 2)), error = identity)
+  expect_s3_class(cnd, "rlang_error")
+  expect_identical(
+    conditionCall(cnd),
+    quote(catrnav_wfs_get_parcels_bbox(c(1, 2)))
+  )
+})

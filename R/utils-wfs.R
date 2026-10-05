@@ -10,7 +10,7 @@ wfs_read_bbox_query <- function(
   count <- ensure_null(count)
   validate_wfs_args(verbose, count)
 
-  bbox_res <- wfs_bbox(x, srs)
+  bbox_res <- wfs_bbox(x, srs, call = parent.frame())
 
   query <- wfs_build_bbox_query(typenames, bbox_res, count)
 
@@ -64,7 +64,7 @@ wfs_build_bbox_query <- function(typenames, bbox, count = NULL) {
   query
 }
 
-wfs_bbox <- function(bbox, srs = NULL) {
+wfs_bbox <- function(bbox, srs = NULL, call = parent.frame()) {
   srs <- ensure_null(srs)
 
   if (inherits(bbox, "sf") || inherits(bbox, "sfc")) {
@@ -77,7 +77,8 @@ wfs_bbox <- function(bbox, srs = NULL) {
     x = bbox,
     srs = srs,
     srs_dest = 25830,
-    limit_km2 = getOption("catastronav_wfs_limit_km2", Inf)
+    limit_km2 = getOption("catastronav_wfs_limit_km2", Inf),
+    call = call
   )
 
   list(
@@ -87,13 +88,19 @@ wfs_bbox <- function(bbox, srs = NULL) {
   )
 }
 
-wfs_get_bbox <- function(x, srs = NULL, srs_dest = 25830, limit_km2 = Inf) {
+wfs_get_bbox <- function(
+  x,
+  srs = NULL,
+  srs_dest = 25830,
+  limit_km2 = Inf,
+  call = parent.frame()
+) {
   srs <- ensure_null(srs)
 
   if (inherits(x, "sf") || inherits(x, "sfc")) {
     sfobj <- sf::st_as_sfc(sf::st_bbox(x))
   } else {
-    validate_vector_with_srs(x, srs, 4L)
+    validate_vector_with_srs(x, srs, 4L, call = call)
 
     sfobj <- x
     class(sfobj) <- "bbox"
@@ -103,7 +110,8 @@ wfs_get_bbox <- function(x, srs = NULL, srs_dest = 25830, limit_km2 = Inf) {
 
   if (is.na(sf::st_crs(sfobj))) {
     cli::cli_abort(
-      "{.arg srs} must identify a valid coordinate reference system."
+      "{.arg srs} must identify a valid coordinate reference system.",
+      call = call
     )
   }
 

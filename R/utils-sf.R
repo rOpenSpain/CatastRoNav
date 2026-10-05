@@ -32,7 +32,7 @@ read_geo_file_sf <- function(
     }
   }
 
-  layers <- sf::st_layers(file_local)
+  layers <- st_layers_fun(file_local)
 
   if (is.null(layers) || length(layers$name) == 0L) {
     cli::cli_alert_warning("No spatial layers found.")
@@ -96,13 +96,17 @@ sanitize_sf <- function(data_sf) {
   sf::st_make_valid(data_sf)
 }
 
-get_sf_from_bbox <- function(bbox, srs = NULL) {
+get_sf_from_bbox <- function(bbox, srs = NULL, call = parent.frame()) {
   srs <- ensure_null(srs)
 
   if (inherits(bbox, "sf") || inherits(bbox, "sfc")) {
     return(bbox)
   }
 
-  bbox_new <- wfs_get_bbox(x = bbox, srs = srs, srs_dest = srs)
+  bbox_new <- wfs_get_bbox(x = bbox, srs = srs, srs_dest = srs, call = call)
   sf::st_as_sfc(bbox_new)
+}
+
+st_layers_fun <- function(...) {
+  sf::st_layers(...)
 }

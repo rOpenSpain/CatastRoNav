@@ -98,12 +98,6 @@ catrnav_wms_get_layer <- function(
   bbox_res <- get_sf_from_bbox(x, srs)
   cache_dir <- create_cache_dir(cache_dir)
 
-  if (!is_online_fun()) {
-    cli::cli_alert_danger("No internet connection detected.")
-    cli::cli_alert("Returning {.code NULL} because the request cannot run.")
-    return(NULL)
-  }
-
   # Map the requested value to a WMS layer name.
 
   what <- match_arg_pretty(what) # nolint: object_usage_linter

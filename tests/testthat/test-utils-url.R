@@ -432,3 +432,42 @@ test_that("large downloads report their size before fetching the body", {
   expect_identical(readLines(result), "data")
   expect_all_false(seen$progress)
 })
+
+test_that("cache installation failures preserve both files", {
+  cache_dir <- withr::local_tempdir()
+  download <- file.path(cache_dir, "new.txt")
+  target <- file.path(cache_dir, "cached.txt")
+  writeLines("fresh", download)
+  local_mocked_bindings(catrnav_file_rename = function(...) FALSE)
+  expect_error(replace_cached_file(download, target), class = "rlang_error")
+  expect_identical(readLines(download), "fresh")
+  expect_all_false(file.exists(target))
+  writeLines("cached", target)
+  expect_error(replace_cached_file(download, target), class = "rlang_error")
+  expect_identical(readLines(target), "cached")
+  expect_setequal(list.files(cache_dir), c("cached.txt", "new.txt"))
+})
+
+test_that("cache replacement succeeds after preserving the previous file", {
+  cache_dir <- withr::local_tempdir()
+  download <- file.path(cache_dir, "new.txt")
+  target <- file.path(cache_dir, "cached.txt")
+  writeLines("fresh", download)
+  writeLines("cached", target)
+  local_mocked_bindings(catrnav_file_rename = function(from, to) {
+    if (identical(from, download) && file.exists(target)) {
+      return(FALSE)
+    }
+    file.rename(from, to)
+  })
+  expect_identical(replace_cached_file(download, target), target)
+  expect_identical(readLines(target), "fresh")
+  expect_identical(list.files(cache_dir), "cached.txt")
+})
+
+test_that("request failures include the condition message", {
+  expect_snapshot(report_request_failure(
+    simpleError("Connection failed."),
+    "request"
+  ))
+})

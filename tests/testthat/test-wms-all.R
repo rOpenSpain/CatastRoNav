@@ -38,7 +38,10 @@ test_that("WMS requests handle offline sessions and 404 responses", {
   bbox <- c(-1.646812, 42.814528, -1.638036, 42.820320)
   cdir <- withr::local_tempdir(pattern = "catrnav-wms-")
 
-  local_mocked_bindings(is_online_fun = function(...) FALSE)
+  local_mocked_bindings(
+    is_online_fun = function(...) FALSE,
+    esp_get_tiles_fun = function(...) NULL
+  )
   expect_snapshot(offline <- catrnav_wms_get_layer(bbox, cache_dir = cdir))
   expect_null(offline)
 
@@ -156,4 +159,23 @@ test_that("WMS tiles can be downloaded and cropped", {
   expect_s4_class(objcrop, "SpatRaster")
   expect_gt(terra::nrow(obj), terra::nrow(objcrop))
   expect_true(terra::same.crs(objcrop, obj))
+})
+
+test_that("offline WMS requests validate arguments and delegate cached tiles", {
+  cache_dir <- withr::local_tempdir()
+  tile <- terra::rast(nrows = 1, ncols = 1)
+  local_mocked_bindings(
+    is_online_fun = function(...) FALSE,
+    esp_get_tiles_fun = function(...) tile
+  )
+  bbox <- c(-1, 40, 0, 41)
+  expect_error(
+    catrnav_wms_get_layer(bbox, what = "invalid", cache_dir = cache_dir),
+    class = "rlang_error"
+  )
+  expect_error(
+    catrnav_wms_get_layer(bbox, styles = "invalid", cache_dir = cache_dir),
+    class = "rlang_error"
+  )
+  expect_identical(catrnav_wms_get_layer(bbox, cache_dir = cache_dir), tile)
 })
