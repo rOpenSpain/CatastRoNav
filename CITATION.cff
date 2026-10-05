@@ -12,10 +12,9 @@ version: 1.0.0.9000
 doi: 10.5281/zenodo.6366407
 abstract: Provides access to public spatial data from the Cadastre of Navarre through
   its 'INSPIRE' ATOM feeds, Web Feature Service and Web Map Service endpoints provided
-  by the Government of Navarre through the Sistema de Información Territorial de
-  Navarra ('SITNA'). Supports complete municipal dataset downloads, bounding box feature
-  queries and georeferenced map image downloads for addresses, buildings and cadastral
-  parcels.
+  by the Government of Navarre through the Sistema de Información Territorial de Navarra
+  ('SITNA'). Supports complete municipal dataset downloads, bounding box feature queries
+  and georeferenced map image downloads for addresses, buildings and cadastral parcels.
 authors:
 - family-names: Hernangómez
   given-names: Diego
@@ -27,6 +26,8 @@ preferred-citation:
   authors:
   - family-names: Hernangómez
     given-names: Diego
+    email: diego.hernangomezherrero@gmail.com
+    orcid: https://orcid.org/0000-0001-8457-4658
   year: '2026'
   version: 1.0.0.9000
   doi: 10.5281/zenodo.6366407
@@ -76,16 +77,16 @@ references:
   repository: https://CRAN.R-project.org/package=CatastRo
   authors:
   - family-names: Delgado Panadero
-    given-names: Angel
+    given-names: Ángel
     email: delgadopanadero@gmail.com
     orcid: https://orcid.org/0000-0002-8189-9251
-  - family-names: Hernangomez
+  - family-names: Hernangómez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
+  year: '2026'
   doi: 10.32614/CRAN.package.CatastRo
   version: '>= 1.1.0'
-  year: '2026'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -93,8 +94,8 @@ references:
   url: https://cli.r-lib.org
   repository: https://CRAN.R-project.org/package=cli
   authors:
-  - family-names: Csardi
-    given-names: Gabor
+  - family-names: Csárdi
+    given-names: Gábor
     email: gabor@posit.co
   year: '2026'
   doi: 10.32614/CRAN.package.cli
@@ -109,12 +110,12 @@ references:
     given-names: Hadley
     email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: Francois
+  - family-names: François
     given-names: Romain
     orcid: https://orcid.org/0000-0002-2444-4226
   - family-names: Henry
     given-names: Lionel
-  - family-names: Muller
+  - family-names: Müller
     given-names: Kirill
     orcid: https://orcid.org/0000-0002-1416-3412
   - family-names: Vaughan
@@ -159,7 +160,7 @@ references:
   url: https://ropenspain.github.io/mapSpain/
   repository: https://CRAN.R-project.org/package=mapSpain
   authors:
-  - family-names: Hernangomez
+  - family-names: Hernangómez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
@@ -213,7 +214,7 @@ references:
     given-names: Andrew
     orcid: https://orcid.org/0000-0002-4565-533X
   - family-names: Barbosa
-    given-names: A. Marcia
+    given-names: A. Márcia
     orcid: https://orcid.org/0000-0001-8972-7713
   - family-names: Cordano
     given-names: Emanuele
@@ -355,7 +356,7 @@ references:
   url: https://tibble.tidyverse.org/
   repository: https://CRAN.R-project.org/package=tibble
   authors:
-  - family-names: Muller
+  - family-names: Müller
     given-names: Kirill
     email: kirill@cynkra.com
     orcid: https://orcid.org/0000-0002-1416-3412
@@ -372,7 +373,7 @@ references:
   url: https://dieghernan.github.io/tidyterra/
   repository: https://CRAN.R-project.org/package=tidyterra
   authors:
-  - family-names: Hernangomez
+  - family-names: Hernangómez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
@@ -390,7 +391,7 @@ references:
   - family-names: Henry
     given-names: Lionel
     email: lionel@posit.co
-  - family-names: Muller
+  - family-names: Müller
     given-names: Kirill
     email: krlmlr+r@mailbox.org
   - family-names: Ushey

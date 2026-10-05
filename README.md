@@ -168,8 +168,8 @@ catrnav_atom_get_parcels(201, cache_dir = tempdir())
 
 <p>
 
-Hernangómez D (2026). <em>CatastRoNav: Interface to the INSPIRE
-Services of the Cadastre of Navarre</em>.
+Hernangómez D (2026). <em>CatastRoNav: Interface to the INSPIRE Services
+of the Cadastre of Navarre</em>.
 <a href="https://doi.org/10.5281/zenodo.6366407">doi:10.5281/zenodo.6366407</a>.
 <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
