@@ -52,7 +52,7 @@ Config/roxygen2/markdown: TRUE
 Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Copyright: Data source: SITNA b <https://geoportal.navarra.es/es/inspire>
+Copyright: See file COPYRIGHTS
 Encoding: UTF-8
 X-schema.org-isPartOf: https://ropenspain.es/
 X-schema.org-keywords: catastro, maps, navarra, r, r-package, r-stats,

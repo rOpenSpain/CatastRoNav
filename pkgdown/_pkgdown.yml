@@ -1,8 +1,5 @@
 url: https://ropenspain.github.io/CatastRoNav/
 
-development:
-  mode: auto
-
 repo:
   branch: main
 
