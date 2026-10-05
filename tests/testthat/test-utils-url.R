@@ -132,6 +132,7 @@ test_that("download_url() handles transport failures", {
 
 test_that("download_url() reuses cached files", {
   cache_dir <- withr::local_tempdir(pattern = "catrnav-cache-")
+  cache_dir <- normalizePath(cache_dir, winslash = "/")
   cached_file <- file.path(cache_dir, basename(atom_test_url))
   writeLines("cached", cached_file)
   local_mocked_bindings(is_online_fun = function(...) {
@@ -168,6 +169,7 @@ test_that("download_url() handles HTTP errors", {
 
 test_that("download_url() reports cached refreshes and downloads", {
   cache_dir <- withr::local_tempdir(pattern = "catrnav-refresh-")
+  cache_dir <- normalizePath(cache_dir, winslash = "/")
   cached_file <- file.path(cache_dir, basename(atom_test_url))
   writeLines("cached", cached_file)
   local_mocked_bindings(
@@ -199,6 +201,7 @@ test_that("download_url() reports cached refreshes and downloads", {
 
 test_that("failed refreshes preserve cached files and remove partial data", {
   cache_dir <- withr::local_tempdir()
+  cache_dir <- normalizePath(cache_dir, winslash = "/")
   target <- file.path(cache_dir, "data.xml")
   writeLines("cached", target)
   partial <- NULL

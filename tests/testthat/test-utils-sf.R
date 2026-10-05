@@ -75,7 +75,13 @@ test_that("read_geo_file_sf() handles invalid large files", {
   expect_snapshot(
     error = TRUE,
     read_geo_file_sf(source),
-    transform = function(x) gsub(source, "<source.gml>", x, fixed = TRUE)
+    transform = function(x) {
+      sub(
+        "Cannot open data source .*",
+        "Cannot open data source <source.gml>",
+        x
+      )
+    }
   )
 })
 
