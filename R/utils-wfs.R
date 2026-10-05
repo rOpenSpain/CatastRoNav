@@ -1,13 +1,3 @@
-#' Run a Navarre WFS bounding box query
-#'
-#' @inheritParams catrnav_wfs_get_buildings_bbox
-#'
-#' @param path WFS endpoint path.
-#' @param typenames WFS feature type.
-#'
-#' @inherit catrnav_wfs_get_address_bbox return
-#'
-#' @noRd
 wfs_read_bbox_query <- function(
   x,
   srs = 4326,
@@ -28,14 +18,13 @@ wfs_read_bbox_query <- function(
     hostname = "inspire.navarra.es",
     path = path,
     query = query,
+    cache_dir = create_cache_dir(),
     verbose = verbose
   )
 
   if (is.null(file_local)) {
     return(NULL)
   }
-
-  on.exit(unlink(file_local, force = TRUE), add = TRUE)
 
   out <- read_geo_file_sf(file_local, verbose)
   if (is.null(out)) {
@@ -46,6 +35,16 @@ wfs_read_bbox_query <- function(
 }
 
 inspire_wfs_get_fun <- function(...) {
+  old_options <- options(
+    catastro_ssl_verify = catrnav_ssl_verify(),
+    catastro_timeout = catrnav_timeout()
+  )
+  on.exit(options(old_options), add = TRUE)
+
+  catrnav_inspire_wfs_get(...)
+}
+
+catrnav_inspire_wfs_get <- function(...) {
   CatastRo::inspire_wfs_get(...)
 }
 
@@ -88,9 +87,6 @@ wfs_bbox <- function(bbox, srs = NULL) {
   )
 }
 
-#' Prepare a bounding box for a WFS query
-#'
-#' @noRd
 wfs_get_bbox <- function(x, srs = NULL, srs_dest = 25830, limit_km2 = Inf) {
   srs <- ensure_null(srs)
 

@@ -15,8 +15,19 @@ catr_read_atom <- function(file, encoding = "UTF-8") {
     base <- x$content$div$ul$li$a
     title <- base[[1]]
     url <- unlist(attr(base, "href"))
-    date <- as.POSIXct(unlist(x$updated))
-    data.frame(title = trimws(title), url = trimws(url), date = as.Date(date))
+    updated <- sub("Z$", "+0000", unlist(x$updated))
+    updated <- sub("([+-][0-9]{2}):([0-9]{2})$", "\\1\\2", updated)
+    date <- as.POSIXct(
+      updated,
+      tz = "UTC",
+      tryFormats = c(
+        "%Y-%m-%dT%H:%M:%OS%z",
+        "%Y-%m-%dT%H:%M:%OS",
+        "%Y-%m-%d %H:%M:%OS",
+        "%Y-%m-%d"
+      )
+    )
+    data.frame(title = trimws(title), url = trimws(url), date = date)
   })
 
   tbl_all <- dplyr::bind_rows(tbl_all)
@@ -37,20 +48,19 @@ read_atom_xml <- function(file, encoding = NULL) {
 catrnav_atom_read_db_all <- function(
   api_entry,
   title_prefix,
-  cache = TRUE,
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 ) {
-  validate_cache_args(cache, update_cache, cache_dir, verbose)
+  validate_cache_args(update_cache, cache_dir, verbose)
 
   path <- download_url(
     url = api_entry,
     name = basename(api_entry),
     cache_dir = cache_dir,
+    subdir = "databases",
     verbose = verbose,
-    update_cache = update_cache,
-    cache = cache
+    update_cache = update_cache
   )
 
   if (is.null(path)) {
@@ -67,24 +77,14 @@ catrnav_atom_read_munic <- function(
   munic,
   db_getter,
   db_name,
-  cache = TRUE,
+  subdir,
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 ) {
-  validate_cache_args(cache, update_cache, cache_dir, verbose)
-
-  if (
-    !is.character(munic) ||
-      length(munic) != 1L ||
-      is.na(munic) ||
-      !nzchar(munic)
-  ) {
-    cli::cli_abort("{.arg munic} must be a non-empty character value.")
-  }
+  validate_cache_args(update_cache, cache_dir, verbose)
 
   all <- db_getter(
-    cache = cache,
     update_cache = update_cache,
     cache_dir = cache_dir,
     verbose = FALSE
@@ -101,7 +101,7 @@ catrnav_atom_read_munic <- function(
     verbose = verbose
   )
   if (is.null(selected)) {
-    return(invisible(NA))
+    return(NULL)
   }
 
   api_entry <- selected$url[1]
@@ -110,34 +110,18 @@ catrnav_atom_read_munic <- function(
     url = api_entry,
     name = filename,
     cache_dir = cache_dir,
+    subdir = subdir,
     verbose = verbose,
-    update_cache = update_cache,
-    cache = cache
+    update_cache = update_cache
   )
 
   if (is.null(path)) {
     return(NULL)
   }
 
-  if (isFALSE(cache)) {
-    cache_dir <- tempdir()
-  } else {
-    cache_dir <- create_cache_dir(cache_dir)
-  }
-  exdir <- file.path(cache_dir, sub("\\..*$", "", filename))
-  if (!dir.exists(exdir)) {
-    dir.create(exdir, recursive = TRUE)
-  }
-
-  unzip(path, exdir = exdir, junkpaths = TRUE, overwrite = TRUE)
-
-  files <- list.files(exdir, full.names = TRUE, pattern = "\\.gml$")
-  read_geo_file_sf(files, verbose)
+  read_geo_file_sf(path, verbose = verbose, hint = "\\.gml$")
 }
 
-#' Select a municipality from an ATOM index
-#'
-#' @noRd
 catrnav_atom_select_munic <- function(all, munic, db_name, verbose = FALSE) {
   candidates <- catrnav_atom_match_munic(all, munic)
   if (is.null(candidates)) {
@@ -168,11 +152,8 @@ catrnav_atom_select_munic <- function(all, munic, db_name, verbose = FALSE) {
   selected
 }
 
-#' Match municipalities in an ATOM index
-#'
-#' @noRd
 catrnav_atom_match_munic <- function(all, munic) {
-  validate_non_empty_arg(munic)
+  munic <- as.character(munic)
 
   matches <- grep(munic, all$munic, ignore.case = TRUE)
 

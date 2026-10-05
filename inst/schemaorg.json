@@ -7,12 +7,18 @@
         "id": "https://orcid.org/0000-0001-8457-4658"
       },
       "codeRepository": "https://github.com/rOpenSpain/CatastRoNav",
-      "contributor": {
-        "id": "https://orcid.org/0000-0003-1626-525X",
-        "type": "Person",
-        "familyName": "Goerlich",
-        "givenName": "Francisco J."
-      },
+      "contributor": [
+        {
+          "id": "https://orcid.org/0000-0003-1626-525X",
+          "type": "Person",
+          "familyName": "Goerlich",
+          "givenName": "Francisco J."
+        },
+        {
+          "type": "Organization",
+          "name": "Gobierno de Navarra"
+        }
+      ],
       "copyrightHolder": {
         "id": "https://orcid.org/0000-0001-8457-4658",
         "type": "Person",
@@ -20,7 +26,7 @@
         "familyName": "Hernangómez",
         "givenName": "Diego"
       },
-      "description": "Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.",
+      "description": "Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' ATOM feeds, Web Feature Service and Web Map Service endpoints provided by the Government of Navarre through the Sistema de Información Territorial de Navarra ('SITNA'). Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.",
       "license": "https://spdx.org/licenses/GPL-2.0",
       "name": "CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre",
       "programmingLanguage": {

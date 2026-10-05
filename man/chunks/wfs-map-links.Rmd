@@ -1,0 +1,2 @@
+[catrnav_wms_get_layer()] retrieves a georeferenced map image rather than
+individual spatial features.

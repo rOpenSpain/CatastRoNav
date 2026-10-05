@@ -72,11 +72,11 @@ test_that("read_geo_file_sf() handles invalid large files", {
   writeBin(as.raw(0), connection)
   close(connection)
 
-  expect_message(
-    result <- read_geo_file_sf(source),
-    "Reading a large spatial file"
+  expect_snapshot(
+    error = TRUE,
+    read_geo_file_sf(source),
+    transform = function(x) gsub(source, "<source.gml>", x, fixed = TRUE)
   )
-  expect_null(result)
 })
 
 test_that("read_geo_file_sf() handles missing layers and read errors", {
@@ -88,9 +88,9 @@ test_that("read_geo_file_sf() handles missing layers and read errors", {
   expect_null(no_layer)
 
   expect_snapshot(
-    unreadable <- suppressWarnings(
+    error = TRUE,
+    suppressWarnings(
       read_geo_file_sf(source, query = "SELECT * FROM missing")
     )
   )
-  expect_null(unreadable)
 })

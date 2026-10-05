@@ -13,25 +13,27 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 
 \item{cached_data}{If \code{TRUE}, deletes your \code{cache_dir} and all its contents.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 }
 \value{
-\link[base:NULL]{NULL}, invisibly. This function is called for its side
-effects.
+\code{\link[base:NULL]{NULL}}, invisibly. This function is called for its
+side effects.
 }
 \description{
 Use this function with caution. It clears cached data and configuration,
 specifically:
 \itemize{
-\item Deletes the \pkg{CatastRoNav} configuration directory
+\item Deletes the \pkg{CatastRoNav} configuration directory when
+\code{config = TRUE}
 (\code{tools::R_user_dir("CatastRoNav", "config")}).
-\item Deletes the \code{cache_dir} directory.
+\item Deletes the \code{cache_dir} directory and its contents when
+\code{cached_data = TRUE}.
 \item Clears the \code{CATASTRONAV_CACHE_DIR} environment variable.
 }
 }
 \details{
-This function resets the cache state as if you had never used
-\pkg{CatastRoNav}.
+With \code{config = TRUE} and \code{cached_data = TRUE}, this function resets the
+cache state as if you had never used \pkg{CatastRoNav}.
 }
 \examples{
 

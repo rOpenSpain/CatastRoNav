@@ -27,7 +27,7 @@ test_that("address ATOM data reports unknown municipalities", {
   )
 
   expect_snapshot(result <- catrnav_atom_get_address("xyxghx"))
-  expect_identical(result, NA)
+  expect_null(result)
 })
 
 test_that("address ATOM data can be downloaded", {
@@ -45,4 +45,44 @@ test_that("address ATOM data can be downloaded", {
   expect_false(is.na(sf::st_crs(s)))
   expect_all_true(sf::st_is_valid(s))
   expect_true(attr(s, "sf_column") %in% names(s))
+})
+
+test_that("catrnav_atom_get_address() deprecates cache", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  local_mocked_bindings(catrnav_atom_read_munic = function(...) NULL)
+
+  expect_warning(
+    result <- catrnav_atom_get_address("061", cache = FALSE),
+    class = "lifecycle_warning_deprecated"
+  )
+  expect_null(result)
+})
+
+test_that("address downloads reject invalid municipalities before requests", {
+  local_mocked_bindings(catrnav_atom_read_munic = function(...) {
+    testthat::fail("Invalid inputs must not trigger a request.")
+  })
+
+  expect_snapshot(error = TRUE, catrnav_atom_get_address())
+  expect_error(catrnav_atom_get_address(NULL), class = "rlang_error")
+  expect_error(catrnav_atom_get_address(NA), class = "rlang_error")
+  expect_error(catrnav_atom_get_address("  "), class = "rlang_error")
+  expect_error(catrnav_atom_get_address(c("201", "061")), class = "rlang_error")
+  expect_error(catrnav_atom_get_address(TRUE), class = "rlang_error")
+})
+
+test_that("address downloads accept numeric municipality codes", {
+  seen <- NULL
+  local_mocked_bindings(
+    catrnav_atom_get_address_db_all = function(...) {
+      dplyr::tibble(munic = "201 Pamplona / Iruña", url = "municipality.zip")
+    },
+    download_url = function(url, ...) {
+      seen <<- url
+      NULL
+    }
+  )
+
+  expect_null(catrnav_atom_get_address(201))
+  expect_identical(seen, "municipality.zip")
 })

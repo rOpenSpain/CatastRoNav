@@ -10,39 +10,48 @@
 \usage{
 catrnav_atom_get_parcels(
   munic,
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 )
 }
 \arguments{
-\item{munic}{A municipality name, partial name or cadastral code. Use
+\item{munic}{A single municipality name, partial name or cadastral code.
+Accepts a character string or numeric code. Use
 \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} to search for available municipalities.}
 
-\item{cache}{A logical value indicating whether to use cached files. Defaults
-to \code{TRUE}.}
+\item{cache}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no longer
+supported because results are always cached.}
 
-\item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
-\code{FALSE}. When set to \code{TRUE}, it forces a new download.}
+\item{update_cache}{Logical. Whether to refresh the cached file. Defaults to
+\code{FALSE}.}
 
-\item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
-stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
+\item{cache_dir}{Path to a cache directory. If \code{NULL}, uses the configured
+cache or a directory inside \code{\link[base:tempdir]{base::tempdir()}}. See
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 }
 \value{
-An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be
-retrieved. Returns \code{NA} invisibly if no municipality matches \code{munic}.
+An \code{\link[sf:st_sf]{sf}} object. Returns \code{\link[base:NULL]{NULL}} if the
+data cannot be
+retrieved.
 }
 \description{
 Downloads spatial data for all cadastral parcels in a municipality using the
 ATOM INSPIRE service provided by the Cadastre of Navarre.
 }
+\details{
+Empty, missing or non-scalar values of \code{munic} produce an error before
+any download is attempted. Returns \code{NULL} if no municipality matches \code{munic}.
+Municipal ZIP archives are read directly without extracting their contents
+to disk.
+}
 \examples{
 \dontshow{if (run_example() && requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
-s <- catrnav_atom_get_parcels("Iruña")
+s <- catrnav_atom_get_parcels("Iru<U+00F1>a")
 
 library(ggplot2)
 
@@ -50,7 +59,7 @@ ggplot(s) +
   geom_sf() +
   labs(
     title = "Cadastral Zoning",
-    subtitle = "Pamplona / Iruña"
+    subtitle = "Pamplona / Iru<U+00F1>a"
   )
 \dontshow{\}) # examplesIf}
 }
@@ -59,7 +68,10 @@ ggplot(s) +
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}} retrieves cadastral parcels within a
 bounding box instead of downloading a complete municipal dataset.
 
-Use the ATOM INSPIRE service:
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} configures the download cache and
+\code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}} removes cached downloads.
+
+Query ATOM INSPIRE services:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
@@ -72,5 +84,5 @@ Work with cadastral parcels:
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}},
 \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
-\concept{atom}
+\concept{atom_services}
 \concept{parcels}

@@ -9,36 +9,38 @@
 }
 \usage{
 catrnav_atom_get_parcels_db_all(
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 )
 }
 \arguments{
-\item{cache}{A logical value indicating whether to use cached files. Defaults
-to \code{TRUE}.}
+\item{cache}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no longer
+supported because results are always cached.}
 
-\item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
-\code{FALSE}. When set to \code{TRUE}, it forces a new download.}
+\item{update_cache}{Logical. Whether to refresh the cached file. Defaults to
+\code{FALSE}.}
 
-\item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
-stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
+\item{cache_dir}{Path to a cache directory. If \code{NULL}, uses the configured
+cache or a directory inside \code{\link[base:tempdir]{base::tempdir()}}. See
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 }
 \value{
-A \link[tibble:tbl_df]{tibble} with the following columns, or \code{NULL} if
-the data cannot be retrieved:
+A \link[tibble:tbl_df]{tibble} with the following columns. Returns
+\code{\link[base:NULL]{NULL}} if the data cannot be retrieved.
 \itemize{
 \item \code{munic}: Municipality name and cadastral code.
 \item \code{url}: ATOM URL for the corresponding municipality.
-\item \code{date}: Reference date of the data.
+\item \code{date}: Reference timestamp of the data in UTC.
 }
 }
 \description{
-Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
-service for downloading cadastral parcels by municipality.
+Creates a \link[tibble:tbl_df]{tibble} of URLs provided by the Cadastre of
+Navarre ATOM INSPIRE service for downloading cadastral parcels by
+municipality.
 }
 \examples{
 \dontshow{if (run_example()) withAutoprint(\{ # examplesIf}
@@ -47,10 +49,11 @@ catrnav_atom_get_parcels_db_all()
 }
 \seealso{
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} downloads cadastral parcels for a municipality
-listed in this index. \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} finds municipality names
-and cadastral codes.
+listed in this index.
 
-Use the ATOM INSPIRE service:
+\code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} finds municipality names and cadastral codes.
+
+Query ATOM INSPIRE services:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
@@ -58,10 +61,15 @@ Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}},
 \code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}}
 
+Browse ATOM municipal indexes:
+\code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
+\code{\link[=catrnav_atom_get_buildings_db_all]{catrnav_atom_get_buildings_db_all()}}
+
 Work with cadastral parcels:
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}},
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}},
 \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
-\concept{atom}
+\concept{atom_indexes}
+\concept{atom_services}
 \concept{parcels}

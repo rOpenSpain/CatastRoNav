@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Configures the cache directory used by \pkg{CatastRoNav}. Use
-#' `Sys.getenv("CATASTRONAV_CACHE_DIR")` or
+#' [Sys.getenv()] with `"CATASTRONAV_CACHE_DIR"` or
 #' [catrnav_detect_cache_dir()] to inspect the current path.
 #'
 #' @details
@@ -12,10 +12,9 @@
 #' sessions, use
 #' `catrnav_set_cache_dir(cache_dir, install = TRUE)`. This writes the chosen
 #' path to a configuration file under
-#' `tools::R_user_dir("CatastRoNav", "config")`.
+#' [tools::R_user_dir()] with `"CatastRoNav"` and `"config"`.
 #'
 #' @inheritParams CatastRo::catr_set_cache_dir cache_dir install verbose
-#'
 #' @param overwrite A logical value indicating whether to overwrite an existing
 #'   `CATASTRONAV_CACHE_DIR` value.
 #'
@@ -25,8 +24,8 @@
 #'
 #' @section Caching strategies:
 #'
-#' Source files are cached after download. \pkg{CatastRoNav} implements the
-#' following caching options:
+#' Source files are always cached after download. \pkg{CatastRoNav} implements
+#' the following caching options:
 #'
 #' - For occasional use, rely on the default [tempdir()]-based cache without
 #'   installing a persistent path.
@@ -39,7 +38,26 @@
 #'   corresponding function.
 #'
 #' Cached files can occasionally become corrupt. In that case, download the
-#' data again by setting `update_cache = TRUE` in the corresponding function.
+#' data again by setting `update_cache = TRUE` in an ATOM or WMS function.
+#' ATOM downloads check the file size with a HEAD request and report downloads
+#' larger than 20 MB before fetching the body. Failed ATOM updates preserve
+#' the previous cached file. WFS queries reuse their cached response until the
+#' cache is cleared.
+#'
+#' ATOM indexes are stored in `databases`, municipal downloads in `atom_ad`,
+#' `atom_bu` or `atom_cp` and WFS responses in `wfs_inspire_cache`.
+#'
+#' The ATOM `cache` argument is deprecated and no longer changes caching.
+#' Use a temporary `cache_dir` when downloads should last only for a session.
+#' @section HTTP settings:
+#' ATOM downloads and WFS queries use the `catastronav_timeout` and
+#' `catastronav_ssl_verify` options. If unset, the `CATASTRONAV_TIMEOUT` and
+#' `CATASTRONAV_SSL_VERIFY` environment variables are used, followed by the
+#' `catastro_timeout` and `catastro_ssl_verify` options. The defaults are
+#' 300 seconds and enabled SSL verification. WFS queries apply these settings
+#' only for the request and restore the previous \CRANpkg{CatastRo} options.
+#' WMS request settings are passed to [mapSpain::esp_get_tiles()] through
+#' the `options` argument of [catrnav_wms_get_layer()].
 #'
 #' If a download fails, use `verbose = TRUE` to inspect the request and
 #' [catrnav_detect_cache_dir()] to identify the active cache path.
@@ -47,12 +65,18 @@
 #' @note
 #' The configuration location has moved from
 #' `rappdirs::user_config_dir("CatastRoNav", "R")` to
-#' `tools::R_user_dir("CatastRoNav", "config")`. Existing configuration files
-#' are migrated automatically. A migration message is shown only once.
+#' [tools::R_user_dir()] with `"CatastRoNav"` and `"config"`. Existing
+#' configuration files are migrated automatically. A migration message is shown
+#' only once.
 #'
 #' @seealso
 #' [tools::R_user_dir()] determines the persistent configuration directory.
 #' [base::tempdir()] provides the default temporary cache directory.
+#' [catrnav_atom_get_address()], [catrnav_atom_get_buildings()] and
+#' [catrnav_atom_get_parcels()] cache municipal downloads.
+#' [catrnav_wfs_get_address_bbox()], [catrnav_wfs_get_buildings_bbox()] and
+#' [catrnav_wfs_get_parcels_bbox()] cache spatial queries.
+#' [catrnav_wms_get_layer()] caches map images.
 #'
 #' @family cache_utilities
 #'
@@ -170,22 +194,23 @@ catrnav_detect_cache_dir <- function() {
 #' Use this function with caution. It clears cached data and configuration,
 #' specifically:
 #'
-#' - Deletes the \pkg{CatastRoNav} configuration directory
+#' - Deletes the \pkg{CatastRoNav} configuration directory when
+#'   `config = TRUE`
 #'   (`tools::R_user_dir("CatastRoNav", "config")`).
-#' - Deletes the `cache_dir` directory.
+#' - Deletes the `cache_dir` directory and its contents when
+#'   `cached_data = TRUE`.
 #' - Clears the `CATASTRONAV_CACHE_DIR` environment variable.
 #'
 #' @details
-#' This function resets the cache state as if you had never used
-#' \pkg{CatastRoNav}.
+#' With `config = TRUE` and `cached_data = TRUE`, this function resets the
+#' cache state as if you had never used \pkg{CatastRoNav}.
 #'
 #' @inheritParams CatastRo::catr_clear_cache cached_data verbose
-#'
 #' @param config A logical value indicating whether to delete the
 #'   \pkg{CatastRoNav} configuration directory.
 #'
-#' @returns [NULL][base::NULL], invisibly. This function is called for its side
-#'   effects.
+#' @returns [`NULL`][base::NULL], invisibly. This function is called for its
+#'   side effects.
 #'
 #' @seealso
 #' [catrnav_detect_cache_dir()] identifies the active cache path before
@@ -228,8 +253,16 @@ catrnav_clear_cache <- function(
   data_dir <- detect_cache_dir_muted()
 
   if (config && dir.exists(config_dir)) {
-    unlink(config_dir, recursive = TRUE, force = TRUE)
-    if (verbose) {
+    status <- catrnav_unlink(config_dir, recursive = TRUE, force = TRUE)
+    if (status != 0L || dir.exists(config_dir)) {
+      cli::cli_inform(c(
+        "!" = paste0(
+          "Could not completely delete cache configuration at ",
+          "{.path {config_dir}}."
+        ),
+        "i" = "Check file permissions and close programs using these files."
+      ))
+    } else if (verbose) {
       cli::cli_alert_success(
         "Deleted the {.pkg CatastRoNav} cache configuration."
       )
@@ -242,8 +275,13 @@ catrnav_clear_cache <- function(
     class(size) <- class(object.size("a"))
     size <- format(size, units = "auto")
 
-    unlink(data_dir, recursive = TRUE, force = TRUE)
-    if (verbose) {
+    status <- catrnav_unlink(data_dir, recursive = TRUE, force = TRUE)
+    if (status != 0L || dir.exists(data_dir)) {
+      cli::cli_inform(c(
+        "!" = "Could not completely delete cached data at {.path {data_dir}}.",
+        "i" = "Check file permissions and close programs using these files."
+      ))
+    } else if (verbose) {
       cli::cli_alert_success(paste0(
         "Deleted {.pkg CatastRoNav} cached data from ",
         "{.path {data_dir}} ({.val {size}})."
@@ -259,9 +297,6 @@ catrnav_clear_cache <- function(
 
 # Internal functions ----------------------------------------------------------
 
-#' Detect the cache directory silently
-#'
-#' @noRd
 detect_cache_dir_muted <- function() {
   migrate_cache()
 
@@ -299,11 +334,6 @@ detect_cache_dir_muted <- function() {
   }
 }
 
-#' Create `cache_dir` if it does not exist
-#'
-#' @inheritParams catrnav_set_cache_dir
-#'
-#' @noRd
 create_cache_dir <- function(cache_dir = NULL) {
   # Read the configured cache directory when no path is provided.
   if (is.null(cache_dir)) {
@@ -318,16 +348,10 @@ create_cache_dir <- function(cache_dir = NULL) {
   cache_dir
 }
 
-#' Detect the user configuration directory
-#'
-#' @noRd
 catrnav_user_config_dir <- function() {
   tools::R_user_dir("CatastRoNav", "config")
 }
 
-#' Migrate the cache configuration
-#'
-#' @noRd
 migrate_cache <- function(
   old = rappdirs::user_config_dir("CatastRoNav", "R"),
   new = catrnav_user_config_dir()
@@ -368,4 +392,8 @@ migrate_cache <- function(
     unlink(old, recursive = TRUE, force = TRUE)
   }
   invisible()
+}
+
+catrnav_unlink <- function(...) {
+  unlink(...)
 }

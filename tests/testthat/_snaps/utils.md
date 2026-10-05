@@ -40,7 +40,7 @@
 # validate_cache_args() rejects invalid flags and paths
 
     Code
-      validate_cache_args(TRUE, FALSE, cache_dir = 1, verbose = FALSE)
+      validate_cache_args(FALSE, cache_dir = 1, verbose = FALSE)
     Condition
       Error in `validate_cache_args()`:
       ! `cache_dir` must be `NULL` or a non-empty character value.
@@ -66,7 +66,7 @@
     Code
       my_fun("error here")
     Condition
-      Error:
+      Error in `my_fun()`:
       ! `arg_one` must be one of "10", "1000", "3000" or "5000", not "error here".
 
 ---
@@ -74,7 +74,7 @@
     Code
       my_fun(c("an", "error"))
     Condition
-      Error:
+      Error in `my_fun()`:
       ! `arg_one` must be one of "10", "1000", "3000" or "5000", not "an" or "error".
 
 ---
@@ -82,7 +82,7 @@
     Code
       my_fun("5")
     Condition
-      Error:
+      Error in `my_fun()`:
       ! `arg_one` must be one of "10", "1000", "3000" or "5000", not "5".
       i Did you mean "5000"?
 
@@ -91,7 +91,7 @@
     Code
       my_fun("00")
     Condition
-      Error:
+      Error in `my_fun()`:
       ! `arg_one` must be one of "10", "1000", "3000" or "5000", not "00".
 
 ---
@@ -99,7 +99,7 @@
     Code
       my_fun2(c(1, 2))
     Condition
-      Error:
+      Error in `my_fun2()`:
       ! `year` must be "20", not "1" or "2".
 
 ---
@@ -107,7 +107,7 @@
     Code
       my_fun3("3")
     Condition
-      Error:
+      Error in `my_fun3()`:
       ! `an_arg` must be one of "30" or "20", not "3".
       i Did you mean "30"?
 

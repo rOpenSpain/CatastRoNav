@@ -9,7 +9,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.
+Provides access to public spatial data from the Cadastre of Navarre through its 'INSPIRE' ATOM feeds, Web Feature Service and Web Map Service endpoints provided by the Government of Navarre through the Sistema de Información Territorial de Navarra ('SITNA'). Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.
 }
 \seealso{
 \itemize{
@@ -41,6 +41,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Francisco J. Goerlich (\href{https://orcid.org/0000-0003-1626-525X}{ORCID}) [contributor]
+  \item Gobierno de Navarra (\href{https://ror.org/025qq4838}{ROR}) (Provider of cadastral data and INSPIRE services through SITNA) [data contributor]
 }
 
 }

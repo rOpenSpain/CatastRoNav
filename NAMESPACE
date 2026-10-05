@@ -15,6 +15,7 @@ export(catrnav_wfs_get_buildings_bbox)
 export(catrnav_wfs_get_parcels_bbox)
 export(catrnav_wms_get_layer)
 export(run_example)
+importFrom(lifecycle,deprecated)
 importFrom(utils,
   URLencode,
   adist,

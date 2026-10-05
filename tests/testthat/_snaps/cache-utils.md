@@ -93,3 +93,23 @@
       Error in `validate_flag()`:
       ! `verbose` must be `TRUE` or `FALSE`.
 
+# cache deletion reports failed and incomplete removals
+
+    Code
+      catrnav_clear_cache(config = TRUE, verbose = TRUE)
+    Message
+      ! Could not completely delete cache configuration at '<config_dir>'.
+      i Check file permissions and close programs using these files.
+      ! Could not completely delete cached data at '<data_dir>'.
+      i Check file permissions and close programs using these files.
+
+---
+
+    Code
+      catrnav_clear_cache(config = TRUE, verbose = TRUE)
+    Message
+      ! Could not completely delete cache configuration at '<config_dir>'.
+      i Check file permissions and close programs using these files.
+      ! Could not completely delete cached data at '<data_dir>'.
+      i Check file permissions and close programs using these files.
+

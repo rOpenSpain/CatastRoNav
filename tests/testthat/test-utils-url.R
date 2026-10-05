@@ -73,7 +73,10 @@ test_that("downloads apply HTTP environment settings", {
   seen <- NULL
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
-    req_perform_fun = function(req, path, ...) {
+    req_perform_fun = function(req, path = NULL, ...) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
       seen <<- req$options
       writeLines("ok", path)
       httr2::response(status_code = 200)
@@ -107,21 +110,12 @@ test_that("download_url() handles offline sessions", {
   expect_length(list.files(cache_dir), 0L)
 })
 
-test_that("download_url() handles uncached offline sessions", {
-  local_mocked_bindings(is_online_fun = function(...) FALSE)
-
-  expect_snapshot(
-    result <- download_url(atom_test_url, cache = FALSE, verbose = FALSE)
-  )
-  expect_null(result)
-})
-
 test_that("download_url() handles transport failures", {
   cache_dir <- withr::local_tempdir(pattern = "catrnav-transport-")
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(...) {
-      stop("Simulated transport failure.", call. = FALSE)
+      cli::cli_abort("Simulated transport failure.", class = "httr2_failure")
     }
   )
 
@@ -178,7 +172,10 @@ test_that("download_url() reports cached refreshes and downloads", {
   writeLines("cached", cached_file)
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
-    req_perform_fun = function(req, path) {
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
       writeLines("fresh", path)
       httr2::response(status_code = 200L, url = atom_test_url)
     }
@@ -198,6 +195,125 @@ test_that("download_url() reports cached refreshes and downloads", {
   )
   expect_identical(result, cached_file)
   expect_identical(readLines(result), "fresh")
+})
+
+test_that("failed refreshes preserve cached files and remove partial data", {
+  cache_dir <- withr::local_tempdir()
+  target <- file.path(cache_dir, "data.xml")
+  writeLines("cached", target)
+  partial <- NULL
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
+      partial <<- path
+      writeLines("partial", path)
+      cli::cli_abort("Simulated transport failure.", class = "httr2_failure")
+    }
+  )
+
+  expect_snapshot(
+    result <- download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      update_cache = TRUE,
+      verbose = FALSE
+    )
+  )
+  expect_null(result)
+  expect_identical(readLines(target), "cached")
+  expect_all_false(file.exists(partial))
+
+  local_mocked_bindings(is_online_fun = function(...) {
+    testthat::fail("A cached file must remain available offline.")
+  })
+  expect_identical(
+    download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      verbose = FALSE
+    ),
+    target
+  )
+})
+
+test_that("HTTP errors preserve cached files and remove partial data", {
+  cache_dir <- withr::local_tempdir()
+  target <- file.path(cache_dir, "data.xml")
+  writeLines("cached", target)
+  partial <- NULL
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
+      partial <<- path
+      writeLines("error response", path)
+      httr2::response(status_code = 500L)
+    }
+  )
+  expect_snapshot(
+    result <- download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      update_cache = TRUE,
+      verbose = FALSE
+    )
+  )
+  expect_null(result)
+  expect_identical(readLines(target), "cached")
+  expect_all_false(file.exists(partial))
+})
+
+test_that("cache replacement restores files if installation fails", {
+  cache_dir <- withr::local_tempdir()
+  target <- file.path(cache_dir, "cached.txt")
+  download <- file.path(cache_dir, "new.txt")
+  writeLines("cached", target)
+  writeLines("fresh", download)
+  local_mocked_bindings(catrnav_file_rename = function(from, to) {
+    if (identical(from, download)) {
+      return(FALSE)
+    }
+    file.rename(from, to)
+  })
+
+  expect_error(replace_cached_file(download, target), class = "rlang_error")
+  expect_identical(readLines(target), "cached")
+  expect_setequal(list.files(cache_dir), c("cached.txt", "new.txt"))
+})
+
+test_that("download_url() separates files by service", {
+  cache_dir <- withr::local_tempdir()
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
+      writeLines(req$url, path)
+      httr2::response(status_code = 200L)
+    }
+  )
+
+  address <- download_url(
+    "https://example.com/address/data.zip",
+    cache_dir = cache_dir,
+    subdir = "atom_ad",
+    verbose = FALSE
+  )
+  building <- download_url(
+    "https://example.com/building/data.zip",
+    cache_dir = cache_dir,
+    subdir = "atom_bu",
+    verbose = FALSE
+  )
+  expect_identical(readLines(address), "https://example.com/address/data.zip")
+  expect_identical(readLines(building), "https://example.com/building/data.zip")
+  expect_setequal(list.files(cache_dir), c("atom_ad", "atom_bu"))
 })
 
 test_that("download_url() downloads and refreshes cached files", {
@@ -226,4 +342,90 @@ test_that("download_url() downloads and refreshes cached files", {
   )
   expect_identical(refreshed, result)
   expect_true(file.exists(refreshed))
+})
+
+test_that("HEAD transport failures preserve the cache without downloading", {
+  cache_dir <- withr::local_tempdir()
+  target <- file.path(cache_dir, "data.xml")
+  writeLines("cached", target)
+  seen <- NULL
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      seen <<- req$method
+      cli::cli_abort("Simulated HEAD failure.", class = "httr2_failure")
+    }
+  )
+
+  expect_snapshot(
+    result <- download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      update_cache = TRUE,
+      verbose = FALSE
+    )
+  )
+  expect_null(result)
+  expect_identical(seen, "HEAD")
+  expect_identical(readLines(target), "cached")
+  expect_identical(list.files(cache_dir), "data.xml")
+})
+
+test_that("unexpected errors propagate and partial downloads are removed", {
+  cache_dir <- withr::local_tempdir()
+  target <- file.path(cache_dir, "data.xml")
+  writeLines("cached", target)
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        return(httr2::response(status_code = 200L))
+      }
+      writeLines("partial", path)
+      cli::cli_abort("Unexpected internal failure.", class = "internal_failure")
+    }
+  )
+
+  expect_error(
+    download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      update_cache = TRUE,
+      verbose = FALSE
+    ),
+    class = "internal_failure"
+  )
+  expect_identical(readLines(target), "cached")
+  expect_identical(list.files(cache_dir), "data.xml")
+})
+
+test_that("large downloads report their size before fetching the body", {
+  cache_dir <- withr::local_tempdir()
+  seen <- list()
+  local_mocked_bindings(
+    is_online_fun = function(...) TRUE,
+    req_perform_fun = function(req, path = NULL) {
+      if (is.null(path)) {
+        seen$head <<- req$method
+        return(httr2::response(
+          status_code = 200L,
+          headers = list(`content-length` = "22020096")
+        ))
+      }
+      seen$progress <<- req$options$noprogress
+      writeLines("data", path)
+      httr2::response(status_code = 200L)
+    }
+  )
+
+  expect_snapshot(
+    result <- download_url(
+      "https://example.com/data.xml",
+      cache_dir = cache_dir,
+      verbose = FALSE
+    )
+  )
+  expect_identical(seen$head, "HEAD")
+  expect_identical(readLines(result), "data")
+  expect_all_false(seen$progress)
 })

@@ -1,0 +1,48 @@
+# Software
+
+The CatastRoNav package code is licensed under GPL-2, as specified in
+DESCRIPTION. The package authors are listed in Authors@R.
+
+Parts of the package code are adapted from CatastRo, also licensed under
+GPL-2. Its authors and copyright holders are listed in that package's
+DESCRIPTION:
+<https://github.com/rOpenSpain/CatastRo/blob/main/DESCRIPTION>
+
+# Cadastral data and web services
+
+The Government of Navarre provides the cadastral data and INSPIRE ATOM, WFS
+and WMS services accessed by CatastRoNav through SITNA and IDENA.
+The Government of Navarre (Gobierno de Navarra) is credited as a data
+contributor (dtc) in Authors@R, with ROR identifier
+<https://ror.org/025qq4838>. Its official INSPIRE page identifies it as the
+producer of the harmonized cadastral parcel, building and address datasets.
+Rights in individual resources, services and datasets belong to the holders
+identified in their metadata.
+
+The GPL-2 license for the package code does not replace the terms governing
+access to and use of these data and services.
+
+# Data access and use conditions
+
+SITNA datasets are published under the Creative Commons Attribution 4.0
+International license (CC BY 4.0), unless otherwise indicated. Consult the
+metadata of each dataset for its rights holder and applicable terms.
+
+When reusing data, acknowledge the source, provide a link to the applicable
+license and identify any modifications. Do not imply that derived products
+are endorsed by the data provider. Consult the official sources below for
+the complete license and additional access and use conditions.
+
+Official sources:
+
+Geoportal of Navarre legal notice:
+<https://geoportal.navarra.es/es/aviso-legal>
+
+SITNA data downloads:
+<https://geoportal.navarra.es/es/idena/descargar>
+
+INSPIRE services:
+<https://geoportal.navarra.es/es/inspire>
+
+Creative Commons Attribution 4.0 International:
+<https://creativecommons.org/licenses/by/4.0/>

@@ -1,14 +1,3 @@
-#' Emit a message conditionally
-#'
-#' @param type Character string specifying the message type.
-#' @param verbose A logical value indicating whether to emit the message.
-#' @param ... Message components passed to \CRANpkg{cli}.
-#' @param .envir An environment used to evaluate inline \CRANpkg{cli}
-#'   expressions.
-#'
-#' @returns [NULL][base::NULL], invisibly.
-#'
-#' @noRd
 make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
   cli_abort_if_not(
     "{.arg verbose} must be {.code TRUE} or {.code FALSE}." = is.logical(
@@ -23,7 +12,8 @@ make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
     return(invisible())
   }
 
-  fun <- switch(type,
+  fun <- switch(
+    type,
     danger = cli::cli_alert_danger,
     info = cli::cli_alert_info,
     success = cli::cli_alert_success,
@@ -34,9 +24,6 @@ make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
   invisible()
 }
 
-#' Validate a logical flag
-#'
-#' @noRd
 validate_flag <- function(value, arg) {
   cli_abort_if_not(
     "{.arg {arg}} must be {.code TRUE} or {.code FALSE}." = is.logical(value) &&
@@ -46,15 +33,7 @@ validate_flag <- function(value, arg) {
   invisible(value)
 }
 
-#' Match an argument with a clear error message
-#'
-#' @param arg The argument to match.
-#' @param choices A vector of possible values for `arg`.
-#'
-#' @returns A [character][base::character] string containing the matched value.
-#'
-#' @noRd
-match_arg_pretty <- function(arg, choices) {
+match_arg_pretty <- function(arg, choices, call = parent.frame()) {
   arg_name <- as.character(substitute(arg)) # nolint
 
   if (missing(choices)) {
@@ -107,7 +86,7 @@ match_arg_pretty <- function(arg, choices) {
 
     cli::cli_abort(
       c(paste0("{.arg {arg_name}} must be ", msg), "i" = reg_msg),
-      call = NULL
+      call = call
     )
   }
 
@@ -127,21 +106,42 @@ ensure_null <- function(x) {
   x_initial
 }
 
-validate_non_empty_arg <- function(arg, call = parent.frame(1)) {
-  arg_name <- as.character(substitute(arg)) # nolint
-
+validate_non_empty_arg <- function(
+  arg,
+  call = parent.frame(1),
+  arg_name = as.character(substitute(arg))
+) {
   if (missing(arg)) {
     cli::cli_abort("{.arg {arg_name}} cannot be missing.", call = call)
+  }
+
+  is_empty <- is.null(arg) ||
+    length(arg) == 0L ||
+    (is.atomic(arg) && anyNA(arg)) ||
+    (is.character(arg) && !all(nzchar(trimws(arg))))
+
+  if (is_empty) {
+    cli::cli_abort("{.arg {arg_name}} cannot be empty.", call = call)
   }
 
   arg
 }
 
-#' Validate arguments shared by cached downloads
-#'
-#' @noRd
-validate_cache_args <- function(cache, update_cache, cache_dir, verbose) {
-  validate_flag(cache, "cache")
+validate_scalar_arg <- function(arg, call = parent.frame(1)) {
+  arg_name <- as.character(substitute(arg)) # nolint
+  arg <- validate_non_empty_arg(arg, call = call, arg_name = arg_name)
+
+  if (!((is.character(arg) || is.numeric(arg)) && length(arg) == 1L)) {
+    cli::cli_abort(
+      "{.arg {arg_name}} must be a single string or number.",
+      call = call
+    )
+  }
+
+  arg
+}
+
+validate_cache_args <- function(update_cache, cache_dir, verbose) {
   validate_flag(update_cache, "update_cache")
   validate_flag(verbose, "verbose")
 
@@ -161,9 +161,17 @@ validate_cache_args <- function(cache, update_cache, cache_dir, verbose) {
   invisible()
 }
 
-#' Validate WFS query arguments
-#'
-#' @noRd
+warn_deprecated_cache <- function(cache, what) {
+  if (lifecycle::is_present(cache)) {
+    lifecycle::deprecate_warn(
+      when = "1.1.0",
+      what = what,
+      details = "Results are always cached.",
+      user_env = parent.frame(2)
+    )
+  }
+}
+
 validate_wfs_args <- function(verbose, count) {
   validate_flag(verbose, "verbose")
 
@@ -185,9 +193,6 @@ validate_wfs_args <- function(verbose, count) {
   invisible()
 }
 
-#' Validate a vector with an associated CRS
-#'
-#' @noRd
 validate_vector_with_srs <- function(x, srs, expected_length) {
   if (!is.numeric(x)) {
     cli::cli_abort(

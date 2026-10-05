@@ -1,16 +1,3 @@
-#' Read and sanitize a spatial file
-#'
-#' @param file_local A character string containing a local file path or URL.
-#' @param verbose A logical value indicating whether to display information
-#'   about reading the file.
-#' @param hint A character string used to identify files in ZIP archives.
-#' @param layer_hint An optional character string used to identify layer names.
-#' @param ... Additional arguments passed to [sf::read_sf()].
-#'
-#' @returns An [`sf`][sf::st_sf] object, or `NULL` if no spatial layer can be
-#'   read.
-#'
-#' @noRd
 read_geo_file_sf <- function(
   file_local,
   verbose = FALSE,
@@ -45,9 +32,7 @@ read_geo_file_sf <- function(
     }
   }
 
-  layers <- tryCatch(sf::st_layers(file_local), error = function(cnd) {
-    NULL
-  })
+  layers <- sf::st_layers(file_local)
 
   if (is.null(layers) || length(layers$name) == 0L) {
     cli::cli_alert_warning("No spatial layers found.")
@@ -56,7 +41,8 @@ read_geo_file_sf <- function(
 
   if (!is.null(layer_hint)) {
     layers <- layers[
-      grepl(layer_hint, layers$name, ignore.case = TRUE), ,
+      grepl(layer_hint, layers$name, ignore.case = TRUE),
+      ,
       drop = FALSE
     ]
   }
@@ -68,29 +54,16 @@ read_geo_file_sf <- function(
     return(NULL)
   }
 
-  out <- tryCatch(
-    sf::read_sf(file_local, layer = spatial_layers[1], quiet = !verbose, ...),
-    error = function(cnd) {
-      cli::cli_alert_warning("The spatial result could not be read.")
-      NULL
-    }
+  out <- sf::read_sf(
+    file_local,
+    layer = spatial_layers[1],
+    quiet = !verbose,
+    ...
   )
-
-  if (is.null(out)) {
-    return(NULL)
-  }
 
   sanitize_sf(out)
 }
 
-#' Normalize an `sf` object
-#'
-#' @param data_sf An [`sf`][sf::st_sf] object.
-#'
-#' @returns An [`sf`][sf::st_sf] object with valid geometries and UTF-8
-#'   metadata.
-#'
-#' @noRd
 sanitize_sf <- function(data_sf) {
   set_utf8 <- function(x) {
     object_names <- names(x)

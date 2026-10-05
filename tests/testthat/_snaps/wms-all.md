@@ -3,7 +3,7 @@
     Code
       catrnav_wms_get_layer(c(760926, 4019259, 761155, 4019366), srs = 25829, what = "aa")
     Condition
-      Error:
+      Error in `catrnav_wms_get_layer()`:
       ! `what` must be one of "building", "parcel" or "address", not "aa".
 
 ---
@@ -11,7 +11,7 @@
     Code
       catrnav_wms_get_layer(c(760926, 4019259, 761155, 4019366), srs = 25829, styles = "a")
     Condition
-      Error:
+      Error in `catrnav_wms_get_layer()`:
       ! `styles` must be one of "default" or "ELFCadastre", not "a".
 
 ---

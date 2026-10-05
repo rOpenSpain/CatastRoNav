@@ -63,17 +63,6 @@ test_that("municipality readers propagate unavailable data", {
   ))
 })
 
-test_that("municipality readers reject invalid names", {
-  expect_snapshot(
-    error = TRUE,
-    catrnav_atom_read_munic(
-      NA_character_,
-      db_getter = function(...) NULL,
-      db_name = "db"
-    )
-  )
-})
-
 test_that("ATOM parsing retries without an explicit encoding", {
   env <- new.env(parent = emptyenv())
   env$encodings <- list()
@@ -117,54 +106,99 @@ test_that("ATOM XML can be read without an explicit encoding", {
   expect_type(read_atom_xml(source), "list")
 })
 
-test_that("municipality readers handle temporary extracted data", {
-  archive <- withr::local_tempfile(fileext = ".zip")
+test_that("municipality downloads read cached archives directly", {
+  cache_dir <- withr::local_tempdir()
+  archive <- file.path(cache_dir, "data.zip")
   writeBin(raw(), archive)
-  db <- function(...) {
-    dplyr::tibble(
-      munic = "201 Pamplona / Iruña",
-      url = "https://example.com/data.zip",
-      date = as.Date("2026-01-01")
-    )
-  }
+  all <- dplyr::tibble(
+    munic = "201 Pamplona / Iruña",
+    url = "https://example.com/data.zip"
+  )
   expected <- sf::st_sf(
     id = 1L,
     geometry = sf::st_sfc(sf::st_point(c(0, 0)), crs = 4326)
   )
-  env <- new.env(parent = emptyenv())
-  env$unzip <- NULL
-  env$files <- NULL
+  seen <- list()
   local_mocked_bindings(
-    download_url = function(...) archive,
-    unzip = function(zipfile, exdir, junkpaths, overwrite) {
-      env$unzip <- list(
-        zipfile = zipfile,
-        exdir = exdir,
-        junkpaths = junkpaths,
-        overwrite = overwrite
-      )
-      writeLines("gml", file.path(exdir, "data.gml"))
-      invisible()
+    download_url = function(url, subdir, update_cache, ...) {
+      seen$subdir <<- subdir
+      seen$update_cache <<- update_cache
+      archive
     },
-    read_geo_file_sf = function(files, ...) {
-      env$files <- files
+    read_geo_file_sf = function(file_local, hint, ...) {
+      seen$file <<- file_local
+      seen$hint <<- hint
       expected
     }
   )
 
   result <- catrnav_atom_read_munic(
     "Pamplona",
-    db_getter = db,
+    db_getter = function(...) all,
     db_name = "db",
-    cache = FALSE
+    subdir = "atom_cp",
+    cache_dir = cache_dir,
+    update_cache = TRUE
   )
   expect_identical(result, expected)
-  expect_identical(env$unzip$zipfile, archive)
-  expect_true(env$unzip$junkpaths)
-  expect_true(env$unzip$overwrite)
-  expect_identical(basename(env$files), "data.gml")
-  expect_identical(
-    normalizePath(dirname(env$files), winslash = "/"),
-    normalizePath(env$unzip$exdir, winslash = "/")
-  )
+  expect_identical(seen$subdir, "atom_cp")
+  expect_all_true(seen$update_cache)
+  expect_identical(seen$file, archive)
+  expect_identical(seen$hint, "\\.gml$")
+  expect_identical(list.files(cache_dir), "data.zip")
+})
+
+test_that("ATOM indexes retain timestamps in UTC across local time zones", {
+  withr::local_timezone("Pacific/Honolulu")
+  local_mocked_bindings(read_atom_xml = function(...) {
+    list(
+      feed = list(
+        entry = list(
+          content = list(
+            div = list(
+              ul = list(
+                li = list(
+                  a = structure(
+                    list("001 Municipality"),
+                    href = "https://example.com/data.zip"
+                  )
+                )
+              )
+            )
+          ),
+          updated = "2026-01-01T12:30:00Z"
+        )
+      )
+    )
+  })
+
+  result <- catr_read_atom("feed.xml")
+  expect_identical(result$date, as.POSIXct("2026-01-01 12:30:00", tz = "UTC"))
+})
+
+test_that("ATOM timestamps with offsets are converted to UTC", {
+  local_mocked_bindings(read_atom_xml = function(...) {
+    list(
+      feed = list(
+        entry = list(
+          content = list(
+            div = list(
+              ul = list(
+                li = list(
+                  a = structure(
+                    list("001 Municipality"),
+                    href = "https://example.com/data.zip"
+                  )
+                )
+              )
+            )
+          ),
+          updated = "2026-01-01T12:30:00+02:00"
+        )
+      )
+    )
+  })
+
+  result <- catr_read_atom("feed.xml")
+  expect_identical(result$date, as.POSIXct("2026-01-01 10:30:00", tz = "UTC"))
 })

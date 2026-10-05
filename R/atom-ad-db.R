@@ -1,30 +1,34 @@
 #' ATOM INSPIRE: list address download URLs
 #'
 #' @description
-#' Creates a table of URLs provided by the Cadastre of Navarre ATOM INSPIRE
-#' service for downloading addresses by municipality.
+#' Creates a [tibble][tibble::tbl_df] of URLs provided by the Cadastre of
+#' Navarre ATOM INSPIRE service for downloading addresses by municipality.
 #'
-#' @inheritParams CatastRo::catr_atom_get_address_db_all -cache -to
+#' @inheritParams CatastRo::catr_atom_get_address_db_all cache update_cache
+#' @inheritParams CatastRo::catr_set_cache_dir verbose
+#' @param cache_dir Path to a cache directory. If `NULL`, uses the configured
+#'   cache or a directory inside [base::tempdir()]. See
+#'   [catrnav_set_cache_dir()].
 #'
-#' @param cache A logical value indicating whether to use cached files. Defaults
-#'   to `TRUE`.
-#'
-#' @returns A [tibble][tibble::tbl_df] with the following columns, or `NULL` if
-#'   the data cannot be retrieved:
+#' @returns A [tibble][tibble::tbl_df] with the following columns. Returns
+#'   [`NULL`][base::NULL] if the data cannot be retrieved.
 #' - `munic`: Municipality name and cadastral code.
 #' - `url`: ATOM URL for the corresponding municipality.
-#' - `date`: Reference date of the data.
+#' - `date`: Reference timestamp of the data in UTC.
 #'
 #' @source
 #' ```{r child = "man/chunks/sitna.Rmd"}
 #' ```
 #'
 #' @seealso
-#' [catrnav_atom_get_address()] downloads addresses for a municipality listed in
-#' this index. [catrnav_atom_search_munic()] finds municipality names and
-#' cadastral codes.
+#' [catrnav_atom_get_address()] downloads addresses for a municipality
+#' listed in this index.
 #'
-#' @family atom
+#' ```{r child = "man/chunks/atom-search-links.Rmd"}
+#' ```
+#'
+#' @family atom_services
+#' @family atom_indexes
 #' @family addresses
 #'
 #' @rdname catrnav_atom_get_address_db
@@ -35,11 +39,16 @@
 #' @examplesIf run_example()
 #' catrnav_atom_get_address_db_all()
 catrnav_atom_get_address_db_all <- function(
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 ) {
+  warn_deprecated_cache(
+    cache,
+    "CatastRoNav::catrnav_atom_get_address_db_all(cache)"
+  )
+
   catrnav_atom_read_db_all(
     api_entry = paste0(
       "https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/",
@@ -47,7 +56,6 @@ catrnav_atom_get_address_db_all <- function(
       "Addresses_ServiceATOM_Navarra.xml"
     ),
     title_prefix = "Download INSPIRE addresses of the municipality ",
-    cache = cache,
     update_cache = update_cache,
     cache_dir = cache_dir,
     verbose = verbose

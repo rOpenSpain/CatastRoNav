@@ -16,17 +16,17 @@ catrnav_set_cache_dir(
 catrnav_detect_cache_dir()
 }
 \arguments{
-\item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
-stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
+\item{cache_dir}{Path to a cache directory. If \code{NULL} or \code{FALSE}, the
+function stores cached files in a temporary directory. See
+\code{\link[base:tempdir]{base::tempdir()}}.}
 
 \item{overwrite}{A logical value indicating whether to overwrite an existing
 \code{CATASTRONAV_CACHE_DIR} value.}
 
-\item{install}{Logical. If \code{TRUE}, installs the key on your local
-machine for use in future sessions. Defaults to \code{FALSE}. If \code{cache_dir}
-is \code{FALSE}, this argument is set to \code{FALSE} automatically.}
+\item{install}{Logical. Whether to store the path locally for use in future
+sessions. Defaults to \code{FALSE}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 }
 \value{
 \code{catrnav_set_cache_dir()} returns a \link[base:character]{character}
@@ -38,7 +38,7 @@ string containing the cache path used in the current session.
 }
 \description{
 Configures the cache directory used by \pkg{CatastRoNav}. Use
-\code{Sys.getenv("CATASTRONAV_CACHE_DIR")} or
+\code{\link[=Sys.getenv]{Sys.getenv()}} with \code{"CATASTRONAV_CACHE_DIR"} or
 \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} to inspect the current path.
 }
 \details{
@@ -48,19 +48,20 @@ and are removed when the \R session ends. To persist a cache across \R
 sessions, use
 \code{catrnav_set_cache_dir(cache_dir, install = TRUE)}. This writes the chosen
 path to a configuration file under
-\code{tools::R_user_dir("CatastRoNav", "config")}.
+\code{\link[tools:R_user_dir]{tools::R_user_dir()}} with \code{"CatastRoNav"} and \code{"config"}.
 }
 \note{
 The configuration location has moved from
 \code{rappdirs::user_config_dir("CatastRoNav", "R")} to
-\code{tools::R_user_dir("CatastRoNav", "config")}. Existing configuration files
-are migrated automatically. A migration message is shown only once.
+\code{\link[tools:R_user_dir]{tools::R_user_dir()}} with \code{"CatastRoNav"} and \code{"config"}. Existing
+configuration files are migrated automatically. A migration message is shown
+only once.
 }
 \section{Caching strategies}{
 
 
-Source files are cached after download. \pkg{CatastRoNav} implements the
-following caching options:
+Source files are always cached after download. \pkg{CatastRoNav} implements
+the following caching options:
 \itemize{
 \item For occasional use, rely on the default \code{\link[=tempdir]{tempdir()}}-based cache without
 installing a persistent path.
@@ -74,7 +75,29 @@ corresponding function.
 }
 
 Cached files can occasionally become corrupt. In that case, download the
-data again by setting \code{update_cache = TRUE} in the corresponding function.
+data again by setting \code{update_cache = TRUE} in an ATOM or WMS function.
+ATOM downloads check the file size with a HEAD request and report downloads
+larger than 20 MB before fetching the body. Failed ATOM updates preserve
+the previous cached file. WFS queries reuse their cached response until the
+cache is cleared.
+
+ATOM indexes are stored in \code{databases}, municipal downloads in \code{atom_ad},
+\code{atom_bu} or \code{atom_cp} and WFS responses in \code{wfs_inspire_cache}.
+
+The ATOM \code{cache} argument is deprecated and no longer changes caching.
+Use a temporary \code{cache_dir} when downloads should last only for a session.
+}
+
+\section{HTTP settings}{
+
+ATOM downloads and WFS queries use the \code{catastronav_timeout} and
+\code{catastronav_ssl_verify} options. If unset, the \code{CATASTRONAV_TIMEOUT} and
+\code{CATASTRONAV_SSL_VERIFY} environment variables are used, followed by the
+\code{catastro_timeout} and \code{catastro_ssl_verify} options. The defaults are
+300 seconds and enabled SSL verification. WFS queries apply these settings
+only for the request and restore the previous \CRANpkg{CatastRo} options.
+WMS request settings are passed to \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles()}} through
+the \code{options} argument of \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}.
 
 If a download fails, use \code{verbose = TRUE} to inspect the request and
 \code{\link[=catrnav_detect_cache_dir]{catrnav_detect_cache_dir()}} to identify the active cache path.
@@ -101,6 +124,11 @@ catrnav_detect_cache_dir()
 \seealso{
 \code{\link[tools:R_user_dir]{tools::R_user_dir()}} determines the persistent configuration directory.
 \code{\link[base:tempdir]{base::tempdir()}} provides the default temporary cache directory.
+\code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}}, \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} and
+\code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} cache municipal downloads.
+\code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}}, \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}} and
+\code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}} cache spatial queries.
+\code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}} caches map images.
 
 Manage the local cache:
 \code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}}

@@ -10,11 +10,3 @@
       * "202 Pamplona Norte"
       i Retrieving information for "201 Pamplona / Iruña".
 
-# municipality readers reject invalid names
-
-    Code
-      catrnav_atom_read_munic(NA_character_, db_getter = function(...) NULL, db_name = "db")
-    Condition
-      Error in `catrnav_atom_read_munic()`:
-      ! `munic` must be a non-empty character value.
-

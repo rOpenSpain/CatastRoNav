@@ -33,23 +33,22 @@ test_that("validate_non_empty_arg() rejects missing arguments", {
 test_that("validate_cache_args() rejects invalid flags and paths", {
   expect_snapshot(
     error = TRUE,
-    validate_cache_args(TRUE, FALSE, cache_dir = 1, verbose = FALSE)
+    validate_cache_args(FALSE, cache_dir = 1, verbose = FALSE)
   )
   expect_error(
-    validate_cache_args(NA, FALSE, cache_dir = NULL, verbose = FALSE),
+    validate_cache_args(NA, cache_dir = NULL, verbose = FALSE),
     class = "rlang_error"
   )
   expect_error(
-    validate_cache_args(TRUE, 1, cache_dir = NULL, verbose = FALSE),
+    validate_cache_args(1, cache_dir = NULL, verbose = FALSE),
     class = "rlang_error"
   )
   expect_error(
-    validate_cache_args(TRUE, FALSE, cache_dir = "", verbose = FALSE),
+    validate_cache_args(FALSE, cache_dir = "", verbose = FALSE),
     class = "rlang_error"
   )
   expect_error(
     validate_cache_args(
-      TRUE,
       FALSE,
       cache_dir = NA_character_,
       verbose = FALSE
@@ -58,7 +57,6 @@ test_that("validate_cache_args() rejects invalid flags and paths", {
   )
   expect_error(
     validate_cache_args(
-      TRUE,
       FALSE,
       cache_dir = c("one", "two"),
       verbose = FALSE
@@ -123,4 +121,22 @@ test_that("match_arg_pretty() validates and normalizes arguments", {
   }
   expect_identical(my_fun3(), "20")
   expect_snapshot(my_fun3("3"), error = TRUE)
+})
+
+test_that("scalar validation rejects empty and non-scalar inputs", {
+  expect_error(validate_scalar_arg(NULL), class = "rlang_error")
+  expect_error(validate_scalar_arg(character()), class = "rlang_error")
+  expect_error(validate_scalar_arg("  "), class = "rlang_error")
+  expect_error(validate_scalar_arg(NA_character_), class = "rlang_error")
+  expect_error(validate_scalar_arg(c("201", "061")), class = "rlang_error")
+  expect_error(validate_scalar_arg(TRUE), class = "rlang_error")
+  expect_identical(validate_scalar_arg(201), 201)
+  expect_identical(validate_scalar_arg("201"), "201")
+})
+
+test_that("match_arg_pretty() preserves the calling function", {
+  select_value <- function(value) match_arg_pretty(value, c("a", "b"))
+  cnd <- tryCatch(select_value("c"), error = identity)
+  expect_s3_class(cnd, "rlang_error")
+  expect_identical(conditionCall(cnd), quote(select_value("c")))
 })

@@ -4,14 +4,12 @@
 #' Searches for a municipality by name or cadastral code in the Cadastre of
 #' Navarre ATOM index.
 #'
-#' @inheritParams catrnav_atom_get_address_db_all cache update_cache
-#' @inheritParams catrnav_atom_get_address_db_all cache_dir verbose
-#'
-#' @param munic A municipality name, partial name or cadastral code to search
-#'   for.
+#' @inheritParams catrnav_atom_get_address_db_all
+#' @inheritParams catrnav_atom_get_address munic
 #'
 #' @returns A [tibble][tibble::tbl_df] with the municipality name and cadastral
-#'   code, or `NULL` if no match is found or the data cannot be retrieved.
+#'   code. Returns [`NULL`][base::NULL] if no match is found or the data cannot
+#'   be retrieved.
 #'
 #' @seealso
 #' [catrnav_atom_get_address_db_all()] provides the index used by this search.
@@ -20,26 +18,30 @@
 #' code with [catrnav_atom_get_address()], [catrnav_atom_get_buildings()] or
 #' [catrnav_atom_get_parcels()] to download a complete municipal dataset.
 #'
-#' @family atom
-#' @family search
+#' @family atom_services
+#' @family search_tools
 #'
 #' @export
 #' @encoding UTF-8
 #'
 #' @examplesIf run_example()
 #' catrnav_atom_search_munic("Pamplona")
+#'
+#' # Search using a numeric cadastral code.
+#' catrnav_atom_search_munic(201)
 catrnav_atom_search_munic <- function(
   munic,
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 ) {
-  validate_non_empty_arg(munic)
-  validate_cache_args(cache, update_cache, cache_dir, verbose)
+  warn_deprecated_cache(cache, "CatastRoNav::catrnav_atom_search_munic(cache)")
+
+  munic <- validate_scalar_arg(munic)
+  validate_cache_args(update_cache, cache_dir, verbose)
 
   all <- catrnav_atom_get_address_db_all(
-    cache = cache,
     update_cache = update_cache,
     cache_dir = cache_dir,
     verbose = FALSE

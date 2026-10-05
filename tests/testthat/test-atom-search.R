@@ -33,12 +33,12 @@ test_that("catrnav_atom_search_munic() propagates unavailable indexes", {
 })
 
 test_that("catrnav_atom_search_munic() returns NULL when offline", {
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = withr::local_tempdir())
   local_mocked_bindings(is_online_fun = function(...) FALSE)
 
   expect_snapshot(
     result <- catrnav_atom_search_munic(
       "Pamplona",
-      cache = FALSE,
       verbose = FALSE
     )
   )
@@ -51,7 +51,6 @@ test_that("catrnav_atom_search_munic() returns NULL after HTTP errors", {
   expect_snapshot(
     result <- catrnav_atom_search_munic(
       "Pamplona",
-      cache = FALSE,
       update_cache = TRUE,
       verbose = FALSE
     )
@@ -76,4 +75,45 @@ test_that("catrnav_atom_search_munic() downloads and filters matches", {
 
   expect_snapshot(c <- catrnav_atom_search_munic("XXX", cache_dir = cdir))
   expect_null(c)
+})
+
+test_that("catrnav_atom_search_munic() deprecates cache", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) NULL)
+
+  expect_warning(
+    result <- catrnav_atom_search_munic("061", cache = FALSE),
+    class = "lifecycle_warning_deprecated"
+  )
+  expect_null(result)
+})
+
+test_that("cache deprecation explains the new caching contract", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) NULL)
+
+  expect_snapshot(. <- catrnav_atom_search_munic("061", cache = FALSE))
+})
+
+test_that("municipality search validates scalar inputs before requests", {
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) {
+    testthat::fail("Invalid inputs must not trigger a request.")
+  })
+
+  expect_snapshot(error = TRUE, catrnav_atom_search_munic())
+  expect_snapshot(error = TRUE, catrnav_atom_search_munic("  "))
+  expect_error(catrnav_atom_search_munic(NULL), class = "rlang_error")
+  expect_error(catrnav_atom_search_munic(NA), class = "rlang_error")
+  expect_error(catrnav_atom_search_munic(c(201, 61)), class = "rlang_error")
+  expect_error(catrnav_atom_search_munic(list("201")), class = "rlang_error")
+})
+
+test_that("municipality search accepts numeric codes like character codes", {
+  local_mocked_bindings(catrnav_atom_get_address_db_all = function(...) {
+    dplyr::tibble(munic = "201 Pamplona / Iruña", url = "municipality.zip")
+  })
+
+  result <- catrnav_atom_search_munic(201)
+  expect_identical(result$catrcode, "201")
+  expect_identical(result, catrnav_atom_search_munic("201"))
 })

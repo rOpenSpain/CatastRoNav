@@ -11,9 +11,11 @@ title: 'CatastRoNav: Interface to the ''INSPIRE'' Services of the Cadastre of Na
 version: 1.0.0.9000
 doi: 10.5281/zenodo.6366407
 abstract: Provides access to public spatial data from the Cadastre of Navarre through
-  its 'INSPIRE' Atom feeds, Web Feature Service and Web Map Service endpoints. Supports
-  complete municipal dataset downloads, bounding box feature queries and georeferenced
-  map image downloads for addresses, buildings and cadastral parcels.
+  its 'INSPIRE' ATOM feeds, Web Feature Service and Web Map Service endpoints provided
+  by the Government of Navarre through the Sistema de Información Territorial de
+  Navarra ('SITNA'). Supports complete municipal dataset downloads, bounding box feature
+  queries and georeferenced map image downloads for addresses, buildings and cadastral
+  parcels.
 authors:
 - family-names: Hernangómez
   given-names: Diego
@@ -25,16 +27,16 @@ preferred-citation:
   authors:
   - family-names: Hernangómez
     given-names: Diego
-    email: diego.hernangomezherrero@gmail.com
-    orcid: https://orcid.org/0000-0001-8457-4658
   year: '2026'
   version: 1.0.0.9000
   doi: 10.5281/zenodo.6366407
   url: https://ropenspain.github.io/CatastRoNav/
   abstract: Provides access to public spatial data from the Cadastre of Navarre through
-    its INSPIRE Atom feeds, Web Feature Service and Web Map Service endpoints. Supports
-    complete municipal dataset downloads, bounding box feature queries and georeferenced
-    map image downloads for addresses, buildings and cadastral parcels.
+    its INSPIRE ATOM feeds, Web Feature Service and Web Map Service endpoints provided
+    by the Government of Navarre through the Sistema de Información Territorial de
+    Navarra (SITNA). Supports complete municipal dataset downloads, bounding box feature
+    queries and georeferenced map image downloads for addresses, buildings and cadastral
+    parcels.
 repository-code: https://github.com/rOpenSpain/CatastRoNav
 url: https://ropenspain.github.io/CatastRoNav/
 contact:
@@ -74,16 +76,16 @@ references:
   repository: https://CRAN.R-project.org/package=CatastRo
   authors:
   - family-names: Delgado Panadero
-    given-names: Ángel
+    given-names: Angel
     email: delgadopanadero@gmail.com
     orcid: https://orcid.org/0000-0002-8189-9251
-  - family-names: Hernangómez
+  - family-names: Hernangomez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
-  year: '2026'
   doi: 10.32614/CRAN.package.CatastRo
-  version: '>= 1.0.2'
+  version: '>= 1.1.0'
+  year: '2026'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -91,8 +93,8 @@ references:
   url: https://cli.r-lib.org
   repository: https://CRAN.R-project.org/package=cli
   authors:
-  - family-names: Csárdi
-    given-names: Gábor
+  - family-names: Csardi
+    given-names: Gabor
     email: gabor@posit.co
   year: '2026'
   doi: 10.32614/CRAN.package.cli
@@ -107,12 +109,12 @@ references:
     given-names: Hadley
     email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: François
+  - family-names: Francois
     given-names: Romain
     orcid: https://orcid.org/0000-0002-2444-4226
   - family-names: Henry
     given-names: Lionel
-  - family-names: Müller
+  - family-names: Muller
     given-names: Kirill
     orcid: https://orcid.org/0000-0002-1416-3412
   - family-names: Vaughan
@@ -135,13 +137,29 @@ references:
   doi: 10.32614/CRAN.package.httr2
   version: '>= 1.0.0'
 - type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2026'
+  doi: 10.32614/CRAN.package.lifecycle
+- type: software
   title: mapSpain
   abstract: 'mapSpain: Administrative Boundaries and Static Map Tiles for Spain'
   notes: Imports
   url: https://ropenspain.github.io/mapSpain/
   repository: https://CRAN.R-project.org/package=mapSpain
   authors:
-  - family-names: Hernangómez
+  - family-names: Hernangomez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
@@ -195,7 +213,7 @@ references:
     given-names: Andrew
     orcid: https://orcid.org/0000-0002-4565-533X
   - family-names: Barbosa
-    given-names: A. Márcia
+    given-names: A. Marcia
     orcid: https://orcid.org/0000-0001-8972-7713
   - family-names: Cordano
     given-names: Emanuele
@@ -329,7 +347,7 @@ references:
     email: hadley@posit.co
   year: '2026'
   doi: 10.32614/CRAN.package.testthat
-  version: '>= 3.0.0'
+  version: '>= 3.3.0'
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
@@ -337,7 +355,7 @@ references:
   url: https://tibble.tidyverse.org/
   repository: https://CRAN.R-project.org/package=tibble
   authors:
-  - family-names: Müller
+  - family-names: Muller
     given-names: Kirill
     email: kirill@cynkra.com
     orcid: https://orcid.org/0000-0002-1416-3412
@@ -354,7 +372,7 @@ references:
   url: https://dieghernan.github.io/tidyterra/
   repository: https://CRAN.R-project.org/package=tidyterra
   authors:
-  - family-names: Hernangómez
+  - family-names: Hernangomez
     given-names: Diego
     email: diego.hernangomezherrero@gmail.com
     orcid: https://orcid.org/0000-0001-8457-4658
@@ -372,7 +390,7 @@ references:
   - family-names: Henry
     given-names: Lionel
     email: lionel@posit.co
-  - family-names: Müller
+  - family-names: Muller
     given-names: Kirill
     email: krlmlr+r@mailbox.org
   - family-names: Ushey

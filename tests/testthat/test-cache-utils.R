@@ -265,3 +265,34 @@ test_that("catrnav_clear_cache() validates arguments", {
   expect_snapshot(error = TRUE, catrnav_clear_cache(cached_data = NA))
   expect_snapshot(error = TRUE, catrnav_clear_cache(verbose = NA))
 })
+
+test_that("cache deletion reports failed and incomplete removals", {
+  config_dir <- withr::local_tempdir()
+  data_dir <- withr::local_tempdir()
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = data_dir)
+  local_mocked_bindings(
+    migrate_cache = function(...) invisible(),
+    catrnav_user_config_dir = function() config_dir,
+    catrnav_unlink = function(...) 1L
+  )
+  expect_snapshot(
+    catrnav_clear_cache(config = TRUE, verbose = TRUE),
+    transform = function(x) {
+      x <- gsub(config_dir, "<config_dir>", x, fixed = TRUE)
+      gsub(data_dir, "<data_dir>", x, fixed = TRUE)
+    }
+  )
+  expect_all_true(dir.exists(c(config_dir, data_dir)))
+  expect_identical(Sys.getenv("CATASTRONAV_CACHE_DIR"), "")
+
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = data_dir)
+  local_mocked_bindings(catrnav_unlink = function(...) 0L)
+  expect_snapshot(
+    catrnav_clear_cache(config = TRUE, verbose = TRUE),
+    transform = function(x) {
+      x <- gsub(config_dir, "<config_dir>", x, fixed = TRUE)
+      gsub(data_dir, "<data_dir>", x, fixed = TRUE)
+    }
+  )
+  expect_all_true(dir.exists(c(config_dir, data_dir)))
+})

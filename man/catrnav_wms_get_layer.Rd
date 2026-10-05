@@ -22,11 +22,11 @@ catrnav_wms_get_layer(
 )
 }
 \arguments{
-\item{x}{See \strong{Bounding box}. Can be one of:
+\item{x}{Input defining the query area. See \strong{Bounding box}. It can be:
 \itemize{
 \item A numeric vector of length 4 with the coordinates that define
 the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
-\item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
+\item An \code{\link[sf:st_sf]{sf}} or \code{\link[sf:st_sfc]{sfc}} object from \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}}.
 }}
 
 \item{srs}{The CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
@@ -37,13 +37,14 @@ box}.}
 \item{styles}{Style to apply to the selected WMS layer. See
 \strong{Layers and styles}.}
 
-\item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
-\code{FALSE}. When set to \code{TRUE}, it forces a new download.}
+\item{update_cache}{Logical. Whether to refresh the cached file. Defaults to
+\code{FALSE}.}
 
-\item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
-stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
+\item{cache_dir}{Path to a cache directory. If \code{NULL}, uses the configured
+cache or a directory inside \code{\link[base:tempdir]{base::tempdir()}}. See
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 
 \item{crop}{Logical. If \code{TRUE}, crop results to the specified \code{x} extent. If
 \code{x} is an \code{\link[sf:st_sf]{sf}} object with one \code{POINT}, \code{crop} is set to
@@ -64,25 +65,17 @@ supported.}
   }}
 }
 \value{
-A \code{SpatRaster} with 3 (RGB) or 4 (RGBA) layers, depending on
-the provider. See \code{\link[terra:rast]{terra::rast()}}.
+A \code{\link[terra:rast]{SpatRaster}} with three RGB or four RGBA layers.
+Returns \code{\link[base:NULL]{NULL}} if the request cannot run or no image can be
+retrieved. See \code{\link[terra:RGB]{terra::RGB()}}.
 }
 \description{
 Downloads georeferenced map images from the Cadastre of Navarre WMS service.
 This function wraps \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles()}}.
 }
-\section{Bounding box}{
-
-When \code{x} is a numeric vector, make sure that \code{srs} matches the coordinate
-values. When \code{x} is an \code{\link[sf:st_sf]{sf}} or \code{\link[sf:st_sfc]{sfc}} object,
-\code{srs} is ignored.
-
-The query uses \href{https://epsg.io/3857}{EPSG:3857}, Web Mercator, then
-transforms the image back to the input CRS. If the image appears distorted,
-provide a spatial object as \code{x} or set \code{srs} to the CRS of the requested
-image.
+\details{
+Returns \code{NULL} if the request cannot run or no image can be retrieved.
 }
-
 \section{Layers and styles}{
 
 \subsection{Layers}{
@@ -105,6 +98,20 @@ Available styles include:
 \item \code{"address"}: \code{"default"}.
 }
 }
+}
+
+\section{Bounding box}{
+
+
+When \code{x} is a numeric vector, make sure that \code{srs} matches the coordinate
+values. When \code{x} is an \code{\link[sf:st_sf]{sf}} object, the \code{srs} value is
+ignored.
+
+The query uses \href{https://epsg.io/3857}{EPSG:3857} (Web Mercator), then
+transforms the tile back to the SRS of \code{x}. If the tile appears distorted,
+provide a spatial object as \code{x} or set \code{srs} to the SRS of the requested
+tile. See \strong{Examples}.
+
 }
 
 \examples{
@@ -140,7 +147,10 @@ ggplot() +
 \item \code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}}, \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}} and
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}} retrieve individual spatial features
 within a bounding box.
+\item \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}}, \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} and
+\code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} download complete municipal vector datasets.
 \item \code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} configures where downloaded images are cached.
+\code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}} removes cached images.
 \item \code{\link[mapSpain:esp_get_tiles]{mapSpain::esp_get_tiles()}} downloads map tiles.
 \item \code{\link[terra:RGB]{terra::RGB()}} identifies RGB channels.
 \item \code{\link[terra:plotRGB]{terra::plotRGB()}} and \code{\link[tidyterra:geom_spatraster_rgb]{tidyterra::geom_spatraster_rgb()}} plot RGB rasters.
@@ -164,4 +174,4 @@ Work with cadastral parcels:
 \concept{addresses}
 \concept{buildings}
 \concept{parcels}
-\concept{wms}
+\concept{wms_services}

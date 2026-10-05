@@ -1,127 +1,157 @@
-#' Download and cache a file from a URL
-#'
-#' @param url A character string containing the URL to download.
-#' @param name A character string specifying the destination file name.
-#' @param cache_dir A character string specifying the cache directory.
-#' @param update_cache A logical value indicating whether to refresh the cached
-#'   file.
-#' @param cache A logical value indicating whether to cache the downloaded file.
-#' @param verbose A logical value indicating whether to display informational
-#'   messages.
-#'
-#' @returns A [character][base::character] string containing the downloaded
-#'   file path, or `NULL` if the download fails.
-#'
-#' @noRd
 download_url <- function(
   url,
   name = basename(url),
   cache_dir = NULL,
+  subdir = NULL,
   update_cache = FALSE,
-  cache = TRUE,
   verbose = TRUE
 ) {
-  url <- gsub("^http:", "https:", url)
-  url <- URLencode(url)
-
-  if (isFALSE(cache)) {
-    cache_dir <- tempdir()
-  } else {
-    cache_dir <- create_cache_dir(cache_dir)
+  cache_dir <- create_cache_dir(cache_dir)
+  if (!is.null(subdir)) {
+    cache_dir <- create_cache_dir(file.path(cache_dir, subdir))
   }
 
+  # Create and normalize the destination file path.
   file_local <- file.path(cache_dir, name)
-  file_on_cache <- file.exists(file_local)
+  file_local <- gsub("//", "/", file_local, fixed = TRUE)
 
-  if (isTRUE(cache) && isFALSE(update_cache) && file_on_cache) {
-    make_msg("success", verbose, "Using cached file {.file ", file_local, "}.")
+  msg <- "Using cache directory {.path {cache_dir}}."
+  make_msg("info", verbose, msg)
+
+  # Check whether the file already exists.
+  fileoncache <- file.exists(file_local)
+
+  # Return the cached file unless a refresh is requested.
+  if (isFALSE(update_cache) && fileoncache) {
+    msg <- "Using cached file {.file {file_local}}."
+    make_msg("success", verbose, msg)
+
     return(file_local)
   }
 
-  if (isTRUE(cache) && file_on_cache) {
-    make_msg("info", verbose, "Refreshing cached file.")
+  if (fileoncache) {
+    make_msg("warning", verbose, "Refreshing cached file.")
   }
 
-  make_msg("info", verbose, "Downloading {.url ", url, "}.")
-
-  if (!is_online_fun()) {
-    cli::cli_alert_danger("No internet connection detected.")
-    cli::cli_alert("Returning {.code NULL} because the request cannot run.")
-    return(NULL)
-  }
+  msg <- "Downloading {.url {url}}."
+  make_msg("info", verbose, msg)
 
   req <- httr2::request(url)
-  req <- httr2::req_error(req, is_error = function(resp) {
-    FALSE
-  })
-  req <- httr2::req_options(
-    req,
-    ssl_verifypeer = catrnav_ssl_verify()
-  )
+  req <- httr2::req_error(req, is_error = catrnav_never_error)
+
+  req <- httr2::req_options(req, ssl_verifypeer = catrnav_ssl_verify())
+
   req <- httr2::req_timeout(req, catrnav_timeout())
   req <- httr2::req_retry(req, max_tries = 3)
-
   if (verbose) {
     req <- httr2::req_progress(req)
   }
 
-  resp <- tryCatch(
-    req_perform_fun(req, path = file_local),
-    error = function(cnd) {
-      unlink(file_local, force = TRUE)
-      cli::cli_alert_danger("Download failed for {.url {url}}.")
-      cli::cli_alert(
-        "Returning {.code NULL}. Reason: {.emph {conditionMessage(cnd)}}"
-      )
+  if (!is_online_fun()) {
+    cli::cli_alert_danger("No internet connection detected.")
+    cli::cli_inform("Returning {.code NULL} because the request cannot run.")
+    return(NULL)
+  }
+
+  # Use HEAD to determine whether to report the download size.
+  get_header <- httr2::req_method(req, "HEAD")
+  getsize <- tryCatch(
+    req_perform_fun(get_header),
+    httr2_failure = function(cnd) {
+      report_request_failure(cnd, "download")
       NULL
     }
   )
+  if (is.null(getsize)) {
+    return(NULL)
+  }
 
+  size_dwn <- as.numeric(httr2::resp_header(getsize, "content-length", 0))
+  class(size_dwn) <- class(object.size("a"))
+  thr <- 20 * (1024^2)
+  if (size_dwn > thr) {
+    sz_dwn <- paste0(format(size_dwn, units = "auto"), ".")
+    make_msg("warning", TRUE, "Download size is ", sz_dwn)
+    req <- httr2::req_progress(req)
+  }
+
+  file_download <- tempfile(pattern = "download-", tmpdir = cache_dir)
+  on.exit(unlink(file_download, force = TRUE), add = TRUE)
+
+  resp <- tryCatch(
+    req_perform_fun(req, path = file_download),
+    httr2_failure = function(cnd) {
+      report_request_failure(cnd, "download")
+      NULL
+    }
+  )
   if (is.null(resp)) {
     return(NULL)
   }
 
   if (httr2::resp_is_error(resp)) {
-    unlink(file_local, force = TRUE)
-    status <- httr2::resp_status(resp) # nolint
-    description <- httr2::resp_status_desc(resp) # nolint
-    cli::cli_alert_danger(
-      "HTTP error {.val {status}} ({.emph {description}}): {.url {url}}."
+    report_http_error(
+      url,
+      httr2::resp_status(resp),
+      httr2::resp_status_desc(resp)
     )
-    cli::cli_alert_warning(paste0(
-      "If this looks like a package bug, open an issue at ",
-      "{.url https://github.com/ropenspain/CatastRoNav/issues}."
-    ))
-    cli::cli_alert("Returning {.code NULL} because the download failed.")
+    cli::cli_inform("Returning {.code NULL} because the download failed.")
     return(NULL)
   }
-
-  if (verbose) {
-    size <- file.size(file_local)
-    class(size) <- class(object.size("a"))
-    cli::cli_alert_success(paste0(
-      "Downloaded file to {.file {file_local}} ",
-      "({.val {format(size, units = 'auto')}})."
-    ))
-  }
+  replace_cached_file(file_download, file_local)
+  msg <- "Downloaded file to {.file {file_local}}."
+  make_msg("success", verbose, msg)
 
   file_local
 }
+
+replace_cached_file <- function(download, target) {
+  if (suppressWarnings(catrnav_file_rename(download, target))) {
+    return(invisible(target))
+  }
+
+  if (!file.exists(target)) {
+    cli::cli_abort("Could not install the downloaded file {.file {target}}.")
+  }
+
+  backup <- tempfile(pattern = "cache-backup-", tmpdir = dirname(target))
+  if (!catrnav_file_rename(target, backup)) {
+    cli::cli_abort("Could not preserve the cached file {.file {target}}.")
+  }
+
+  restore_backup <- TRUE
+  on.exit(
+    {
+      if (restore_backup && file.exists(backup)) {
+        catrnav_file_rename(backup, target)
+      }
+    },
+    add = TRUE
+  )
+
+  if (!catrnav_file_rename(download, target)) {
+    cli::cli_abort("Could not install the downloaded file {.file {target}}.")
+  }
+
+  restore_backup <- FALSE
+  unlink(backup, force = TRUE)
+  invisible(target)
+}
+
+# nocov start
+catrnav_file_rename <- function(...) {
+  file.rename(...)
+}
+# nocov end
 
 req_perform_fun <- function(...) {
   httr2::req_perform(...)
 }
 
-#' Wrap `httr2::is_online()` for testing
-#'
-#' @noRd
 is_online_fun <- function(...) {
   httr2::is_online()
 }
 
-#' Get an HTTP configuration value from options or environment variables
-#'
-#' @noRd
 catrnav_http_config <- function(option, envvar, default) {
   opt <- getOption(option, NULL)
   if (!is.null(opt)) {
@@ -141,9 +171,6 @@ catrnav_http_config <- function(option, envvar, default) {
   env_num
 }
 
-#' Get the SSL verification setting for CatastRoNav HTTP requests
-#'
-#' @noRd
 catrnav_ssl_verify <- function() {
   catrnav_http_config(
     "catastronav_ssl_verify",
@@ -152,13 +179,44 @@ catrnav_ssl_verify <- function() {
   )
 }
 
-#' Get the timeout setting for CatastRoNav HTTP requests
-#'
-#' @noRd
 catrnav_timeout <- function() {
   catrnav_http_config(
     "catastronav_timeout",
     "CATASTRONAV_TIMEOUT",
     getOption("catastro_timeout", 300)
   )
+}
+
+catrnav_never_error <- function(...) {
+  FALSE
+}
+
+report_http_error <- function(
+  url,
+  status_code = 404,
+  status_desc = "Not Found"
+) {
+  cli::cli_alert_danger(c(
+    "HTTP error {.val {status_code}} ({status_desc}):",
+    " {.url {url}}."
+  ))
+  cli::cli_alert_warning(paste0(
+    "If this looks like a package bug, open an issue at ",
+    "{.url https://github.com/ropenspain/CatastRoNav/issues}."
+  ))
+}
+
+report_request_failure <- function(cnd, type) {
+  request_type <- if (identical(type, "request")) {
+    "request"
+  } else {
+    paste(type, "request")
+  }
+  cli::cli_alert_danger(paste0(
+    "The ",
+    request_type,
+    " could not be completed."
+  ))
+  cli::cli_alert_warning("{conditionMessage(cnd)}")
+  cli::cli_inform("Returning {.code NULL} because the {type} failed.")
 }

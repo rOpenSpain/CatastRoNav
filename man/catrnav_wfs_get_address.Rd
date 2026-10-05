@@ -11,29 +11,35 @@
 catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 }
 \arguments{
-\item{x}{See \strong{Bounding box}. Can be one of:
+\item{x}{Input defining the query area. See \strong{Bounding box}. It can be:
 \itemize{
 \item A numeric vector of length 4 with the coordinates that define
 the bounding box: \code{c(xmin, ymin, xmax, ymax)}.
-\item A \code{sf/sfc} object, as provided by the \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}} package.
+\item An \code{\link[sf:st_sf]{sf}} or \code{\link[sf:st_sfc]{sfc}} object from \href{https://CRAN.R-project.org/package=sf}{\pkg{sf}}.
 }}
 
 \item{srs}{The CRS to use for the query. Defaults to \code{4326}. See \strong{Bounding
 box}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 
 \item{count}{A positive whole number specifying the maximum number of
 features to return. If \code{NULL}, the service default applies.}
 }
 \value{
-An \code{\link[sf:st_sf]{sf}} object, or \code{NULL} if the data cannot be
+An \code{\link[sf:st_sf]{sf}} object. Returns \code{\link[base:NULL]{NULL}} if the
+data cannot be
 retrieved.
 }
 \description{
 Retrieves spatial address data from the Cadastre of Navarre WFS INSPIRE
-service. \code{catrnav_wfs_get_address_bbox()} retrieves features within the
+service. \code{\link[=catrnav_wfs_get_address_bbox]{catrnav_wfs_get_address_bbox()}} retrieves features within the
 supplied bounding box. See \strong{Bounding box}.
+}
+\details{
+Responses are cached in the \code{wfs_inspire_cache} subdirectory of the
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}} cache. Repeated queries reuse the cached file.
+Clear the cache with \code{\link[=catrnav_clear_cache]{catrnav_clear_cache()}} to download fresh results.
 }
 \section{API limits}{
 
@@ -67,10 +73,11 @@ ggplot(ad) +
 }
 \seealso{
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}} downloads all addresses for a municipality.
+
 \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}} retrieves a georeferenced map image rather than
 individual spatial features.
 
-Query data from the WFS INSPIRE service:
+Query WFS INSPIRE services:
 \code{\link[=catrnav_wfs_get_buildings_bbox]{catrnav_wfs_get_buildings_bbox()}},
 \code{\link[=catrnav_wfs_get_parcels_bbox]{catrnav_wfs_get_parcels_bbox()}}
 
@@ -80,4 +87,4 @@ Work with cadastral addresses:
 \code{\link[=catrnav_wms_get_layer]{catrnav_wms_get_layer()}}
 }
 \concept{addresses}
-\concept{wfs}
+\concept{wfs_services}

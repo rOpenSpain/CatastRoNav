@@ -1,4 +1,7 @@
-url: https://ropenspain.github.io/CatastRoNav
+url: https://ropenspain.github.io/CatastRoNav/
+
+development:
+  mode: auto
 
 repo:
   branch: main
@@ -14,61 +17,71 @@ figures:
 home:
   title: CatastRoNav
   description: >
-    Access complete municipal datasets, bounding box features and georeferenced
-    map images from the Cadastre of Navarre.
+    Access complete municipal datasets, features within a bounding box and
+    georeferenced map images from the Cadastre of Navarre.
 
 authors:
   Diego Hernangómez:
     href: https://dieghernan.github.io/
   Francisco J. Goerlich:
     href: https://www.uv.es/goerlich/
+  Gobierno de Navarra:
+    href: https://geoportal.navarra.es/
 
 reference:
+- title: Retrieve cadastral data
+  desc: >
+    Download complete municipal datasets, query features within a selected
+    area or retrieve georeferenced cadastral map images.
+- subtitle: Complete municipal datasets
+  desc: >
+    Download all addresses, buildings or cadastral parcels for a municipality
+    through the INSPIRE ATOM service. Use `catrnav_atom_search_munic()` to find
+    municipality names and codes.
+- contents:
+  - catrnav_atom_get_address
+  - catrnav_atom_get_buildings
+  - catrnav_atom_get_parcels
+
+- subtitle: ATOM download catalogs
+  desc: >
+    Inspect available municipalities, download URLs and data reference
+    timestamps before retrieving complete datasets.
+- contents:
+  - has_concept("atom_indexes")
+
+- subtitle: Features within a bounding box
+  desc: >
+    Query addresses, buildings or cadastral parcels through the INSPIRE WFS service.
+    Results are returned as `sf` objects from the **sf** package.
+- contents:
+  - has_concept("wfs_services")
+
+- subtitle: Georeferenced map images
+  desc: >
+    Download cadastral map images through WMS as `SpatRaster` objects from
+    the **terra** package.
+    Use the spatial objects returned by WFS queries to define the map extent.
+- contents:
+  - has_concept("wms_services")
+
 - title: Find municipalities
   desc: >
-    Search by municipality name or cadastral code before downloading data.
+    Search the ATOM index by municipality name or cadastral code before
+    downloading a complete municipal dataset.
 - contents:
-  - has_concept("search")
+  - has_concept("search_tools")
 
-- title: Download municipal datasets
+- title: Configure and inspect CatastRoNav
   desc: >
-    Use the ATOM service to retrieve complete municipal datasets for addresses,
-    buildings and cadastral parcels.
-- subtitle: Explore download URLs
-  desc: >
-    List available municipalities, download URLs and data reference dates.
-- contents:
-  - ends_with("_db_all")
-- subtitle: Download spatial features
-  desc: >
-    Download all features of a selected type for one municipality as an
-    **sf** object.
-- contents:
-  - has_concept("atom")
-  - -has_concept("search")
-  - -ends_with("_db_all")
-
-- title: Query features within a bounding box
-  desc: >
-    Use the WFS service to retrieve addresses, buildings or cadastral parcels
-    for a selected area as an **sf** object.
-- contents:
-  - has_concept("wfs")
-
-- title: Download map images
-  desc: >
-    Use the WMS service to download georeferenced cadastral map images as a
-    **terra** SpatRaster object.
-- contents:
-  - has_concept("wms")
-
-- title: Manage the cache
+    Manage downloaded files and access package-level documentation.
+- subtitle: Cache management
   desc: >
     Configure, inspect and clear the local cache used by **CatastRoNav**.
 - contents:
   - has_concept("cache_utilities")
 
-- title: Package overview
+- subtitle: Package overview
   desc: >
     Read the package overview and follow links to the main workflows.
 - contents:

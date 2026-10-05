@@ -2,18 +2,21 @@
 #'
 #' @description
 #' Retrieves spatial address data from the Cadastre of Navarre WFS INSPIRE
-#' service. `catrnav_wfs_get_address_bbox()` retrieves features within the
+#' service. [catrnav_wfs_get_address_bbox()] retrieves features within the
 #' supplied bounding box. See **Bounding box**.
 #'
-#' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
+#' @details
+#' Responses are cached in the `wfs_inspire_cache` subdirectory of the
+#' [catrnav_set_cache_dir()] cache. Repeated queries reuse the cached file.
+#' Clear the cache with [catrnav_clear_cache()] to download fresh results.
 #'
+#' @inheritParams CatastRo::catr_wfs_get_address_bbox x verbose
 #' @param srs The CRS to use for the query. Defaults to `4326`. See **Bounding
 #'   box**.
 #' @param count A positive whole number specifying the maximum number of
 #'   features to return. If `NULL`, the service default applies.
 #'
-#' @returns An [`sf`][sf::st_sf] object, or `NULL` if the data cannot be
-#'   retrieved.
+#' @inherit CatastRo::catr_wfs_get_address_bbox return
 #'
 #' @section API limits:
 #' The service returns a maximum of 5,000 features by default. Use `count` to
@@ -26,10 +29,11 @@
 #'
 #' @seealso
 #' [catrnav_atom_get_address()] downloads all addresses for a municipality.
-#' [catrnav_wms_get_layer()] retrieves a georeferenced map image rather than
-#' individual spatial features.
 #'
-#' @family wfs
+#' ```{r child = "man/chunks/wfs-map-links.Rmd"}
+#' ```
+#'
+#' @family wfs_services
 #' @family addresses
 #'
 #' @rdname catrnav_wfs_get_address

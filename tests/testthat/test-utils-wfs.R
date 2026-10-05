@@ -56,7 +56,7 @@ test_that("WFS queries omit empty optional arguments", {
   expect_identical(query_with_count$count, 10)
 })
 
-test_that("WFS helpers handle failed and empty responses", {
+test_that("empty WFS responses retain cached files", {
   local_mocked_bindings(inspire_wfs_get_fun = function(...) NULL)
   expect_null(wfs_read_bbox_query(
     c(-1, 40, 0, 41),
@@ -75,10 +75,10 @@ test_that("WFS helpers handle failed and empty responses", {
     path = "services/CP/wfs",
     typenames = "CP:CadastralParcel"
   ))
-  expect_false(file.exists(response))
+  expect_all_true(file.exists(response))
 })
 
-test_that("WFS helpers transform successful responses and clean up", {
+test_that("successful WFS responses retain cached files", {
   response <- withr::local_tempfile(fileext = ".gml")
   writeLines("spatial response", response)
   source <- sf::st_sf(
@@ -99,7 +99,60 @@ test_that("WFS helpers transform successful responses and clean up", {
 
   expect_s3_class(result, "sf")
   expect_equal(sf::st_crs(result), sf::st_crs(4326))
-  expect_false(file.exists(response))
+  expect_all_true(file.exists(response))
+})
+
+test_that("WFS queries use the Navarre cache and preserve response files", {
+  cache_dir <- withr::local_tempdir()
+  withr::local_envvar(CATASTRONAV_CACHE_DIR = cache_dir)
+  response <- file.path(cache_dir, "response.gml")
+  writeLines("spatial response", response)
+  source <- sf::st_sf(
+    geometry = sf::st_sfc(sf::st_point(c(500000, 4700000)), crs = 25830)
+  )
+  seen <- NULL
+  local_mocked_bindings(
+    inspire_wfs_get_fun = function(cache_dir, ...) {
+      seen <<- cache_dir
+      response
+    },
+    read_geo_file_sf = function(...) source
+  )
+
+  result <- catrnav_wfs_get_parcels_bbox(c(-1, 40, 0, 41))
+  expect_identical(seen, cache_dir)
+  expect_equal(sf::st_crs(result), sf::st_crs(4326))
+  expect_all_true(file.exists(response))
+})
+
+test_that("WFS requests scope Navarre HTTP options to the delegated call", {
+  withr::local_options(list(
+    catastronav_timeout = NULL,
+    catastronav_ssl_verify = NULL,
+    catastro_timeout = 120,
+    catastro_ssl_verify = 1L
+  ))
+  withr::local_envvar(c(
+    CATASTRONAV_TIMEOUT = "30",
+    CATASTRONAV_SSL_VERIFY = "0"
+  ))
+  seen <- NULL
+  local_mocked_bindings(catrnav_inspire_wfs_get = function(...) {
+    seen <<- options()[c("catastro_timeout", "catastro_ssl_verify")]
+    "response.gml"
+  })
+
+  expect_identical(inspire_wfs_get_fun(), "response.gml")
+  expect_equal(seen, list(catastro_timeout = 30, catastro_ssl_verify = 0))
+  expect_identical(getOption("catastro_timeout"), 120)
+  expect_identical(getOption("catastro_ssl_verify"), 1L)
+
+  local_mocked_bindings(catrnav_inspire_wfs_get = function(...) {
+    cli::cli_abort("Simulated WFS failure.")
+  })
+  expect_error(inspire_wfs_get_fun(), class = "rlang_error")
+  expect_identical(getOption("catastro_timeout"), 120)
+  expect_identical(getOption("catastro_ssl_verify"), 1L)
 })
 
 test_that("WFS bounding boxes report invalid CRS and configured limits", {

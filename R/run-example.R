@@ -7,8 +7,8 @@
 #' @details
 #' Returns `FALSE` on CRAN or when offline.
 #'
-#' @returns A [logical][base::logical] value, `TRUE` if online and not running
-#'   on CRAN, `FALSE` otherwise.
+#' @returns A [logical][base::logical] value. Returns `TRUE` if online and not
+#'   running on CRAN, `FALSE` otherwise.
 #'
 #' @keywords internal
 #'
@@ -28,12 +28,6 @@ run_example <- function() {
   TRUE
 }
 
-#' Check whether code is running on CRAN
-#'
-#' @returns A [logical][base::logical] value, `TRUE` if running on CRAN,
-#'   `FALSE` otherwise.
-#'
-#' @noRd
 on_cran <- function(is_interactive = interactive()) {
   env <- Sys.getenv("NOT_CRAN")
   if (identical(env, "")) {

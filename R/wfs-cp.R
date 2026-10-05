@@ -2,8 +2,10 @@
 #'
 #' @description
 #' Retrieves spatial cadastral parcel data from the Cadastre of Navarre WFS
-#' INSPIRE service. `catrnav_wfs_get_parcels_bbox()` retrieves features within
+#' INSPIRE service. [catrnav_wfs_get_parcels_bbox()] retrieves features within
 #' the supplied bounding box. See **Bounding box**.
+#'
+#' @inherit catrnav_wfs_get_address_bbox details
 #'
 #' @inheritParams catrnav_wfs_get_address_bbox x srs verbose count
 #'
@@ -16,10 +18,12 @@
 #'
 #' @seealso
 #' [catrnav_atom_get_parcels()] downloads all cadastral parcels for a
-#' municipality. [catrnav_wms_get_layer()] retrieves a georeferenced map image
-#' rather than individual spatial features.
+#' municipality.
 #'
-#' @family wfs
+#' ```{r child = "man/chunks/wfs-map-links.Rmd"}
+#' ```
+#'
+#' @family wfs_services
 #' @family parcels
 #'
 #' @rdname catrnav_wfs_get_parcels

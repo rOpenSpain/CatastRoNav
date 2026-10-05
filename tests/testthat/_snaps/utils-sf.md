@@ -12,6 +12,18 @@
     Message
       ! No matching files found in the ZIP archive.
 
+# read_geo_file_sf() handles invalid large files
+
+    Code
+      read_geo_file_sf(source)
+    Message
+      ! Reading a large spatial file ("21 Mb").
+    Output
+      Cannot open data source <source.gml>
+    Condition
+      Error:
+      ! Open failed.
+
 # read_geo_file_sf() handles missing layers and read errors
 
     Code
@@ -22,7 +34,8 @@
 ---
 
     Code
-      unreadable <- suppressWarnings(read_geo_file_sf(source, query = "SELECT * FROM missing"))
-    Message
-      ! The spatial result could not be read.
+      suppressWarnings(read_geo_file_sf(source, query = "SELECT * FROM missing"))
+    Condition
+      Error:
+      ! Query execution failed, cannot open layer.
 

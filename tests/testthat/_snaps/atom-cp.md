@@ -4,7 +4,7 @@
       result <- catrnav_atom_get_parcels("061", cache_dir = cdir)
     Message
       x No internet connection detected.
-      > Returning `NULL` because the request cannot run.
+      Returning `NULL` because the request cannot run.
 
 # parcel ATOM data handles HTTP 404 responses
 
@@ -13,7 +13,7 @@
     Message
       x HTTP error 404 (Not Found): <https://filescartografia.navarra.es/2_CARTOGRAFIA_TEMATICA/2_7_CATASTRO/2_7_3_INSPIRE_ATOM/2_7_3_1_CP/CadastralParcels_ServiceATOM_Navarra.xml>.
       ! If this looks like a package bug, open an issue at <https://github.com/ropenspain/CatastRoNav/issues>.
-      > Returning `NULL` because the download failed.
+      Returning `NULL` because the download failed.
 
 # parcel ATOM data reports unknown municipalities
 
@@ -22,4 +22,12 @@
     Message
       ! No municipality matched the pattern "xyxghx".
       i Check available municipalities with `catrnav_atom_get_parcels_db_all()`.
+
+# parcels downloads reject invalid municipalities before requests
+
+    Code
+      catrnav_atom_get_parcels()
+    Condition
+      Error in `catrnav_atom_get_parcels()`:
+      ! `munic` cannot be missing.
 

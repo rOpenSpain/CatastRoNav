@@ -1,0 +1,2 @@
+[catrnav_set_cache_dir()] configures the download cache and
+[catrnav_clear_cache()] removes cached downloads.

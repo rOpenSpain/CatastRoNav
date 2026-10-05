@@ -7,30 +7,33 @@
 \usage{
 catrnav_atom_search_munic(
   munic,
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
 )
 }
 \arguments{
-\item{munic}{A municipality name, partial name or cadastral code to search
-for.}
+\item{munic}{A single municipality name, partial name or cadastral code.
+Accepts a character string or numeric code. Use
+\code{\link[=catrnav_atom_search_munic]{catrnav_atom_search_munic()}} to search for available municipalities.}
 
-\item{cache}{A logical value indicating whether to use cached files. Defaults
-to \code{TRUE}.}
+\item{cache}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no longer
+supported because results are always cached.}
 
-\item{update_cache}{Logical. Should the cached file be refreshed? Defaults to
-\code{FALSE}. When set to \code{TRUE}, it forces a new download.}
+\item{update_cache}{Logical. Whether to refresh the cached file. Defaults to
+\code{FALSE}.}
 
-\item{cache_dir}{Path to a cache directory. On \code{NULL}, the function
-stores cached files in a temporary directory (see \code{\link[base:tempdir]{base::tempdir()}}).}
+\item{cache_dir}{Path to a cache directory. If \code{NULL}, uses the configured
+cache or a directory inside \code{\link[base:tempdir]{base::tempdir()}}. See
+\code{\link[=catrnav_set_cache_dir]{catrnav_set_cache_dir()}}.}
 
-\item{verbose}{Logical. If \code{TRUE}, displays informational messages.}
+\item{verbose}{Logical. Whether to display informational messages.}
 }
 \value{
 A \link[tibble:tbl_df]{tibble} with the municipality name and cadastral
-code, or \code{NULL} if no match is found or the data cannot be retrieved.
+code. Returns \code{\link[base:NULL]{NULL}} if no match is found or the data cannot
+be retrieved.
 }
 \description{
 Searches for a municipality by name or cadastral code in the Cadastre of
@@ -39,6 +42,9 @@ Navarre ATOM index.
 \examples{
 \dontshow{if (run_example()) withAutoprint(\{ # examplesIf}
 catrnav_atom_search_munic("Pamplona")
+
+# Search using a numeric cadastral code.
+catrnav_atom_search_munic(201)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
@@ -48,7 +54,7 @@ list downloads for the other data types. Use the selected name or cadastral
 code with \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}}, \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}} or
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}} to download a complete municipal dataset.
 
-Use the ATOM INSPIRE service:
+Query ATOM INSPIRE services:
 \code{\link[=catrnav_atom_get_address]{catrnav_atom_get_address()}},
 \code{\link[=catrnav_atom_get_address_db_all]{catrnav_atom_get_address_db_all()}},
 \code{\link[=catrnav_atom_get_buildings]{catrnav_atom_get_buildings()}},
@@ -56,5 +62,5 @@ Use the ATOM INSPIRE service:
 \code{\link[=catrnav_atom_get_parcels]{catrnav_atom_get_parcels()}},
 \code{\link[=catrnav_atom_get_parcels_db_all]{catrnav_atom_get_parcels_db_all()}}
 }
-\concept{atom}
-\concept{search}
+\concept{atom_services}
+\concept{search_tools}

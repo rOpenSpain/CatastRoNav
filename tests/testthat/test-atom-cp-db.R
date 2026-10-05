@@ -19,11 +19,25 @@ test_that("parcel ATOM index can be downloaded", {
   skip_if_offline()
 
   expect_message(
-    result <- catrnav_atom_get_parcels_db_all(verbose = TRUE, cache = FALSE),
+    result <- catrnav_atom_get_parcels_db_all(
+      verbose = TRUE,
+      cache_dir = withr::local_tempdir()
+    ),
     "Downloaded file"
   )
 
   expect_s3_class(result, "tbl_df")
   expect_named(result, c("munic", "url", "date"))
   expect_gt(nrow(result), 0L)
+})
+
+test_that("catrnav_atom_get_parcels_db_all() deprecates cache", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  local_mocked_bindings(catrnav_atom_read_db_all = function(...) NULL)
+
+  expect_warning(
+    result <- catrnav_atom_get_parcels_db_all(cache = FALSE),
+    class = "lifecycle_warning_deprecated"
+  )
+  expect_null(result)
 })

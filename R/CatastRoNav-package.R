@@ -23,4 +23,5 @@
 ## usethis namespace: start
 ## usethis namespace: end
 #' @importFrom utils unzip object.size URLencode adist zip
+#' @importFrom lifecycle deprecated
 NULL
