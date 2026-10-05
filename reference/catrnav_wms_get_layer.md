@@ -207,11 +207,9 @@ parc <- catrnav_wms_get_layer(
   srs = 4326,
   what = "parcel"
 )
-#> Error: [rast] cannot open this file as a SpatRaster: /tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png
-#>        (GDAL) `/tmp/RtmpbIPnyR/CatastRoNav/CatastroNav_parcel/2fae4d556841f337fa7edbad08cc462c.png' not recognized as a supported file format.
 
 ggplot() +
   geom_spatraster_rgb(data = parc)
-#> Error: object 'parc' not found
+
 # }
 ```
