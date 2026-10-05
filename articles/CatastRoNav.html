@@ -99,7 +99,9 @@
 <li>
 <strong>WMS service:</strong> Downloads georeferenced map images for addresses, buildings and cadastral parcels.</li>
 </ol>
-<p>ATOM download and WFS query functions return addresses, buildings and cadastral parcels as <code>sf</code> objects from the <strong>sf</strong> package. ATOM index and search functions return tibbles. WMS functions return georeferenced images as <code>SpatRaster</code> objects from the <strong>terra</strong> package.</p>
+<p>ATOM download and WFS query functions return addresses, buildings and cadastral parcels as <code>sf</code> objects from the <strong>sf</strong> package. ATOM index and search functions return tibbles. WMS functions return georeferenced images as <code>SpatRaster</code> objects from the <strong>terra</strong> package. ATOM index reference timestamps use UTC. Municipal downloads return <code>NULL</code> if no municipality matches or the data cannot be downloaded. Errors when reading spatial files propagate to the caller. Municipality inputs must be a single name, partial name or cadastral code. Codes can be strings or numbers, such as <code>"201"</code> or <code>201</code>. Empty inputs, <code>NA</code> and vectors produce an error before any network request.</p>
+<p>Downloads are always cached, as in <strong>CatastRo</strong>. The ATOM <code>cache</code> argument is deprecated. Use a temporary <code>cache_dir</code> for session-only downloads and <code>update_cache = TRUE</code> to refresh ATOM or WMS data. Failed ATOM updates preserve previously cached files. WFS queries reuse cached responses until the cache is cleared with <code><a href="../reference/catrnav_clear_cache.html">catrnav_clear_cache()</a></code>.</p>
+<p>ATOM downloads and WFS queries share the <code>catastronav_timeout</code> and <code>catastronav_ssl_verify</code> options and the <code>CATASTRONAV_TIMEOUT</code> and <code>CATASTRONAV_SSL_VERIFY</code> environment variables. See <code><a href="../reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> for configuration precedence and cache subdirectories.</p>
 </section><section class="level2"><h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <section class="level3"><h3 id="working-with-layers">Working with layers<a class="anchor" aria-label="anchor" href="#working-with-layers"></a>
@@ -147,7 +149,7 @@ Figure 1: Cadastral layers around El Sadar Stadium
 </div>
 </section><section class="level3"><h3 id="thematic-maps">Thematic maps<a class="anchor" aria-label="anchor" href="#thematic-maps"></a>
 </h3>
-<p>We can also create thematic maps from attributes in spatial objects. This example visualizes urban growth in Pamplona with <strong>CatastRoNav</strong>, reproducing a map by <a href="https://dominicroye.github.io" class="external-link">Dominic Royé</a> <span class="citation" data-cites="roye19">(<a href="#ref-roye19" role="doc-biblioref">Royé 2019</a>)</span>.</p>
+<p>We can also create thematic maps from attributes in spatial objects. This example visualizes urban growth in Pamplona with <strong>CatastRoNav</strong>, reproducing a map by <a href="https://dominicroye.github.io" class="external-link">Dominic RoyC)</a> <span class="citation" data-cites="roye19">(<a href="#ref-roye19" role="doc-biblioref">Royé 2019</a>)</span>.</p>
 <p>First, we retrieve the geometry of Pamplona’s city center with <strong>mapSpain</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use mapSpain to obtain the city geometry.</span></span>

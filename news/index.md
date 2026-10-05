@@ -7,6 +7,49 @@
   `CATASTRONAV_SSL_VERIFY` environment variables. The existing
   `catastronav_timeout` and `catastronav_ssl_verify` options still take
   precedence.
+- Downloads now use separate cache subdirectories and preserve valid
+  ATOM files if an update fails. **CatastRoNav** now requires
+  **CatastRo** 1.1.0 or later.
+- ATOM downloads now check file sizes with HEAD requests, report
+  downloads larger than 20 MB and handle HTTP and transport failures
+  consistently with **CatastRo**. Unexpected internal errors are no
+  longer converted to `NULL`.
+- Errors when reading spatial files now propagate to the caller instead
+  of being converted to `NULL`.
+- `catrnav_atom_get_*()` and
+  [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  deprecate the `cache` argument. Results are always cached, as in
+  **CatastRo**. Use a temporary `cache_dir` for session-only downloads
+  and `update_cache = TRUE` to refresh ATOM data.
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+  and
+  [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+  now return `NULL` when no municipality matches and read municipal ZIP
+  archives without extracting them to disk.
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),
+  [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+  and
+  [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  now accept numeric municipality codes and reject missing, empty or
+  non-scalar municipality inputs before requesting data.
+- [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
+  [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+  and
+  [`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
+  now retain reference timestamps in UTC instead of converting them to
+  dates.
+- [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
+  now reports unsuccessful or incomplete deletions and only announces
+  success when the directory has been removed.
+- [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md),
+  [`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_buildings.md)
+  and
+  [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
+  now retain responses in the **CatastRoNav** cache and apply its HTTP
+  timeout and SSL verification settings without changing subsequent
+  **CatastRo** requests.
 
 ## CatastRoNav 1.0.0
 

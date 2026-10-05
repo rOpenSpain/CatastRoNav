@@ -30,7 +30,26 @@ services:
 ATOM download and WFS query functions return addresses, buildings and
 cadastral parcels as `sf` objects from the **sf** package. ATOM index
 and search functions return tibbles. WMS functions return georeferenced
-images as `SpatRaster` objects from the **terra** package.
+images as `SpatRaster` objects from the **terra** package. ATOM index
+reference timestamps use UTC. Municipal downloads return `NULL` if no
+municipality matches or the data cannot be downloaded. Errors when
+reading spatial files propagate to the caller. Municipality inputs must
+be a single name, partial name or cadastral code. Codes can be strings
+or numbers, such as `"201"` or `201`. Empty inputs, `NA` and vectors
+produce an error before any network request.
+
+Downloads are always cached, as in **CatastRo**. The ATOM `cache`
+argument is deprecated. Use a temporary `cache_dir` for session-only
+downloads and `update_cache = TRUE` to refresh ATOM or WMS data. Failed
+ATOM updates preserve previously cached files. WFS queries reuse cached
+responses until the cache is cleared with
+[`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md).
+
+ATOM downloads and WFS queries share the `catastronav_timeout` and
+`catastronav_ssl_verify` options and the `CATASTRONAV_TIMEOUT` and
+`CATASTRONAV_SSL_VERIFY` environment variables. See
+[`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+for configuration precedence and cache subdirectories.
 
 ## Examples
 
@@ -89,7 +108,7 @@ Figure 1: Cadastral layers around El Sadar Stadium
 
 We can also create thematic maps from attributes in spatial objects.
 This example visualizes urban growth in Pamplona with **CatastRoNav**,
-reproducing a map by [Dominic Royé](https://dominicroye.github.io)
+reproducing a map by [Dominic RoyC)](https://dominicroye.github.io)
 ([Royé 2019](#ref-roye19)).
 
 First, we retrieve the geometry of Pamplona’s city center with

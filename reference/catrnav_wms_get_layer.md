@@ -29,13 +29,14 @@ catrnav_wms_get_layer(
 
 - x:
 
-  See **Bounding box**. Can be one of:
+  Input defining the query area. See **Bounding box**. It can be:
 
   - A numeric vector of length 4 with the coordinates that define the
     bounding box: `c(xmin, ymin, xmax, ymax)`.
 
-  - A `sf/sfc` object, as provided by the
-    [sf](https://CRAN.R-project.org/package=sf) package.
+  - An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) or
+    [`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object
+    from [sf](https://CRAN.R-project.org/package=sf).
 
 - srs:
 
@@ -52,18 +53,18 @@ catrnav_wms_get_layer(
 
 - update_cache:
 
-  Logical. Should the cached file be refreshed? Defaults to `FALSE`.
-  When set to `TRUE`, it forces a new download.
+  Logical. Whether to refresh the cached file. Defaults to `FALSE`.
 
 - cache_dir:
 
-  Path to a cache directory. On `NULL`, the function stores cached files
-  in a temporary directory (see
-  [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
+  Path to a cache directory. If `NULL`, uses the configured cache or a
+  directory inside
+  [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html). See
+  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
 
 - verbose:
 
-  Logical. If `TRUE`, displays informational messages.
+  Logical. Whether to display informational messages.
 
 - crop:
 
@@ -101,22 +102,15 @@ catrnav_wms_get_layer(
 
 ## Value
 
-A `SpatRaster` with 3 (RGB) or 4 (RGBA) layers, depending on the
-provider. See
-[`terra::rast()`](https://rspatial.github.io/terra/reference/rast.html).
+A [`SpatRaster`](https://rspatial.github.io/terra/reference/rast.html)
+with three RGB or four RGBA layers. Returns
+[`NULL`](https://rdrr.io/r/base/NULL.html) if the request cannot run or
+no image can be retrieved. See
+[`terra::RGB()`](https://rspatial.github.io/terra/reference/RGB.html).
 
-## Bounding box
+## Details
 
-When `x` is a numeric vector, make sure that `srs` matches the
-coordinate values. When `x` is an
-[`sf`](https://r-spatial.github.io/sf/reference/sf.html) or
-[`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object, `srs`
-is ignored.
-
-The query uses [EPSG:3857](https://epsg.io/3857), Web Mercator, then
-transforms the image back to the input CRS. If the image appears
-distorted, provide a spatial object as `x` or set `srs` to the CRS of
-the requested image.
+Returns `NULL` if the request cannot run or no image can be retrieved.
 
 ## Layers and styles
 
@@ -141,6 +135,18 @@ argument). Available styles include:
 
 - `"address"`: `"default"`.
 
+## Bounding box
+
+When `x` is a numeric vector, make sure that `srs` matches the
+coordinate values. When `x` is an
+[`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, the
+`srs` value is ignored.
+
+The query uses [EPSG:3857](https://epsg.io/3857) (Web Mercator), then
+transforms the tile back to the SRS of `x`. If the tile appears
+distorted, provide a spatial object as `x` or set `srs` to the SRS of
+the requested tile. See **Examples**.
+
 ## See also
 
 - [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md),
@@ -149,8 +155,16 @@ argument). Available styles include:
   [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
   retrieve individual spatial features within a bounding box.
 
+- [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md),
+  [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md)
+  and
+  [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
+  download complete municipal vector datasets.
+
 - [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
   configures where downloaded images are cached.
+  [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
+  removes cached images.
 
 - [`mapSpain::esp_get_tiles()`](https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html)
   downloads map tiles.

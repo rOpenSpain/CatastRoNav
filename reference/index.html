@@ -39,9 +39,14 @@
     </div>
 
     <div class="section level2">
-      <h2 id="find-municipalities">Find municipalities<a class="anchor" aria-label="anchor" href="#find-municipalities"></a></h2>
+      <h2 id="retrieve-cadastral-data">Retrieve cadastral data<a class="anchor" aria-label="anchor" href="#retrieve-cadastral-data"></a></h2>
 
-      <div class="section-desc"><p>Search by municipality name or cadastral code before downloading data.</p></div>
+      <div class="section-desc"><p>Download complete municipal datasets, query features within a selected area or retrieve georeferenced cadastral map images.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="complete-municipal-datasets">Complete municipal datasets<a class="anchor" aria-label="anchor" href="#complete-municipal-datasets"></a></h3>
+      <div class="section-desc"><p>Download all addresses, buildings or cadastral parcels for a municipality through the INSPIRE ATOM service. Use <code><a href="../reference/catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> to find municipality names and codes.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -50,19 +55,28 @@
 
       <dl><dt>
 
-          <code><a href="catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code>
+          <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>
 
         </dt>
-        <dd>ATOM INSPIRE: search for municipalities</dd>
+        <dd>ATOM INSPIRE: download all addresses for a municipality</dd>
+
+        <dt>
+
+          <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>
+
+        </dt>
+        <dd>ATOM INSPIRE: download all buildings for a municipality</dd>
+
+        <dt>
+
+          <code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code>
+
+        </dt>
+        <dd>ATOM INSPIRE: download all cadastral parcels for a municipality</dd>
       </dl></div><div class="section level2">
-      <h2 id="download-municipal-datasets">Download municipal datasets<a class="anchor" aria-label="anchor" href="#download-municipal-datasets"></a></h2>
 
-      <div class="section-desc"><p>Use the ATOM service to retrieve complete municipal datasets for addresses, buildings and cadastral parcels.</p></div>
-
-      <dl></dl></div><div class="section level2">
-
-      <h3 id="explore-download-urls">Explore download URLs<a class="anchor" aria-label="anchor" href="#explore-download-urls"></a></h3>
-      <div class="section-desc"><p>List available municipalities, download URLs and data reference dates.</p></div>
+      <h3 id="atom-download-catalogs">ATOM download catalogs<a class="anchor" aria-label="anchor" href="#atom-download-catalogs"></a></h3>
+      <div class="section-desc"><p>Inspect available municipalities, download URLs and data reference timestamps before retrieving complete datasets.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -91,38 +105,8 @@
         <dd>ATOM INSPIRE: list cadastral parcel download URLs</dd>
       </dl></div><div class="section level2">
 
-      <h3 id="download-spatial-features">Download spatial features<a class="anchor" aria-label="anchor" href="#download-spatial-features"></a></h3>
-      <div class="section-desc"><p>Download all features of a selected type for one municipality as an <strong>sf</strong> object.</p></div>
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>
-
-        </dt>
-        <dd>ATOM INSPIRE: download all addresses for a municipality</dd>
-
-        <dt>
-
-          <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>
-
-        </dt>
-        <dd>ATOM INSPIRE: download all buildings for a municipality</dd>
-
-        <dt>
-
-          <code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code>
-
-        </dt>
-        <dd>ATOM INSPIRE: download all cadastral parcels for a municipality</dd>
-      </dl></div><div class="section level2">
-      <h2 id="query-features-within-a-bounding-box">Query features within a bounding box<a class="anchor" aria-label="anchor" href="#query-features-within-a-bounding-box"></a></h2>
-
-      <div class="section-desc"><p>Use the WFS service to retrieve addresses, buildings or cadastral parcels for a selected area as an <strong>sf</strong> object.</p></div>
+      <h3 id="features-within-a-bounding-box">Features within a bounding box<a class="anchor" aria-label="anchor" href="#features-within-a-bounding-box"></a></h3>
+      <div class="section-desc"><p>Query addresses, buildings or cadastral parcels through the INSPIRE WFS service. Results are returned as <code>sf</code> objects from the <strong>sf</strong> package.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -150,9 +134,9 @@
         </dt>
         <dd>WFS INSPIRE: retrieve cadastral parcels</dd>
       </dl></div><div class="section level2">
-      <h2 id="download-map-images">Download map images<a class="anchor" aria-label="anchor" href="#download-map-images"></a></h2>
 
-      <div class="section-desc"><p>Use the WMS service to download georeferenced cadastral map images as a <strong>terra</strong> SpatRaster object.</p></div>
+      <h3 id="georeferenced-map-images">Georeferenced map images<a class="anchor" aria-label="anchor" href="#georeferenced-map-images"></a></h3>
+      <div class="section-desc"><p>Download cadastral map images through WMS as <code>SpatRaster</code> objects from the <strong>terra</strong> package. Use the spatial objects returned by WFS queries to define the map extent.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -166,8 +150,29 @@
         </dt>
         <dd>WMS INSPIRE: download georeferenced map images</dd>
       </dl></div><div class="section level2">
-      <h2 id="manage-the-cache">Manage the cache<a class="anchor" aria-label="anchor" href="#manage-the-cache"></a></h2>
+      <h2 id="find-municipalities">Find municipalities<a class="anchor" aria-label="anchor" href="#find-municipalities"></a></h2>
 
+      <div class="section-desc"><p>Search the ATOM index by municipality name or cadastral code before downloading a complete municipal dataset.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code>
+
+        </dt>
+        <dd>ATOM INSPIRE: search for municipalities</dd>
+      </dl></div><div class="section level2">
+      <h2 id="configure-and-inspect-catastronav">Configure and inspect CatastRoNav<a class="anchor" aria-label="anchor" href="#configure-and-inspect-catastronav"></a></h2>
+
+      <div class="section-desc"><p>Manage downloaded files and access package-level documentation.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="cache-management">Cache management<a class="anchor" aria-label="anchor" href="#cache-management"></a></h3>
       <div class="section-desc"><p>Configure, inspect and clear the local cache used by <strong>CatastRoNav</strong>.</p></div>
 
       <dl></dl></div><div class="section level2">
@@ -189,8 +194,8 @@
         </dt>
         <dd>Set your <span class="pkg">CatastRoNav</span> cache directory</dd>
       </dl></div><div class="section level2">
-      <h2 id="package-overview">Package overview<a class="anchor" aria-label="anchor" href="#package-overview"></a></h2>
 
+      <h3 id="package-overview">Package overview<a class="anchor" aria-label="anchor" href="#package-overview"></a></h3>
       <div class="section-desc"><p>Read the package overview and follow links to the main workflows.</p></div>
 
       <dl></dl></div><div class="section level2">

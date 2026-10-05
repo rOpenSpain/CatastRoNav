@@ -72,9 +72,9 @@ This function wraps <code><a href="https://ropenspain.github.io/mapSpain/referen
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>See <strong>Bounding box</strong>. Can be one of:</p><ul><li><p>A numeric vector of length 4 with the coordinates that define
+<dd><p>Input defining the query area. See <strong>Bounding box</strong>. It can be:</p><ul><li><p>A numeric vector of length 4 with the coordinates that define
 the bounding box: <code>c(xmin, ymin, xmax, ymax)</code>.</p></li>
-<li><p>A <code>sf/sfc</code> object, as provided by the <a href="https://CRAN.R-project.org/package=sf" class="external-link"><span class="pkg">sf</span></a> package.</p></li>
+<li><p>An <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> or <code><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">sfc</a></code> object from <a href="https://CRAN.R-project.org/package=sf" class="external-link"><span class="pkg">sf</span></a>.</p></li>
 </ul></dd>
 
 
@@ -93,17 +93,18 @@ box</strong>.</p></dd>
 
 
 <dt id="arg-update-cache">update_cache<a class="anchor" aria-label="anchor" href="#arg-update-cache"></a></dt>
-<dd><p>Logical. Should the cached file be refreshed? Defaults to
-<code>FALSE</code>. When set to <code>TRUE</code>, it forces a new download.</p></dd>
+<dd><p>Logical. Whether to refresh the cached file. Defaults to
+<code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-cache-dir">cache_dir<a class="anchor" aria-label="anchor" href="#arg-cache-dir"></a></dt>
-<dd><p>Path to a cache directory. On <code>NULL</code>, the function
-stores cached files in a temporary directory (see <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">base::tempdir()</a></code>).</p></dd>
+<dd><p>Path to a cache directory. If <code>NULL</code>, uses the configured
+cache or a directory inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">base::tempdir()</a></code>. See
+<code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, displays informational messages.</p></dd>
+<dd><p>Logical. Whether to display informational messages.</p></dd>
 
 
 <dt id="arg-crop">crop<a class="anchor" aria-label="anchor" href="#arg-crop"></a></dt>
@@ -138,20 +139,13 @@ supported.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>SpatRaster</code> with 3 (RGB) or 4 (RGBA) layers, depending on
-the provider. See <code><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">terra::rast()</a></code>.</p>
+    <p>A <code><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">SpatRaster</a></code> with three RGB or four RGBA layers.
+Returns <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a></code> if the request cannot run or no image can be
+retrieved. See <code><a href="https://rspatial.github.io/terra/reference/RGB.html" class="external-link">terra::RGB()</a></code>.</p>
     </div>
     <div class="section level2">
-    <h2 id="bounding-box">Bounding box<a class="anchor" aria-label="anchor" href="#bounding-box"></a></h2>
-
-
-<p>When <code>x</code> is a numeric vector, make sure that <code>srs</code> matches the coordinate
-values. When <code>x</code> is an <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> or <code><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">sfc</a></code> object,
-<code>srs</code> is ignored.</p>
-<p>The query uses <a href="https://epsg.io/3857" class="external-link">EPSG:3857</a>, Web Mercator, then
-transforms the image back to the input CRS. If the image appears distorted,
-provide a spatial object as <code>x</code> or set <code>srs</code> to the CRS of the requested
-image.</p>
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Returns <code>NULL</code> if the request cannot run or no image can be retrieved.</p>
     </div>
     <div class="section level2">
     <h2 id="layers-and-styles">Layers and styles<a class="anchor" aria-label="anchor" href="#layers-and-styles"></a></h2>
@@ -178,12 +172,28 @@ Available styles include:</p><ul><li><p><code>"parcel"</code>: <code>"default"</
 
     </div>
     <div class="section level2">
+    <h2 id="bounding-box">Bounding box<a class="anchor" aria-label="anchor" href="#bounding-box"></a></h2>
+
+
+
+<p>When <code>x</code> is a numeric vector, make sure that <code>srs</code> matches the coordinate
+values. When <code>x</code> is an <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> object, the <code>srs</code> value is
+ignored.</p>
+<p>The query uses <a href="https://epsg.io/3857" class="external-link">EPSG:3857</a> (Web Mercator), then
+transforms the tile back to the SRS of <code>x</code>. If the tile appears distorted,
+provide a spatial object as <code>x</code> or set <code>srs</code> to the SRS of the requested
+tile. See <strong>Examples</strong>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and
 <code><a href="catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> retrieve individual spatial features
 within a bounding box.</p></li>
-<li><p><code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> configures where downloaded images are cached.</p></li>
+<li><p><code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> and
+<code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> download complete municipal vector datasets.</p></li>
+<li><p><code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> configures where downloaded images are cached.
+<code><a href="catrnav_clear_cache.html">catrnav_clear_cache()</a></code> removes cached images.</p></li>
 <li><p><code><a href="https://ropenspain.github.io/mapSpain/reference/esp_get_tiles.html" class="external-link">mapSpain::esp_get_tiles()</a></code> downloads map tiles.</p></li>
 <li><p><code><a href="https://rspatial.github.io/terra/reference/RGB.html" class="external-link">terra::RGB()</a></code> identifies RGB channels.</p></li>
 <li><p><code><a href="https://rspatial.github.io/terra/reference/plotRGB.html" class="external-link">terra::plotRGB()</a></code> and <code><a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html" class="external-link">tidyterra::geom_spatraster_rgb()</a></code> plot RGB rasters.</p></li>

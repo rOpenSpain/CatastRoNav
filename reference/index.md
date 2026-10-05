@@ -1,32 +1,16 @@
 # Package index
 
-## Find municipalities
+## Retrieve cadastral data
 
-Search by municipality name or cadastral code before downloading data.
+Download complete municipal datasets, query features within a selected
+area or retrieve georeferenced cadastral map images.
 
-- [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
-  : ATOM INSPIRE: search for municipalities
+### Complete municipal datasets
 
-## Download municipal datasets
-
-Use the ATOM service to retrieve complete municipal datasets for
-addresses, buildings and cadastral parcels.
-
-### Explore download URLs
-
-List available municipalities, download URLs and data reference dates.
-
-- [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
-  : ATOM INSPIRE: list address download URLs
-- [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
-  : ATOM INSPIRE: list building download URLs
-- [`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
-  : ATOM INSPIRE: list cadastral parcel download URLs
-
-### Download spatial features
-
-Download all features of a selected type for one municipality as an
-**sf** object.
+Download all addresses, buildings or cadastral parcels for a
+municipality through the INSPIRE ATOM service. Use
+[`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+to find municipality names and codes.
 
 - [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md)
   : ATOM INSPIRE: download all addresses for a municipality
@@ -35,10 +19,22 @@ Download all features of a selected type for one municipality as an
 - [`catrnav_atom_get_parcels()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels.md)
   : ATOM INSPIRE: download all cadastral parcels for a municipality
 
-## Query features within a bounding box
+### ATOM download catalogs
 
-Use the WFS service to retrieve addresses, buildings or cadastral
-parcels for a selected area as an **sf** object.
+Inspect available municipalities, download URLs and data reference
+timestamps before retrieving complete datasets.
+
+- [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md)
+  : ATOM INSPIRE: list address download URLs
+- [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md)
+  : ATOM INSPIRE: list building download URLs
+- [`catrnav_atom_get_parcels_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_parcels_db.md)
+  : ATOM INSPIRE: list cadastral parcel download URLs
+
+### Features within a bounding box
+
+Query addresses, buildings or cadastral parcels through the INSPIRE WFS
+service. Results are returned as `sf` objects from the **sf** package.
 
 - [`catrnav_wfs_get_address_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_address.md)
   : WFS INSPIRE: retrieve addresses
@@ -47,15 +43,28 @@ parcels for a selected area as an **sf** object.
 - [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
   : WFS INSPIRE: retrieve cadastral parcels
 
-## Download map images
+### Georeferenced map images
 
-Use the WMS service to download georeferenced cadastral map images as a
-**terra** SpatRaster object.
+Download cadastral map images through WMS as `SpatRaster` objects from
+the **terra** package. Use the spatial objects returned by WFS queries
+to define the map extent.
 
 - [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
   : WMS INSPIRE: download georeferenced map images
 
-## Manage the cache
+## Find municipalities
+
+Search the ATOM index by municipality name or cadastral code before
+downloading a complete municipal dataset.
+
+- [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
+  : ATOM INSPIRE: search for municipalities
+
+## Configure and inspect CatastRoNav
+
+Manage downloaded files and access package-level documentation.
+
+### Cache management
 
 Configure, inspect and clear the local cache used by **CatastRoNav**.
 
@@ -70,7 +79,7 @@ Configure, inspect and clear the local cache used by **CatastRoNav**.
 
   Set your CatastRoNav cache directory
 
-## Package overview
+### Package overview
 
 Read the package overview and follow links to the main workflows.
 

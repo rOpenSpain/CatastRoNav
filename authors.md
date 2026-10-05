@@ -9,6 +9,11 @@
 - **[Francisco J. Goerlich](https://www.uv.es/goerlich/)**. Contributor.
   [](https://orcid.org/0000-0003-1626-525X)
 
+- **[Gobierno de Navarra](https://geoportal.navarra.es/)**. Data
+  contributor.
+  [![ROR](https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg)](https://ror.org/025qq4838)  
+  Provider of cadastral data and INSPIRE services through SITNA
+
 ## Citation
 
 Source:
@@ -26,5 +31,5 @@ the Cadastre of Navarre*.
       author = {Diego Hernangómez},
       doi = {10.5281/zenodo.6366407},
       url = {https://ropenspain.github.io/CatastRoNav/},
-      abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
+      abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM feeds, Web Feature Service and Web Map Service endpoints provided by the Government of Navarre through the Sistema de Información Territorial de Navarra (SITNA). Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
     }

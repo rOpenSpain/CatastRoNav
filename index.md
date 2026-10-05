@@ -46,15 +46,23 @@ through three INSPIRE services:
 The ATOM service downloads complete municipal datasets for addresses,
 buildings and cadastral parcels. Download functions return `sf` objects
 from the **sf** package. Index and search functions return tibbles.
+Index reference timestamps use UTC. Downloads return `NULL` if the data
+cannot be downloaded or no municipality matches the search. Errors when
+reading spatial files propagate to the caller.
 
 These functions use the `catrnav_atom_get_*()` prefix.
+
+Municipality inputs must be a single name, partial name or cadastral
+code. Codes can be supplied as strings or numbers, such as `"201"` or
+`201`. Empty values, `NA` and vectors of municipalities produce an error
+before any network request.
 
 #### WFS service
 
 The WFS service retrieves cadastral features within a supplied bounding
 box. Results are returned as `sf` objects from the
-[**sf**](https://r-spatial.github.io/sf/) package. For full municipal
-downloads, prefer the ATOM service.
+[**sf**](https://r-spatial.github.io/sf/) package. For complete
+municipal downloads, prefer the ATOM service.
 
 These functions use the `catrnav_wfs_get_*()` prefix.
 
@@ -100,13 +108,50 @@ Olite](reference/figures/README-wfs-1.png)
 
 ## Cache management
 
-Downloaded files are cached locally. Use
+Downloaded files are always cached locally, as in **CatastRo**. The ATOM
+`cache` argument is deprecated and no longer changes this behavior. Use
+a temporary `cache_dir` for session-only downloads and
+`update_cache = TRUE` to refresh ATOM or WMS data. Failed ATOM updates
+preserve the previous cached file. ATOM downloads check the file size
+with a HEAD request and report downloads larger than 20 MB before
+fetching the body.
+
+ATOM indexes are stored in `databases`, municipal downloads in
+`atom_ad`, `atom_bu` or `atom_cp` and WFS responses in
+`wfs_inspire_cache`. WFS queries reuse their cached response until the
+cache is cleared. Municipal ZIP archives are read directly without
+extracting their contents to disk.
+
+Use
 [`catrnav_detect_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
 to inspect the active cache,
 [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
 to configure it and
 [`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
 to remove cached data.
+
+ATOM downloads and WFS queries use the `catastronav_timeout` and
+`catastronav_ssl_verify` options. If unset, **CatastRoNav** checks the
+`CATASTRONAV_TIMEOUT` and `CATASTRONAV_SSL_VERIFY` environment
+variables, then the `catastro_timeout` and `catastro_ssl_verify`
+options. The defaults are 300 seconds and enabled SSL verification. WFS
+queries restore the previous **CatastRo** options after the request. For
+WMS requests, pass **mapSpain** settings through the `options` argument
+of
+[`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md).
+
+For a municipal download that lasts only for the current session,
+replace the deprecated `cache = FALSE` argument with a temporary cache
+path:
+
+``` r
+
+# Before (deprecated):
+# catrnav_atom_get_parcels("201", cache = FALSE)
+
+# Use a temporary cache instead.
+catrnav_atom_get_parcels(201, cache_dir = tempdir())
+```
 
 ## Citation
 
@@ -125,7 +170,7 @@ A **BibTeX** entry for **LaTeX** users is:
   author = {Diego Hernangómez},
   doi = {10.5281/zenodo.6366407},
   url = {https://ropenspain.github.io/CatastRoNav/},
-  abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
+  abstract = {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM feeds, Web Feature Service and Web Map Service endpoints provided by the Government of Navarre through the Sistema de Información Territorial de Navarra (SITNA). Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads for addresses, buildings and cadastral parcels.},
 }
 ```
 

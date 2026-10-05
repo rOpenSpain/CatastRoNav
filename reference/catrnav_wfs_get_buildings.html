@@ -64,9 +64,9 @@ supplied bounding box. See <strong>Bounding box</strong>.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>See <strong>Bounding box</strong>. Can be one of:</p><ul><li><p>A numeric vector of length 4 with the coordinates that define
+<dd><p>Input defining the query area. See <strong>Bounding box</strong>. It can be:</p><ul><li><p>A numeric vector of length 4 with the coordinates that define
 the bounding box: <code>c(xmin, ymin, xmax, ymax)</code>.</p></li>
-<li><p>A <code>sf/sfc</code> object, as provided by the <a href="https://CRAN.R-project.org/package=sf" class="external-link"><span class="pkg">sf</span></a> package.</p></li>
+<li><p>An <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> or <code><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">sfc</a></code> object from <a href="https://CRAN.R-project.org/package=sf" class="external-link"><span class="pkg">sf</span></a>.</p></li>
 </ul></dd>
 
 
@@ -76,7 +76,7 @@ box</strong>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, displays informational messages.</p></dd>
+<dd><p>Logical. Whether to display informational messages.</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -86,8 +86,15 @@ features to return. If <code>NULL</code>, the service default applies.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> object, or <code>NULL</code> if the data cannot be
+    <p>An <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf</a></code> object. Returns <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a></code> if the
+data cannot be
 retrieved.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Responses are cached in the <code>wfs_inspire_cache</code> subdirectory of the
+<code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> cache. Repeated queries reuse the cached file.
+Clear the cache with <code><a href="catrnav_clear_cache.html">catrnav_clear_cache()</a></code> to download fresh results.</p>
     </div>
     <div class="section level2">
     <h2 id="api-limits">API limits<a class="anchor" aria-label="anchor" href="#api-limits"></a></h2>
@@ -110,10 +117,10 @@ back to the input CRS. See <code><a href="https://r-spatial.github.io/sf/referen
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> downloads all buildings for a municipality.
-<code><a href="catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code> retrieves a georeferenced map image rather than
+    <div class="dont-index"><p><code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> downloads all buildings for a municipality.</p>
+<p><code><a href="catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code> retrieves a georeferenced map image rather than
 individual spatial features.</p>
-<p>Query data from the WFS INSPIRE service:
+<p>Query WFS INSPIRE services:
 <code><a href="catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>,
 <code><a href="catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code></p>
 <p>Work with cadastral buildings:

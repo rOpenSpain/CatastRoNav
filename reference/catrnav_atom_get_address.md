@@ -8,7 +8,7 @@ ATOM INSPIRE service provided by the Cadastre of Navarre.
 ``` r
 catrnav_atom_get_address(
   munic,
-  cache = TRUE,
+  cache = deprecated(),
   update_cache = FALSE,
   cache_dir = NULL,
   verbose = FALSE
@@ -23,35 +23,43 @@ catrnav_atom_get_address(
 
 - munic:
 
-  A municipality name, partial name or cadastral code. Use
+  A single municipality name, partial name or cadastral code. Accepts a
+  character string or numeric code. Use
   [`catrnav_atom_search_munic()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_search_munic.md)
   to search for available municipalities.
 
 - cache:
 
-  A logical value indicating whether to use cached files. Defaults to
-  `TRUE`.
+  **\[deprecated\]** This argument is no longer supported because
+  results are always cached.
 
 - update_cache:
 
-  Logical. Should the cached file be refreshed? Defaults to `FALSE`.
-  When set to `TRUE`, it forces a new download.
+  Logical. Whether to refresh the cached file. Defaults to `FALSE`.
 
 - cache_dir:
 
-  Path to a cache directory. On `NULL`, the function stores cached files
-  in a temporary directory (see
-  [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html)).
+  Path to a cache directory. If `NULL`, uses the configured cache or a
+  directory inside
+  [`base::tempdir()`](https://rdrr.io/r/base/tempfile.html). See
+  [`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md).
 
 - verbose:
 
-  Logical. If `TRUE`, displays informational messages.
+  Logical. Whether to display informational messages.
 
 ## Value
 
-An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
-`NULL` if the data cannot be retrieved. Returns `NA` invisibly if no
-municipality matches `munic`.
+An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object.
+Returns [`NULL`](https://rdrr.io/r/base/NULL.html) if the data cannot be
+retrieved.
+
+## Details
+
+Empty, missing or non-scalar values of `munic` produce an error before
+any download is attempted. Returns `NULL` if no municipality matches
+`munic`. Municipal ZIP archives are read directly without extracting
+their contents to disk.
 
 ## See also
 
@@ -61,7 +69,12 @@ lists available municipal downloads.
 retrieves addresses within a bounding box instead of downloading a
 complete municipal dataset.
 
-Use the ATOM INSPIRE service:
+[`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+configures the download cache and
+[`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
+removes cached downloads.
+
+Query ATOM INSPIRE services:
 [`catrnav_atom_get_address_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address_db.md),
 [`catrnav_atom_get_buildings()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings.md),
 [`catrnav_atom_get_buildings_db_all()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_buildings_db.md),

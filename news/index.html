@@ -43,6 +43,21 @@
 <h2 class="pkg-version" data-toc-text="development version" id="catastronav-development-version">CatastRoNav (development version)<a class="anchor" aria-label="anchor" href="#catastronav-development-version"></a></h2>
 <ul><li>
 <strong>CatastRoNav</strong> users can now configure HTTP timeout and SSL verification with the <code>CATASTRONAV_TIMEOUT</code> and <code>CATASTRONAV_SSL_VERIFY</code> environment variables. The existing <code>catastronav_timeout</code> and <code>catastronav_ssl_verify</code> options still take precedence.</li>
+<li>Downloads now use separate cache subdirectories and preserve valid ATOM files if an update fails. <strong>CatastRoNav</strong> now requires <strong>CatastRo</strong> 1.1.0 or later.</li>
+<li>ATOM downloads now check file sizes with HEAD requests, report downloads larger than 20 MB and handle HTTP and transport failures consistently with <strong>CatastRo</strong>. Unexpected internal errors are no longer converted to <code>NULL</code>.</li>
+<li>Errors when reading spatial files now propagate to the caller instead of being converted to <code>NULL</code>.</li>
+<li>
+<code>catrnav_atom_get_*()</code> and <code><a href="../reference/catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> deprecate the <code>cache</code> argument. Results are always cached, as in <strong>CatastRo</strong>. Use a temporary <code>cache_dir</code> for session-only downloads and <code>update_cache = TRUE</code> to refresh ATOM data.</li>
+<li>
+<code><a href="../reference/catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="../reference/catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> and <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> now return <code>NULL</code> when no municipality matches and read municipal ZIP archives without extracting them to disk.</li>
+<li>
+<code><a href="../reference/catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="../reference/catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>, <code><a href="../reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> and <code><a href="../reference/catrnav_atom_search_munic.html">catrnav_atom_search_munic()</a></code> now accept numeric municipality codes and reject missing, empty or non-scalar municipality inputs before requesting data.</li>
+<li>
+<code><a href="../reference/catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code>, <code><a href="../reference/catrnav_atom_get_buildings_db.html">catrnav_atom_get_buildings_db_all()</a></code> and <code><a href="../reference/catrnav_atom_get_parcels_db.html">catrnav_atom_get_parcels_db_all()</a></code> now retain reference timestamps in UTC instead of converting them to dates.</li>
+<li>
+<code><a href="../reference/catrnav_clear_cache.html">catrnav_clear_cache()</a></code> now reports unsuccessful or incomplete deletions and only announces success when the directory has been removed.</li>
+<li>
+<code><a href="../reference/catrnav_wfs_get_address.html">catrnav_wfs_get_address_bbox()</a></code>, <code><a href="../reference/catrnav_wfs_get_buildings.html">catrnav_wfs_get_buildings_bbox()</a></code> and <code><a href="../reference/catrnav_wfs_get_parcels.html">catrnav_wfs_get_parcels_bbox()</a></code> now retain responses in the <strong>CatastRoNav</strong> cache and apply its HTTP timeout and SSL verification settings without changing subsequent <strong>CatastRo</strong> requests.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="catastronav-100">CatastRoNav 1.0.0<a class="anchor" aria-label="anchor" href="#catastronav-100"></a></h2>

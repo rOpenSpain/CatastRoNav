@@ -3,10 +3,11 @@
 Use this function with caution. It clears cached data and configuration,
 specifically:
 
-- Deletes the CatastRoNav configuration directory
+- Deletes the CatastRoNav configuration directory when `config = TRUE`
   (`tools::R_user_dir("CatastRoNav", "config")`).
 
-- Deletes the `cache_dir` directory.
+- Deletes the `cache_dir` directory and its contents when
+  `cached_data = TRUE`.
 
 - Clears the `CATASTRONAV_CACHE_DIR` environment variable.
 
@@ -29,17 +30,17 @@ catrnav_clear_cache(config = FALSE, cached_data = TRUE, verbose = FALSE)
 
 - verbose:
 
-  Logical. If `TRUE`, displays informational messages.
+  Logical. Whether to display informational messages.
 
 ## Value
 
-[NULL](https://rdrr.io/r/base/NULL.html), invisibly. This function is
+[`NULL`](https://rdrr.io/r/base/NULL.html), invisibly. This function is
 called for its side effects.
 
 ## Details
 
-This function resets the cache state as if you had never used
-CatastRoNav.
+With `config = TRUE` and `cached_data = TRUE`, this function resets the
+cache state as if you had never used CatastRoNav.
 
 ## See also
 
@@ -58,20 +59,20 @@ Manage the local cache:
 # Caution! This modifies your current state.
 # \dontrun{
 my_cache <- catrnav_detect_cache_dir()
-#> ℹ /tmp/Rtmptlyc5x/CatastRoNav
+#> ℹ /tmp/Rtmp0Cngkk/CatastRoNav
 
 example_cache <- file.path(tempdir(), "example", "cache")
 catrnav_set_cache_dir(example_cache, verbose = FALSE)
 
 catrnav_clear_cache(verbose = TRUE)
-#> ✔ Deleted CatastRoNav cached data from /tmp/Rtmptlyc5x/example/cache ("0 bytes").
+#> ✔ Deleted CatastRoNav cached data from /tmp/Rtmp0Cngkk/example/cache ("0 bytes").
 
 # Restore the initial cache.
 catrnav_set_cache_dir(my_cache)
-#> ℹ CatastRoNav cache directory is /tmp/Rtmptlyc5x/CatastRoNav.
+#> ℹ CatastRoNav cache directory is /tmp/Rtmp0Cngkk/CatastRoNav.
 #> ℹ To reuse this cache directory in future sessions, set `install` to `TRUE`.
 identical(my_cache, catrnav_detect_cache_dir())
-#> ℹ /tmp/Rtmptlyc5x/CatastRoNav
+#> ℹ /tmp/Rtmp0Cngkk/CatastRoNav
 #> [1] TRUE
 # }
 ```

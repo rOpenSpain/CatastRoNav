@@ -18,9 +18,9 @@
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="CatastRoNav">
-<meta name="description" content="Access complete municipal datasets, bounding box features and georeferenced map images from the Cadastre of Navarre.
+<meta name="description" content="Access complete municipal datasets, features within a bounding box and georeferenced map images from the Cadastre of Navarre.
 ">
-<meta property="og:description" content="Access complete municipal datasets, bounding box features and georeferenced map images from the Cadastre of Navarre.
+<meta property="og:description" content="Access complete municipal datasets, features within a bounding box and georeferenced map images from the Cadastre of Navarre.
 ">
 <meta property="og:image" content="https://ropenspain.github.io/CatastRoNav/logo.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -108,13 +108,14 @@
 <div class="section level4">
 <h4 id="atom-service">ATOM service<a class="anchor" aria-label="anchor" href="#atom-service"></a>
 </h4>
-<p>The ATOM service downloads complete municipal datasets for addresses, buildings and cadastral parcels. Download functions return <code>sf</code> objects from the <strong>sf</strong> package. Index and search functions return tibbles.</p>
+<p>The ATOM service downloads complete municipal datasets for addresses, buildings and cadastral parcels. Download functions return <code>sf</code> objects from the <strong>sf</strong> package. Index and search functions return tibbles. Index reference timestamps use UTC. Downloads return <code>NULL</code> if the data cannot be downloaded or no municipality matches the search. Errors when reading spatial files propagate to the caller.</p>
 <p>These functions use the <code>catrnav_atom_get_*()</code> prefix.</p>
+<p>Municipality inputs must be a single name, partial name or cadastral code. Codes can be supplied as strings or numbers, such as <code>"201"</code> or <code>201</code>. Empty values, <code>NA</code> and vectors of municipalities produce an error before any network request.</p>
 </div>
 <div class="section level4">
 <h4 id="wfs-service">WFS service<a class="anchor" aria-label="anchor" href="#wfs-service"></a>
 </h4>
-<p>The WFS service retrieves cadastral features within a supplied bounding box. Results are returned as <code>sf</code> objects from the <a href="https://r-spatial.github.io/sf/" class="external-link"><strong>sf</strong></a> package. For full municipal downloads, prefer the ATOM service.</p>
+<p>The WFS service retrieves cadastral features within a supplied bounding box. Results are returned as <code>sf</code> objects from the <a href="https://r-spatial.github.io/sf/" class="external-link"><strong>sf</strong></a> package. For complete municipal downloads, prefer the ATOM service.</p>
 <p>These functions use the <code>catrnav_wfs_get_*()</code> prefix.</p>
 </div>
 <div class="section level4">
@@ -154,7 +155,17 @@
 <div class="section level2">
 <h2 id="cache-management">Cache management<a class="anchor" aria-label="anchor" href="#cache-management"></a>
 </h2>
-<p>Downloaded files are cached locally. Use <code><a href="reference/catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code> to inspect the active cache, <code><a href="reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> to configure it and <code><a href="reference/catrnav_clear_cache.html">catrnav_clear_cache()</a></code> to remove cached data.</p>
+<p>Downloaded files are always cached locally, as in <strong>CatastRo</strong>. The ATOM <code>cache</code> argument is deprecated and no longer changes this behavior. Use a temporary <code>cache_dir</code> for session-only downloads and <code>update_cache = TRUE</code> to refresh ATOM or WMS data. Failed ATOM updates preserve the previous cached file. ATOM downloads check the file size with a HEAD request and report downloads larger than 20 MB before fetching the body.</p>
+<p>ATOM indexes are stored in <code>databases</code>, municipal downloads in <code>atom_ad</code>, <code>atom_bu</code> or <code>atom_cp</code> and WFS responses in <code>wfs_inspire_cache</code>. WFS queries reuse their cached response until the cache is cleared. Municipal ZIP archives are read directly without extracting their contents to disk.</p>
+<p>Use <code><a href="reference/catrnav_set_cache_dir.html">catrnav_detect_cache_dir()</a></code> to inspect the active cache, <code><a href="reference/catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code> to configure it and <code><a href="reference/catrnav_clear_cache.html">catrnav_clear_cache()</a></code> to remove cached data.</p>
+<p>ATOM downloads and WFS queries use the <code>catastronav_timeout</code> and <code>catastronav_ssl_verify</code> options. If unset, <strong>CatastRoNav</strong> checks the <code>CATASTRONAV_TIMEOUT</code> and <code>CATASTRONAV_SSL_VERIFY</code> environment variables, then the <code>catastro_timeout</code> and <code>catastro_ssl_verify</code> options. The defaults are 300 seconds and enabled SSL verification. WFS queries restore the previous <strong>CatastRo</strong> options after the request. For WMS requests, pass <strong>mapSpain</strong> settings through the <code>options</code> argument of <code><a href="reference/catrnav_wms_get_layer.html">catrnav_wms_get_layer()</a></code>.</p>
+<p>For a municipal download that lasts only for the current session, replace the deprecated <code>cache = FALSE</code> argument with a temporary cache path:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Before (deprecated):</span></span>
+<span><span class="co"># catrnav_atom_get_parcels("201", cache = FALSE)</span></span>
+<span></span>
+<span><span class="co"># Use a temporary cache instead.</span></span>
+<span><span class="fu"><a href="reference/catrnav_atom_get_parcels.html">catrnav_atom_get_parcels</a></span><span class="op">(</span><span class="fl">201</span>, cache_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
@@ -163,15 +174,15 @@
 Hernangómez D (2026). <em>CatastRoNav: Interface to the INSPIRE Services of the Cadastre of Navarre</em>. <a href="https://doi.org/10.5281/zenodo.6366407" class="external-link">doi:10.5281/zenodo.6366407</a>. <a href="https://ropenspain.github.io/CatastRoNav/">https://ropenspain.github.io/CatastRoNav/</a>.
 </p>
 <p>A <strong>BibTeX</strong> entry for <strong>LaTeX</strong> users is:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">@</span>Manual{R<span class="sc">-</span>catastronav,</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  title <span class="ot">=</span> {{CatastRoNav}<span class="sc">:</span> Interface to the INSPIRE Services of the Cadastre of Navarre},</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  version <span class="ot">=</span> {<span class="dv">1</span>.<span class="dv">0</span>.<span class="fl">0.9000</span>},</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  author <span class="ot">=</span> {Diego Hernangómez},</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  doi <span class="ot">=</span> {<span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.6366407</span>},</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ropenspain.github.io<span class="sc">/</span>CatastRoNav<span class="sc">/</span>},</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  abstract <span class="ot">=</span> {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE Atom feeds, Web Feature Service and Web Map Service endpoints. Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads <span class="cf">for</span> addresses, buildings and cadastral parcels.},</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">@</span>Manual{R<span class="sc">-</span>catastronav,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  title <span class="ot">=</span> {{CatastRoNav}<span class="sc">:</span> Interface to the INSPIRE Services of the Cadastre of Navarre},</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="ot">=</span> {<span class="dv">1</span>.<span class="dv">0</span>.<span class="fl">0.9000</span>},</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  author <span class="ot">=</span> {Diego Hernangómez},</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  doi <span class="ot">=</span> {<span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.6366407</span>},</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ropenspain.github.io<span class="sc">/</span>CatastRoNav<span class="sc">/</span>},</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  abstract <span class="ot">=</span> {Provides access to public spatial data from the Cadastre of Navarre through its INSPIRE ATOM feeds, Web Feature Service and Web Map Service endpoints provided by the Government of Navarre through the Sistema de Información Territorial de <span class="fu">Navarra</span> (SITNA). Supports complete municipal dataset downloads, bounding box feature queries and georeferenced map image downloads <span class="cf">for</span> addresses, buildings and cadastral parcels.},</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>

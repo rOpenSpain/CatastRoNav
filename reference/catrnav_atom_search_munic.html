@@ -51,7 +51,7 @@ Navarre ATOM index.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">catrnav_atom_search_munic</span><span class="op">(</span></span>
 <span>  <span class="va">munic</span>,</span>
-<span>  cache <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cache <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  update_cache <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cache_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -63,33 +63,36 @@ Navarre ATOM index.</p>
 
 
 <dl><dt id="arg-munic">munic<a class="anchor" aria-label="anchor" href="#arg-munic"></a></dt>
-<dd><p>A municipality name, partial name or cadastral code to search
-for.</p></dd>
+<dd><p>A single municipality name, partial name or cadastral code.
+Accepts a character string or numeric code. Use
+<code>catrnav_atom_search_munic()</code> to search for available municipalities.</p></dd>
 
 
 <dt id="arg-cache">cache<a class="anchor" aria-label="anchor" href="#arg-cache"></a></dt>
-<dd><p>A logical value indicating whether to use cached files. Defaults
-to <code>TRUE</code>.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is no longer
+supported because results are always cached.</p></dd>
 
 
 <dt id="arg-update-cache">update_cache<a class="anchor" aria-label="anchor" href="#arg-update-cache"></a></dt>
-<dd><p>Logical. Should the cached file be refreshed? Defaults to
-<code>FALSE</code>. When set to <code>TRUE</code>, it forces a new download.</p></dd>
+<dd><p>Logical. Whether to refresh the cached file. Defaults to
+<code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-cache-dir">cache_dir<a class="anchor" aria-label="anchor" href="#arg-cache-dir"></a></dt>
-<dd><p>Path to a cache directory. On <code>NULL</code>, the function
-stores cached files in a temporary directory (see <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">base::tempdir()</a></code>).</p></dd>
+<dd><p>Path to a cache directory. If <code>NULL</code>, uses the configured
+cache or a directory inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">base::tempdir()</a></code>. See
+<code><a href="catrnav_set_cache_dir.html">catrnav_set_cache_dir()</a></code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, displays informational messages.</p></dd>
+<dd><p>Logical. Whether to display informational messages.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://tibble.tidyverse.org/reference/tbl_df-class.html" class="external-link">tibble</a> with the municipality name and cadastral
-code, or <code>NULL</code> if no match is found or the data cannot be retrieved.</p>
+code. Returns <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a></code> if no match is found or the data cannot
+be retrieved.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -98,7 +101,7 @@ code, or <code>NULL</code> if no match is found or the data cannot be retrieved.
 list downloads for the other data types. Use the selected name or cadastral
 code with <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>, <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code> or
 <code><a href="catrnav_atom_get_parcels.html">catrnav_atom_get_parcels()</a></code> to download a complete municipal dataset.</p>
-<p>Use the ATOM INSPIRE service:
+<p>Query ATOM INSPIRE services:
 <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address()</a></code>,
 <code><a href="catrnav_atom_get_address_db.html">catrnav_atom_get_address_db_all()</a></code>,
 <code><a href="catrnav_atom_get_buildings.html">catrnav_atom_get_buildings()</a></code>,
@@ -110,6 +113,13 @@ code with <code><a href="catrnav_atom_get_address.html">catrnav_atom_get_address
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">catrnav_atom_search_munic</span><span class="op">(</span><span class="st">"Pamplona"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   munic                catrcode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 201 Pamplona / Iruña 201     </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Search using a numeric cadastral code.</span></span></span>
+<span class="r-in"><span><span class="fu">catrnav_atom_search_munic</span><span class="op">(</span><span class="fl">201</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   munic                catrcode</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>

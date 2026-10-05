@@ -11,8 +11,8 @@ run_example()
 
 ## Value
 
-A [logical](https://rdrr.io/r/base/logical.html) value, `TRUE` if online
-and not running on CRAN, `FALSE` otherwise.
+A [logical](https://rdrr.io/r/base/logical.html) value. Returns `TRUE`
+if online and not running on CRAN, `FALSE` otherwise.
 
 ## Details
 

@@ -1,10 +1,12 @@
 # CatastRoNav: Interface to the 'INSPIRE' Services of the Cadastre of Navarre
 
 Provides access to public spatial data from the Cadastre of Navarre
-through its 'INSPIRE' Atom feeds, Web Feature Service and Web Map
-Service endpoints. Supports complete municipal dataset downloads,
-bounding box feature queries and georeferenced map image downloads for
-addresses, buildings and cadastral parcels.
+through its 'INSPIRE' ATOM feeds, Web Feature Service and Web Map
+Service endpoints provided by the Government of Navarre through the
+Sistema de Información Territorial de Navarra ('SITNA'). Supports
+complete municipal dataset downloads, bounding box feature queries and
+georeferenced map image downloads for addresses, buildings and cadastral
+parcels.
 
 ## See also
 
@@ -58,3 +60,7 @@ Other contributors:
 
 - Francisco J. Goerlich ([ORCID](https://orcid.org/0000-0003-1626-525X))
   \[contributor\]
+
+- Gobierno de Navarra ([ROR](https://ror.org/025qq4838)) (Provider of
+  cadastral data and INSPIRE services through SITNA) \[data
+  contributor\]

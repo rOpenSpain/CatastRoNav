@@ -18,13 +18,14 @@ catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 
 - x:
 
-  See **Bounding box**. Can be one of:
+  Input defining the query area. See **Bounding box**. It can be:
 
   - A numeric vector of length 4 with the coordinates that define the
     bounding box: `c(xmin, ymin, xmax, ymax)`.
 
-  - A `sf/sfc` object, as provided by the
-    [sf](https://CRAN.R-project.org/package=sf) package.
+  - An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) or
+    [`sfc`](https://r-spatial.github.io/sf/reference/sfc.html) object
+    from [sf](https://CRAN.R-project.org/package=sf).
 
 - srs:
 
@@ -33,7 +34,7 @@ catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 
 - verbose:
 
-  Logical. If `TRUE`, displays informational messages.
+  Logical. Whether to display informational messages.
 
 - count:
 
@@ -42,8 +43,17 @@ catrnav_wfs_get_address_bbox(x, srs = 4326, verbose = FALSE, count = NULL)
 
 ## Value
 
-An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object, or
-`NULL` if the data cannot be retrieved.
+An [`sf`](https://r-spatial.github.io/sf/reference/sf.html) object.
+Returns [`NULL`](https://rdrr.io/r/base/NULL.html) if the data cannot be
+retrieved.
+
+## Details
+
+Responses are cached in the `wfs_inspire_cache` subdirectory of the
+[`catrnav_set_cache_dir()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_set_cache_dir.md)
+cache. Repeated queries reuse the cached file. Clear the cache with
+[`catrnav_clear_cache()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_clear_cache.md)
+to download fresh results.
 
 ## API limits
 
@@ -67,11 +77,12 @@ the result is transformed back to the input CRS. See
 
 [`catrnav_atom_get_address()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_atom_get_address.md)
 downloads all addresses for a municipality.
+
 [`catrnav_wms_get_layer()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wms_get_layer.md)
 retrieves a georeferenced map image rather than individual spatial
 features.
 
-Query data from the WFS INSPIRE service:
+Query WFS INSPIRE services:
 [`catrnav_wfs_get_buildings_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_buildings.md),
 [`catrnav_wfs_get_parcels_bbox()`](https://ropenspain.github.io/CatastRoNav/reference/catrnav_wfs_get_parcels.md)
 
