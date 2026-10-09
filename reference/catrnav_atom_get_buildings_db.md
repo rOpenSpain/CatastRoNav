@@ -87,15 +87,15 @@ catrnav_atom_get_buildings_db_all()
 #> # A tibble: 281 × 3
 #>    munic                            url                      date               
 #>    <chr>                            <chr>                    <dttm>             
-#>  1 001 Abáigar                      https://filescartografi… 2026-06-30 13:45:03
-#>  2 002 Abárzuza / Abartzuza         https://filescartografi… 2026-06-30 13:45:03
-#>  3 003 Abaurregaina / Abaurrea Alta https://filescartografi… 2026-06-30 13:45:03
-#>  4 004 Abaurrepea / Abaurrea Baja   https://filescartografi… 2026-06-30 13:45:03
-#>  5 005 Aberin                       https://filescartografi… 2026-06-30 13:45:03
-#>  6 006 Ablitas                      https://filescartografi… 2026-06-30 13:45:03
-#>  7 007 Adiós                        https://filescartografi… 2026-06-30 13:45:03
-#>  8 008 Aguilar de Codés             https://filescartografi… 2026-06-30 13:45:03
-#>  9 009 Aibar / Oibar                https://filescartografi… 2026-06-30 13:45:03
-#> 10 010 Altsasu / Alsasua            https://filescartografi… 2026-06-30 13:45:03
+#>  1 001 Abáigar                      https://filescartografi… 2026-09-30 13:45:03
+#>  2 002 Abárzuza / Abartzuza         https://filescartografi… 2026-09-30 13:45:03
+#>  3 003 Abaurregaina / Abaurrea Alta https://filescartografi… 2026-09-30 13:45:03
+#>  4 004 Abaurrepea / Abaurrea Baja   https://filescartografi… 2026-09-30 13:45:03
+#>  5 005 Aberin                       https://filescartografi… 2026-09-30 13:45:03
+#>  6 006 Ablitas                      https://filescartografi… 2026-09-30 13:45:03
+#>  7 007 Adiós                        https://filescartografi… 2026-09-30 13:45:03
+#>  8 008 Aguilar de Codés             https://filescartografi… 2026-09-30 13:45:03
+#>  9 009 Aibar / Oibar                https://filescartografi… 2026-09-30 13:45:03
+#> 10 010 Altsasu / Alsasua            https://filescartografi… 2026-09-30 13:45:03
 #> # ℹ 271 more rows
 ```
