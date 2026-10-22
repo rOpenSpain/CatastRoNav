@@ -12,7 +12,8 @@ make_msg <- function(type = "generic", verbose, ..., .envir = parent.frame()) {
     return(invisible())
   }
 
-  fun <- switch(type,
+  fun <- switch(
+    type,
     danger = cli::cli_alert_danger,
     info = cli::cli_alert_info,
     success = cli::cli_alert_success,
@@ -97,7 +98,7 @@ ensure_null <- function(x) {
   x <- as.vector(x)
   x[is.null(x)] <- NA
   x[is.na(x)] <- NA
-  x[nchar(as.character(x)) == 0] <- NA
+  x[!nzchar(as.character(x), keepNA = TRUE)] <- NA
   if (all(is.na(x))) {
     return(NULL)
   }
