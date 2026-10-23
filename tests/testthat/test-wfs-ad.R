@@ -6,9 +6,10 @@ test_that("address WFS validates bounding boxes", {
 })
 
 test_that("address WFS uses the address service contract", {
-  received <- NULL
+  state <- new.env(parent = emptyenv())
+  state$received <- NULL
   local_mocked_bindings(inspire_wfs_get_fun = function(...) {
-    received <<- list(...)
+    state$received <- list(...)
     NULL
   })
 
@@ -19,9 +20,9 @@ test_that("address WFS uses the address service contract", {
   )
 
   expect_null(result)
-  expect_identical(received$path, "services/AD/wfs")
-  expect_identical(received$query$typenames, "AD:Address")
-  expect_identical(received$query$count, 10)
+  expect_identical(state$received$path, "services/AD/wfs")
+  expect_identical(state$received$query$typenames, "AD:Address")
+  expect_identical(state$received$query$count, 10)
 })
 
 test_that("address WFS downloads features", {

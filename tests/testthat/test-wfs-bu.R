@@ -6,9 +6,10 @@ test_that("building WFS validates bounding boxes", {
 })
 
 test_that("building WFS uses the building service contract", {
-  received <- NULL
+  state <- new.env(parent = emptyenv())
+  state$received <- NULL
   local_mocked_bindings(inspire_wfs_get_fun = function(...) {
-    received <<- list(...)
+    state$received <- list(...)
     NULL
   })
 
@@ -19,9 +20,9 @@ test_that("building WFS uses the building service contract", {
   )
 
   expect_null(result)
-  expect_identical(received$path, "services/BU/wfs")
-  expect_identical(received$query$typenames, "BU:Building")
-  expect_identical(received$query$count, 10)
+  expect_identical(state$received$path, "services/BU/wfs")
+  expect_identical(state$received$query$typenames, "BU:Building")
+  expect_identical(state$received$query$count, 10)
 })
 
 test_that("building WFS downloads features", {

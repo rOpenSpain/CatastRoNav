@@ -71,17 +71,18 @@ test_that("parcels downloads reject invalid municipalities before requests", {
 })
 
 test_that("parcels downloads accept numeric municipality codes", {
-  seen <- NULL
+  state <- new.env(parent = emptyenv())
+  state$seen <- NULL
   local_mocked_bindings(
     catrnav_atom_get_parcels_db_all = function(...) {
       dplyr::tibble(munic = "201 Pamplona / Iruña", url = "municipality.zip")
     },
     download_url = function(url, ...) {
-      seen <<- url
+      state$seen <- url
       NULL
     }
   )
 
   expect_null(catrnav_atom_get_parcels(201))
-  expect_identical(seen, "municipality.zip")
+  expect_identical(state$seen, "municipality.zip")
 })

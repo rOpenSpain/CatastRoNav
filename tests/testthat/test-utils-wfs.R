@@ -103,6 +103,7 @@ test_that("successful WFS responses retain cached files", {
 })
 
 test_that("WFS queries use the Navarre cache and preserve response files", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
   withr::local_envvar(CATASTRONAV_CACHE_DIR = cache_dir)
   response <- file.path(cache_dir, "response.gml")
@@ -110,22 +111,23 @@ test_that("WFS queries use the Navarre cache and preserve response files", {
   source <- sf::st_sf(
     geometry = sf::st_sfc(sf::st_point(c(500000, 4700000)), crs = 25830)
   )
-  seen <- NULL
+  state$seen <- NULL
   local_mocked_bindings(
     inspire_wfs_get_fun = function(cache_dir, ...) {
-      seen <<- cache_dir
+      state$seen <- cache_dir
       response
     },
     read_geo_file_sf = function(...) source
   )
 
   result <- catrnav_wfs_get_parcels_bbox(c(-1, 40, 0, 41))
-  expect_identical(seen, cache_dir)
+  expect_identical(state$seen, cache_dir)
   expect_equal(sf::st_crs(result), sf::st_crs(4326))
   expect_all_true(file.exists(response))
 })
 
 test_that("WFS requests scope Navarre HTTP options to the delegated call", {
+  state <- new.env(parent = emptyenv())
   withr::local_options(list(
     catastronav_timeout = NULL,
     catastronav_ssl_verify = NULL,
@@ -136,14 +138,14 @@ test_that("WFS requests scope Navarre HTTP options to the delegated call", {
     CATASTRONAV_TIMEOUT = "30",
     CATASTRONAV_SSL_VERIFY = "0"
   ))
-  seen <- NULL
+  state$seen <- NULL
   local_mocked_bindings(catrnav_inspire_wfs_get = function(...) {
-    seen <<- options()[c("catastro_timeout", "catastro_ssl_verify")]
+    state$seen <- options()[c("catastro_timeout", "catastro_ssl_verify")]
     "response.gml"
   })
 
   expect_identical(inspire_wfs_get_fun(), "response.gml")
-  expect_equal(seen, list(catastro_timeout = 30, catastro_ssl_verify = 0))
+  expect_equal(state$seen, list(catastro_timeout = 30, catastro_ssl_verify = 0))
   expect_identical(getOption("catastro_timeout"), 120)
   expect_identical(getOption("catastro_ssl_verify"), 1L)
 

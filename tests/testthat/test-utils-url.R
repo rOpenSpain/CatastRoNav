@@ -59,6 +59,7 @@ test_that("HTTP configuration falls back to CatastRo options", {
 })
 
 test_that("downloads apply HTTP environment settings", {
+  state <- new.env(parent = emptyenv())
   withr::local_options(list(
     catastronav_ssl_verify = NULL,
     catastronav_timeout = NULL,
@@ -70,14 +71,14 @@ test_that("downloads apply HTTP environment settings", {
     CATASTRONAV_TIMEOUT = "600"
   ))
 
-  seen <- NULL
+  state$seen <- NULL
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(req, path = NULL, ...) {
       if (is.null(path)) {
         return(httr2::response(status_code = 200L))
       }
-      seen <<- req$options
+      state$seen <- req$options
       writeLines("ok", path)
       httr2::response(status_code = 200)
     }
@@ -91,8 +92,8 @@ test_that("downloads apply HTTP environment settings", {
   )
 
   expect_type(result, "character")
-  expect_equal(seen$ssl_verifypeer, 0)
-  expect_equal(seen$timeout_ms, 600000)
+  expect_equal(state$seen$ssl_verifypeer, 0)
+  expect_equal(state$seen$timeout_ms, 600000)
 })
 
 test_that("download_url() handles offline sessions", {
@@ -200,18 +201,19 @@ test_that("download_url() reports cached refreshes and downloads", {
 })
 
 test_that("failed refreshes preserve cached files and remove partial data", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
   cache_dir <- normalizePath(cache_dir, winslash = "/")
   target <- file.path(cache_dir, "data.xml")
   writeLines("cached", target)
-  partial <- NULL
+  state$partial <- NULL
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(req, path = NULL) {
       if (is.null(path)) {
         return(httr2::response(status_code = 200L))
       }
-      partial <<- path
+      state$partial <- path
       writeLines("partial", path)
       cli::cli_abort("Simulated transport failure.", class = "httr2_failure")
     }
@@ -227,7 +229,7 @@ test_that("failed refreshes preserve cached files and remove partial data", {
   )
   expect_null(result)
   expect_identical(readLines(target), "cached")
-  expect_all_false(file.exists(partial))
+  expect_all_false(file.exists(state$partial))
 
   local_mocked_bindings(is_online_fun = function(...) {
     testthat::fail("A cached file must remain available offline.")
@@ -243,17 +245,18 @@ test_that("failed refreshes preserve cached files and remove partial data", {
 })
 
 test_that("HTTP errors preserve cached files and remove partial data", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
   target <- file.path(cache_dir, "data.xml")
   writeLines("cached", target)
-  partial <- NULL
+  state$partial <- NULL
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(req, path = NULL) {
       if (is.null(path)) {
         return(httr2::response(status_code = 200L))
       }
-      partial <<- path
+      state$partial <- path
       writeLines("error response", path)
       httr2::response(status_code = 500L)
     }
@@ -268,7 +271,7 @@ test_that("HTTP errors preserve cached files and remove partial data", {
   )
   expect_null(result)
   expect_identical(readLines(target), "cached")
-  expect_all_false(file.exists(partial))
+  expect_all_false(file.exists(state$partial))
 })
 
 test_that("cache replacement restores files if installation fails", {
@@ -348,14 +351,15 @@ test_that("download_url() downloads and refreshes cached files", {
 })
 
 test_that("HEAD transport failures preserve the cache without downloading", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
   target <- file.path(cache_dir, "data.xml")
   writeLines("cached", target)
-  seen <- NULL
+  state$seen <- NULL
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(req, path = NULL) {
-      seen <<- req$method
+      state$seen <- req$method
       cli::cli_abort("Simulated HEAD failure.", class = "httr2_failure")
     }
   )
@@ -369,7 +373,7 @@ test_that("HEAD transport failures preserve the cache without downloading", {
     )
   )
   expect_null(result)
-  expect_identical(seen, "HEAD")
+  expect_identical(state$seen, "HEAD")
   expect_identical(readLines(target), "cached")
   expect_identical(list.files(cache_dir), "data.xml")
 })
@@ -403,19 +407,20 @@ test_that("unexpected errors propagate and partial downloads are removed", {
 })
 
 test_that("large downloads report their size before fetching the body", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
-  seen <- list()
+  state$seen <- list()
   local_mocked_bindings(
     is_online_fun = function(...) TRUE,
     req_perform_fun = function(req, path = NULL) {
       if (is.null(path)) {
-        seen$head <<- req$method
+        state$seen$head <- req$method
         return(httr2::response(
           status_code = 200L,
           headers = list(`content-length` = "22020096")
         ))
       }
-      seen$progress <<- req$options$noprogress
+      state$seen$progress <- req$options$noprogress
       writeLines("data", path)
       httr2::response(status_code = 200L)
     }
@@ -428,9 +433,9 @@ test_that("large downloads report their size before fetching the body", {
       verbose = FALSE
     )
   )
-  expect_identical(seen$head, "HEAD")
+  expect_identical(state$seen$head, "HEAD")
   expect_identical(readLines(result), "data")
-  expect_all_false(seen$progress)
+  expect_all_false(state$seen$progress)
 })
 
 test_that("cache installation failures preserve both files", {

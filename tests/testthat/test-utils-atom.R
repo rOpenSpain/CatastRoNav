@@ -107,6 +107,7 @@ test_that("ATOM XML can be read without an explicit encoding", {
 })
 
 test_that("municipality downloads read cached archives directly", {
+  state <- new.env(parent = emptyenv())
   cache_dir <- withr::local_tempdir()
   archive <- file.path(cache_dir, "data.zip")
   writeBin(raw(), archive)
@@ -118,16 +119,16 @@ test_that("municipality downloads read cached archives directly", {
     id = 1L,
     geometry = sf::st_sfc(sf::st_point(c(0, 0)), crs = 4326)
   )
-  seen <- list()
+  state$seen <- list()
   local_mocked_bindings(
     download_url = function(url, subdir, update_cache, ...) {
-      seen$subdir <<- subdir
-      seen$update_cache <<- update_cache
+      state$seen$subdir <- subdir
+      state$seen$update_cache <- update_cache
       archive
     },
     read_geo_file_sf = function(file_local, hint, ...) {
-      seen$file <<- file_local
-      seen$hint <<- hint
+      state$seen$file <- file_local
+      state$seen$hint <- hint
       expected
     }
   )
@@ -141,10 +142,10 @@ test_that("municipality downloads read cached archives directly", {
     update_cache = TRUE
   )
   expect_identical(result, expected)
-  expect_identical(seen$subdir, "atom_cp")
-  expect_all_true(seen$update_cache)
-  expect_identical(seen$file, archive)
-  expect_identical(seen$hint, "\\.gml$")
+  expect_identical(state$seen$subdir, "atom_cp")
+  expect_all_true(state$seen$update_cache)
+  expect_identical(state$seen$file, archive)
+  expect_identical(state$seen$hint, "\\.gml$")
   expect_identical(list.files(cache_dir), "data.zip")
 })
 

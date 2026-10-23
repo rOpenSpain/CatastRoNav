@@ -6,9 +6,10 @@ test_that("parcel WFS validates bounding boxes", {
 })
 
 test_that("parcel WFS uses the parcel service contract", {
-  received <- NULL
+  state <- new.env(parent = emptyenv())
+  state$received <- NULL
   local_mocked_bindings(inspire_wfs_get_fun = function(...) {
-    received <<- list(...)
+    state$received <- list(...)
     NULL
   })
 
@@ -19,9 +20,9 @@ test_that("parcel WFS uses the parcel service contract", {
   )
 
   expect_null(result)
-  expect_identical(received$path, "services/CP/wfs")
-  expect_identical(received$query$typenames, "CP:CadastralParcel")
-  expect_identical(received$query$count, 10)
+  expect_identical(state$received$path, "services/CP/wfs")
+  expect_identical(state$received$query$typenames, "CP:CadastralParcel")
+  expect_identical(state$received$query$count, 10)
 })
 
 test_that("parcel WFS downloads features", {
