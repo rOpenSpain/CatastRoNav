@@ -22,7 +22,7 @@ URL: https://ropenspain.github.io/CatastRoNav/,
     https://github.com/rOpenSpain/CatastRoNav
 BugReports: https://github.com/rOpenSpain/CatastRoNav/issues
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 Imports: 
     CatastRo (>= 1.1.0),
     cli,

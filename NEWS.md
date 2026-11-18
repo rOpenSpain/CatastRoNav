@@ -1,5 +1,6 @@
 # CatastRoNav (development version)
 
+- The minimum supported **R** version is now 4.2.0.
 - **CatastRoNav** users can now configure HTTP timeout and SSL verification with the `CATASTRONAV_TIMEOUT` and `CATASTRONAV_SSL_VERIFY` environment variables. The existing `catastronav_timeout` and `catastronav_ssl_verify` options still take precedence.
 - Downloads now use separate cache subdirectories and preserve valid ATOM files if an update fails. **CatastRoNav** now requires **CatastRo** 1.1.0 or later.
 - ATOM downloads now check file sizes with HEAD requests, report downloads larger than 20 MB and handle HTTP and transport failures consistently with **CatastRo**. Unexpected internal errors are no longer converted to `NULL`.
