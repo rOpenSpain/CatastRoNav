@@ -41,7 +41,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="catastronav-development-version">CatastRoNav (development version)<a class="anchor" aria-label="anchor" href="#catastronav-development-version"></a></h2>
-<ul><li>
+<ul><li>The minimum supported <strong>R</strong> version is now 4.2.0.</li>
+<li>
 <strong>CatastRoNav</strong> users can now configure HTTP timeout and SSL verification with the <code>CATASTRONAV_TIMEOUT</code> and <code>CATASTRONAV_SSL_VERIFY</code> environment variables. The existing <code>catastronav_timeout</code> and <code>catastronav_ssl_verify</code> options still take precedence.</li>
 <li>Downloads now use separate cache subdirectories and preserve valid ATOM files if an update fails. <strong>CatastRoNav</strong> now requires <strong>CatastRo</strong> 1.1.0 or later.</li>
 <li>ATOM downloads now check file sizes with HEAD requests, report downloads larger than 20 MB and handle HTTP and transport failures consistently with <strong>CatastRo</strong>. Unexpected internal errors are no longer converted to <code>NULL</code>.</li>
@@ -124,7 +125,10 @@
       <div class="col-md">
         <h4 data-toc-skip>About <img src="../logo.png" alt="CatastRoNav logo" height="24" class="round-logo">
           CatastRoNav</h4>
-        <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>.</p>
+        <div class="author-wrapper">
+          <p>Developed by <a href="https://dieghernan.github.io/" class="external-link">Diego Hernangómez</a>.</p>
+          <p>Part of the <span class="ROS-light">rOpenSpain</span> project.</p>
+        </div>
         <hr class="d-md-none"></div>
       <div class="col-md offset-md-4">
         <h4 data-toc-skip>About <img src="../ROS-logo.png" alt="rOpenSpain logo" height="24" class="round-logo"><span class="ROS-light">
@@ -134,8 +138,9 @@
           works together to create high-quality <strong>R</strong> packages for
           the analysis and use of Spanish data of general interest.
         </p>
-        <p class="fst-italic text-md-end">"rOpenSci is our form, Spanish public
-          data our matter"</p>
+        <blockquote class="fst-italic small py-0 px-2 border-2">
+          "rOpenSci is our form, Spanish public data our matter"
+        </blockquote>
         <hr class="d-md-none"></div>
     </div>
   </div>

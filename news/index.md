@@ -2,6 +2,7 @@
 
 ## CatastRoNav (development version)
 
+- The minimum supported **R** version is now 4.2.0.
 - **CatastRoNav** users can now configure HTTP timeout and SSL
   verification with the `CATASTRONAV_TIMEOUT` and
   `CATASTRONAV_SSL_VERIFY` environment variables. The existing
